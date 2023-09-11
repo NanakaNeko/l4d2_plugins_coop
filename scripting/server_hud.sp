@@ -185,29 +185,26 @@ Action tmrUpdate1(Handle timer)
 
 		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
 		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s\n女巫: [%s]", buffer, L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-
+		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
+		Format(buffer, sizeof(buffer), "%s%s地图[%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
 	}
-	
+
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDPlace(HUD_SCORE_1, 0.00, 0.00, 1.0, 0.03);
+
 	char g_sDate[64], g_sTime[128];
-	FormatTime(g_sDate, sizeof(g_sDate), "%Y-%m-%d %H:%M:%S");
+	FormatTime(g_sDate, sizeof(g_sDate), "%Y年%m月%d日 %H时%M分");
 	FormatEx(g_sTime, sizeof(g_sTime), "%s 星期%s", g_sDate, IsWeekName());
-	HUDSetLayout(HUD_MID_TOP, HUD_FLAG_ALIGN_LEFT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, g_sTime);
-	HUDPlace(HUD_MID_TOP, 0.70, 0.00, 1.0, 0.03);
+	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_LEFT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, g_sTime);
+	HUDPlace(HUD_SCORE_2, 0.70, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
-	HUDPlace(HUD_SCORE_1, 0.70, 0.03, 1.0, 0.07);
-
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "人数: [%d/%d]\n地图: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), g_iCurrentChapter, g_iMaxChapters);
-	HUDPlace(HUD_SCORE_2, 0.83, 0.03, 1.0, 0.07);
-
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, 0.70, 0.10, 1.0, 0.03);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_3, 0.70, 0.03, 1.0, 0.03);
 
 	char g_sTotalTime[128];
-	FormatEx(g_sTotalTime, sizeof(g_sTotalTime), "运行: %s", StandardizeTime(g_fMapRunTime));
+	FormatEx(g_sTotalTime, sizeof(g_sTotalTime), "系统运行: %s", StandardizeTime(g_fMapRunTime));
 	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", g_sTotalTime);
-	HUDPlace(HUD_SCORE_4, 0.70, 0.13, 1.0, 0.03);
+	HUDPlace(HUD_SCORE_4, 0.70, 0.06, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
@@ -233,10 +230,10 @@ Action tmrUpdate2(Handle timer)
 	}
 
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
+	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s[%d/%d]", GetHostName(), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_2, 0.65, 0.00, 1.0, 0.03);
+	HUDPlace(HUD_SCORE_2, 0.65, 0.00, 1.0, 0.04);
 
 	return Plugin_Continue;
 }
