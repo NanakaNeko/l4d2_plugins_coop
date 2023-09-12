@@ -13,8 +13,7 @@ enum struct KillData {
 		this.TotalCI = 0;
 	}
 }
-char g_sWeekName[][] = {"一", "二", "三", "四", "五", "六", "日"};
-char sDate[][] = {"天", "时", "分", "秒"};
+
 //对抗模式.
 char g_sModeVersus[][] = 
 {
@@ -45,11 +44,12 @@ bool g_bflow;
 float g_fMapRunTime;
 int g_ihud, g_iPlayerNum, g_iMaxChapters, g_iCurrentChapter;
 
-public Plugin myinfo = {
+public Plugin myinfo = 
+{
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.1.3",
+	version = "1.1.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -192,10 +192,9 @@ Action tmrUpdate1(Handle timer)
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
 	HUDPlace(HUD_SCORE_1, 0.00, 0.00, 1.0, 0.03);
 
-	char g_sDate[64], g_sTime[128];
-	FormatTime(g_sDate, sizeof(g_sDate), "%Y年%m月%d日 %H时%M分");
-	FormatEx(g_sTime, sizeof(g_sTime), "%s 星期%s", g_sDate, IsWeekName());
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_LEFT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, g_sTime);
+	char Time[128];
+	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
+	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_LEFT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
 	HUDPlace(HUD_SCORE_2, 0.70, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
@@ -313,12 +312,43 @@ char[] GetHostName()
 	return g_sHostName;
 }
 
-//返回当前星期几.
-char[] IsWeekName()
+//返回当前年月日.
+char[] GetDate()
+{
+	char g_sDate[64];
+	FormatTime(g_sDate, sizeof(g_sDate), "%Y年%m月%d日");
+	return g_sDate;
+}
+
+//返回当前周几.
+char[] GetWeek()
 {
 	char g_sWeek[8];
+	char g_sWeekName[][] = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
 	FormatTime(g_sWeek, sizeof(g_sWeek), "%u");
 	return g_sWeekName[StringToInt(g_sWeek) - 1];
+}
+
+//返回上午下午
+char[] GetAPM()
+{
+	char g_sAPM[4], g_sMaA[8];
+	FormatTime(g_sAPM, sizeof(g_sAPM), "%p");
+	if(StrContains(g_sAPM, "AM", false) != -1)
+		Format(g_sMaA, sizeof(g_sMaA), "上午");
+	else if(StrContains(g_sAPM, "PM", false) != -1)
+		Format(g_sMaA, sizeof(g_sMaA), "下午");
+	else
+		Format(g_sMaA, sizeof(g_sMaA), "");
+	return g_sMaA;
+}
+
+//返回时间
+char[] Get12Time()
+{
+	char g_sTime[8];
+	FormatTime(g_sTime, sizeof(g_sTime), "%I:%M");
+	return g_sTime;
 }
 
 //填入对应数量的内容.
@@ -375,7 +405,7 @@ char[] GetGameMode()
 char[] StandardizeTime(float g_fRunTime)
 {
 	int iTime[4];
-	char sName[128], sTime[4][32];
+	char sName[128], sTime[4][32], sDate[][] = {"天", "时", "分", "秒"};
 	float fTime[3] = {86400.0, 3600.0, 60.0};
 	float remainder = GetEngineTime() - g_fRunTime;
 	
