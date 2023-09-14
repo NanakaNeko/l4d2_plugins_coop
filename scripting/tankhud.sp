@@ -87,11 +87,11 @@ public Action Cmd_TankHud(int client, int args)
 	if (!hiddenPanel[client])
 	{
 		hiddenPanel[client] = true;
-		PrintToChat(client, "\x04[TankHUD]: \x05坦克状态面板已\x03关闭");
+		PrintToChat(client, "\x04[TankHUD] \x05已\x03关闭\x05坦克状态面板");
 		return Plugin_Continue;
 	}
 	hiddenPanel[client] = false;
-	PrintToChat(client, "\x04[TankHUD]: \x05坦克状态面板已\x03打开");
+	PrintToChat(client, "\x04[TankHUD] \x05已\x03打开\x05坦克状态面板");
 	return Plugin_Continue;
 }
 
@@ -118,8 +118,8 @@ public void evt_TankSpawn(Event event, const char[] name, bool dontBroadcast)
 	static int i;
 	for (i = 1; i <= MaxClients; i++)
 	{
-		if (!IsClientInGame(i) || IsFakeClient(i) || GetClientTeam(i) != TEAM_SURVIVOR || hiddenPanel[i]) { continue; }
-		PrintToChat(i, "\x04[TankHUD]: \x05坦克状态面板已\x03关闭\n\x04[TankHUD]: \x05输入\x04!tankhud\x05打开坦克状态面板");
+		if (IsClientInGame(i) && !IsFakeClient(i) && GetClientTeam(i) != TEAM_SURVIVOR && hiddenPanel[i])
+			PrintToChat(i, "\x04[TankHUD] \x05输入\x04!tankhud\x03打开\x05坦克状态面板");
 	}
 }
 
