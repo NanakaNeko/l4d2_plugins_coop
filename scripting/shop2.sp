@@ -40,7 +40,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.0", 
+	version = "1.3.1", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -51,7 +51,7 @@ public void OnPluginStart()
 
 	RegAdminCmd("sm_shop", SwitchShop, ADMFLAG_ROOT, "开关商店");
 	RegConsoleCmd("sm_tp", Transmit, "传送菜单");
-	RegConsoleCmd("sm_ammo", GiveAmmo, "补充子弹");
+	RegConsoleCmd("sm_ammo", GetAmmo, "补充子弹");
 	RegConsoleCmd("sm_chr", GiveChr, "快速选铁喷");
 	RegConsoleCmd("sm_pum", GivePum, "快速选木喷");
 	RegConsoleCmd("sm_smg", GiveSmg, "快速选smg");
@@ -695,6 +695,7 @@ public void SundryMenu(int client)
 {
 	Menu menu = new Menu(SundryMenu_back);
 	menu.SetTitle("点数(剩余:%d)\n————————", player[client].ClientPoint);
+	menu.AddItem("ammo", "子弹(免费)");
 	menu.AddItem("molotov", "燃烧瓶(1点)");
 	menu.AddItem("pipebomb", "土制炸弹(1点)");
 	menu.AddItem("vomitjar", "胆汁(1点)");
@@ -718,32 +719,36 @@ public int SundryMenu_back(Menu menu, MenuAction action, int client, int param)
 	{
 		switch (param) 
 		{ 
-			case 0: //燃烧瓶
+			case 0: //子弹
+			{
+				GiveAmmo(client);
+			}
+			case 1: //燃烧瓶
 			{ 
 				GiveCommand(client, "molotov");
 				PrintSundryName(client, 0);
 			}
-			case 1: //土制炸弹
+			case 2: //土制炸弹
 			{ 
 				GiveCommand(client, "pipe_bomb");
 				PrintSundryName(client, 1);
 			}
-			case 2: //胆汁
+			case 3: //胆汁
 			{ 
 				GiveCommand(client, "vomitjar");
 				PrintSundryName(client, 2);
 			}
-			case 3: //激光瞄准
+			case 4: //激光瞄准
 			{ 
 				CheatCommand(client,"upgrade_add", "laser_sight");
 				PrintSundryName(client, 3);
 			}
-			case 4: //烟花
+			case 5: //烟花
 			{ 
 				GiveCommand(client, "weapon_fireworkcrate");
 				PrintSundryName(client, 4);
 			}
-			case 5: //地精
+			case 6: //地精
 			{ 
 				GiveCommand(client, "weapon_gnome");
 				PrintSundryName(client, 5);
@@ -966,18 +971,24 @@ void DeleteMelee(int client)
 	}
 }
 
-//补充子弹指令
-public Action GiveAmmo(int client, int args)
+public Action GetAmmo(int client, int args)
+{
+	GiveAmmo(client);
+	return Plugin_Handled;
+}
+
+//补充子弹
+public void GiveAmmo(int client)
 {
 	if(b_Disable)
 	{
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
-		return Plugin_Handled;
+		return;
 	}
 	if(f_AmmoTime < 0.0)
 	{
 		PrintToChat(client, "\x04[商店]\x05补充子弹已关闭.");
-		return Plugin_Handled;
+		return;
 	}
 	if (GetClientTeam(client) == 2 && !NoValidPlayer(client))
 	{
@@ -985,12 +996,12 @@ public Action GiveAmmo(int client, int args)
 		if (fTime < 0.0)
 		{
 			PrintToChat(client, "\x04[提示]\x05请等待\x04%.1f\x05秒后补充子弹.", FloatAbs(fTime));
-			return Plugin_Handled;
+			return;
 		}
 		GiveCommand(client, "ammo");
+		PrintToChat(client, "\x04[提示]\x05后备弹药已补充.");
 		player[client].ClientAmmoTime = GetEngineTime();
 	}
-	return Plugin_Handled;
 }
 
 //cheat give命令
