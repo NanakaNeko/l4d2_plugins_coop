@@ -186,7 +186,7 @@ Action tmrUpdate1(Handle timer)
 		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
 		StrCat(witch, sizeof(witch), "%");
 		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-		Format(buffer, sizeof(buffer), "%s%s地图[%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
+		Format(buffer, sizeof(buffer), "%s%s地图: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
 	}
 
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
