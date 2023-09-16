@@ -13,14 +13,14 @@ public Plugin myinfo =
 	name = "[L4D2]复活",
 	author = "奈",
 	description = "生还死亡后复活",
-	version = "1.1.4",
+	version = "1.1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 
 public void OnPluginStart()
 {
-	cv_RespawnNumber = CreateConVar("l4d2_respawn_number", "0", "复活次数,小于等于0关闭插件功能", FCVAR_NOTIFY, true, 0.0);
+	cv_RespawnNumber = CreateConVar("l4d2_respawn_number", "5", "复活次数,小于等于0关闭插件功能", FCVAR_NOTIFY, true, 0.0);
 	cv_RespawnTime = CreateConVar("l4d2_respawn_time", "20.0", "复活时间,小于等于0.0关闭插件功能");
 	cv_RespawnAddTime = CreateConVar("l4d2_respawn_add_time", "5.0", "每次复活后增加复活时间,负数为每次复活减少时间");
 	i_RespawnNumber = GetConVarInt(cv_RespawnNumber);
@@ -111,7 +111,7 @@ public Action RespawnAll(int client, int args)
 			StopSound(i, SNDCHAN_STATIC, "player/heartbeatloop.wav");
 		}
 	}
-	PrintToChatAll("\x04[提示]\x03全体玩家复活并回满血量!");
+	PrintToChatAll("\x04[提示]\x03%N\x05使用指令,全体玩家复活并回满血量!", client);
 	return Plugin_Handled;
 }
 
