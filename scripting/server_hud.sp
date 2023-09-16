@@ -41,7 +41,6 @@ ConVar hud_style;
 KillData g_eData;
 Handle g_hTimer;
 bool g_bflow;
-float g_fMapRunTime;
 int g_ihud, g_iPlayerNum, g_iMaxChapters, g_iCurrentChapter;
 
 public Plugin myinfo = 
@@ -49,7 +48,7 @@ public Plugin myinfo =
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.1.4",
+	version = "1.1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -74,7 +73,6 @@ public void OnPluginStart()
 	g_ihud = GetConVarInt(hud_style);
 	HookConVarChange(hud_style, CvarChanged);
 
-	g_fMapRunTime = GetEngineTime();
 	hud_start();
 }
 
@@ -185,25 +183,20 @@ Action tmrUpdate1(Handle timer)
 
 		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
 		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-		Format(buffer, sizeof(buffer), "%s%s地图: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
+		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(3, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
+		Format(buffer, sizeof(buffer), "%s%s地图: [%d/%d]", buffer, GetAddSpacesMax(6, " "), g_iCurrentChapter, g_iMaxChapters);
 	}
 
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_1, 0.00, 0.00, 1.0, 0.03);
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(3, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
 
 	char Time[128];
 	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_LEFT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
-	HUDPlace(HUD_SCORE_2, 0.70, 0.00, 1.0, 0.03);
+	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
+	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.04);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, 0.70, 0.03, 1.0, 0.03);
-
-	char g_sTotalTime[128];
-	FormatEx(g_sTotalTime, sizeof(g_sTotalTime), "系统运行: %s", StandardizeTime(g_fMapRunTime));
-	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", g_sTotalTime);
-	HUDPlace(HUD_SCORE_4, 0.70, 0.06, 1.0, 0.03);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_3, -0.05, 0.04, 1.0, 0.04);
 
 	return Plugin_Continue;
 }
@@ -231,8 +224,8 @@ Action tmrUpdate2(Handle timer)
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
 	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
 
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s[%d/%d]", GetHostName(), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_2, 0.65, 0.00, 1.0, 0.04);
+	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "%s[%d/%d]", GetHostName(), g_iPlayerNum, GetMaxPlayers());
+	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.04);
 
 	return Plugin_Continue;
 }
@@ -262,8 +255,8 @@ Action tmrUpdate3(Handle timer)
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
 	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.04);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "人数: [%d/%d]%s地图: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
-	HUDPlace(HUD_SCORE_3, 0.75, 0.00, 1.0, 0.04);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "人数: [%d/%d]%s地图: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
+	HUDPlace(HUD_SCORE_3, -0.05, 0.00, 1.0, 0.04);
 
 	return Plugin_Continue;
 }
@@ -276,8 +269,8 @@ Action tmrUpdate4(Handle timer)
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
 	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.04);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, 0.75, 0.00, 1.0, 0.04);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_3, -0.05, 0.00, 1.0, 0.04);
 
 	return Plugin_Continue;
 }
@@ -399,27 +392,4 @@ char[] GetGameMode()
 	char g_sMode[32];
 	GetConVarString(FindConVar("mp_gamemode"), g_sMode, sizeof(g_sMode));
 	return g_sMode;
-}
-
-//https://forums.alliedmods.net/showthread.php?t=288686
-char[] StandardizeTime(float g_fRunTime)
-{
-	int iTime[4];
-	char sName[128], sTime[4][32], sDate[][] = {"天", "时", "分", "秒"};
-	float fTime[3] = {86400.0, 3600.0, 60.0};
-	float remainder = GetEngineTime() - g_fRunTime;
-	
-	iTime[0] = RoundToFloor(remainder / fTime[0]);
-	remainder = remainder - float(iTime[0]) * fTime[0];
-	iTime[1] = RoundToFloor(remainder / fTime[1]);
-	remainder = remainder - float(iTime[1]) * fTime[1];
-	iTime[2] = RoundToFloor(remainder / fTime[2]);
-	remainder = remainder - float(iTime[2]) * fTime[2];
-	iTime[3] = RoundToFloor(remainder);
-
-	for (int i = 0; i < sizeof(sTime); i++)
-		if(iTime[i] > 0)
-			FormatEx(sTime[i], sizeof(sTime[]), "%d%s", iTime[i], sDate[i]);
-	ImplodeStrings(sTime, sizeof(sTime), "", sName, sizeof(sName));//打包字符串.
-	return sName;
 }
