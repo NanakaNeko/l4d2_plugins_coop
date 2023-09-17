@@ -37,6 +37,8 @@ char g_sModeSingle[][] =
 	"mutation1", //孤身一人
 	"mutation17" //孤胆枪手
 };
+static char mapName[64];
+static int g_iFailCount;
 ConVar hud_style;
 KillData g_eData;
 Handle g_hTimer;
@@ -48,7 +50,7 @@ public Plugin myinfo =
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.1.7",
+	version = "1.1.8",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -66,10 +68,11 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 public void OnPluginStart() 
 {
 	hud_style = CreateConVar("l4d2_hud_style", "1", "hud样式切换", _, true, 0.0, true, 5.0);
-	HookEvent("round_end",		Event_RoundEnd,		EventHookMode_PostNoCopy);
-	HookEvent("round_start",	Event_RoundStart,	EventHookMode_PostNoCopy);
-	HookEvent("player_death",	Event_PlayerDeath,	EventHookMode_Pre);
-	HookEvent("infected_death",	Event_InfectedDeath);
+	HookEvent("round_end", Event_RoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
+	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
+	HookEvent("infected_death", Event_InfectedDeath);
+	HookEvent("mission_lost", Event_MissionLost);
 	g_ihud = GetConVarInt(hud_style);
 	HookConVarChange(hud_style, CvarChanged);
 
@@ -105,6 +108,13 @@ public void OnClientDisconnect(int client)
 
 public void OnMapStart() 
 {
+	char nowMapName[64];
+	GetCurrentMap(nowMapName, sizeof(nowMapName));
+	if (strlen(mapName) < 1 || strcmp(mapName, nowMapName) != 0) {
+		g_iFailCount = 0;
+		strcopy(mapName, sizeof(mapName), nowMapName);
+	}
+
 	g_iPlayerNum = 0;
 	EnableHUD();
 }
@@ -123,8 +133,20 @@ void Event_RoundEnd(Event event, const char[] name, bool dontBroadcast)
 
 void Event_RoundStart(Event event, const char[] name, bool dontBroadcast) 
 {
+	char nowMapName[64] = {'\0'};
+	GetCurrentMap(nowMapName, sizeof(nowMapName));
+	if (strlen(mapName) < 1 || strcmp(mapName, nowMapName) != 0) {
+		g_iFailCount = 0;
+		strcopy(mapName, sizeof(mapName), nowMapName);
+	}
+
 	g_bflow = true;
 	hud_start();
+}
+
+void Event_MissionLost(Event event, const char[] name, bool dontBroadcast) 
+{
+	g_iFailCount++;
 }
 
 void hud_start(bool restart=false)
@@ -168,9 +190,9 @@ void hud_start(bool restart=false)
 
 void RestartMap()
 {
-	char mapname[64];
-	GetCurrentMap(mapname, sizeof(mapname));
-	ServerCommand("changelevel %s", mapname);
+	char mapbuffer[64];
+	GetCurrentMap(mapbuffer, sizeof(mapbuffer));
+	ServerCommand("changelevel %s", mapbuffer);
 }
 
 Action tmrUpdate1(Handle timer) 
@@ -208,10 +230,10 @@ Action tmrUpdate1(Handle timer)
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
 	HUDPlace(HUD_SCORE_2, -0.02, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(3, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "团灭: %d次 关卡: [%d/%d] 人数: [%d/%d]", g_iFailCount, g_iCurrentChapter, g_iMaxChapters, g_iPlayerNum, GetMaxPlayers());
 	HUDPlace(HUD_SCORE_3, -0.02, 0.03, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
 	HUDPlace(HUD_SCORE_4, -0.02, 0.06, 1.0, 0.03);
 
 	return Plugin_Continue;
@@ -278,7 +300,7 @@ Action tmrUpdate3(Handle timer)
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
 	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "人数: [%d/%d]%s地图: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "人数: [%d/%d]%s关卡: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
 	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
 
 	return Plugin_Continue;
@@ -286,13 +308,13 @@ Action tmrUpdate3(Handle timer)
 
 Action tmrUpdate4(Handle timer) 
 {
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "关卡: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
 	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
 	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
 	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
 
 	return Plugin_Continue;
@@ -300,7 +322,7 @@ Action tmrUpdate4(Handle timer)
 
 Action tmrUpdate5(Handle timer) 
 {
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
 	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
 
 	char Time[128];
@@ -308,7 +330,7 @@ Action tmrUpdate5(Handle timer)
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
 	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "团灭: %d次 关卡: [%d/%d] 人数: [%d/%d]",g_iFailCount, g_iCurrentChapter, g_iMaxChapters, g_iPlayerNum, GetMaxPlayers());
 	HUDPlace(HUD_SCORE_3, -0.05, 0.03, 1.0, 0.03);
 
 	return Plugin_Continue;
