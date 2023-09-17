@@ -48,7 +48,7 @@ public Plugin myinfo =
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.1.5",
+	version = "1.1.7",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -65,7 +65,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart() 
 {
-	hud_style = CreateConVar("l4d2_hud_style", "1", "hud样式切换", _, true, 0.0, true, 4.0);
+	hud_style = CreateConVar("l4d2_hud_style", "1", "hud样式切换", _, true, 0.0, true, 5.0);
 	HookEvent("round_end",		Event_RoundEnd,		EventHookMode_PostNoCopy);
 	HookEvent("round_start",	Event_RoundStart,	EventHookMode_PostNoCopy);
 	HookEvent("player_death",	Event_PlayerDeath,	EventHookMode_Pre);
@@ -158,6 +158,12 @@ void hud_start(bool restart=false)
 		if(restart)
 			RestartMap();
 	}
+	else if(g_ihud == 5){
+		delete g_hTimer;
+		g_hTimer = CreateTimer(1.0, tmrUpdate5, _, TIMER_REPEAT);
+		if(restart)
+			RestartMap();
+	}
 }
 
 void RestartMap()
@@ -183,20 +189,30 @@ Action tmrUpdate1(Handle timer)
 
 		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
 		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(3, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-		Format(buffer, sizeof(buffer), "%s%s地图: [%d/%d]", buffer, GetAddSpacesMax(6, " "), g_iCurrentChapter, g_iMaxChapters);
+		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
 	}
 
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s%s人数: [%d/%d]", buffer, GetAddSpacesMax(3, " "), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
+	static int client;
+	static float maxFlow;
+	static float highestFlow;
+	maxFlow = L4D2Direct_GetMapMaxFlowDistance();
+	highestFlow = (client = L4D_GetHighestFlowSurvivor()) != -1 ? L4D2Direct_GetFlowDistance(client) : L4D2_GetFurthestSurvivorFlow();
+	if (highestFlow)
+		highestFlow = highestFlow / maxFlow * 100;
+
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", RoundToCeil(highestFlow), GetAddSpacesMax(5, " "), buffer);
+	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
 
 	char Time[128];
 	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
-	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_2, -0.02, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, -0.05, 0.04, 1.0, 0.04);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(3, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDPlace(HUD_SCORE_3, -0.02, 0.03, 1.0, 0.03);
+
+	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_4, -0.02, 0.06, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
@@ -218,14 +234,21 @@ Action tmrUpdate2(Handle timer)
 		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
 		StrCat(witch, sizeof(witch), "%");
 		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-		Format(buffer, sizeof(buffer), "%s%s地图: [%d/%d]", buffer, GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
 	}
 
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
+	static int client;
+	static float maxFlow;
+	static float highestFlow;
+	maxFlow = L4D2Direct_GetMapMaxFlowDistance();
+	highestFlow = (client = L4D_GetHighestFlowSurvivor()) != -1 ? L4D2Direct_GetFlowDistance(client) : L4D2_GetFurthestSurvivorFlow();
+	if (highestFlow)
+		highestFlow = highestFlow / maxFlow * 100;
+
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", RoundToCeil(highestFlow), GetAddSpacesMax(5, " "), buffer);
+	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "%s[%d/%d]", GetHostName(), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
@@ -250,13 +273,13 @@ Action tmrUpdate3(Handle timer)
 	}
 
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
-	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "人数: [%d/%d]%s地图: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
-	HUDPlace(HUD_SCORE_3, -0.05, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
@@ -264,13 +287,29 @@ Action tmrUpdate3(Handle timer)
 Action tmrUpdate4(Handle timer) 
 {
 	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
-	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.04);
+	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
 
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "本章击杀: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, -0.05, 0.00, 1.0, 0.04);
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
+
+	return Plugin_Continue;
+}
+
+Action tmrUpdate5(Handle timer) 
+{
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "章节: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
+	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
+
+	char Time[128];
+	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
+	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
+	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.03);
+
+	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "地图: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
+	HUDPlace(HUD_SCORE_3, -0.05, 0.03, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
