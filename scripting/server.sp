@@ -14,7 +14,7 @@ public Plugin myinfo =
 	name = "Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.1.4",
+	version = "1.1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -22,7 +22,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	g_smSteamIDs = new StringMap();
-	cv_ChangeName = CreateConVar("change_name_number", "5", "改名次数达到多少后踢出", FCVAR_NOTIFY, true, 0.0);
+	cv_ChangeName = CreateConVar("change_name_number", "6", "改名次数达到多少后踢出", FCVAR_NOTIFY, true, 0.0);
 	cv_ServerRank = CreateConVar("l4d_server_rank", "233", "全球排名数", _, true, 0.0);
 	cv_ServerNumber = CreateConVar("l4d_server_players_number", "6666", "加入服务器人数", _, true, 0.0);
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -46,6 +46,9 @@ public void OnPluginEnd()
 public void OnMapStart()
 {
 	SetGodMode(true);
+	//重置改名次数
+	for(int client = 1; client <= MaxClients; client++)
+		ChangeName[client] = 0;
 }
 
 public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
@@ -69,16 +72,25 @@ public void Event_PlayerChangeName(Event event, const char[] name, bool dontBroa
 	if(IsFakeClient(client))
 		return;
 
-	if(ChangeName[client] > cv_ChangeName.IntValue)
+	if(ChangeName[client] >= cv_ChangeName.IntValue)
 	{
 		ChangeName[client] = 0;
 		KickClient(client, "因频繁改名被踢出");
 		return;
 	}
 
-	if(ChangeName[client] > --cv_ChangeName.IntValue)
-		PrintToChat(client, "\x04[提示]\x03再次改名将被踢出服务器!");
+	char sOldname[MAX_NAME_LENGTH], sNewname[MAX_NAME_LENGTH];
+	event.GetString("oldname", sOldname, sizeof(sOldname));
+	event.GetString("newname", sNewname, sizeof(sNewname));
+	PrintToChatAll("\x03>> \x04%s \x05更改名称为 \x04%s", sOldname, sNewname);
 	ChangeName[client]++;
+}
+
+public void OnClientPutInServer(int client)
+{
+	if(IsFakeClient(client))
+		return;
+	ChangeName[client] = 0;
 }
 
 void ServerRank()
