@@ -7,7 +7,7 @@ public Plugin myinfo =
 	name = "[L4D2]友伤",
 	description = "L4D2 Friendly Fire",
 	author = "奈",
-	version = "1.1",
+	version = "1.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -28,28 +28,28 @@ Action Cmd_FriendlyFire(int client, int args)
 			FindConVar("survivor_friendly_fire_factor_normal").RestoreDefault();
 			FindConVar("survivor_friendly_fire_factor_hard").RestoreDefault();
 			FindConVar("survivor_friendly_fire_factor_expert").RestoreDefault();
-			PrintToChatAll("\x04[提示]\x05恢复队友伤害.");
+			PrintToChatAll("\x04[提示]\x05队友伤害恢复\x03正常\x05伤害.");
 		}
 		else if (strcmp(tmp, "off", false) == 0) {
 			FindConVar("survivor_friendly_fire_factor_easy").SetFloat(0.0);
 			FindConVar("survivor_friendly_fire_factor_normal").SetFloat(0.0);
 			FindConVar("survivor_friendly_fire_factor_hard").SetFloat(0.0);
 			FindConVar("survivor_friendly_fire_factor_expert").SetFloat(0.0);
-			PrintToChatAll("\x04[提示]\x05关闭队友伤害.");
+			PrintToChatAll("\x04[提示]\x05队友伤害设置为\x03关闭.");
 		}
 		else if (strcmp(tmp, "normal", false) == 0) {
 			FindConVar("survivor_friendly_fire_factor_easy").SetFloat(0.1);
 			FindConVar("survivor_friendly_fire_factor_normal").SetFloat(0.1);
 			FindConVar("survivor_friendly_fire_factor_hard").SetFloat(0.1);
 			FindConVar("survivor_friendly_fire_factor_expert").SetFloat(0.1);
-			PrintToChatAll("\x04[提示]\x05队友伤害全局设置为\x03普通\x05伤害.");
+			PrintToChatAll("\x04[提示]\x05队友伤害设置为\x03普通\x05伤害.");
 		}
 		else if (strcmp(tmp, "top", false) == 0) {
 			FindConVar("survivor_friendly_fire_factor_easy").SetFloat(1.0);
 			FindConVar("survivor_friendly_fire_factor_normal").SetFloat(1.0);
 			FindConVar("survivor_friendly_fire_factor_hard").SetFloat(1.0);
 			FindConVar("survivor_friendly_fire_factor_expert").SetFloat(1.0);
-			PrintToChatAll("\x04[提示]\x05队友伤害设置为最高.");
+			PrintToChatAll("\x04[提示]\x05队友伤害设置为\x03专家2倍\x05伤害.");
 		}
 		else
 			PrintToChat(client, "\x04[提示]\x03请输入正确的命令!");

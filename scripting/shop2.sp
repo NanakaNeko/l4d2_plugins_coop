@@ -40,7 +40,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.1", 
+	version = "1.3.2", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -56,6 +56,8 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_pum", GivePum, "快速选木喷");
 	RegConsoleCmd("sm_smg", GiveSmg, "快速选smg");
 	RegConsoleCmd("sm_uzi", GiveUzi, "快速选uzi");
+	RegConsoleCmd("sm_pill", BuyPill, "快速买药");
+	RegConsoleCmd("sm_pen", GivePen, "快速随机一把单喷");
 
 	cv_Disable = CreateConVar("l4d2_shop_disable", "0", "商店开关 开:0 关:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_Medical = CreateConVar("l4d2_medical_enable", "1", "医疗物品购买开关 开:1 关:0", FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -442,7 +444,7 @@ public void WeaponMenu(int client)
 //白嫖武器菜单选择后执行
 public int WeaponMenu_back(Menu menu, MenuAction action, int client, int num)
 {
-	if(judge(client))
+	if(judge(client, true))
 		return 0;
 
 	if (action == MenuAction_Select)
@@ -509,7 +511,7 @@ public void MeleeMenu(int client)
 //白嫖近战菜单选择后执行
 public int MeleeMenu_back(Menu menu, MenuAction action, int client, int num)
 {
-	if(judge(client))
+	if(judge(client, true))
 		return 0;
 
 	if (action == MenuAction_Select)
@@ -1038,7 +1040,7 @@ bool NoValidPlayer(int Client)
 }
 
 //白嫖武器判定
-bool judge(int client)
+bool judge(int client, bool free=false)
 {
 	if(NoValidPlayer(client))  
 		return true; 
@@ -1049,10 +1051,13 @@ bool judge(int client)
 		return true; 
 	} 
 
-	if(player[client].ClientWeapon >= i_MaxWeapon)  
-	{ 
-		PrintToChat(client, "\x04[商店]\x05已达到每关白嫖上限."); 
-		return true; 
+	if(free)
+	{
+		if(player[client].ClientWeapon >= i_MaxWeapon)  
+		{ 
+			PrintToChat(client, "\x04[商店]\x05已达到每关白嫖上限."); 
+			return true; 
+		}
 	}
 	return false;
 }
@@ -1065,7 +1070,7 @@ public Action GiveChr(int client,int args)
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
 		return Plugin_Handled;
 	}
-	if(judge(client))
+	if(judge(client, true))
 		return Plugin_Handled;
 	GiveCommand(client, "shotgun_chrome");
 	PrintWeaponName(client, 0);
@@ -1080,7 +1085,7 @@ public Action GivePum(int client,int args)
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
 		return Plugin_Handled;
 	}
-	if(judge(client))
+	if(judge(client, true))
 		return Plugin_Handled;
 	GiveCommand(client, "pumpshotgun");
 	PrintWeaponName(client, 1);
@@ -1095,7 +1100,7 @@ public Action GiveSmg(int client,int args)
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
 		return Plugin_Handled;
 	}
-	if(judge(client))
+	if(judge(client, true))
 		return Plugin_Handled;
 	GiveCommand(client, "smg_silenced"); 
 	PrintWeaponName(client, 2);
@@ -1110,11 +1115,56 @@ public Action GiveUzi(int client,int args)
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
 		return Plugin_Handled;
 	}
-	if(judge(client))
+	if(judge(client, true))
 		return Plugin_Handled;
 	GiveCommand(client, "smg");
 	PrintWeaponName(client, 3);
 	return Plugin_Handled; 
+}
+
+//快速白嫖一把单喷
+public Action GivePen(int client,int args) 
+{ 
+	if(b_Disable)
+	{
+		PrintToChat(client, "\x04[商店]\x05商店未开启.");
+		return Plugin_Handled;
+	}
+	if(judge(client, true))
+		return Plugin_Handled;
+	if(GetRandomInt(0, 1)){
+		GiveCommand(client, "pumpshotgun");
+		PrintWeaponName(client, 1);
+	}
+	else{
+		GiveCommand(client, "shotgun_chrome");
+		PrintWeaponName(client, 0);
+	}
+	return Plugin_Handled; 
+}
+
+public Action BuyPill(int client,int args)
+{
+	if(b_Disable)
+	{
+		PrintToChat(client, "\x04[商店]\x05商店未开启.");
+		return Plugin_Handled;
+	}
+	if(judge(client))
+		return Plugin_Handled;
+	if(player[client].ClientPoint == 0){
+		PrintToChat(client, "\x04[商店]\x03点数不足!");
+		return Plugin_Handled;
+	}
+	if(player[client].CanBuyMedical)
+	{
+		GiveCommand(client, "pain_pills");
+		PrintMedicalName(client, 0);
+		player[client].CanBuyMedical = false;
+	}
+	else
+		PrintToChat(client, "\x04[提示]\x03医疗物品每关只能买一次哦!");
+	return Plugin_Handled;
 }
 
 public Action Transmit(int client, int args)
