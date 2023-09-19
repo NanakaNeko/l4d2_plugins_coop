@@ -7,7 +7,7 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------- |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
 |           [**hostname**](./scripting/hostname.sp)            | 根据端口号改服名，显示部分突变模式(不常用的模式没写，仅写了部分战役和生还者)和难度 |
-|       [**join_out_msg**](./scripting/join_out_msg.sp)        | 加入退出服务器提示信息                                       |
+|       [**join_out_msg**](./scripting/join_out_msg.sp)        | 加入退出服务器提示信息，离开安全屋提示音                     |
 |           [**kicktank**](./scripting/kicktank.sp)            | 使用指令后单次关卡只会出现一个克                             |
 |  [**l4d2_auto_medical**](./scripting/l4d2_auto_medical.sp)   | 根据人数自动倍数医疗物品                                     |
 | [**l4d2_friendly_fire**](./scripting/l4d2_friendly_fire.sp)  | 开关队友伤害，!setff on打开友伤，!setff off关闭友伤，!setff normal设置普通友伤，!setff top设置最高友伤（1.0） |

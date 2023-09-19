@@ -10,19 +10,50 @@
 #define IsConnected         "buttons/button11.wav"
 //玩家离开时播放的声音
 #define IsDisconnect        "buttons/button4.wav"
+//玩家离开安全屋的声音
+#define IsLeftSafeArea      "level/countdown.wav"
+#define IsStart             "level/loud/bell_break.wav"
+
+ConVar cv_SafeArea;
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.3",
+	version = "1.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
-	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+    cv_SafeArea = CreateConVar("l4d2_leftsafe_sound", "1", "离开安全屋提示音", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+    HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+}
+
+public void OnMapStart()
+{
+    PrecacheSound(IsConnecting);
+    PrecacheSound(IsConnected);
+    PrecacheSound(IsDisconnect);
+    PrecacheSound(IsLeftSafeArea);
+    PrecacheSound(IsStart);
+}
+
+public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
+{
+	if(cv_SafeArea.BoolValue){
+        PlaySound(IsLeftSafeArea);
+        CreateTimer(3.0, SoundTimer, _, TIMER_FLAG_NO_MAPCHANGE);
+    }
+
+	return Plugin_Continue;
+}
+
+public Action SoundTimer(Handle timer)
+{
+    PlaySound(IsStart);
+    return Plugin_Continue;
 }
 
 //玩家连接
