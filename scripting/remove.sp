@@ -5,13 +5,49 @@
 #include <sdkhooks>
 #include <sdktools>
 
+ConVar cv_DeleteSlots;
+
 public Plugin myinfo = 
 {
 	name 			= "Remove Medical",
 	author 			= "奈",
 	description 	= "删除所有医疗物品, 开局发药",
-	version 		= "1.0",
+	version 		= "1.1",
 	url 			= "https://github.com/NanakaNeko/l4d2_plugins_coop"
+}
+
+public void OnPluginStart()
+{
+	cv_DeleteSlots = CreateConVar("l4d2_delete_slots", "0", "清除武器 关闭:0 开启:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	HookEvent("map_transition", Event_ResetInventory, EventHookMode_Post);
+}
+
+public Action Event_ResetInventory(Event event, const char[] name, bool dontBroadcast)
+{
+	if(cv_DeleteSlots.BoolValue)
+		ResetInventory();
+	return Plugin_Continue;
+}
+
+// 清除物品
+void ResetInventory()
+{
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (IsAliveSurvivor(client))
+		{
+			for (int slot = 0; slot < 5; slot++)
+				DeleteInventoryItem(client, slot);
+			GiveCommand(client, "pistol");
+		}
+	}
+}
+
+void DeleteInventoryItem(int client, int slot)
+{
+	int item = GetPlayerWeaponSlot(client, slot);
+	if (IsValidEntity(item) && IsValidEdict(item))
+		RemovePlayerItem(client, item);
 }
 
 public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
@@ -22,8 +58,6 @@ public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
 
 public void GivePill()
 {
-	int flags = GetCommandFlags("give");	
-	SetCommandFlags("give", flags & ~FCVAR_CHEAT);	
 	for (int client = 1; client <= MaxClients; client++)
 	{
 		if (IsAliveSurvivor(client))
@@ -31,10 +65,18 @@ public void GivePill()
 			int item = GetPlayerWeaponSlot(client, 4);
 			if (IsValidEntity(item) && IsValidEdict(item))
 				RemovePlayerItem(client, item);
-			FakeClientCommand(client, "give pain_pills");
+			GiveCommand(client, "pain_pills");
 		}
 	}
-	SetCommandFlags("give", flags|FCVAR_CHEAT);
+}
+
+//cheat give命令
+void GiveCommand(int client, char[] args = "")
+{
+	int iFlags = GetCommandFlags("give");
+	SetCommandFlags("give", iFlags & ~FCVAR_CHEAT);
+	FakeClientCommand(client, "give %s", args);
+	SetCommandFlags("give", iFlags);
 }
 
 stock bool IsAliveSurvivor(int i)

@@ -22,7 +22,7 @@
 |  [**l4d_blackandwhite**](./scripting/l4d_blackandwhite.sp)   | 汉化并增加聊天框提示颜色，增加黑白移除提示                   |
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
 | [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | 战役用仿zonemod的坦克数据提示，最大支持8人，超过会不显示，仅汉化 |
-|             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药                           |
+|             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
 |             [**server**](./scripting/server.sp)              | 服务器部分功能的实现  <br/>重启地图  <br/>安全屋无敌  <br/>自杀，关闭闲置提示  <br/>ConVar提示仅管理员可见  <br/>1.1.1 频繁改名踢出  <br/>1.1.2 全球排名和人数  <br/>1.1.3 新增debug模式，来自sorallll的rygive插件  <br/>1.1.4 增加服务器匹配禁用 |
 |         [**server_hud**](./scripting/server_hud.sp)          | 融合sorallll和豆瓣酱的hud，提供几种风格<br/>1. 坦克女巫路程居左，北京时间、团灭次数、地图关卡、人数、击杀数量居右<br/>2. 坦克女巫路程居左，服名、人数居右 <br/>3. 坦克女巫居左，服名居中，人数、地图关卡居右<br/>4. 地图关卡、人数居左，服名居中，击杀数量居右<br/>5. 击杀数量居左，北京时间、团灭次数、地图关卡、人数居右 |
 |               [**shop**](./scripting/shop.sp)                | 商店插件说明:  <br/>每关提供几次机会白嫖部分武器，cvar可自行设定每关几次  <br/>!buy !gw打开商店面板  <br/>!chr快速选铁喷，!pum快速选木喷，!uzi快速选uzi，!smg快速选smg  <br/>!ammo补充后备弹夹，cvar设置多长时间补充一次  <br/>增加出门近战发放，读取steamid写入data/melee.txt文件，再次进服自动加载之前选择  <br/>增加一个cvar控制开关商店  <br/>2.0新增管理员指令开关商店，!shop off关闭商店，!shop on打开商店，!shop查看当前商店开关情况  <br/>2.1新增白嫖近战菜单 |
