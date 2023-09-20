@@ -3,6 +3,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <colors>
+#include <geoip>
 
 //玩家连接时播放的声音
 #define IsConnecting        "ambient/alarms/klaxon1.wav"
@@ -21,7 +22,7 @@ public Plugin myinfo =
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.4",
+	version = "1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -29,6 +30,7 @@ public void OnPluginStart()
 {
     cv_SafeArea = CreateConVar("l4d2_leftsafe_sound", "1", "离开安全屋提示音", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+    //RegAdminCmd("sm_test", test, ADMFLAG_ROOT);
 }
 
 public void OnMapStart()
@@ -70,7 +72,7 @@ public void OnClientConnected(int client)
 public void OnClientPutInServer(int client)
 {
     if(!IsFakeClient(client)){
-        CPrintToChatAll("{green}[服务器] {olive}玩家{blue}%N{default}({green}%s{default}){olive}入狱", client, GetSteamId(client));
+        CPrintToChatAll("{green}[服务器] {olive}来自{blue}%s{olive}的玩家{blue}%N{green}(%s){olive}入狱", GetCountry(client), client, GetSteamId(client));
         //PrintToChatAll("\x03[服务器] \x05玩家\x04%N(\x01%s\x05)加入", client, GetSteamId(client));
         PlaySound(IsConnected);
     }
@@ -167,4 +169,12 @@ char[] GetSteamId(int client)
 	return id;
 }
 
+char[] GetCountry(int client)
+{
+    char ip[16], Country[32];
+    GetClientIP(client, ip, sizeof(ip));
+    if(!GeoipCountry(ip, Country, sizeof(Country)))
+        Format(Country, sizeof(Country), "未知");
+    return Country;
+}
 
