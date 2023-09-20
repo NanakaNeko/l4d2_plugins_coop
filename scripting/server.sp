@@ -4,17 +4,23 @@
 #pragma semicolon 1
 
 //清除部分功能，让插件通用在服务器
-ConVar cv_ChangeName, cv_ServerRank, cv_ServerNumber, cv_LobbyDisable;
+ConVar
+	cv_ChangeName,
+	cv_ServerRank,
+	cv_ServerNumber,
+	cv_LobbyDisable,
+	cv_smPrompt;
+
 int ChangeName[MAXPLAYERS + 1];
 StringMap g_smSteamIDs;
 bool g_bDebugMode;
 
 public Plugin myinfo =
 {
-	name = "Server Function",
+	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.1.5",
+	version = "1.1.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -26,6 +32,7 @@ public void OnPluginStart()
 	cv_ServerRank = CreateConVar("l4d_server_rank", "233", "全球排名数", _, true, 0.0);
 	cv_ServerNumber = CreateConVar("l4d_server_players_number", "6666", "加入服务器人数", _, true, 0.0);
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_smPrompt = CreateConVar("l4d2_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "重启当前地图");
 	RegAdminCmd("sm_debug", DebugMode, ADMFLAG_ROOT, "开关调试模式");
 	RegConsoleCmd("sm_zs", Kill_Survivor, "幸存者自杀指令");
@@ -133,7 +140,7 @@ Action umTextMsg(UserMsg msg_id, BfRead msg, const int[] players, int num, bool 
 
 	if (strcmp(buffer, "\x03#L4D_idle_spectator") == 0) //聊天栏提示：XXX 现已闲置。
 		return Plugin_Handled;
-	else if (StrContains(buffer, "\x03[SM]") == 0) //聊天栏以[SM]开头的消息。
+	else if (StrContains(buffer, "\x03[SM]") == 0 && cv_smPrompt.BoolValue) //聊天栏以[SM]开头的消息。
 	{
 		DataPack dPack = new DataPack();
 		dPack.WriteCell(num);
