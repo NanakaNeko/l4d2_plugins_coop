@@ -20,7 +20,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.1.6",
+	version = "1.1.7",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -33,7 +33,8 @@ public void OnPluginStart()
 	cv_ServerNumber = CreateConVar("l4d_server_players_number", "6666", "加入服务器人数", _, true, 0.0);
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_smPrompt = CreateConVar("l4d2_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "重启当前地图");
+	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
+	RegAdminCmd("sm_restartmap5", RestartMap5, ADMFLAG_ROOT, "延迟5秒重启当前地图");
 	RegAdminCmd("sm_debug", DebugMode, ADMFLAG_ROOT, "开关调试模式");
 	RegConsoleCmd("sm_zs", Kill_Survivor, "幸存者自杀指令");
 	RegConsoleCmd("sm_kill", Kill_Survivor, "幸存者自杀指令");
@@ -206,6 +207,14 @@ void SetGodMode(bool canset)
 }
 
 public Action RestartMap(int client,int args)
+{
+	char mapname[64];
+	GetCurrentMap(mapname, sizeof(mapname));
+	ServerCommand("changelevel %s", mapname);
+	return Plugin_Handled;
+}
+
+public Action RestartMap5(int client,int args)
 {
 	PrintHintTextToAll("地图将在5秒后重启");
 	CreateTimer(5.0, Timer_Restartmap);
