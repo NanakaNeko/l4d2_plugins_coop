@@ -15,19 +15,20 @@
 #define IsLeftSafeArea      "level/countdown.wav"
 #define IsStart             "level/loud/bell_break.wav"
 
-ConVar cv_SafeArea;
+ConVar cv_SafeArea, cv_Isconnecting;
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.5",
+	version = "1.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
+    cv_Isconnecting = CreateConVar("l4d2_connecting_sound", "1", "连接中提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     cv_SafeArea = CreateConVar("l4d2_leftsafe_sound", "1", "离开安全屋提示音", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
     //RegAdminCmd("sm_test", test, ADMFLAG_ROOT);
@@ -61,7 +62,7 @@ public Action SoundTimer(Handle timer)
 //玩家连接
 public void OnClientConnected(int client)
 {   
-	if(!IsFakeClient(client)){
+	if(!IsFakeClient(client) && cv_Isconnecting.BoolValue){
         CPrintToChatAll("{green}[服务器] {olive}玩家{blue}%N{olive}申请进入牢房...", client);
         //PrintToChatAll("\x03[服务器] \x05玩家\x03%N\x05连接中...", client);
         PlaySound(IsConnecting);
@@ -131,7 +132,7 @@ public Action Event_PlayerDisconnect(Event event, const char[] name, bool dontBr
     }
     else if(StrContains(reason, "This Steam account does not own this game", false) != -1)
     {
-        Format(message,sizeof(message),"使用他人账号");
+        Format(message,sizeof(message),"家庭共享账号");
     }
     else if(StrContains(reason, "Validation Rejected", false) != -1)
     {
@@ -171,10 +172,10 @@ char[] GetSteamId(int client)
 
 char[] GetCountry(int client)
 {
-    char ip[16], Country[32];
+    char ip[16], Country[64];
     GetClientIP(client, ip, sizeof(ip));
     if(!GeoipCountry(ip, Country, sizeof(Country)))
-        Format(Country, sizeof(Country), "未知");
+        Format(Country, sizeof(Country), "未知国家");
     return Country;
 }
 
