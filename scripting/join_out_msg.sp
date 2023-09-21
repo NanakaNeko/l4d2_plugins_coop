@@ -22,7 +22,7 @@ public Plugin myinfo =
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.6",
+	version = "1.7",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -176,6 +176,28 @@ char[] GetCountry(int client)
     GetClientIP(client, ip, sizeof(ip));
     if(!GeoipCountry(ip, Country, sizeof(Country)))
         Format(Country, sizeof(Country), "未知国家");
+    if(StrContains(Country, "China", false) != -1)
+        Format(Country,sizeof(Country),"中国");
+    else if(StrContains(Country, "Taiwan", false) != -1)
+        Format(Country,sizeof(Country),"中国台湾");
+    else if(StrContains(Country, "Hong Kong", false) != -1)
+        Format(Country,sizeof(Country),"中国香港");
+    else if(StrContains(Country, "America", false) != -1)
+        Format(Country,sizeof(Country),"美国");
+    else if(StrContains(Country, "South Korea", false) != -1)
+        Format(Country,sizeof(Country),"韩国");
+    else if(StrContains(Country, "Japan", false) != -1)
+        Format(Country,sizeof(Country),"日本");
+    else if(StrContains(Country, "Philippines", false) != -1)
+        Format(Country,sizeof(Country),"菲律宾");
+    else if(StrContains(Country, "India", false) != -1)
+        Format(Country,sizeof(Country),"印度");
+    else if(StrContains(Country, "Singapore", false) != -1)
+        Format(Country,sizeof(Country),"新加坡");
+    else if(StrContains(Country, "Indonesia", false) != -1)
+        Format(Country,sizeof(Country),"印度尼西亚");
+    else if(StrContains(Country, "Vietnam", false) != -1)
+        Format(Country,sizeof(Country),"越南");
     return Country;
 }
 
