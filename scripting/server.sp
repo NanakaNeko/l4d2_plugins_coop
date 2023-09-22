@@ -21,13 +21,14 @@ pingStruct pingCheck[MAXPLAYERS + 1];
 int ChangeName[MAXPLAYERS + 1];
 StringMap g_smSteamIDs;
 bool g_bDebugMode;
+char g_sLogPath[PLATFORM_MAX_PATH];
 
 public Plugin myinfo =
 {
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.1.8",
+	version = "1.1.9",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -41,6 +42,7 @@ public void OnPluginStart()
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_smPrompt = CreateConVar("l4d2_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_pingCheck = CreateConVar("l4d2_ping_check", "1", "进入服务器ping值检测,高于250ms踢出,仅在第一次进入检测,中途升高不检测 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/server_kick.log");
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
 	RegAdminCmd("sm_restartmap5", RestartMap5, ADMFLAG_ROOT, "延迟5秒重启当前地图");
 	RegAdminCmd("sm_debug", DebugMode, ADMFLAG_ROOT, "开关调试模式");
@@ -92,6 +94,7 @@ public void Event_PlayerChangeName(Event event, const char[] name, bool dontBroa
 	{
 		ChangeName[client] = 0;
 		KickClient(client, "因频繁改名被踢出");
+		LogToFileEx(g_sLogPath, "[改名] %N 因为频繁改名被踢出", client);
 		return;
 	}
 
@@ -120,8 +123,8 @@ public Action ping_Check(Handle timer, int client)
 	if (GetClientTime(client) < 60.0)
 		return Plugin_Continue;
 
-	//PrintToConsoleAll("开始检测ping");
 	float ping = GetClientAvgLatency(client, NetFlow_Outgoing) * 1000.0;
+	//PrintToConsoleAll("开始检测ping");
 
 	if(ping > 250.0)
 		pingCheck[client].pingTooHigh++;
@@ -130,6 +133,7 @@ public Action ping_Check(Handle timer, int client)
 
 	if(pingCheck[client].pingTooHigh >= 5){
 		KickClient(client, "ping值太高了");
+		LogToFileEx(g_sLogPath, "[ping] %N 因为ping太高被踢出", client);
 		return Plugin_Stop;
 	}
 	if(pingCheck[client].pingCheckCount > 15){
