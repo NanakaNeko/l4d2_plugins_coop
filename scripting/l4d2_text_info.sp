@@ -9,7 +9,6 @@ ConVar
 	cv_Rhp,
 	cv_Restore,
 	cv_Siammoregain,
-	cv_Respawn,
 	cv_SiNum,
 	cv_SiTime,
 	cv_SiMode;
@@ -21,7 +20,6 @@ int
 	Rhp,
 	Restore,
 	Siammoregain,
-	Respawn,
 	SiNum,
 	SiTime;
 
@@ -30,7 +28,7 @@ public Plugin myinfo =
     name        = "!xx查询信息",
     author      = "奈",
     description = "服务器信息查询",
-    version     = "1.2.4",
+    version     = "1.2.5",
     url         = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -49,8 +47,8 @@ public void OnPluginStart()
 	SiNum = GetConVarInt(cv_SiNum);
 	SiTime = GetConVarInt(cv_SiTime);
 	
-	cv_Weapon = CreateConVar("WeaponDamage", "0", "设置武器伤害", _, true, 0.0, true, 2.0);
-	cv_WeaponReplace = CreateConVar("WeaponReplace", "-1", "开启大小枪", _, true, -1.0, true, 1.0);
+	cv_Weapon = CreateConVar("WeaponDamage", "-1", "设置武器伤害", _, true, -1.0, true, 2.0);
+	cv_WeaponReplace = CreateConVar("WeaponReplace", "0", "开启大小枪", _, true, 0.0, true, 1.0);
 	cv_stripper = CreateConVar("maps_stripper", "-1", "地图版本", _, true, -1.0, true, 3.0);
 
 	Weapon = GetConVarInt(cv_Weapon);
@@ -67,7 +65,6 @@ public void OnAllPluginsLoaded()
 	cv_Rhp = FindConVar("ss_health");
 	cv_Siammoregain = FindConVar("ss_siammoregain");
 	cv_Restore = FindConVar("l4d2_restore_health_flag");
-	cv_Respawn = FindConVar("l4d2_respawn_number");
 	cv_SiNum = FindConVar("l4d2_si_spawn_control_max_specials");
 	cv_SiTime = FindConVar("l4d2_si_spawn_control_spawn_time");
 	cv_SiMode = FindConVar("l4d2_si_spawn_control_together_spawn");
@@ -97,13 +94,6 @@ public void OnConfigsExecuted()
 		cv_Restore = FindConVar("l4d2_restore_health_flag");
 		cv_Restore.AddChangeHook(CvarRestore);
 	}
-	if(cv_Respawn != null){
-		cv_Respawn.AddChangeHook(CvarRespawn);
-	}
-	else if(FindConVar("l4d2_respawn_number")){
-		cv_Respawn = FindConVar("l4d2_respawn_number");
-		cv_Respawn.AddChangeHook(CvarRespawn);
-	}
 	if(cv_SiNum != null && cv_SiTime != null && cv_SiMode != null){
 		cv_SiNum.AddChangeHook(CvarInfected);
 		cv_SiTime.AddChangeHook(CvarInfected);
@@ -128,28 +118,28 @@ public void CvarWeapon(ConVar convar, const char[] oldValue, const char[] newVal
 		ServerCommand("exec vt_cfg/weapon/AnneHappy.cfg");
 	else if (Weapon == 2)
 		ServerCommand("exec vt_cfg/weapon/AnneHappyPlus.cfg");
+	else if (Weapon == -1)
+		ServerCommand("sm_weapon_attributes_reset");
 }
 public void CvarWeaponReplace(ConVar convar, const char[] oldValue, const char[] newValue)
 {
 	WReplace = GetConVarInt(cv_WeaponReplace);
 	if (WReplace == 1)
-		ServerCommand("exec vt_cfg/wreplace/weaponreplace.cfg");
-	else if (WReplace == 0){
-		ServerCommand("exec vt_cfg/wreplace/reset.cfg");
-		cv_WeaponReplace.IntValue = -1;
-	}
+		ServerCommand("exec vt_cfg/weaponreplace.cfg");
+	else if (WReplace == 0)
+		ServerCommand("l4d2_resetweaponrules");
 }
 public void CvarMapStripper(ConVar convar, const char[] oldValue, const char[] newValue)
 {
 	MapStripper = GetConVarInt(cv_stripper);
 	if (MapStripper == 1)
-		ServerCommand("exec vt_cfg/mapstripper/zonemod.cfg");
+		ServerCommand("sm_cvar stripper_cfg_path cfg/stripper/zonemod");
 	else if (MapStripper == 2)
-		ServerCommand("exec vt_cfg/mapstripper/neomod.cfg");
+		ServerCommand("sm_cvar stripper_cfg_path cfg/stripper/neomod");
 	else if (MapStripper == 3)
-		ServerCommand("exec vt_cfg/mapstripper/deadman.cfg");
+		ServerCommand("sm_cvar stripper_cfg_path cfg/stripper/deadman");
 	else if (MapStripper == 0){
-		ServerCommand("exec vt_cfg/mapstripper/default.cfg");
+		ServerCommand("sm_cvar stripper_cfg_path addons/stripper");
 		cv_stripper.IntValue = -1;
 	}
 }
@@ -165,10 +155,6 @@ public void CvarAmmo( ConVar convar, const char[] oldValue, const char[] newValu
 {
 	Siammoregain = GetConVarInt(cv_Siammoregain);
 }
-public void CvarRespawn( ConVar convar, const char[] oldValue, const char[] newValue)
-{
-	Respawn = GetConVarInt(cv_Respawn);
-}
 public void CvarInfected( ConVar convar, const char[] oldValue, const char[] newValue)
 {
 	SiNum = GetConVarInt(cv_SiNum);
@@ -180,12 +166,11 @@ void printinfo(int client = 0, bool All = true){
 	char buffer2[256];
 	
 	Format(buffer, sizeof(buffer), "\x03特感\x05[\x04%s%d特%d秒\x05]", (cv_SiMode !=null && cv_SiMode.BoolValue)?"固定":"自动", SiNum, SiTime);
-	Format(buffer, sizeof(buffer), "%s \x03武器\x05[\x04%s\x05]", buffer, Weapon == 0?"Zone":(Weapon == 1?"Anne":"Anne+"));
+	Format(buffer, sizeof(buffer), "%s \x03武器\x05[\x04%s\x05]", buffer, Weapon == 0?"Zone":(Weapon == 1?"Anne":(Weapon == 2?"Anne+":"默认")));
 	Format(buffer, sizeof(buffer), "%s \x03地图\x05[\x04%s\x05]", buffer, MapStripper == 1?"ZoneMod":(MapStripper == 2?"NeoMod":(MapStripper == 3?"DeadMan":"默认")));
 
 	Format(buffer2, sizeof(buffer2), "\x03回血\x05[\x04%s\x05]", Rhp > 0?"开启":"关闭");
 	Format(buffer2, sizeof(buffer2), "%s \x03回弹\x05[\x04%s\x05]", buffer2, Siammoregain == 0?"关闭":"开启");
-	Format(buffer2, sizeof(buffer2), "%s \x03复活\x05[\x04%s\x05]", buffer2, Respawn == 0?"关闭":"开启");
 	Format(buffer2, sizeof(buffer2), "%s \x03过关满血\x05[\x04%s\x05]", buffer2, Restore == 0?"关闭":"开启");
 	if(All){
 		PrintToChatAll(buffer);
