@@ -11,6 +11,11 @@ enum struct PlayerStruct{
 	int ClientWeapon;
 	int ClientMelee;
 	int ClientPoint;
+	int ClientTotalPoint;
+	int ClientKillCI;
+	int ClientKillSI;
+	int ClientKillTank;
+	int ClientKillWitch;
 	float ClientAmmoTime;
 	bool CanBuyMedical;
 	int ClientTransmit;
@@ -40,8 +45,91 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.2", 
+	version = "1.3.5", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
+}
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	//API
+	RegPluginLibrary("shop");
+	//Native
+	CreateNative("Shop_Get_TotalPoint", Native_GetTotalPoint);
+	CreateNative("Shop_Get_KillCI", Native_GetKillCI);
+	CreateNative("Shop_Get_KillSI", Native_GetKillSI);
+	CreateNative("Shop_Get_KillTank", Native_GetKillTank);
+	CreateNative("Shop_Get_KillWitch", Native_GetKillWitch);
+	return APLRes_Success;
+}
+
+int Native_GetTotalPoint(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientTotalPoint;
+}
+
+int Native_GetKillCI(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientKillCI;
+}
+
+int Native_GetKillSI(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientKillSI;
+}
+
+int Native_GetKillTank(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientKillTank;
+}
+
+int Native_GetKillWitch(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientKillWitch;
 }
 
 public void OnPluginStart() 
@@ -72,9 +160,10 @@ public void OnPluginStart()
 	HookEvent("round_start", Event_Reset, EventHookMode_Pre);
 	HookEvent("mission_lost", Event_Reset, EventHookMode_Post);
 	HookEvent("finale_win", Event_RewardPoint, EventHookMode_Pre);
-	HookEvent("player_death", Event_player_death, EventHookMode_Post);
-	HookEvent("witch_killed", Event_WitchKilled, EventHookMode_Post);
-	HookEvent("tank_killed", Event_TankKilled, EventHookMode_Post);
+	HookEvent("player_death", Event_player_death, EventHookMode_Pre);
+	HookEvent("infected_death", Event_InfectedDeath);
+	HookEvent("witch_killed", Event_WitchKilled);
+	HookEvent("tank_killed", Event_TankKilled);
 	HookConVarChange(cv_Disable, CvarChanged);
 	HookConVarChange(cv_MaxWeapon, CvarChanged);
 	HookConVarChange(cv_MaxPoint, CvarChanged);
@@ -113,7 +202,7 @@ void InitSQLite()
 	if (!(sqlite = SQLite_UseDatabase("ShopSystem", sError, sizeof sError)))
 		SetFailState("Could not connect to the database \"ShopSystem\" at the following error:\n%s", sError);
 
-	SQL_FastQuery(sqlite, "CREATE TABLE IF NOT EXISTS Shop(SteamID NVARCHAR(32) NOT NULL DEFAULT '', Select_Melee INT NOT NULL DEFAULT 0, Point INT NOT NULL DEFAULT 0);");
+	SQL_FastQuery(sqlite, "CREATE TABLE IF NOT EXISTS Shop(SteamID NVARCHAR(32) NOT NULL DEFAULT '', Select_Melee INT NOT NULL DEFAULT 0, Point INT NOT NULL DEFAULT 0, TotalPoint INT NOT NULL DEFAULT 0, KillCI INT NOT NULL DEFAULT 0, KillSI INT NOT NULL DEFAULT 0, KillTank INT NOT NULL DEFAULT 0, KillWitch INT NOT NULL DEFAULT 0);");
 }
 
 void SQL_LoadAll() 
@@ -131,6 +220,9 @@ void SQL_SaveAll()
 		if (IsClientInGame(i) && !IsFakeClient(i)){
 			SQL_SaveMelee(i);
 			SQL_SavePoint(i);
+			SQL_SaveKillCI(i);
+			SQL_SaveKillSI(i);
+			SQL_SaveKillTankWitch(i);
 		}		
 	}
 }
@@ -141,7 +233,7 @@ void SQL_Load(int client)
 		return;
 
 	char query[1024];
-	FormatEx(query, sizeof query, "SELECT Select_Melee, Point FROM Shop WHERE SteamID = '%s';", GetSteamId(client));
+	FormatEx(query, sizeof query, "SELECT Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch FROM Shop WHERE SteamID = '%s';", GetSteamId(client));
 	sqlite.Query(SQL_CallbackLoad, query, GetClientUserId(client));
 }
 
@@ -161,7 +253,37 @@ void SQL_SavePoint(int client)
 		return;
 
 	char query[1024];
-	FormatEx(query, sizeof query, "UPDATE Shop SET Point = %d WHERE SteamID = '%s';", player[client].ClientPoint, GetSteamId(client));
+	FormatEx(query, sizeof query, "UPDATE Shop SET Point = %d, TotalPoint = %d WHERE SteamID = '%s';", player[client].ClientPoint, player[client].ClientTotalPoint, GetSteamId(client));
+	SQL_FastQuery(sqlite, query);
+}
+
+void SQL_SaveKillCI(int client)
+{
+	if (!sqlite)
+		return;
+
+	char query[1024];
+	FormatEx(query, sizeof query, "UPDATE Shop SET KillCI = %d WHERE SteamID = '%s';", player[client].ClientKillCI, GetSteamId(client));
+	SQL_FastQuery(sqlite, query);
+}
+
+void SQL_SaveKillSI(int client)
+{
+	if (!sqlite)
+		return;
+
+	char query[1024];
+	FormatEx(query, sizeof query, "UPDATE Shop SET KillSI = %d WHERE SteamID = '%s';", player[client].ClientKillSI, GetSteamId(client));
+	SQL_FastQuery(sqlite, query);
+}
+
+void SQL_SaveKillTankWitch(int client)
+{
+	if (!sqlite)
+		return;
+
+	char query[1024];
+	FormatEx(query, sizeof query, "UPDATE Shop SET KillTank = %d, KillWitch = %d WHERE SteamID = '%s';", player[client].ClientKillTank, player[client].ClientKillWitch, GetSteamId(client));
 	SQL_FastQuery(sqlite, query);
 }
 
@@ -179,10 +301,15 @@ void SQL_CallbackLoad(Database db, DBResultSet results, const char[] error, any 
 	if (results.FetchRow()){
 		player[client].ClientMelee = results.FetchInt(0);
 		player[client].ClientPoint = results.FetchInt(1);
+		player[client].ClientTotalPoint = results.FetchInt(2);
+		player[client].ClientKillCI = results.FetchInt(3);
+		player[client].ClientKillSI = results.FetchInt(4);
+		player[client].ClientKillTank = results.FetchInt(5);
+		player[client].ClientKillWitch = results.FetchInt(6);
 	}
 	else {
 		char query[1024];
-		FormatEx(query, sizeof query, "INSERT INTO Shop(SteamID, Select_Melee, Point) VALUES ('%s', %d, %d);", GetSteamId(client), player[client].ClientMelee, player[client].ClientPoint);
+		FormatEx(query, sizeof query, "INSERT INTO Shop(SteamID, Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch) VALUES ('%s', %d, %d, %d, %d, %d, %d, %d);", GetSteamId(client), player[client].ClientMelee, player[client].ClientPoint, player[client].ClientTotalPoint, player[client].ClientKillCI, player[client].ClientKillSI, player[client].ClientKillTank, player[client].ClientKillWitch);
 		SQL_FastQuery(sqlite, query);
 	}
 
@@ -213,11 +340,14 @@ public void OnClientDisconnect(int client)
 	if(!IsFakeClient(client)){
 		SQL_SaveMelee(client);
 		SQL_SavePoint(client);
+		SQL_SaveKillCI(client);
+		SQL_SaveKillSI(client);
+		SQL_SaveKillTankWitch(client);
 	}
 }
 
 //玩家死亡重置次数
-public void Event_player_death(Event event, const char []name, bool dontBroadcast)
+void Event_player_death(Event event, const char []name, bool dontBroadcast)
 {
 	if(cv_DeathReset.BoolValue)
 	{
@@ -226,10 +356,22 @@ public void Event_player_death(Event event, const char []name, bool dontBroadcas
 		player[client].ClientAmmoTime = 0.0;
 		player[client].CanBuyMedical = true;
 	}
+
+	//特感击杀记录
+	int victim = GetClientOfUserId(event.GetInt("userid"));
+	if (!victim || !IsClientInGame(victim) || GetClientTeam(victim) != 3)
+		return;
+
+	int attacker = GetClientOfUserId(event.GetInt("attacker"));
+	if (!attacker || !IsClientInGame(attacker) || GetClientTeam(attacker) != 2)
+		return;
+
+	player[attacker].ClientKillSI++;
+	SQL_SaveKillSI(attacker);
 }
 
 //回合开始或失败重开重置次数
-public Action Event_Reset(Event event, const char []name, bool dontBroadcast)
+void Event_Reset(Event event, const char []name, bool dontBroadcast)
 {
 	for(int client = 1; client <= MaxClients; client++){
 		player[client].ClientWeapon = 0;
@@ -237,12 +379,24 @@ public Action Event_Reset(Event event, const char []name, bool dontBroadcast)
 		player[client].CanBuyMedical = true;
 		player[client].ClientTransmit = 0;
 	}
-	return Plugin_Continue;
 }
 
-//玩家通关救援奖励1点数
-public Action Event_RewardPoint(Event event, const char []name, bool dontBroadcast)
+//僵尸击杀记录
+void Event_InfectedDeath(Event event, const char[] name, bool dontBroadcast) 
 {
+	int attacker = GetClientOfUserId(event.GetInt("attacker"));
+	if (!attacker || !IsClientInGame(attacker) || GetClientTeam(attacker) != 2)
+		return;
+
+	player[attacker].ClientKillCI++;
+	SQL_SaveKillCI(attacker);
+}
+
+//玩家通关救援奖励点数
+void Event_RewardPoint(Event event, const char []name, bool dontBroadcast)
+{
+	if(b_Disable)
+		return;
 	for(int client = 1; client <= MaxClients; client++){
 		if(IsClientConnected(client) && IsClientInGame(client) && !IsFakeClient(client) && GetClientTeam(client) == 2)
 		{
@@ -250,12 +404,15 @@ public Action Event_RewardPoint(Event event, const char []name, bool dontBroadca
 			{
 				if(player[client].ClientPoint < i_MaxPoint){
 					player[client].ClientPoint += cv_GetPoint.IntValue;
+					player[client].ClientTotalPoint += cv_GetPoint.IntValue;
 					CheckMaxPoint(client);
 					SQL_SavePoint(client);
 					PrintToChat(client, "\x04[提示]\x05恭喜通关! 获得\x03 %d \x05点数.", cv_GetPoint.IntValue);
 				}
 				else{
 					PrintToChat(client, "\x04[提示]\x05恭喜通关! 点数到达上限\x03 %d \x05点,本关不会增加点数.", i_MaxPoint);
+					player[client].ClientTotalPoint += cv_GetPoint.IntValue;
+					SQL_SavePoint(client);
 				}
 			}
 			else{
@@ -263,42 +420,59 @@ public Action Event_RewardPoint(Event event, const char []name, bool dontBroadca
 			}
 		}
 	}
-	return Plugin_Continue;
 }
 
 // 秒妹加点
-public Action Event_WitchKilled(Event event, const char[] name, bool dontBroadcast)
+void Event_WitchKilled(Event event, const char[] name, bool dontBroadcast)
 {
 	int client = GetClientOfUserId(event.GetInt("userid"));
+	player[client].ClientKillWitch++;
+	SQL_SaveKillTankWitch(client);
+
+	if(b_Disable)
+		return;
+	
 	if (!NoValidPlayer(client) && GetClientTeam(client) == 2){
 		if(player[client].ClientPoint < i_MaxPoint){
 			player[client].ClientPoint += cv_KillPoint.IntValue;
+			player[client].ClientTotalPoint += cv_KillPoint.IntValue;
 			CheckMaxPoint(client);
 			SQL_SavePoint(client);
 			PrintToChat(client, "\x04[提示]\x05击杀女巫! 获得\x03 %d \x05点数.", cv_KillPoint.IntValue);
 		}
-		else
+		else{
 			PrintToChat(client, "\x04[提示]\x05点数到达上限\x03 %d \x05点.", i_MaxPoint);
+			player[client].ClientTotalPoint += cv_KillPoint.IntValue;
+			SQL_SavePoint(client);
+		}
 	}
-	return Plugin_Continue;
 }
 
 // 击杀坦克加点
-public Action Event_TankKilled(Event event, const char[] name, bool dontBroadcast)
+void Event_TankKilled(Event event, const char[] name, bool dontBroadcast)
 {
 	int client = GetClientOfUserId(event.GetInt("attacker"));
+	player[client].ClientKillTank++;
+	SQL_SaveKillTankWitch(client);
+
+	if(b_Disable)
+		return;
+	
 	PrintToChatAll("\x04[提示]\x03%N\x05是坦克最终击杀者!", client);
 	if (!NoValidPlayer(client) && GetClientTeam(client) == 2){
 		if(player[client].ClientPoint < i_MaxPoint){
 			player[client].ClientPoint += cv_KillPoint.IntValue;
+			player[client].ClientTotalPoint += cv_KillPoint.IntValue;
 			CheckMaxPoint(client);
 			SQL_SavePoint(client);
 			PrintToChat(client, "\x04[提示]\x05击杀坦克! 获得\x03 %d \x05点数.", cv_KillPoint.IntValue);
 		}
-		else
+		else{
 			PrintToChat(client, "\x04[提示]\x05点数到达上限\x03 %d \x05点.", i_MaxPoint);
+			player[client].ClientTotalPoint += cv_KillPoint.IntValue;
+			SQL_SavePoint(client);
+		}
 	}
-	return Plugin_Continue;
 }
 
 void CheckMaxPoint(int client)
@@ -374,7 +548,7 @@ void ShowMenu(int client)
 	if( !NoValidPlayer(client) && GetClientTeam(client) == 2 )
 	{
 		Menu menu = new Menu(ShowMenuDetail);
-		menu.SetTitle("商店菜单\n——————");
+		menu.SetTitle("商店菜单\n——————", player[client].ClientTotalPoint);
 		menu.AddItem("a", "白嫖武器");
 		menu.AddItem("b", "白嫖近战");
 		menu.AddItem("c", "出门近战");
@@ -383,6 +557,7 @@ void ShowMenu(int client)
 		menu.AddItem("e", "杂项物品");
 		if(cv_TransmitEnable.BoolValue)
 			menu.AddItem("f", "传送菜单");
+		menu.AddItem("g", "个人信息");
 		menu.Display(client, 20);
 	}
 }
@@ -420,10 +595,41 @@ public int ShowMenuDetail(Menu menu, MenuAction action, int client, int param)
 			{
 				TransmitMenu(client);
 			}
+			case 'g':
+			{
+				PlayerInfoMenu(client);
+			}
 		}
 	}
 	else if (action == MenuAction_End)
 		delete menu;
+	return 0;
+}
+
+public void PlayerInfoMenu(int client)
+{
+	char buffer[256];
+	Panel panel = new Panel();
+	Format(buffer, sizeof(buffer), "%N的个人数据\n——————————", client);
+	panel.SetTitle(buffer);
+	Format(buffer, sizeof(buffer), "累计点数:%d", player[client].ClientTotalPoint);
+	DrawPanelText(panel, buffer);
+	Format(buffer, sizeof(buffer), "击杀僵尸:%d", player[client].ClientKillCI);
+	DrawPanelText(panel, buffer);
+	Format(buffer, sizeof(buffer), "击杀特感:%d", player[client].ClientKillSI);
+	DrawPanelText(panel, buffer);
+	Format(buffer, sizeof(buffer), "击杀坦克:%d", player[client].ClientKillTank);
+	DrawPanelText(panel, buffer);
+	Format(buffer, sizeof(buffer), "击杀女巫:%d", player[client].ClientKillWitch);
+	DrawPanelText(panel, buffer);
+	DrawPanelItem(panel, "关闭");
+	SendPanelToClient(panel, client, InfoPanelHandler, 30);
+	CloseHandle(panel);
+}
+
+// Handler for info panel.
+int InfoPanelHandler(Handle menu, MenuAction action, int param1, int param2)
+{
 	return 0;
 }
 
