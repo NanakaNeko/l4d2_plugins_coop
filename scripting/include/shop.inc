@@ -6,7 +6,7 @@
 public SharedPlugin __pl_shop = 
 {
 	name = "shop",
-	file = "shop2.smx",
+	file = "shop.smx",
 #if defined REQUIRE_PLUGIN
 	required = 1,
 #else
@@ -22,6 +22,9 @@ public void __pl_shop_SetNTVOptional()
 	MarkNativeAsOptional("Shop_Get_KillSI");
 	MarkNativeAsOptional("Shop_Get_KillTank");
 	MarkNativeAsOptional("Shop_Get_KillWitch");
+	MarkNativeAsOptional("Shop_Get_HeadShotCount");
+	MarkNativeAsOptional("Shop_Get_FFCount");
+	MarkNativeAsOptional("Shop_Get_GotFFCount");
 }
 #endif
 
@@ -74,3 +77,33 @@ native int Shop_Get_KillTank(int client);
 *
 */
 native int Shop_Get_KillWitch(int client);
+
+/**
+* @根据id返回爆头率
+*
+* @client	需要获取数据的玩家id
+*
+* @return	float爆头率，不带%
+*
+*/
+native any Shop_Get_HeadShotCount(int client);
+
+/**
+* @根据id返回黑枪数量
+*
+* @client	需要获取数据的玩家id
+*
+* @return	累计造成友伤
+*
+*/
+native int Shop_Get_FFCount(int client);
+
+/**
+* @根据id返回被黑枪数量
+*
+* @client	需要获取数据的玩家id
+*
+* @return	累计被黑
+*
+*/
+native int Shop_Get_GotFFCount(int client);
