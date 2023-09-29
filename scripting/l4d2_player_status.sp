@@ -85,7 +85,7 @@ public void Event_PlayerLedgeGrab(Event event, const char[] name, bool dontBroad
 		return;
 	
 	if(IsValidClient(client) && GetClientTeam(client) == 2)
-		CPrintToChatAll("{green}[提示] {blue}%s {olive}挂边了.", GetTrueName(client));//聊天窗提示.
+		CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}挂边了.", GetTrueName(client));//聊天窗提示.
 }
 
 public void OnClientPutInServer(int client) 
@@ -109,16 +109,16 @@ void OnTakeDamageAlivePost(int victim, int attacker, int inflictor, float damage
 		switch (GetClientTeam(attacker)) 
 		{
 			case 2: 
-				CPrintToChatAll("{green}[提示] {olive}%s {default}黑死了 {blue}%s", GetTrueName(attacker), GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {olive}%s {default}黑死了 {blue}%s", GetTrueName(attacker), GetTrueName(victim));//聊天窗提示.
 			case 3: 
 			{
 				int zcid = GetEntProp(attacker, Prop_Send, "m_zombieClass");
 				if(zcid >= 1 && zcid <= 6)
-					CPrintToChatAll("{green}[提示] {olive}感染者{green}%s{blue}(%s) {default}杀死了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(victim));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {olive}感染者{green}%s{blue}(%s) {default}杀死了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(victim));//聊天窗提示.
 				else if(zcid == 7)
-					CPrintToChatAll("{green}[提示] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
 				else if(zcid == 8)
-					CPrintToChatAll("{green}[提示] {olive}坦克{green}%s {default}杀死了 {blue}%s", GetTankName(attacker), GetTrueName(victim));
+					CPrintToChatAll("{default}[{green}!{default}] {olive}坦克{green}%s {default}杀死了 {blue}%s", GetTankName(attacker), GetTrueName(victim));
 			}
 		}
 	}
@@ -130,19 +130,19 @@ void OnTakeDamageAlivePost(int victim, int attacker, int inflictor, float damage
 			GetEntityClassname(attacker, classname, sizeof classname);
 
 			if (damagetype & DMG_DROWN && GetEntProp(victim, Prop_Data, "m_nWaterLevel") > 1)
-				CPrintToChatAll("{green}[提示] {blue}%s {olive}淹死了.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}淹死了.", GetTrueName(victim));//聊天窗提示.
 			else if (damagetype & DMG_FALL && RoundToFloor(Pow(GetEntPropFloat(victim, Prop_Send, "m_flFallVelocity") / (g_fFallSpeedFatal - g_fFallSpeedSafe), 2.0) * 100.0) == damage)
-				CPrintToChatAll("{green}[提示] {blue}%s {olive}摔死了,亲亲也起不来了.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔死了,亲亲也起不来了.", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "worldspawn") == 0 && damagetype == 131072)
-				CPrintToChatAll("{green}[提示] {blue}%s {olive}流血而死.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}流血而死.", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "infected") == 0)
-				CPrintToChatAll("{green}[提示] {olive}小僵尸 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {olive}小僵尸 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
 			else if (StrEqual(classname, "witch", false))
-				CPrintToChatAll("{green}[提示] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "insect_swarm") == 0)
-				CPrintToChatAll("{green}[提示] {olive}踩痰达人 {blue}%s {default}已死亡.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}已死亡.", GetTrueName(victim));//聊天窗提示.
 			else
-				CPrintToChatAll("{green}[提示] {blue}%s {olive}已死亡.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}已死亡.", GetTrueName(victim));//聊天窗提示.
 		}
 	}
 }
@@ -166,16 +166,16 @@ public void Event_Incapacitate(Event event, const char[] name, bool dontBroadcas
 			switch (GetClientTeam(attacker)) 
 			{
 				case 2: 
-					CPrintToChatAll("{green}[提示] {olive}%s {default}黑倒了 {blue}%s", GetTrueName(attacker), GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {olive}%s {default}黑倒了 {blue}%s", GetTrueName(attacker), GetTrueName(client));//聊天窗提示.
 				case 3: 
 				{
 					int zcid = GetEntProp(attacker, Prop_Send, "m_zombieClass");
 					if(zcid >= 1 && zcid <= 6)
-						CPrintToChatAll("{green}[提示] {olive}感染者{green}%s{blue}(%s) {default}制服了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(client));//聊天窗提示.
+						CPrintToChatAll("{default}[{green}!{default}] {olive}感染者{green}%s{blue}(%s) {default}制服了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(client));//聊天窗提示.
 					else if(zcid == 7)
-						CPrintToChatAll("{green}[提示] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
+						CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
 					else if(zcid == 8)
-						CPrintToChatAll("{green}[提示] {olive}坦克{green}%s {default}制服了 {blue}%s", GetTankName(attacker), GetTrueName(client));
+						CPrintToChatAll("{default}[{green}!{default}] {olive}坦克{green}%s {default}制服了 {blue}%s", GetTankName(attacker), GetTrueName(client));
 				}
 			}
 		}
@@ -187,17 +187,17 @@ public void Event_Incapacitate(Event event, const char[] name, bool dontBroadcas
 				GetEntityClassname(entity, classname, sizeof(classname));
 
 				if (damagetype & DMG_DROWN && GetEntProp(client, Prop_Data, "m_nWaterLevel") > 1)
-					CPrintToChatAll("{green}[提示] {blue}%s {olive}晕倒了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}晕倒了.", GetTrueName(client));//聊天窗提示.
 				else if (damagetype & DMG_FALL)
-					CPrintToChatAll("{green}[提示] {blue}%s {olive}摔倒了,需要亲亲才能起来.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔倒了,需要亲亲才能起来.", GetTrueName(client));//聊天窗提示.
 				else if (strcmp(classname, "infected") == 0)
-					CPrintToChatAll("{green}[提示] {olive}小僵尸 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {olive}小僵尸 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
 				else if (StrEqual(classname, "witch", false))
-					CPrintToChatAll("{green}[提示] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
 				else if (strcmp(classname, "insect_swarm") == 0)
-					CPrintToChatAll("{green}[提示] {olive}踩痰达人 {blue}%s {default}倒下了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}倒下了.", GetTrueName(client));//聊天窗提示.
 				else
-					CPrintToChatAll("{green}[提示] {blue}%s {olive}倒下了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}倒下了.", GetTrueName(client));//聊天窗提示.
 			}
 		}
 	}
