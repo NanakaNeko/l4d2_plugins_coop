@@ -1,0 +1,6739 @@
+"Phrases"
+{
+	"c1m1_hotel"
+	{
+		"chi"		"旅馆"
+	}
+	"c1m2_streets"
+	{
+		"chi"		"街道"
+	}
+	"c1m3_mall"
+	{
+		"chi"		"购物中心"
+	}
+	"c1m4_atrium"
+	{
+		"chi"		"中厅"
+	}
+	"c2m1_highway"
+	{
+		"chi"		"高速公路"
+	}
+	"c2m2_fairgrounds"
+	{
+		"chi"		"游乐场"
+	}
+	"c2m3_coaster"
+	{
+		"chi"		"过山车"
+	}
+	"c2m4_barns"
+	{
+		"chi"		"谷仓"
+	}
+	"c2m5_concert"
+	{
+		"chi"		"音乐会"
+	}
+	"c3m1_plankcountry"
+	{
+		"chi"		"乡村"
+	}
+	"c3m2_swamp"
+	{
+		"chi"		"沼泽"
+	}
+	"c3m3_shantytown"
+	{
+		"chi"		"贫民窟"
+	}
+	"c3m4_plantation"
+	{
+		"chi"		"种植园"
+	}
+	"c4m1_milltown_a"
+	{
+		"chi"		"密尔城"
+	}
+	"c4m2_sugarmill_a"
+	{
+		"chi"		"糖厂"
+	}
+	"c4m3_sugarmill_b"
+	{
+		"chi"		"逃离工厂"
+	}
+	"c4m4_milltown_b"
+	{
+		"chi"		"重返小镇"
+	}
+	"c4m5_milltown_escape"
+	{
+		"chi"		"逃离小镇"
+	}
+	"c5m1_waterfront"
+	{
+		"chi"		"码头"
+	}
+	"c5m2_park"
+	{
+		"chi"		"公园"
+	}
+	"c5m3_cemetery"
+	{
+		"chi"		"墓地"
+	}
+	"c5m4_quarter"
+	{
+		"chi"		"特区"
+	}
+	"c5m5_bridge"
+	{
+		"chi"		"桥"
+	}
+	"c6m1_riverbank"
+	{
+		"chi"		"河畔"
+	}
+	"c6m2_bedlam"
+	{
+		"chi"		"地下通道"
+	}
+	"c6m3_port"
+	{
+		"chi"		"港口"
+	}
+	"c7m1_docks"
+	{
+		"chi"		"码头"
+	}
+	"c7m2_barge"
+	{
+		"chi"		"驳船"
+	}
+	"c7m3_port"
+	{
+		"chi"		"港口"
+	}
+	"c8m1_apartment"
+	{
+		"chi"		"公寓"
+	}
+	"c8m2_subway"
+	{
+		"chi"		"地铁"
+	}
+	"c8m3_sewers"
+	{
+		"chi"		"下水道"
+	}
+	"c8m4_interior"
+	{
+		"chi"		"医院"
+	}
+	"c8m5_rooftop"
+	{
+		"chi"		"屋顶"
+	}
+	"c9m1_alleys"
+	{
+		"chi"		"小巷"
+	}
+	"c9m2_lots"
+	{
+		"chi"		"卡车停车场"
+	}
+	"c10m1_caves"
+	{
+		"chi"		"收费公路"
+	}
+	"c10m2_drainage"
+	{
+		"chi"		"水沟"
+	}
+	"c10m3_ranchhouse"
+	{
+		"chi"		"教堂"
+	}
+	"c10m4_mainstreet"
+	{
+		"chi"		"小镇"
+	}
+	"c10m5_houseboat"
+	{
+		"chi"		"码头"
+	}
+	"c11m1_greenhouse"
+	{
+		"chi"		"花房"
+	}
+	"c11m2_offices"
+	{
+		"chi"		"起重机"
+	}
+	"c11m3_garage"
+	{
+		"chi"		"建筑工地"
+	}
+	"c11m4_terminal"
+	{
+		"chi"		"航空机场"
+	}
+	"c11m5_runway"
+	{
+		"chi"		"飞机跑道"
+	}
+	"c12m1_hilltop"
+	{
+		"chi"		"森林"
+	}
+	"c12m2_traintunnel"
+	{
+		"chi"		"隧道"
+	}
+	"c12m3_bridge"
+	{
+		"chi"		"桥"
+	}
+	"c12m4_barn"
+	{
+		"chi"		"火车站"
+	}
+	"c12m5_cornfield"
+	{
+		"chi"		"农舍"
+	}
+	"c13m1_alpinecreek"
+	{
+		"chi"		"高山小溪"
+	}
+	"c13m2_southpinestream"
+	{
+		"chi"		"松木之河"
+	}
+	"c13m3_memorialbridge"
+	{
+		"chi"		"纪念大桥"
+	}
+	"c13m4_cutthroatcreek"
+	{
+		"chi"		"残酷溪流"
+	}
+	"c14m1_junkyard"
+	{
+		"chi"		"教区桥梁"
+	}
+	"c14m2_lighthouse"
+	{
+		"chi"		"灯塔"
+	}
+	"zc_m1"
+	{
+		"chi"		"公园"
+	}
+	"zc_m2"
+	{
+		"chi"		"街道"
+	}
+	"zc_m3"
+	{
+		"chi"		"城中村"
+	}
+	"zc_m4"
+	{
+		"chi"		"小巷"
+	}
+	"zc_m5"
+	{
+		"chi"		"立交桥"
+	}
+	"2019_M1b"
+	{
+		"chi"		"公寓大楼"
+	}
+	"2019_M2b"
+	{
+		"chi"		"内城河"
+	}
+	"2019_M3b"
+	{
+		"chi"		"公司办公室"
+	}
+	"beldurra2_1"
+	{
+		"chi"		"荒野"
+	}
+	"beldurra2_2"
+	{
+		"chi"		"恐怖公司"
+	}
+	"beldurra2_3"
+	{
+		"chi"		"城市争斗"
+	}
+	"beldurra2_4"
+	{
+		"chi"		"杀死德萨克"
+	}
+	"beldurra2_5"
+	{
+		"chi"		"逆流而上"
+	}
+	"l4d2_bts01_forest"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_bts02_station"
+	{
+		"chi"		"火车站"
+	}
+	"l4d2_bts03_town"
+	{
+		"chi"		"城镇"
+	}
+	"l4d2_bts04_cinema"
+	{
+		"chi"		"电影院"
+	}
+	"l4d2_bts05_church"
+	{
+		"chi"		"教堂"
+	}
+	"l4d2_bts06_school"
+	{
+		"chi"		"学校大结局"
+	}
+	"cotd01_apartments"
+	{
+		"chi"		"公寓"
+	}
+	"cotd02_warehouse"
+	{
+		"chi"		"仓库"
+	}
+	"cotd03_mall"
+	{
+		"chi"		"废弃的购物中心"
+	}
+	"cotd04_rooftop"
+	{
+		"chi"		"屋顶逃生"
+	}
+	"l4d2_city17_01"
+	{
+		"chi"		"隧道"
+	}
+	"l4d2_city17_02"
+	{
+		"chi"		"浮出水面"
+	}
+	"l4d2_city17_03"
+	{
+		"chi"		"街道"
+	}
+	"l4d2_city17_04"
+	{
+		"chi"		"医院"
+	}
+	"l4d2_city17_05"
+	{
+		"chi"		"火车站"
+	}
+	"l4d2_crashbandicootvs1"
+	{
+		"chi"		"理智海滩"
+	}
+	"l4d2_crashbandicootvs2"
+	{
+		"chi"		"技术工厂医生"
+	}
+	"l4d2_crashbandicootvs3"
+	{
+		"chi"		"全球变暖"
+	}
+	"l4d2_crashbandicootvs4"
+	{
+		"chi"		"蒂基蒙·特温尼萨尼"
+	}
+	"Cure2_001"
+	{
+		"chi"		"坠毁着陆"
+	}
+	"Cure2_002"
+	{
+		"chi"		"龙卷风小巷"
+	}
+	"Cure2_003"
+	{
+		"chi"		"侏儒镇"
+	}
+	"Cure2_004"
+	{
+		"chi"		"儿童公园"
+	}
+	"Cure2_005"
+	{
+		"chi"		"仙境"
+	}
+	"l4d_damit01_orchard"
+	{
+		"chi"		"果园"
+	}
+	"l4d_damit02_campground"
+	{
+		"chi"		"野营地"
+	}
+	"l4d_damit03_dam"
+	{
+		"chi"		"水坝"
+	}
+	"dw_woods"
+	{
+		"chi"		"树林"
+	}
+	"dw_underground"
+	{
+		"chi"		"地下"
+	}
+	"dw_complex"
+	{
+		"chi"		"实验室"
+	}
+	"dw_otherworld"
+	{
+		"chi"		"监狱"
+	}
+	"dw_final"
+	{
+		"chi"		"教堂"
+	}
+	"l4d2_daybreak01_hotel"
+	{
+		"chi"		"酒店"
+	}
+	"l4d2_daybreak02_coastline"
+	{
+		"chi"		"海岸线"
+	}
+	"l4d2_daybreak03_bridge"
+	{
+		"chi"		"桥梁"
+	}
+	"l4d2_daybreak04_cruise"
+	{
+		"chi"		"郊区"
+	}
+	"l4d2_daybreak05_rescue"
+	{
+		"chi"		"最后的恶魔岛"
+	}
+	"hotel01_market_two"
+	{
+		"chi"		"丧尸直升机坠落"
+	}
+	"hotel02_sewer_two"
+	{
+		"chi"		"我讨厌下水道"
+	}
+	"hotel03_ramsey_two"
+	{
+		"chi"		"拉姆齐酒店"
+	}
+	"hotel04_scaling_two"
+	{
+		"chi"		"带我去山顶"
+	}
+	"hotel05_rooftop_two"
+	{
+		"chi"		"伦敦建筑倒塌"
+	}
+	"l4d_deathaboard01_prison"
+	{
+		"chi"		"监狱"
+	}
+	"l4d_deathaboard02_yard"
+	{
+		"chi"		"监狱院子"
+	}
+	"l4d_deathaboard03_docks"
+	{
+		"chi"		"港区"
+	}
+	"l4d_deathaboard04_ship"
+	{
+		"chi"		"船"
+	}
+	"l4d_deathaboard05_light"
+	{
+		"chi"		"灯塔"
+	}
+	"dm1_suburbs"
+	{
+		"chi"		"郊外"
+	}
+	"dm2_blastzone"
+	{
+		"chi"		"爆炸区"
+	}
+	"dm3_canyon"
+	{
+		"chi"		"峡谷"
+	}
+	"dm4_caves"
+	{
+		"chi"		"洞穴"
+	}
+	"dm5_summit"
+	{
+		"chi"		"顶点"
+	}
+	"esc_jailbreak"
+	{
+		"chi"		"越狱"
+	}
+	"esc_sunken_park"
+	{
+		"chi"		"下沉公园"
+	}
+	"esc_bypass"
+	{
+		"chi"		"忽视"
+	}
+	"esc_fly_me_to_the_moon"
+	{
+		"chi"		"带我飞向月球"
+	}
+	"l4d2_eft1_subsystem"
+	{
+		"chi"		"地铁枪战"
+	}
+	"l4d2_eft2_tower"
+	{
+		"chi"		"权力之塔"
+	}
+	"l4d2_eft3_queensquay"
+	{
+		"chi"		"皇后同性恋湾"
+	}
+	"l4d2_eft4_drybay"
+	{
+		"chi"		"城市混蛋"
+	}
+	"l4d2_eft5_niagaracity"
+	{
+		"chi"		"瀑布"
+	}
+	"l4d2_eft6_bordercrossing1"
+	{
+		"chi"		"逃回美国"
+	}
+	"bunker"
+	{
+		"chi"		"沙坑"
+	}
+	"goingout"
+	{
+		"chi"		"交往"
+	}
+	"followthetracks"
+	{
+		"chi"		"跟着痕迹走"
+	}
+	"heyvirgil"
+	{
+		"chi"		"嘿维吉尔"
+	}
+	"smokedwarehouse50"
+	{
+		"chi"		"烟熏仓库"
+	}
+	"hf01_theforest"
+	{
+		"chi"		"森林"
+	}
+	"hf02_thesteeple"
+	{
+		"chi"		"尖塔"
+	}
+	"hf03_themansion"
+	{
+		"chi"		"大厦"
+	}
+	"hf04_escape"
+	{
+		"chi"		"隧道"
+	}
+	"l4d2_coast_01"
+	{
+		"chi"		"码头1"
+	}
+	"l4d2_coast_02"
+	{
+		"chi"		"海岸"
+	}
+	"l4d2_coast_03"
+	{
+		"chi"		"码头2"
+	}
+	"l4d2_coast_04"
+	{
+		"chi"		"高速公路"
+	}
+	"l4d2_coast_05"
+	{
+		"chi"		"桥梁决赛"
+	}
+	"l4d_ihm01_forest"
+	{
+		"chi"		"迷失森林"
+	}
+	"l4d_ihm02_manor"
+	{
+		"chi"		"攀登庄园"
+	}
+	"l4d_ihm03_underground"
+	{
+		"chi"		"地下之路"
+	}
+	"l4d_ihm04_lumberyard"
+	{
+		"chi"		"贮木场疏散"
+	}
+	"l4d_ihm05_lakeside"
+	{
+		"chi"		"湖畔大结局"
+	}
+	"splash1"
+	{
+		"chi"		"主要街道"
+	}
+	"splash2"
+	{
+		"chi"		"冒险乐园"
+	}
+	"splash3"
+	{
+		"chi"		"新奥尔良广场"
+	}
+	"splash4"
+	{
+		"chi"		"飞溅山"
+	}
+	"splash5"
+	{
+		"chi"		"动物国家"
+	}
+	"l4d2_diescraper1_apartment_361"
+	{
+		"chi"		"公寓大楼"
+	}
+	"l4d2_diescraper2_streets_361"
+	{
+		"chi"		"市中心军事哨所"
+	}
+	"l4d2_diescraper3_mid_361"
+	{
+		"chi"		"空中购物中心"
+	}
+	"l4d2_diescraper4_top_361"
+	{
+		"chi"		"顶级套房"
+	}
+	"l4d_149_1"
+	{
+		"chi"		"丧尸的黎明"
+	}
+	"l4d_149_2"
+	{
+		"chi"		"阿拉莫"
+	}
+	"l4d_149_3"
+	{
+		"chi"		"坏月亮升起"
+	}
+	"l4d_149_4"
+	{
+		"chi"		"火灾危险"
+	}
+	"l4d_149_5"
+	{
+		"chi"		"坟墓"
+	}
+	"l4d2_tanksplayground"
+	{
+		"chi"		"合作"
+	}
+	"l4d_yama_1"
+	{
+		"chi"		"东京街道"
+	}
+	"l4d_yama_2"
+	{
+		"chi"		"森林小镇"
+	}
+	"l4d_yama_3"
+	{
+		"chi"		"清水寺"
+	}
+	"l4d_yama_4"
+	{
+		"chi"		"采矿村"
+	}
+	"l4d_yama_5"
+	{
+		"chi"		"玛雅坎科酒店"
+	}
+	"leftinprypiatc1mf"
+	{
+		"chi"		"留在普里皮亚季"
+	}
+	"silenthill3mall"
+	{
+		"chi"		"中央广场"
+	}
+	"silenthill3othermall"
+	{
+		"chi"		"购物中心"
+	}
+	"silenthill3subway"
+	{
+		"chi"		"地铁车站"
+	}
+	"silenthill3underground"
+	{
+		"chi"		"地下通道"
+	}
+	"silenthill3site"
+	{
+		"chi"		"山顶中心"
+	}
+	"silenthill3otherofficebuilding"
+	{
+		"chi"		"另一个世界山顶"
+	}
+	"silenthill3apartment"
+	{
+		"chi"		"卑尔根街"
+	}
+	"l4d2_mic2_trapmentd"
+	{
+		"chi"		"诱捕"
+	}
+	"l4d2_mic2_decentd"
+	{
+		"chi"		"舒适的"
+	}
+	"l4d2_mic2_bunker_part1"
+	{
+		"chi"		"该死的地堡"
+	}
+	"l4d2_mic2_bunker_part2"
+	{
+		"chi"		"地堡:丧尸地狱"
+	}
+	"l4d2_mic_bunker_top"
+	{
+		"chi"		"碉堡:顶峰"
+	}
+	"l4d2_mic_bunker_bottom"
+	{
+		"chi"		"碉堡:坦克地狱"
+	}
+	"l4d2_mic_escape"
+	{
+		"chi"		"所有人都登上疯狂列车"
+	}
+	"l4d2_mic_finale"
+	{
+		"chi"		"史诗般的逃塔"
+	}
+	"undergroundfacility"
+	{
+		"chi"		"加工区"
+	}
+	"survivalmap6"
+	{
+		"chi"		"化学品储存厂"
+	}
+	"awakening"
+	{
+		"chi"		"觉醒"
+	}
+	"necromap4main"
+	{
+		"chi"		"二次曝光"
+	}
+	"quarantine"
+	{
+		"chi"		"隔离"
+	}
+	"NP_Forest"
+	{
+		"chi"		"森林"
+	}
+	"Np_Deepwithin"
+	{
+		"chi"		"内心深处"
+	}
+	"NP_Ocean"
+	{
+		"chi"		"海洋"
+	}
+	"NP_Rescue"
+	{
+		"chi"		"救援"
+	}
+	"qe2_ep1"
+	{
+		"chi"		"第一集"
+	}
+	"qe2_ep2"
+	{
+		"chi"		"第二集"
+	}
+	"qe2_ep3"
+	{
+		"chi"		"第三集"
+	}
+	"qe2_ep4"
+	{
+		"chi"		"第四集"
+	}
+	"qe2_ep5"
+	{
+		"chi"		"第五集"
+	}
+	"re3m1"
+	{
+		"chi"		"住宅区"
+	}
+	"re3m2"
+	{
+		"chi"		"警察局"
+	}
+	"re3m3"
+	{
+		"chi"		"市中心"
+	}
+	"re3m4"
+	{
+		"chi"		"钟楼"
+	}
+	"re3m5"
+	{
+		"chi"		"医院"
+	}
+	"re3m6"
+	{
+		"chi"		"公园"
+	}
+	"re3m7"
+	{
+		"chi"		"死亡工厂"
+	}
+	"re3m8"
+	{
+		"chi"		"最后的逃亡"
+	}
+	"saltwell_1_d"
+	{
+		"chi"		"寻找公园"
+	}
+	"saltwell_2_d"
+	{
+		"chi"		"军事化区域"
+	}
+	"saltwell_3_d"
+	{
+		"chi"		"湖泊"
+	}
+	"saltwell_4_d"
+	{
+		"chi"		"索尔塔酒店"
+	}
+	"saltwell_5_d"
+	{
+		"chi"		"火葬场"
+	}
+	"shenmesb"
+	{
+		"chi"		"什么"
+	}
+	"shenmesb2"
+	{
+		"chi"		"为什么"
+	}
+	"shenmesb3"
+	{
+		"chi"		"怎么"
+	}
+	"silentfear"
+	{
+		"chi"		"无声的恐惧"
+	}
+	"SA_01"
+	{
+		"chi"		"遗失"
+	}
+	"SA_02"
+	{
+		"chi"		"混乱"
+	}
+	"SA_03"
+	{
+		"chi"		"沉默的灵魂之城"
+	}
+	"SA_04"
+	{
+		"chi"		"伍德克里克"
+	}
+	"SA_05"
+	{
+		"chi"		"玩忽职守"
+	}
+	"SA_06"
+	{
+		"chi"		"另一边"
+	}
+	"SA_07"
+	{
+		"chi"		"真相"
+	}
+	"the_hive_m1"
+	{
+		"chi"		"医院"
+	}
+	"the_hive_m2"
+	{
+		"chi"		"下降"
+	}
+	"the_hive_m3"
+	{
+		"chi"		"迷宫"
+	}
+	"the_hive_m4"
+	{
+		"chi"		"逃跑"
+	}
+	"the_hive_m5"
+	{
+		"chi"		"公寓"
+	}
+	"persecucion"
+	{
+		"chi"		"只有一个办法"
+	}
+	"uz_crash"
+	{
+		"chi"		"崩溃"
+	}
+	"uz_town"
+	{
+		"chi"		"城镇"
+	}
+	"uz_desert"
+	{
+		"chi"		"沙漠"
+	}
+	"uz_bunker"
+	{
+		"chi"		"沙坑"
+	}
+	"uz_escape"
+	{
+		"chi"		"逃跑"
+	}
+	"wfp1_track"
+	{
+		"chi"		"列车解谜"
+	}
+	"wfp2_horn"
+	{
+		"chi"		"洞穴"
+	}
+	"wfp3_mill"
+	{
+		"chi"		"工业仓库"
+	}
+	"wfp4_commstation"
+	{
+		"chi"		"无线电台"
+	}
+	"patientscab"
+	{
+		"chi"		"医院"
+	}
+	"towncab"
+	{
+		"chi"		"小镇1"
+	}
+	"axiomcab"
+	{
+		"chi"		"小镇2"
+	}
+	"l4d_4sight_beginetd"
+	{
+		"chi"		"后视"
+	}
+	"l4d_4sight_midetd"
+	{
+		"chi"		"前视"
+	}
+	"l4d_babel02bcab"
+	{
+		"chi"		"巴贝尔2"
+	}
+	"l4d_babel_finalcab"
+	{
+		"chi"		"巴贝尔3"
+	}
+	"ddg1_tower_v2_1"
+	{
+		"chi"		"塔"
+	}
+	"ddg2_gristmill_v2"
+	{
+		"chi"		"磨坊"
+	}
+	"ddg3_bluff_v2_1"
+	{
+		"chi"		"虚张声势"
+	}
+	"ec01_outlets"
+	{
+		"chi"		"奥特莱斯购物中心"
+	}
+	"ec02_dam"
+	{
+		"chi"		"水库"
+	}
+	"ec03_village"
+	{
+		"chi"		"村庄"
+	}
+	"ec04_powerstation"
+	{
+		"chi"		"发电站"
+	}
+	"ec05_quarry"
+	{
+		"chi"		"采石场"
+	}
+	"quart"
+	{
+		"chi"		"街道"
+	}
+	"nuevocentro_ext"
+	{
+		"chi"		"商场外部"
+	}
+	"nuevocentro_int"
+	{
+		"chi"		"商场内部"
+	}
+	"metro_vlc"
+	{
+		"chi"		"地铁"
+	}
+	"BadHoodL1"
+	{
+		"chi"		"街道"
+	}
+	"BadHoodL2"
+	{
+		"chi"		"学校"
+	}
+	"BadHoodL4"
+	{
+		"chi"		"下水道"
+	}
+	"BadHoodL3"
+	{
+		"chi"		"公园"
+	}
+	"rmstitanic_m1"
+	{
+		"chi"		"背心装"
+	}
+	"rmstitanic_m2"
+	{
+		"chi"		"苏格兰路"
+	}
+	"rmstitanic_m3"
+	{
+		"chi"		"头等舱"
+	}
+	"rmstitanic_m4"
+	{
+		"chi"		"救生艇逃生"
+	}
+	"bt1"
+	{
+		"chi"		"突然的天空"
+	}
+	"bt2"
+	{
+		"chi"		"医院集合"
+	}
+	"bt3"
+	{
+		"chi"		"和死人一起购物"
+	}
+	"bt4"
+	{
+		"chi"		"封锁城市"
+	}
+	"bt5"
+	{
+		"chi"		"新黎明"
+	}
+	"cbm1_lake"
+	{
+		"chi"		"湖泊"
+	}
+	"cbm2_town"
+	{
+		"chi"		"教堂"
+	}
+	"cbm3_bunker"
+	{
+		"chi"		"地堡"
+	}
+	"l4d2_motamap_m1"
+	{
+		"chi"		"渗透"
+	}
+	"l4d2_motamap_m2"
+	{
+		"chi"		"A1-180跑道"
+	}
+	"l4d2_motamap_m3"
+	{
+		"chi"		"水坝拦截"
+	}
+	"l4d2_motamap_m4"
+	{
+		"chi"		"地下震动"
+	}
+	"l4d2_motamap_m5"
+	{
+		"chi"		"提取"
+	}
+	"l4d_deathrow01_streetstlm"
+	{
+		"chi"		"街道"
+	}
+	"l4d_deathrow02_outskirtstlm"
+	{
+		"chi"		"郊区"
+	}
+	"l4d_deathrow03_prisontlm"
+	{
+		"chi"		"监狱"
+	}
+	"l4d_deathrow04_courtyardtlm"
+	{
+		"chi"		"庭院"
+	}
+	"desperate_houseway"
+	{
+		"chi"		"绝望的房子"
+	}
+	"coldstaircase"
+	{
+		"chi"		"冷气机箱"
+	}
+	"smallevill"
+	{
+		"chi"		"斯莫维尔"
+	}
+	"band_of_rushers"
+	{
+		"chi"		"拉什乐队"
+	}
+	"dttg1"
+	{
+		"chi"		"枪手"
+	}
+	"dttg2"
+	{
+		"chi"		"塔尔"
+	}
+	"dttg3"
+	{
+		"chi"		"沙漠"
+	}
+	"dttg4"
+	{
+		"chi"		"车站"
+	}
+	"dttg5"
+	{
+		"chi"		"森林山脉"
+	}
+	"dttg6"
+	{
+		"chi"		"矿井...缓慢的突变"
+	}
+	"dttg7"
+	{
+		"chi"		"最终山区"
+	}
+	"l4d_cardiff"
+	{
+		"chi"		"道路"
+	}
+	"l4d_cardiff_2"
+	{
+		"chi"		"玉米地"
+	}
+	"l4d_cardiff_3"
+	{
+		"chi"		"街道"
+	}
+	"l4d_cardiff_4"
+	{
+		"chi"		"风暴"
+	}
+	"wildride01"
+	{
+		"chi"		"自来水厂"
+	}
+	"wildride02"
+	{
+		"chi"		"发电站"
+	}
+	"wildride03"
+	{
+		"chi"		"洪水隧道"
+	}
+	"bsas_m1_barrios"
+	{
+		"chi"		"巴里奥斯"
+	}
+	"bsas_m2_adrogue"
+	{
+		"chi"		"有预谋的"
+	}
+	"bsas_m3_capital"
+	{
+		"chi"		"首都联邦"
+	}
+	"bsas_m4_costanera"
+	{
+		"chi"		"生态保护区"
+	}
+	"x1m1_cliffs"
+	{
+		"chi"		"悬崖"
+	}
+	"x1m2_path"
+	{
+		"chi"		"小路"
+	}
+	"x1m3_city"
+	{
+		"chi"		"城市"
+	}
+	"x1m4_forest"
+	{
+		"chi"		"森林"
+	}
+	"x1m5_salvation"
+	{
+		"chi"		"拯救"
+	}
+	"x1m6_aftermath"
+	{
+		"chi"		"后果"
+	}
+	"l4d2_timemachine_01"
+	{
+		"chi"		"山地实验室"
+	}
+	"l4d2_timemachine_02"
+	{
+		"chi"		"第一个悖论"
+	}
+	"l4d2_timemachine_03"
+	{
+		"chi"		"第二个悖论"
+	}
+	"l4d2_timemachine_04"
+	{
+		"chi"		"联排别墅大结局"
+	}
+	"FF01_Rooftops"
+	{
+		"chi"		"屋顶"
+	}
+	"FF02_Streets"
+	{
+		"chi"		"街道"
+	}
+	"FF03_Facility"
+	{
+		"chi"		"设施"
+	}
+	"FF04_Fortress"
+	{
+		"chi"		"堡垒"
+	}
+	"FF05_Escape"
+	{
+		"chi"		"大结局:逃脱"
+	}
+	"FF06_ParkSurvival"
+	{
+		"chi"		"公园"
+	}
+	"FF07_ProcessorSurvival"
+	{
+		"chi"		"加工厂"
+	}
+	"a_lor_11"
+	{
+		"chi"		"欢迎来到黎明镇"
+	}
+	"a_lor_21"
+	{
+		"chi"		"美妙的黎明镇"
+	}
+	"a_lor_22"
+	{
+		"chi"		"屋顶和下水道"
+	}
+	"a_lor_31"
+	{
+		"chi"		"塔楼"
+	}
+	"a_lor_32"
+	{
+		"chi"		"丧尸河"
+	}
+	"a_lor_33"
+	{
+		"chi"		"高速公路立交桥"
+	}
+	"a_lor_41"
+	{
+		"chi"		"航空母舰"
+	}
+	"a_lor_42"
+	{
+		"chi"		"城镇广场"
+	}
+	"a_lor_43"
+	{
+		"chi"		"山顶"
+	}
+	"a_lor_5_good"
+	{
+		"chi"		"你死定了..."
+	}
+	"l4d_5tolife01"
+	{
+		"chi"		"闯入"
+	}
+	"l4d_5tolife02"
+	{
+		"chi"		"最长的院子"
+	}
+	"l4d_5tolife03"
+	{
+		"chi"		"停止执行"
+	}
+	"l4d_Stranded01_chopper_down"
+	{
+		"chi"		"丧尸直升机降落"
+	}
+	"l4d_Stranded02_workshop"
+	{
+		"chi"		"地下狩猎"
+	}
+	"l4d_Stranded03_train_station"
+	{
+		"chi"		"所有丧尸上船"
+	}
+	"l4d_Stranded04_garage"
+	{
+		"chi"		"丧尸车库"
+	}
+	"l4d_Stranded05_park_final"
+	{
+		"chi"		"穿过比特曼公园"
+	}
+	"dayofthedead1"
+	{
+		"chi"		"街道"
+	}
+	"dayofthedead2"
+	{
+		"chi"		"夜晚的街道"
+	}
+	"dayofthedead3"
+	{
+		"chi"		"煤仓"
+	}
+	"dayofthedead4"
+	{
+		"chi"		"家"
+	}
+	"dayofthedead5"
+	{
+		"chi"		"底座内部"
+	}
+	"dayofthedead6"
+	{
+		"chi"		"废弃的海滩"
+	}
+	"l4d2_dead_end"
+	{
+		"chi"		"死胡同街道"
+	}
+	"l4d2_dead_end_part2"
+	{
+		"chi"		"死胡同庄园"
+	}
+	"l4d2_dead_end_part3"
+	{
+		"chi"		"死胡同垃圾场"
+	}
+	"ch01_jupiter"
+	{
+		"chi"		"木星工厂"
+	}
+	"ch02_pripyat01"
+	{
+		"chi"		"游泳池"
+	}
+	"ch03_pripyat02"
+	{
+		"chi"		"中心普里皮亚季"
+	}
+	"ch04_pripyat03"
+	{
+		"chi"		"学校"
+	}
+	"ch05_pripyat04"
+	{
+		"chi"		"医院"
+	}
+	"q_ancienttown"
+	{
+		"chi"		"雨"
+	}
+	"q_ancienttown2"
+	{
+		"chi"		"雾"
+	}
+	"q_fleshbridge1"
+	{
+		"chi"		"山"
+	}
+	"q_fleshbridge2"
+	{
+		"chi"		"桥"
+	}
+	"q_fleshbridgesurvive"
+	{
+		"chi"		"桥"
+	}
+	"house_1"
+	{
+		"chi"		"城镇"
+	}
+	"house_1_survival"
+	{
+		"chi"		"城镇"
+	}
+	"hiking_trails"
+	{
+		"chi"		"远足小径"
+	}
+	"camp_grounds"
+	{
+		"chi"		"野营地"
+	}
+	"plant"
+	{
+		"chi"		"伐木厂"
+	}
+	"the_end"
+	{
+		"chi"		"营救"
+	}
+	"dworld01_point"
+	{
+		"chi"		"Ⅰ.谜题"
+	}
+	"dworld02_falling"
+	{
+		"chi"		"Ⅱ.遗迹"
+	}
+	"dworld03_noctis"
+	{
+		"chi"		"Ⅲ.山峦"
+	}
+	"dworld04_monolith"
+	{
+		"chi"		"Ⅳ.要塞"
+	}
+	"dworld05_forgotten"
+	{
+		"chi"		"Ⅴ.沉睡"
+	}
+	"dworld06_sheep"
+	{
+		"chi"		"Ⅵ.梦境"
+	}
+	"dworld07_new_eden"
+	{
+		"chi"		"Ⅶ.新界"
+	}
+	"dworld08_tuto"
+	{
+		"chi"		"Ⅷ.探求"
+	}
+	"dworld09_tuto2"
+	{
+		"chi"		"Ⅸ.死刑"
+	}
+	"dworld10_ancient"
+	{
+		"chi"		"Ⅹ.古殿"
+	}
+	"dworld11_purge"
+	{
+		"chi"		"Ⅺ.花园"
+	}
+	"dworld12_warp"
+	{
+		"chi"		"Ⅻ.终章"
+	}
+	"int4"
+	{
+		"chi"		"简介"
+	}
+	"coretRaB1I"
+	{
+		"chi"		"岩芯"
+	}
+	"commandG"
+	{
+		"chi"		"命令"
+	}
+	"gaunty5"
+	{
+		"chi"		"铁臂铠"
+	}
+	"cave11"
+	{
+		"chi"		"永恒洞穴"
+	}
+	"lava_giant_finale"
+	{
+		"chi"		"熔岩巨人"
+	}
+	"lava_giant_2"
+	{
+		"chi"		"熔岩巨人"
+	}
+	"and"
+	{
+		"chi"		"然后行动"
+	}
+	"bp_mapalpha1"
+	{
+		"chi"		"中国W.T.C 8"
+	}
+	"bp_02fix"
+	{
+		"chi"		"北京街道"
+	}
+	"bp_map_03"
+	{
+		"chi"		"人民英雄纪念碑"
+	}
+	"none"
+	{
+		"chi"		"没有人"
+	}
+	"DisplayName"
+	{
+		"chi"		"英国石油公司1-1"
+	}
+	"the_return_lvl1"
+	{
+		"chi"		"城镇"
+	}
+	"the_return_lvl2"
+	{
+		"chi"		"旧路"
+	}
+	"the_return_level3"
+	{
+		"chi"		"沼泽"
+	}
+	"the_return_level4"
+	{
+		"chi"		"公寓"
+	}
+	"the_return_lvl5"
+	{
+		"chi"		"疏散中心"
+	}
+	"l4d_bureauxfxd"
+	{
+		"chi"		"办公室局"
+	}
+	"l4d_l_usinefxd"
+	{
+		"chi"		"工地"
+	}
+	"l4d_chantierfxd"
+	{
+		"chi"		"魔法死亡"
+	}
+	"l4d_la_ruefxd"
+	{
+		"chi"		"后悔一天..."
+	}
+	"l4d_le_parcfxd"
+	{
+		"chi"		"穿过比特曼公园"
+	}
+	"l4d2_win1"
+	{
+		"chi"		"触地得分"
+	}
+	"l4d2_win2"
+	{
+		"chi"		"冰冻荒凉"
+	}
+	"l4d2_win3"
+	{
+		"chi"		"北极中庭"
+	}
+	"l4d2_win4"
+	{
+		"chi"		"春天解冻"
+	}
+	"l4d2_win5"
+	{
+		"chi"		"高耸的地狱"
+	}
+	"l4d2_win6"
+	{
+		"chi"		"屋顶大结局"
+	}
+	"gunk_misty"
+	{
+		"chi"		"模糊的"
+	}
+	"gunk_occupied"
+	{
+		"chi"		"占用"
+	}
+	"gunk_stinkin_thinkin"
+	{
+		"chi"		"臭气熏天"
+	}
+	"gunk_stinky_bombs"
+	{
+		"chi"		"臭炸弹"
+	}
+	"gunk_on_the_wagon"
+	{
+		"chi"		"车上"
+	}
+	"gunk_wicked_dead"
+	{
+		"chi"		"邪恶的死亡"
+	}
+	"gridlockfinal2"
+	{
+		"chi"		"洲际公路"
+	}
+	"gridlockfinalsurv"
+	{
+		"chi"		"载货汽车停车场"
+	}
+	"left4cake201_start"
+	{
+		"chi"		"治疗"
+	}
+	"left4cake202_dos"
+	{
+		"chi"		"训练"
+	}
+	"left4cake203_tres"
+	{
+		"chi"		"练习"
+	}
+	"left4cake201_start_scavenge"
+	{
+		"chi"		"治疗清除"
+	}
+	"left4cake202_dos_scavenge"
+	{
+		"chi"		"训练清除"
+	}
+	"left4cake203_tres_scavenge"
+	{
+		"chi"		"运动清除"
+	}
+	"outline_m1"
+	{
+		"chi"		"站起来"
+	}
+	"outline_m2"
+	{
+		"chi"		"参观城市"
+	}
+	"outline_m3"
+	{
+		"chi"		"穿过城镇"
+	}
+	"outline_m4"
+	{
+		"chi"		"在院子里休息"
+	}
+	"l4d_co_canal"
+	{
+		"chi"		"乡村"
+	}
+	"l4d_co_church"
+	{
+		"chi"		"神圣的丧尸"
+	}
+	"l4d_co_school"
+	{
+		"chi"		"丧尸教育"
+	}
+	"l4d_co_granary"
+	{
+		"chi"		"丧尸养殖"
+	}
+	"l4d_co_bridge"
+	{
+		"chi"		"桥太远了"
+	}
+	"l4d_naniwa01_shoppingmall"
+	{
+		"chi"		"山谷女孩购物中心"
+	}
+	"l4d_naniwa02_arcade"
+	{
+		"chi"		"死亡拱廊"
+	}
+	"l4d_naniwa03_highway"
+	{
+		"chi"		"死亡是一条公路"
+	}
+	"l4d_naniwa04_subway"
+	{
+		"chi"		"死于地铁"
+	}
+	"l4d_naniwa05_tower"
+	{
+		"chi"		"塔楼逃生"
+	}
+	"l4d2_roadtonowhere_route01"
+	{
+		"chi"		"公路旅行"
+	}
+	"l4d2_roadtonowhere_route02"
+	{
+		"chi"		"毒气大屠杀"
+	}
+	"l4d2_roadtonowhere_route03"
+	{
+		"chi"		"隧道"
+	}
+	"l4d2_roadtonowhere_route04"
+	{
+		"chi"		"卡车场"
+	}
+	"l4d2_roadtonowhere_route05"
+	{
+		"chi"		"下水道"
+	}
+	"l4d2_roadtonowhere_route06"
+	{
+		"chi"		"城市限制"
+	}
+	"jsarena201_town"
+	{
+		"chi"		"市中心"
+	}
+	"jsarena202_alley"
+	{
+		"chi"		"小巷"
+	}
+	"jsarena203_roof"
+	{
+		"chi"		"屋顶"
+	}
+	"jsarena204_arena"
+	{
+		"chi"		"竞技场"
+	}
+	"jsarena202_alley_scavenge"
+	{
+		"chi"		"小巷求生"
+	}
+	"jsarena203_roof_scavenge"
+	{
+		"chi"		"屋顶求生"
+	}
+	"jsarena204_arena_scavenge"
+	{
+		"chi"		"竞技场救援"
+	}
+	"TheMighty4-1"
+	{
+		"chi"		"如何开始"
+	}
+	"TheMighty4-2"
+	{
+		"chi"		"黑暗,丘陵,沙地,安全"
+	}
+	"TheMighty4-3"
+	{
+		"chi"		"秘密基地"
+	}
+	"TheMighty4-4"
+	{
+		"chi"		"机场"
+	}
+	"TheMighty4-5"
+	{
+		"chi"		"是的我们获救了"
+	}
+	"l4d_thewoods2_21"
+	{
+		"chi"		"轮船失事"
+	}
+	"l4d_thewoods2_22"
+	{
+		"chi"		"铁路轨道"
+	}
+	"l4d_thewoods2_23"
+	{
+		"chi"		"旧墓地"
+	}
+	"l4d_thewoods2_24"
+	{
+		"chi"		"翻过小山"
+	}
+	"l4d_thewoods2_25"
+	{
+		"chi"		"大结局逃脱"
+	}
+	"l4d2_deathwoods01_stranded"
+	{
+		"chi"		"搁浅"
+	}
+	"l4d2_deathwoods02_tunnel"
+	{
+		"chi"		"视野狭窄"
+	}
+	"l4d2_deathwoods03_bridge"
+	{
+		"chi"		"桥梁"
+	}
+	"l4d2_deathwoods04_power"
+	{
+		"chi"		"权力游戏"
+	}
+	"l4d2_deathwoods05_airfield"
+	{
+		"chi"		"机场"
+	}
+	"urbanhoods_m1_streets"
+	{
+		"chi"		"街道"
+	}
+	"urbanhoods_m2_sewer"
+	{
+		"chi"		"下水道"
+	}
+	"urbanhoods_m3_forest"
+	{
+		"chi"		"森林"
+	}
+	"urbanhoods_m4_skyscraper"
+	{
+		"chi"		"摩天大楼"
+	}
+	"urbanhoods_m1_streets_vs"
+	{
+		"chi"		"街道(VS)"
+	}
+	"urbanhoods_m2_sewer_vs"
+	{
+		"chi"		"下水道(VS)"
+	}
+	"urbanhoods_m3_forest_vs"
+	{
+		"chi"		"森林(VS)"
+	}
+	"urbanhoods_m4_skyscraper_vs"
+	{
+		"chi"		"摩天大楼(VS)"
+	}
+	"l4d_station01_warehouse"
+	{
+		"chi"		"小镇"
+	}
+	"l4d_subway02_tunnel"
+	{
+		"chi"		"隧道"
+	}
+	"l4d_subway03_bridge"
+	{
+		"chi"		"桥梁"
+	}
+	"l4d_subway04_outskirts"
+	{
+		"chi"		"郊区"
+	}
+	"l4d_subway05_station"
+	{
+		"chi"		"车站"
+	}
+	"l4d_pit01_farml4d2"
+	{
+		"chi"		"气体耗尽"
+	}
+	"l4d_pit02_truckl4d2"
+	{
+		"chi"		"载货汽车停车场"
+	}
+	"l4d_pit_woodsl4d2v2"
+	{
+		"chi"		"树林"
+	}
+	"l4d_pit_lastdropl4d2"
+	{
+		"chi"		"最后一次下降"
+	}
+	"l4d2_kinkm1"
+	{
+		"chi"		"潮湿中取暖"
+	}
+	"l4d2_kinkm2"
+	{
+		"chi"		"受伤了吗"
+	}
+	"l4d2_kinkm3"
+	{
+		"chi"		"迅速的冲刺"
+	}
+	"l4d2_kinkm4"
+	{
+		"chi"		"就是这种精神"
+	}
+	"l4d2_feetunder_outpostacbe"
+	{
+		"chi"		"前哨"
+	}
+	"l4d_hopedb_gorge01cbe"
+	{
+		"chi"		"峡谷"
+	}
+	"l4d_coaldblood01cbe"
+	{
+		"chi"		"蒸汽排放口"
+	}
+	"l4d_tunnels_entrancecbe"
+	{
+		"chi"		"入口"
+	}
+	"l4d_tunnels_cavescbe"
+	{
+		"chi"		"洞穴"
+	}
+	"l4d_coaldblood02cbe"
+	{
+		"chi"		"裂缝"
+	}
+	"l4d_coaldblood03cbe"
+	{
+		"chi"		"电梯"
+	}
+	"l4d_coaldblood04cbe"
+	{
+		"chi"		"悬崖救援"
+	}
+	"l4d_coaldBlood04sv"
+	{
+		"chi"		"悬崖救援"
+	}
+	"l4d_coaldBlood04cbe_vs"
+	{
+		"chi"		"悬崖救援"
+	}
+	"ft_m1_apartments"
+	{
+		"chi"		"公寓"
+	}
+	"ft_m2_subway"
+	{
+		"chi"		"地铁"
+	}
+	"ft_m3_sewers"
+	{
+		"chi"		"下水道"
+	}
+	"ft_m4_interior"
+	{
+		"chi"		"医院"
+	}
+	"ft_m5_rooftop"
+	{
+		"chi"		"屋顶"
+	}
+	"ft_sv_warehouse"
+	{
+		"chi"		"仓库"
+	}
+	"redemptionII-deadstop"
+	{
+		"chi"		"完全停止"
+	}
+	"redemptionII-plantworks"
+	{
+		"chi"		"掩盖真相"
+	}
+	"redemptionII-ceda-pt1"
+	{
+		"chi"		"深入研究"
+	}
+	"redemptionii-ceda-pt2"
+	{
+		"chi"		"真相"
+	}
+	"roundhouse"
+	{
+		"chi"		"逃跑"
+	}
+	"bdp_bunker01"
+	{
+		"chi"		"更深层次"
+	}
+	"bdp_bunker02"
+	{
+		"chi"		"旧隧道"
+	}
+	"bdp_bunker03"
+	{
+		"chi"		"货梯"
+	}
+	"bdp_bunker04"
+	{
+		"chi"		"道路"
+	}
+	"bdp_bunker05"
+	{
+		"chi"		"森林车库"
+	}
+	"death_sentence_1"
+	{
+		"chi"		"撒旦广场"
+	}
+	"death_sentence_2"
+	{
+		"chi"		"肉的臭味"
+	}
+	"death_sentence_3"
+	{
+		"chi"		"霍斯蒂尔营地"
+	}
+	"death_sentence_4"
+	{
+		"chi"		"被诅咒的村庄"
+	}
+	"death_sentence_5"
+	{
+		"chi"		"屠杀岛"
+	}
+	"neverendingwar_train"
+	{
+		"chi"		"火车站"
+	}
+	"neverendingwar_apartments"
+	{
+		"chi"		"公寓"
+	}
+	"neverendingwar_m2_gunshop"
+	{
+		"chi"		"枪械店"
+	}
+	"neverendingwar_m3_prison_new"
+	{
+		"chi"		"监狱"
+	}
+	"neverendingwar_m4_storage_new"
+	{
+		"chi"		"储存设施"
+	}
+	"irr001"
+	{
+		"chi"		"公寓"
+	}
+	"irr002"
+	{
+		"chi"		"商店"
+	}
+	"irr003"
+	{
+		"chi"		"英尼斯路"
+	}
+	"irr004"
+	{
+		"chi"		"松树景观"
+	}
+	"irr005"
+	{
+		"chi"		"天桥"
+	}
+	"irr006"
+	{
+		"chi"		"GHS"
+	}
+	"hotel_time"
+	{
+		"chi"		"解决方案"
+	}
+	"plant_time"
+	{
+		"chi"		"没完没了"
+	}
+	"parish_time"
+	{
+		"chi"		"平衡"
+	}
+	"carnival_time"
+	{
+		"chi"		"差不多"
+	}
+	"home_time"
+	{
+		"chi"		"返回"
+	}
+	"finish_time"
+	{
+		"chi"		"太阳升起来了"
+	}
+	"goodbye_time"
+	{
+		"chi"		"贫民区"
+	}
+	"crossover_map"
+	{
+		"chi"		"两个世界"
+	}
+	"showdown_time"
+	{
+		"chi"		"决战"
+	}
+	"continue_time"
+	{
+		"chi"		"分歧"
+	}
+	"beginnerguide"
+	{
+		"chi"		"开始"
+	}
+	"hollyroad"
+	{
+		"chi"		"霍利路"
+	}
+	"forgottendreams"
+	{
+		"chi"		"被遗忘的梦的森林"
+	}
+	"ossuary"
+	{
+		"chi"		"迷雾之骨棺"
+	}
+	"shadowhills"
+	{
+		"chi"		"影子山"
+	}
+	"cliffsofnevermore"
+	{
+		"chi"		"永不超生的悬崖"
+	}
+	"forgottenforest"
+	{
+		"chi"		"异常"
+	}
+	"powerplant"
+	{
+		"chi"		"溪边电源"
+	}
+	"bridge"
+	{
+		"chi"		"哈珀大桥"
+	}
+	"teethcheese"
+	{
+		"chi"		"牙齿奶酪"
+	}
+	"l4d_lh_01"
+	{
+		"chi"		"不吃东西"
+	}
+	"l4d_lh_02"
+	{
+		"chi"		"欢迎回家"
+	}
+	"l4d_lh_03"
+	{
+		"chi"		"崩溃"
+	}
+	"l4d_lh_end_04"
+	{
+		"chi"		"上帝死了"
+	}
+	"l4d2_tgtn01_fridayroad"
+	{
+		"chi"		"启示录"
+	}
+	"l4d2_tgtn02_northave"
+	{
+		"chi"		"北方丧尸大道"
+	}
+	"embassy"
+	{
+		"chi"		"大使馆地狱"
+	}
+	"ud_map4"
+	{
+		"chi"		"跑,死,还是逃"
+	}
+	"l4d_crstreetcre"
+	{
+		"chi"		"罗利街"
+	}
+	"l4d_crgrapecre"
+	{
+		"chi"		"葡萄村"
+	}
+	"l4d_crrivercitycre"
+	{
+		"chi"		"龙头城市"
+	}
+	"l4d_crmurphycre"
+	{
+		"chi"		"墨菲,NC"
+	}
+	"farmcre"
+	{
+		"chi"		"索尔兹伯里,NC"
+	}
+	"l4d_sh_theend4ext"
+	{
+		"chi"		"来世的,NC"
+	}
+	"l4d2_cc_stranded"
+	{
+		"chi"		"束手无策"
+	}
+	"l4d2_cc_sampling"
+	{
+		"chi"		"采样"
+	}
+	"l4d2_cc_gauntlet"
+	{
+		"chi"		"手套"
+	}
+	"l4d2_cc_tower"
+	{
+		"chi"		"塔"
+	}
+	"l4d2_cc_ai"
+	{
+		"chi"		"人工智能"
+	}
+	"l4d2_cc_escape"
+	{
+		"chi"		"逃跑"
+	}
+	"l4d2_cc_escape_sr"
+	{
+		"chi"		"无路可逃"
+	}
+	"tbm_survivor_01"
+	{
+		"chi"		"TBM幸存者R11"
+	}
+	"tbm_survivor_02"
+	{
+		"chi"		"TBM幸存者R8"
+	}
+	"TBM_Survivor_03"
+	{
+		"chi"		"TBM幸存者大结局"
+	}
+	"t1_m1"
+	{
+		"chi"		"到达"
+	}
+	"t2_m2"
+	{
+		"chi"		"热点"
+	}
+	"t3_m3"
+	{
+		"chi"		"出口"
+	}
+	"t4_m4"
+	{
+		"chi"		"寄宿"
+	}
+	"l4d2_ic01_forest"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_ic02_neighborhood"
+	{
+		"chi"		"社区"
+	}
+	"l4d2_ic03_city"
+	{
+		"chi"		"城市"
+	}
+	"l4d2_ic04_mall"
+	{
+		"chi"		"购物中心"
+	}
+	"l4d2_ic05_skyscraper"
+	{
+		"chi"		"摩天大楼"
+	}
+	"l4d2_ic06_rooftop"
+	{
+		"chi"		"屋顶"
+	}
+	"escapefrombayside01"
+	{
+		"chi"		"逃离J-man的住所"
+	}
+	"escapefrombayside02"
+	{
+		"chi"		"消防和铁路列车"
+	}
+	"escapefrombayside03"
+	{
+		"chi"		"冲向麦克德莫特餐厅"
+	}
+	"escapefrombayside04"
+	{
+		"chi"		"无处藏身"
+	}
+	"cmol1m1_forest"
+	{
+		"chi"		"存储区域"
+	}
+	"cmol1m2_factory"
+	{
+		"chi"		"工厂大厅"
+	}
+	"1BM"
+	{
+		"chi"		"矿山"
+	}
+	"1BM-2"
+	{
+		"chi"		"秘密基地"
+	}
+	"1BM-3"
+	{
+		"chi"		"黑暗森林"
+	}
+	"1BM-4"
+	{
+		"chi"		"黑暗沼泽"
+	}
+	"1BM-5"
+	{
+		"chi"		"国家结束"
+	}
+	"1BM-6"
+	{
+		"chi"		"那是什么味道"
+	}
+	"1BM-7"
+	{
+		"chi"		"河流前哨"
+	}
+	"bjrtc_1"
+	{
+		"chi"		"城镇的南部"
+	}
+	"bjrtc_2"
+	{
+		"chi"		"红卫镇"
+	}
+	"bjrtc_3"
+	{
+		"chi"		"感染管理区"
+	}
+	"bjrtc_4"
+	{
+		"chi"		"临时隔离"
+	}
+	"bjrtc_5"
+	{
+		"chi"		"逃离隔离区直升机"
+	}
+	"bjrtc_5_ex"
+	{
+		"chi"		"逃离隔离区列车"
+	}
+	"l4d2_route66"
+	{
+		"chi"		"路障"
+	}
+	"l4d2_route76"
+	{
+		"chi"		"交通隧道"
+	}
+	"l4d2_shoppingcenter"
+	{
+		"chi"		"大幅降价"
+	}
+	"l4d2_subwayescape"
+	{
+		"chi"		"逃生通道16"
+	}
+	"l4d2_base_east"
+	{
+		"chi"		"基地东部"
+	}
+	"l4d2_base_south"
+	{
+		"chi"		"基地南边"
+	}
+	"l4d2_base_hunter_inn"
+	{
+		"chi"		"猎人旅馆"
+	}
+	"l4d2_base_escape"
+	{
+		"chi"		"逃跑"
+	}
+	"NewRise"
+	{
+		"chi"		"垃圾场"
+	}
+	"NewRiseMap2"
+	{
+		"chi"		"结构"
+	}
+	"NewRiseMap3"
+	{
+		"chi"		"主教公寓"
+	}
+	"NewRiseMapFinale"
+	{
+		"chi"		"铁路"
+	}
+	"river"
+	{
+		"chi"		"河流"
+	}
+	"village"
+	{
+		"chi"		"村庄"
+	}
+	"smalltown"
+	{
+		"chi"		"小镇"
+	}
+	"graveyard"
+	{
+		"chi"		"墓地"
+	}
+	"l4d2_scream01_yards"
+	{
+		"chi"		"Map01场地"
+	}
+	"l4d2_scream02_goingup"
+	{
+		"chi"		"Map02上升"
+	}
+	"l4d2_scream03_rooftops"
+	{
+		"chi"		"Map03屋顶"
+	}
+	"l4d2_scream04_train"
+	{
+		"chi"		"Map04火车"
+	}
+	"l4d2_scream05_finale"
+	{
+		"chi"		"Map05结局"
+	}
+	"l4d2_sv_forage_b6"
+	{
+		"chi"		"饲料"
+	}
+	"youcallthatalanding"
+	{
+		"chi"		"你管那叫着陆?"
+	}
+	"devilscorridor"
+	{
+		"chi"		"魔鬼走廊"
+	}
+	"surface"
+	{
+		"chi"		"表面"
+	}
+	"FtLostOnAHill"
+	{
+		"chi"		"在山上迷失的堡垒"
+	}
+	"GoingUp"
+	{
+		"chi"		"上升"
+	}
+	"Hideout01_v5etd"
+	{
+		"chi"		"街道"
+	}
+	"Hideout02etd"
+	{
+		"chi"		"入口"
+	}
+	"Hideout03etd"
+	{
+		"chi"		"农业"
+	}
+	"Hideout04_tlmetd"
+	{
+		"chi"		"藏身之地"
+	}
+	"e4d_m1etd"
+	{
+		"chi"		"城市逃生"
+	}
+	"house_1etd"
+	{
+		"chi"		"城镇"
+	}
+	"anti_swamp1_b6"
+	{
+		"chi"		"越过山丘"
+	}
+	"anti_swamp2_b3"
+	{
+		"chi"		"穿过树林"
+	}
+	"anti_swamp3_b1"
+	{
+		"chi"		"我们去外婆家"
+	}
+	"anti_mineshaft_b2"
+	{
+		"chi"		"但是我们安全吗"
+	}
+	"anti_vs_swamp1"
+	{
+		"chi"		"越过山丘"
+	}
+	"anti_vs_swamp2"
+	{
+		"chi"		"穿过树林"
+	}
+	"anti_vs_swamp3"
+	{
+		"chi"		"我们去外婆家"
+	}
+	"anti_vs_swamp4"
+	{
+		"chi"		"但是我们安全吗"
+	}
+	"lc_museum_hall25"
+	{
+		"chi"		"市政厅"
+	}
+	"lc_museum_offices"
+	{
+		"chi"		"办公楼"
+	}
+	"lc_museum_gallery"
+	{
+		"chi"		"地铁车站"
+	}
+	"l4d_mortuary02"
+	{
+		"chi"		"屋顶大屠杀"
+	}
+	"l4d_mortuary03"
+	{
+		"chi"		"太平间"
+	}
+	"bjrtc2_lvl1"
+	{
+		"chi"		"绝望"
+	}
+	"bjrtc2_lvl2"
+	{
+		"chi"		"向南走"
+	}
+	"bjrtc2_lvl3"
+	{
+		"chi"		"不支持"
+	}
+	"bjrtc2_lvl4"
+	{
+		"chi"		"死亡办公室"
+	}
+	"bjrtc2_lvl5"
+	{
+		"chi"		"毫发无损"
+	}
+	"the_tunnelslongvers"
+	{
+		"chi"		"隧道"
+	}
+	"the_surface"
+	{
+		"chi"		"浮出水面"
+	}
+	"the_bitter_endpt1"
+	{
+		"chi"		"未来的日子不好过"
+	}
+	"dodsurvivalcooptbe"
+	{
+		"chi"		"隧道"
+	}
+	"the_bitter_endpt2"
+	{
+		"chi"		"艰难的时刻即将到来"
+	}
+	"redtide_01_alleyways"
+	{
+		"chi"		"小巷"
+	}
+	"redtide_02_condo"
+	{
+		"chi"		"公寓"
+	}
+	"redtide_03_carshow"
+	{
+		"chi"		"车展"
+	}
+	"redtide_04_retirementhome"
+	{
+		"chi"		"养老院"
+	}
+	"redtide_05_beachfront"
+	{
+		"chi"		"海滨救援"
+	}
+	"rh_map01"
+	{
+		"chi"		"火车站"
+	}
+	"rh_map02"
+	{
+		"chi"		"灰烬之乡"
+	}
+	"rh_map03"
+	{
+		"chi"		"灰烬公路"
+	}
+	"rh_map04"
+	{
+		"chi"		"灰烬边界交叉"
+	}
+	"rh_map05"
+	{
+		"chi"		"灰山顶峰"
+	}
+	"map2"
+	{
+		"chi"		"不确定"
+	}
+	"helipad"
+	{
+		"chi"		"疏散中心"
+	}
+	"phantasmagoria01"
+	{
+		"chi"		"船屋恐惧症"
+	}
+	"phantasmagoria02"
+	{
+		"chi"		"米尔镇恐惧症"
+	}
+	"phantasmagoria03"
+	{
+		"chi"		"车库恐惧症"
+	}
+	"phantasmagoria04"
+	{
+		"chi"		"地铁恐惧症"
+	}
+	"phantasmagoria05"
+	{
+		"chi"		"街头恐惧症"
+	}
+	"phantasmagoria06"
+	{
+		"chi"		"音乐会恐惧症"
+	}
+	"l4d2_pdmesa01_surface"
+	{
+		"chi"		"表面细节"
+	}
+	"l4d2_pdmesa02_shafted"
+	{
+		"chi"		"有轴的"
+	}
+	"l4d2_pdmesa03_office"
+	{
+		"chi"		"办公空间"
+	}
+	"l4d2_pdmesa04_pointinsert"
+	{
+		"chi"		"点插入"
+	}
+	"l4d2_pdmesa05_returntoxen"
+	{
+		"chi"		"核心"
+	}
+	"l4d2_pdmesa06_xen"
+	{
+		"chi"		"虚拟机"
+	}
+	"m1_village"
+	{
+		"chi"		"村庄"
+	}
+	"m2_jungle"
+	{
+		"chi"		"丛林"
+	}
+	"m3_firebase"
+	{
+		"chi"		"消防基地"
+	}
+	"m4_ruins"
+	{
+		"chi"		"城市"
+	}
+	"#m3Firebase_Title"
+	{
+		"chi"		"消防基地"
+	}
+	"cwm1_intro"
+	{
+		"chi"		"河床"
+	}
+	"cwm2_warehouse"
+	{
+		"chi"		"小镇"
+	}
+	"cwm3_drain"
+	{
+		"chi"		"下水道"
+	}
+	"cwm4_building"
+	{
+		"chi"		"办公楼"
+	}
+	"l4d_redsea01_roofs"
+	{
+		"chi"		"屋顶"
+	}
+	"l4d_redsea02_theater"
+	{
+		"chi"		"公寓"
+	}
+	"l4d_redsea03_lots"
+	{
+		"chi"		"地段"
+	}
+	"l4d_redsea04_alleys"
+	{
+		"chi"		"小巷"
+	}
+	"l4d_redsea05_alleys_escape"
+	{
+		"chi"		"小巷逃生"
+	}
+	"l4d_vs_redsea01_roofs"
+	{
+		"chi"		"屋顶"
+	}
+	"l4d_sv_redsea01_roofs"
+	{
+		"chi"		"屋顶"
+	}
+	"amsterdam1etd"
+	{
+		"chi"		"那个公园"
+	}
+	"amsterdam2etd"
+	{
+		"chi"		"小镇"
+	}
+	"fs_m1_canaletd"
+	{
+		"chi"		"运河"
+	}
+	"palacev4etd"
+	{
+		"chi"		"宫殿电影院"
+	}
+	"fort1ecc"
+	{
+		"chi"		"复合物"
+	}
+	"fort2ecc"
+	{
+		"chi"		"隧道"
+	}
+	"fort3ecc"
+	{
+		"chi"		"煤仓"
+	}
+	"left4bowl_depot"
+	{
+		"chi"		"几个小时后..."
+	}
+	"left4bowl_the_dude"
+	{
+		"chi"		"让我们打保龄球吧"
+	}
+	"left4bowl_escape"
+	{
+		"chi"		"起航,带我离开..."
+	}
+	"gb_m1_road"
+	{
+		"chi"		"无路可逃"
+	}
+	"gb_m2_yard"
+	{
+		"chi"		"机器堆场"
+	}
+	"gb_m3_doctor"
+	{
+		"chi"		"有医生吗...?"
+	}
+	"gb_m4_up"
+	{
+		"chi"		"上升"
+	}
+	"gb_m5_burn"
+	{
+		"chi"		"燃烧,宝贝,燃烧"
+	}
+	"oasis"
+	{
+		"chi"		"绿洲"
+	}
+	"pit"
+	{
+		"chi"		"凹陷"
+	}
+	"drains"
+	{
+		"chi"		"排水沟"
+	}
+	"hole"
+	{
+		"chi"		"洞"
+	}
+	"drone"
+	{
+		"chi"		"雄蜂"
+	}
+	"l4d_deadline02"
+	{
+		"chi"		"死亡线生存"
+	}
+	"l4d_vs_ds1"
+	{
+		"chi"		"市中心杀戮地带"
+	}
+	"l4d_vs_ds2"
+	{
+		"chi"		"丧尸公寓"
+	}
+	"l4d_vs_ds3"
+	{
+		"chi"		"废弃的疏散中心"
+	}
+	"l4d_vs_ds4"
+	{
+		"chi"		"超市"
+	}
+	"l4d_vs_ds5"
+	{
+		"chi"		"工地"
+	}
+	"l4d_vs_ds6"
+	{
+		"chi"		"商店救援"
+	}
+	"storm_citadel_n"
+	{
+		"chi"		"网关"
+	}
+	"lower_citadel_n"
+	{
+		"chi"		"围城之路"
+	}
+	"lower_lower_citadel_n"
+	{
+		"chi"		"高速公路"
+	}
+	"storm_citadel_l"
+	{
+		"chi"		"大门(传奇)"
+	}
+	"lower_citadel_l"
+	{
+		"chi"		"围城(传奇)"
+	}
+	"appartments"
+	{
+		"chi"		"旧公寓"
+	}
+	"district"
+	{
+		"chi"		"地狱地区"
+	}
+	"deepforest"
+	{
+		"chi"		"森林恐惧"
+	}
+	"centr"
+	{
+		"chi"		"疯狂的古城"
+	}
+	"coast"
+	{
+		"chi"		"海滨航行"
+	}
+	"Entrance"
+	{
+		"chi"		"入口"
+	}
+	"Another_world"
+	{
+		"chi"		"地雷死亡者"
+	}
+	"The_next_world"
+	{
+		"chi"		"马里奥死了"
+	}
+	"Return"
+	{
+		"chi"		"返回"
+	}
+	"01_Derailed"
+	{
+		"chi"		"出轨"
+	}
+	"02_Cave"
+	{
+		"chi"		"洞穴"
+	}
+	"03_prison"
+	{
+		"chi"		"监狱"
+	}
+	"04_Station"
+	{
+		"chi"		"车站"
+	}
+	"l4d_fallen01_approach"
+	{
+		"chi"		"方法"
+	}
+	"l4d_fallen02_trenches"
+	{
+		"chi"		"战壕"
+	}
+	"l4d_fallen03_tower"
+	{
+		"chi"		"塔"
+	}
+	"l4d_fallen04_cliff"
+	{
+		"chi"		"悬崖"
+	}
+	"l4d_fallen05_shaft"
+	{
+		"chi"		"轴"
+	}
+	"rtt_01"
+	{
+		"chi"		"通往塔楼的道路"
+	}
+	"rtt_02"
+	{
+		"chi"		"通往塔楼的道路"
+	}
+	"rtt_03"
+	{
+		"chi"		"通往塔楼的道路"
+	}
+	"rtt_04"
+	{
+		"chi"		"通往塔楼的道路"
+	}
+	"rtt_05"
+	{
+		"chi"		"通往塔楼的道路"
+	}
+	"soi_m1_metrostation"
+	{
+		"chi"		"地铁站"
+	}
+	"soi_m2_museum"
+	{
+		"chi"		"博物馆"
+	}
+	"soi_m3_biolab"
+	{
+		"chi"		"生物实验室"
+	}
+	"soi_m4_underground"
+	{
+		"chi"		"地下"
+	}
+	"C1_mario1_1"
+	{
+		"chi"		"世界1-1"
+	}
+	"C1_mario1_2"
+	{
+		"chi"		"世界1-2"
+	}
+	"C1_mario1_3"
+	{
+		"chi"		"世界1-3 & 1-4"
+	}
+	"C1_mario1_4"
+	{
+		"chi"		"结局"
+	}
+	"d1c1"
+	{
+		"chi"		"死亡郊区"
+	}
+	"d1c2"
+	{
+		"chi"		"森林中的小屋"
+	}
+	"d1c3"
+	{
+		"chi"		"实验"
+	}
+	"d1c4"
+	{
+		"chi"		"死亡车站"
+	}
+	"d1c5"
+	{
+		"chi"		"逃离梦想"
+	}
+	"wth_1"
+	{
+		"chi"		"热门区域"
+	}
+	"WTH_2"
+	{
+		"chi"		"长城"
+	}
+	"WTH_3"
+	{
+		"chi"		"大桥"
+	}
+	"WTH_4"
+	{
+		"chi"		"小巷"
+	}
+	"WTH_5"
+	{
+		"chi"		"火车站大结局"
+	}
+	"c1m1_outerbayous_a"
+	{
+		"chi"		"湿地"
+	}
+	"c1m2_brackishintermediate_a"
+	{
+		"chi"		"沼泽深处"
+	}
+	"c1m3_squallline_a"
+	{
+		"chi"		"洪泛平原"
+	}
+	"c1m4_plantation_a"
+	{
+		"chi"		"棚户区"
+	}
+	"c1m5_interstate_10"
+	{
+		"chi"		"布茜酒吧"
+	}
+	"alleys1"
+	{
+		"chi"		"小巷"
+	}
+	"suburbs2"
+	{
+		"chi"		"疏散中心"
+	}
+	"busstation3"
+	{
+		"chi"		"公共汽车站"
+	}
+	"oot_forest"
+	{
+		"chi"		"科克里之森"
+	}
+	"oot_temple"
+	{
+		"chi"		"森林神庙"
+	}
+	"oot_boss"
+	{
+		"chi"		"森林寺庙的老板"
+	}
+	"l4d2_camp_dead"
+	{
+		"chi"		"死亡营地"
+	}
+	"l4d2_deadzone"
+	{
+		"chi"		"死区"
+	}
+	"l4d2_death_city"
+	{
+		"chi"		"死亡之城"
+	}
+	"l4d2_death_pit"
+	{
+		"chi"		"死亡之坑"
+	}
+	"l4d2_death_pit_finale"
+	{
+		"chi"		"死亡之坑救援"
+	}
+	"threedays01"
+	{
+		"chi"		"十年之境"
+	}
+	"threedays02"
+	{
+		"chi"		"昨日惊现"
+	}
+	"threedays03"
+	{
+		"chi"		"忆往昔途"
+	}
+	"threedays04"
+	{
+		"chi"		"镇魂之声"
+	}
+	"threedays05"
+	{
+		"chi"		"殊途同归"
+	}
+	"l4d2_feetunder_outpostazbo"
+	{
+		"chi"		"前哨"
+	}
+	"l4d_route76azbo"
+	{
+		"chi"		"隧洞进口"
+	}
+	"l4d_shoppingcenterzbo"
+	{
+		"chi"		"大幅降价"
+	}
+	"l4d_ft_station01zbo"
+	{
+		"chi"		"街道"
+	}
+	"l4d_ft_station02zbo"
+	{
+		"chi"		"下水道"
+	}
+	"l4d_withoutname_complexzbo"
+	{
+		"chi"		"复杂"
+	}
+	"l4d_withoutname_lakezbo"
+	{
+		"chi"		"湖景"
+	}
+	"l4d_withoutname_townzbo"
+	{
+		"chi"		"我们的小镇"
+	}
+	"L4d2_Test"
+	{
+		"chi"		"发展阶段"
+	}
+	"L4d2_Test2"
+	{
+		"chi"		"纹理"
+	}
+	"L4d2_Test3"
+	{
+		"chi"		"道具"
+	}
+	"L4d2_Test4"
+	{
+		"chi"		"差不多完成了"
+	}
+	"L4d2_Test5"
+	{
+		"chi"		"结局"
+	}
+	"r_concert"
+	{
+		"chi"		"渗透I"
+	}
+	"r_barns"
+	{
+		"chi"		"渗透II"
+	}
+	"r_coaster"
+	{
+		"chi"		"发现敌人"
+	}
+	"r_fairgrounds"
+	{
+		"chi"		"继续前进"
+	}
+	"r_highway"
+	{
+		"chi"		"漫长的旅程"
+	}
+	"r_atrium"
+	{
+		"chi"		"人质"
+	}
+	"r_mall"
+	{
+		"chi"		"秘密行动"
+	}
+	"r_streets"
+	{
+		"chi"		"似曾相识"
+	}
+	"r_hotel"
+	{
+		"chi"		"团聚"
+	}
+	"r_nomercy"
+	{
+		"chi"		"老朋友"
+	}
+	"vr_missions"
+	{
+		"chi"		"奖励:虚拟现实任务"
+	}
+	"nh1remake1_fixed_d"
+	{
+		"chi"		"你"
+	}
+	"nh2c1_d"
+	{
+		"chi"		"无"
+	}
+	"nh2c2_d"
+	{
+		"chi"		"法"
+	}
+	"nh2c3_d"
+	{
+		"chi"		"逃"
+	}
+	"nh2c4_d"
+	{
+		"chi"		"离"
+	}
+	"nh2c5_d"
+	{
+		"chi"		"恶"
+	}
+	"nh2c6_d"
+	{
+		"chi"		"梦"
+	}
+	"nh2c7_d"
+	{
+		"chi"		"屋"
+	}
+	"unattainable_1"
+	{
+		"chi"		"启程"
+	}
+	"unattainable_2"
+	{
+		"chi"		"夜幕"
+	}
+	"l4d2_deadstreet_obahn"
+	{
+		"chi"		"奥巴恩"
+	}
+	"l4d2_deadstreet_holdenhill"
+	{
+		"chi"		"下水道"
+	}
+	"l4d2_deadstreet_inside"
+	{
+		"chi"		"警察局"
+	}
+	"l4d2_deadstreet_thepark"
+	{
+		"chi"		"陆军基地"
+	}
+	"l4d2_vs_deadstreet_obahn"
+	{
+		"chi"		"奥巴恩"
+	}
+	"l4d2_vs_deadstreet_holdenhill"
+	{
+		"chi"		"下水道"
+	}
+	"l4d2_vs_deadstreet_inside"
+	{
+		"chi"		"警察局"
+	}
+	"l4d2_vs_deadstreet_thepark"
+	{
+		"chi"		"陆军基地"
+	}
+	"l4d2_ic_2_1"
+	{
+		"chi"		"开始"
+	}
+	"l4d2_ic2_2"
+	{
+		"chi"		"悲伤公园"
+	}
+	"l4d2_ic2_3"
+	{
+		"chi"		"山口"
+	}
+	"l4d2_ic2_4"
+	{
+		"chi"		"大雨"
+	}
+	"l4d2_ic2_5"
+	{
+		"chi"		"火车站"
+	}
+	"c30m1"
+	{
+		"chi"		"断桥"
+	}
+	"c30m2"
+	{
+		"chi"		"电影院"
+	}
+	"c30m3"
+	{
+		"chi"		"施工区域"
+	}
+	"c30m4"
+	{
+		"chi"		"摩天轮"
+	}
+	"c30m5"
+	{
+		"chi"		"酒店"
+	}
+	"c30m6"
+	{
+		"chi"		"电影布景"
+	}
+	"taiji"
+	{
+		"chi"		"太极"
+	}
+	"LastBaktun"
+	{
+		"chi"		"入口"
+	}
+	"LastBaktun1"
+	{
+		"chi"		"升天"
+	}
+	"LastBaktun2"
+	{
+		"chi"		"最后的巴克图"
+	}
+	"c1_1_mall"
+	{
+		"chi"		"购物中心"
+	}
+	"c1_2_jam"
+	{
+		"chi"		"地下"
+	}
+	"c1_3_school"
+	{
+		"chi"		"学校"
+	}
+	"c1_4_roof_safe"
+	{
+		"chi"		"屋顶"
+	}
+	"grmap1"
+	{
+		"chi"		"崩溃"
+	}
+	"gridmap2"
+	{
+		"chi"		"入口匝道"
+	}
+	"gridmap3"
+	{
+		"chi"		"出口69"
+	}
+	"grid4"
+	{
+		"chi"		"载货汽车停车场"
+	}
+	"Bus_Depot"
+	{
+		"chi"		"旧公共汽车站"
+	}
+	"OutSkirt"
+	{
+		"chi"		"城镇郊区"
+	}
+	"TheBackStreets"
+	{
+		"chi"		"后街"
+	}
+	"EngineRoom"
+	{
+		"chi"		"9号机舱"
+	}
+	"l4d2_draxmap1"
+	{
+		"chi"		"问题1"
+	}
+	"l4d2_draxmap2"
+	{
+		"chi"		"问题2"
+	}
+	"l4d2_draxmap3"
+	{
+		"chi"		"问题3"
+	}
+	"l4d2_draxmap4"
+	{
+		"chi"		"问题4"
+	}
+	"l4d2_draxmap5"
+	{
+		"chi"		"问题5"
+	}
+	"l4d2_draxmap6"
+	{
+		"chi"		"最终问题"
+	}
+	"deepp_m1"
+	{
+		"chi"		"沼泽"
+	}
+	"deepp_m2"
+	{
+		"chi"		"地下"
+	}
+	"deepp_m3"
+	{
+		"chi"		"工厂"
+	}
+	"deepp_m4"
+	{
+		"chi"		"水厂"
+	}
+	"deepp_m5"
+	{
+		"chi"		"坠落隧道"
+	}
+	"unsdwn_mp_1"
+	{
+		"chi"		"城市"
+	}
+	"unsdwn_mp_2"
+	{
+		"chi"		"办公室"
+	}
+	"unsdwn_mp_3"
+	{
+		"chi"		"酒店"
+	}
+	"unsdwn_mp_4"
+	{
+		"chi"		"竞技场"
+	}
+	"mrr_01_darkforest"
+	{
+		"chi"		"黑暗森林"
+	}
+	"mrr_02_schoolsout"
+	{
+		"chi"		"学校外出"
+	}
+	"mrr_03_alleys"
+	{
+		"chi"		"小巷"
+	}
+	"mrr_04_stationfinale"
+	{
+		"chi"		"车站救援"
+	}
+	"castle_map_01"
+	{
+		"chi"		"到达"
+	}
+	"prison_map_02"
+	{
+		"chi"		"到深处"
+	}
+	"lab_map_03"
+	{
+		"chi"		"死亡实验室"
+	}
+	"cemetery_map_04"
+	{
+		"chi"		"黑暗中的秘密"
+	}
+	"theend_map_05"
+	{
+		"chi"		"我们还活着"
+	}
+	"cdta_01detour"
+	{
+		"chi"		"迂回"
+	}
+	"cdta_02road"
+	{
+		"chi"		"山"
+	}
+	"cdta_03warehouse"
+	{
+		"chi"		"仓库"
+	}
+	"cdta_04onarail"
+	{
+		"chi"		"在轨道上"
+	}
+	"cdta_05finalroad"
+	{
+		"chi"		"最终道路"
+	}
+	"bs_1_l4d2"
+	{
+		"chi"		"荒山"
+	}
+	"bs_2_l4d2"
+	{
+		"chi"		"冥界入口"
+	}
+	"bs_3_l4d2"
+	{
+		"chi"		"冥界"
+	}
+	"bs_4_l4d2"
+	{
+		"chi"		"逃离冥界?"
+	}
+	"northpole01"
+	{
+		"chi"		"隧道"
+	}
+	"northpole02"
+	{
+		"chi"		"设施"
+	}
+	"northpole03"
+	{
+		"chi"		"南方研究基地"
+	}
+	"karting"
+	{
+		"chi"		"卡丁车"
+	}
+	"DEAD_BY_DAYLIGHT"
+	{
+		"chi"		"第五人格"
+	}
+	"seal"
+	{
+		"chi"		"希望新世界"
+	}
+	"maple"
+	{
+		"chi"		"冒险岛"
+	}
+	"lol"
+	{
+		"chi"		"英雄联盟"
+	}
+	"l4d2_str_earth"
+	{
+		"chi"		"地球最大的希望"
+	}
+	"l4d2_str_shuttle"
+	{
+		"chi"		"穿梭清理"
+	}
+	"l4d2_str_spacestation1"
+	{
+		"chi"		"空间站1"
+	}
+	"l4d2_str_spacestation2"
+	{
+		"chi"		"空间站2"
+	}
+	"l4d2_str_mars"
+	{
+		"chi"		"火星"
+	}
+	"simple_map_1"
+	{
+		"chi"		"更简单的世界"
+	}
+	"simple_map_2"
+	{
+		"chi"		"桥太远了"
+	}
+	"simple_map_3"
+	{
+		"chi"		"一座不够远的桥"
+	}
+	"simple_map_4"
+	{
+		"chi"		"丧尸之家"
+	}
+	"simple_map_5"
+	{
+		"chi"		"相对而言,结束"
+	}
+	"lego_town_01"
+	{
+		"chi"		"城镇"
+	}
+	"lego_tunnels_02"
+	{
+		"chi"		"隧道"
+	}
+	"lego_wastelands_03"
+	{
+		"chi"		"荒地"
+	}
+	"lego_urban_04"
+	{
+		"chi"		"城市"
+	}
+	"lego_towerfinale_05"
+	{
+		"chi"		"塔"
+	}
+	"l4d2_stadium1_apartment"
+	{
+		"chi"		"公寓"
+	}
+	"l4d2_stadium2_riverwalk"
+	{
+		"chi"		"河畔大厦"
+	}
+	"l4d2_stadium3_city1"
+	{
+		"chi"		"法律"
+	}
+	"l4d2_stadium4_city2"
+	{
+		"chi"		"城市"
+	}
+	"l4d2_stadium5_stadium"
+	{
+		"chi"		"体育场"
+	}
+	"l4d2_vs_stadium2_riverwalk"
+	{
+		"chi"		"河道"
+	}
+	"l4d2_sv_stadium2_riverwalk"
+	{
+		"chi"		"河道生存"
+	}
+	"l4d2_sv_stadium3_city1"
+	{
+		"chi"		"法律生存"
+	}
+	"l4d2_sv_stadium4_city2"
+	{
+		"chi"		"城市生存"
+	}
+	"lost01_club"
+	{
+		"chi"		"小巷"
+	}
+	"lost02_"
+	{
+		"chi"		"施工区域"
+	}
+	"lost03"
+	{
+		"chi"		"沼泽上的房子"
+	}
+	"lost04"
+	{
+		"chi"		"城镇"
+	}
+	"lost02_1"
+	{
+		"chi"		"被毁的房子"
+	}
+	"lost02_2"
+	{
+		"chi"		"公寓的屋顶"
+	}
+	"lost01_scavenge"
+	{
+		"chi"		"小巷"
+	}
+	"lost02_scavenge"
+	{
+		"chi"		"施工区域"
+	}
+	"lost02_2_survival"
+	{
+		"chi"		"公寓屋顶"
+	}
+	"hehe211"
+	{
+		"chi"		"电脑桌"
+	}
+	"hehe212"
+	{
+		"chi"		"旋转试炼"
+	}
+	"hehe213"
+	{
+		"chi"		"小教堂"
+	}
+	"hehe214"
+	{
+		"chi"		"试炼2"
+	}
+	"hehe215"
+	{
+		"chi"		"tank洞穴"
+	}
+	"hehe216"
+	{
+		"chi"		"地下赛车场"
+	}
+	"hehe217"
+	{
+		"chi"		"逃离"
+	}
+	"l4d_coaldBlood01"
+	{
+		"chi"		"蒸汽排放口"
+	}
+	"l4d_coaldBlood02"
+	{
+		"chi"		"裂缝"
+	}
+	"l4d_coaldBlood03"
+	{
+		"chi"		"电梯"
+	}
+	"l4d_coaldBlood04"
+	{
+		"chi"		"悬崖营救"
+	}
+	"l4d_coaldBlood04_vs"
+	{
+		"chi"		"悬崖营救"
+	}
+	"l1_tunnel_01"
+	{
+		"chi"		"宗博酒店"
+	}
+	"l2_city_01"
+	{
+		"chi"		"小镇"
+	}
+	"l3_bunker_01"
+	{
+		"chi"		"综合医院"
+	}
+	"l4_bunker_02"
+	{
+		"chi"		"卡车仓库救援"
+	}
+	"exempt_crapaign1m1"
+	{
+		"chi"		"聚会"
+	}
+	"exempt_crapaign1m2"
+	{
+		"chi"		"折扣"
+	}
+	"exempt_crapaign1m3"
+	{
+		"chi"		"在外面"
+	}
+	"exempt_crapaign1m4"
+	{
+		"chi"		"上升"
+	}
+	"exempt_crapaign1m5"
+	{
+		"chi"		"屋顶"
+	}
+	"c3m1_rurallighthouse"
+	{
+		"chi"		"村庄"
+	}
+	"c3m2_urbansmile"
+	{
+		"chi"		"城市微笑"
+	}
+	"c3m3_longbridge"
+	{
+		"chi"		"桥梁"
+	}
+	"c3m4_prison"
+	{
+		"chi"		"监狱"
+	}
+	"c3m5_vertigo"
+	{
+		"chi"		"眩晕"
+	}
+	"e6m1_deltalab"
+	{
+		"chi"		"德尔塔实验室"
+	}
+	"e6m2_vertigotram01"
+	{
+		"chi"		"眩晕电车1"
+	}
+	"e6m3_alphalab01"
+	{
+		"chi"		"阿尔法实验室1"
+	}
+	"e6m4_alphalab02"
+	{
+		"chi"		"阿尔法实验室2"
+	}
+	"e6m5_vertigotram02"
+	{
+		"chi"		"眩晕电车2"
+	}
+	"e6m6_neighborhood"
+	{
+		"chi"		"邻居"
+	}
+	"zerowarn_1"
+	{
+		"chi"		"科罗拉多河畔公园"
+	}
+	"zerowarn_2"
+	{
+		"chi"		"寒冷潮湿的夜晚"
+	}
+	"zerowarn_3"
+	{
+		"chi"		"最后一次早晨徒步旅行"
+	}
+	"zerowarn_ravine"
+	{
+		"chi"		"三角洲小队:峡谷"
+	}
+	"zerowarn_swamp"
+	{
+		"chi"		"三角洲小队:沼泽"
+	}
+	"zerowarn_cafe"
+	{
+		"chi"		"三角洲小队:咖啡馆"
+	}
+	"zerowarn_tower"
+	{
+		"chi"		"三角洲小队:塔台"
+	}
+	"p84m1_crash"
+	{
+		"chi"		"车祸"
+	}
+	"p84m2_train"
+	{
+		"chi"		"贫民窟"
+	}
+	"p84m3_clubd"
+	{
+		"chi"		"夜总会"
+	}
+	"p84m4_precinct"
+	{
+		"chi"		"加油站大结局"
+	}
+	"canyondownthedrain"
+	{
+		"chi"		"峡谷"
+	}
+	"citydownthedrain"
+	{
+		"chi"		"公路"
+	}
+	"buildingdownthedrain"
+	{
+		"chi"		"建筑物"
+	}
+	"roofdownthedrain"
+	{
+		"chi"		"屋顶"
+	}
+	"ds2_1"
+	{
+		"chi"		"死亡地带"
+	}
+	"ds2_2"
+	{
+		"chi"		"死区"
+	}
+	"ds2_3"
+	{
+		"chi"		"围栏死区"
+	}
+	"ds2_4"
+	{
+		"chi"		"拉格死亡地带"
+	}
+	"ds2_5"
+	{
+		"chi"		"恶魔咆哮死区"
+	}
+	"campaign_portal_acfir_final"
+	{
+		"chi"		"秋天"
+	}
+	"campaign_portal_first_final"
+	{
+		"chi"		"凯夫·约翰逊"
+	}
+	"campaign_portal_second_final"
+	{
+		"chi"		"投掷炸弹"
+	}
+	"campaign_portal_finale_finalv"
+	{
+		"chi"		"保险库"
+	}
+	"survival_vault"
+	{
+		"chi"		"保险库"
+	}
+	"survival_speed_ramp"
+	{
+		"chi"		"速度斜坡"
+	}
+	"gr-mapone-7"
+	{
+		"chi"		"公寓"
+	}
+	"gasrunpart2"
+	{
+		"chi"		"城市"
+	}
+	"evac2"
+	{
+		"chi"		"疏散"
+	}
+	"gasrun"
+	{
+		"chi"		"逃跑"
+	}
+	"fos01_roadonhill"
+	{
+		"chi"		"山上的路"
+	}
+	"fos02_battleintown"
+	{
+		"chi"		"城镇之战"
+	}
+	"fos03_goingdown"
+	{
+		"chi"		"往下走"
+	}
+	"fos04_moors"
+	{
+		"chi"		"月亮沼泽"
+	}
+	"fos05_riverside"
+	{
+		"chi"		"河畔"
+	}
+	"DthMnt_Village"
+	{
+		"chi"		"卡卡里科村"
+	}
+	"DthMnt_Crater"
+	{
+		"chi"		"死亡山陨石坑"
+	}
+	"DthMnt_TempleForye"
+	{
+		"chi"		"火神庙 - 一楼"
+	}
+	"DthMnt_Temple3rdFloor"
+	{
+		"chi"		"火神庙 - 三楼"
+	}
+	"DthMnt_Temple4thFloor"
+	{
+		"chi"		"火神庙 - 四楼"
+	}
+	"DthMnt_TempleBoss"
+	{
+		"chi"		"火神庙的老板"
+	}
+	"l4d_dbde_citylights"
+	{
+		"chi"		"城市之光"
+	}
+	"l4d_dbde_anna_is_gone"
+	{
+		"chi"		"安娜不见了"
+	}
+	"l4d_dbde_the_mall"
+	{
+		"chi"		"购物中心"
+	}
+	"l4d_dbdext_clean_up"
+	{
+		"chi"		"清理"
+	}
+	"l4d_dbdext_undead_center"
+	{
+		"chi"		"亡灵中心"
+	}
+	"l4d_dbdext_new_dawn"
+	{
+		"chi"		"新黎明"
+	}
+	"w4e1_basement"
+	{
+		"chi"		"地下室"
+	}
+	"w4e2_asylum"
+	{
+		"chi"		"庇护"
+	}
+	"w4e3_keeper"
+	{
+		"chi"		"保管员"
+	}
+	"w4e4_mansion"
+	{
+		"chi"		"大厦"
+	}
+	"w4e5_evil"
+	{
+		"chi"		"内心的邪恶"
+	}
+	"l4d_deadgetaway01_dam"
+	{
+		"chi"		"大坝"
+	}
+	"l4d_deadgetaway02_zone"
+	{
+		"chi"		"限制区域"
+	}
+	"l4d_deadgetaway03_lab"
+	{
+		"chi"		"设施"
+	}
+	"l4d_deadgetway04_tunnel"
+	{
+		"chi"		"隧道"
+	}
+	"l4d_deadgetaway_final"
+	{
+		"chi"		"最终"
+	}
+	"l4d2_deadcity01_riverside"
+	{
+		"chi"		"河畔城市"
+	}
+	"l4d2_deadcity02_backalley"
+	{
+		"chi"		"后巷"
+	}
+	"l4d2_deadcity03_bridge"
+	{
+		"chi"		"拉桥"
+	}
+	"l4d2_deadcity04_outpost"
+	{
+		"chi"		"前哨站"
+	}
+	"l4d2_deadcity05_plant"
+	{
+		"chi"		"水厂"
+	}
+	"l4d2_deadcity06_station"
+	{
+		"chi"		"地铁站"
+	}
+	"l4d_tunnels_entrancedze"
+	{
+		"chi"		"入口"
+	}
+	"l4d_tunnels_cavesdze"
+	{
+		"chi"		"洞穴"
+	}
+	"awayfromreality_part1dze"
+	{
+		"chi"		"空军总部"
+	}
+	"l4d_rooftops_01dze"
+	{
+		"chi"		"屋顶花园"
+	}
+	"l4d_nyc01_bridgedze"
+	{
+		"chi"		"百老汇大桥"
+	}
+	"l4d_nyc02_inwooddze"
+	{
+		"chi"		"因伍德"
+	}
+	"l4d_thetunnelsdze"
+	{
+		"chi"		"隧道"
+	}
+	"zepp2dze"
+	{
+		"chi"		"齐柏林"
+	}
+	"newintro_3"
+	{
+		"chi"		"飞越"
+	}
+	"new_coret1"
+	{
+		"chi"		"快捷方式"
+	}
+	"new_deck1"
+	{
+		"chi"		"16号甲板"
+	}
+	"new_gaunty1"
+	{
+		"chi"		"铁手套"
+	}
+	"new_Lliandri1"
+	{
+		"chi"		"第三行"
+	}
+	"new_duku_3"
+	{
+		"chi"		"杜库"
+	}
+	"new_lava_weather_3"
+	{
+		"chi"		"熔岩巨人"
+	}
+	"deck_sur5"
+	{
+		"chi"		"16号甲板"
+	}
+	"duku_4"
+	{
+		"chi"		"杜库"
+	}
+	"gaunty_surv"
+	{
+		"chi"		"铁手套"
+	}
+	"l4d2_sbtd_01"
+	{
+		"chi"		"街道"
+	}
+	"l4d2_sbtd_02"
+	{
+		"chi"		"汽车展厅"
+	}
+	"l4d2_sbtd_03"
+	{
+		"chi"		"小船逃生"
+	}
+	"hcw1_aircrash"
+	{
+		"chi"		"空难"
+	}
+	"hcw2_rivermotel"
+	{
+		"chi"		"汽车旅馆"
+	}
+	"hcw3_outskirts"
+	{
+		"chi"		"郊区"
+	}
+	"hcw4_cityhall"
+	{
+		"chi"		"市政厅"
+	}
+	"hcw5_bombshelter"
+	{
+		"chi"		"防空洞"
+	}
+	"bjrtcre_m1"
+	{
+		"chi"		"货场"
+	}
+	"bjrtcre_m2_left"
+	{
+		"chi"		"躁动的海边"
+	}
+	"bjrtcre_m2_right"
+	{
+		"chi"		"光明大道"
+	}
+	"bjrtcre_m3"
+	{
+		"chi"		"第七区"
+	}
+	"bjrtcre_m4"
+	{
+		"chi"		"南部航站楼"
+	}
+	"dsm01"
+	{
+		"chi"		"坟墓"
+	}
+	"dsm02"
+	{
+		"chi"		"黑暗的走廊"
+	}
+	"dsm03"
+	{
+		"chi"		"喷泉"
+	}
+	"dsm04"
+	{
+		"chi"		"地下墓穴"
+	}
+	"dsm05"
+	{
+		"chi"		"地下牢笼"
+	}
+	"dsm06"
+	{
+		"chi"		"出路"
+	}
+	"dsms1"
+	{
+		"chi"		"祭祀祭坛"
+	}
+	"dsms2"
+	{
+		"chi"		"寺庙庭院"
+	}
+	"exmala1_1"
+	{
+		"chi"		"消防队飞行"
+	}
+	"exmala1_2"
+	{
+		"chi"		"市政厅恐怖事件"
+	}
+	"exmala1_3"
+	{
+		"chi"		"美国1号起义"
+	}
+	"apartment"
+	{
+		"chi"		"公寓"
+	}
+	"hotel"
+	{
+		"chi"		"酒店"
+	}
+	"station-a"
+	{
+		"chi"		"火车站"
+	}
+	"station"
+	{
+		"chi"		"大结局"
+	}
+	"TheCure001"
+	{
+		"chi"		"激光防护罩"
+	}
+	"TheCure002"
+	{
+		"chi"		"四座塔"
+	}
+	"TheCure003"
+	{
+		"chi"		"环流"
+	}
+	"TheCure004"
+	{
+		"chi"		"重症监护"
+	}
+	"TheCure005"
+	{
+		"chi"		"女巫收割"
+	}
+	"bs2_1"
+	{
+		"chi"		"交通事故"
+	}
+	"bs2_2"
+	{
+		"chi"		"该死的"
+	}
+	"bs2_3"
+	{
+		"chi"		"古树地狱"
+	}
+	"bs2_4"
+	{
+		"chi"		"绿水地狱"
+	}
+	"bs2_5"
+	{
+		"chi"		"天空地狱"
+	}
+	"bs2_6"
+	{
+		"chi"		"疯狂的风地狱"
+	}
+	"bs2_7"
+	{
+		"chi"		"火焰地狱"
+	}
+	"bs2_8"
+	{
+		"chi"		"冰冻果子露地狱"
+	}
+	"bs2_9"
+	{
+		"chi"		"毒液地狱"
+	}
+	"bs2_10"
+	{
+		"chi"		"雷电地狱"
+	}
+	"bs2_11"
+	{
+		"chi"		"天空之城"
+	}
+	"bs2_12"
+	{
+		"chi"		"你真的逃脱了吗?"
+	}
+	"skullington_a"
+	{
+		"chi"		"洞穴"
+	}
+	"skullington_b"
+	{
+		"chi"		"地牢"
+	}
+	"l4d_sc_market"
+	{
+		"chi"		"松鸦迷你超市"
+	}
+	"l4d_sc_construction"
+	{
+		"chi"		"建筑工地"
+	}
+	"l4d_sc_warehouse"
+	{
+		"chi"		"分拣仓库"
+	}
+	"bwm1_climb"
+	{
+		"chi"		"攀爬"
+	}
+	"bwm2_city"
+	{
+		"chi"		"城市"
+	}
+	"bwm3_forest"
+	{
+		"chi"		"森林"
+	}
+	"bwm4_rooftops"
+	{
+		"chi"		"屋顶"
+	}
+	"bwm5_bridge"
+	{
+		"chi"		"桥梁"
+	}
+	"l4d2_tunnel"
+	{
+		"chi"		"隧道"
+	}
+	"l4d2_forest"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_tracks"
+	{
+		"chi"		"轨道"
+	}
+	"l4d2_cave"
+	{
+		"chi"		"山洞"
+	}
+	"l4d2_back"
+	{
+		"chi"		"大海"
+	}
+	"l4d2_tunnel_vs"
+	{
+		"chi"		"隧道(VS)"
+	}
+	"l4d2_forest_vs"
+	{
+		"chi"		"森林(VS)"
+	}
+	"l4d2_tracks_vs"
+	{
+		"chi"		"轨道(VS)"
+	}
+	"L4d2_cave_vs"
+	{
+		"chi"		"山洞(VS)"
+	}
+	"l4d2_backtoboat_vs"
+	{
+		"chi"		"大海(VS)"
+	}
+	"tlv01_city"
+	{
+		"chi"		"城市"
+	}
+	"tlv02_powerplant"
+	{
+		"chi"		"发电厂"
+	}
+	"tlv03_riverside"
+	{
+		"chi"		"河边设施"
+	}
+	"carnage_jail"
+	{
+		"chi"		"监狱丧尸"
+	}
+	"carnage_canyon"
+	{
+		"chi"		"丧尸峡谷"
+	}
+	"carnage_basement"
+	{
+		"chi"		"地下室千斤顶"
+	}
+	"carnage_warehouse"
+	{
+		"chi"		"仓库列车逃生"
+	}
+	"WaterCity"
+	{
+		"chi"		"水城"
+	}
+	"WaterCityII"
+	{
+		"chi"		"水城II"
+	}
+	"town"
+	{
+		"chi"		"城镇"
+	}
+	"arena"
+	{
+		"chi"		"竞技场"
+	}
+	"msd1_town"
+	{
+		"chi"		"城镇"
+	}
+	"msd2_gasstation"
+	{
+		"chi"		"加油站"
+	}
+	"msdnew_tccity_newway"
+	{
+		"chi"		"城市"
+	}
+	"msd3_square"
+	{
+		"chi"		"广场"
+	}
+	"l4d_coldfear01_smallforest"
+	{
+		"chi"		"魔法森林"
+	}
+	"l4d_coldfear02_factory"
+	{
+		"chi"		"工厂混乱"
+	}
+	"l4d_coldfear03_officebuilding"
+	{
+		"chi"		"我的订书机在哪里?"
+	}
+	"l4d_coldfear04_roffs"
+	{
+		"chi"		"丧尸屋顶"
+	}
+	"l4d_coldfear05_docks"
+	{
+		"chi"		"码头逃生"
+	}
+	"fk2_1"
+	{
+		"chi"		"fk2_1"
+	}
+	"fk2_2"
+	{
+		"chi"		"fk2_2"
+	}
+	"fk2_3"
+	{
+		"chi"		"fk2_3"
+	}
+	"fk2_4"
+	{
+		"chi"		"fk2_4"
+	}
+	"fk2_5"
+	{
+		"chi"		"fk2_5"
+	}
+	"dodsurvivalcoopppb"
+	{
+		"chi"		"亡灵节"
+	}
+	"Hideout01_v5ppb"
+	{
+		"chi"		"街道"
+	}
+	"Hideout02ppb"
+	{
+		"chi"		"入口"
+	}
+	"Hideout03ppb"
+	{
+		"chi"		"农业"
+	}
+	"Hideout04_tlmppb"
+	{
+		"chi"		"藏身处—哈克在哪里"
+	}
+	"l4d2_planb2_v051ppb"
+	{
+		"chi"		"探测"
+	}
+	"l4d2_planb3_v051ppb"
+	{
+		"chi"		"漏出"
+	}
+	"d1_trainstation_01_d"
+	{
+		"chi"		"1-进入地点"
+	}
+	"d1_trainstation_02_d"
+	{
+		"chi"		"2-进入地点"
+	}
+	"d1_trainstation_03_d"
+	{
+		"chi"		"3-进入地点"
+	}
+	"d1_trainstation_04_d"
+	{
+		"chi"		"4-进入地点"
+	}
+	"d1_trainstation_05_d"
+	{
+		"chi"		"5-好日子"
+	}
+	"d1_trainstation_06_d"
+	{
+		"chi"		"6-好日子"
+	}
+	"d1_canals_01_d"
+	{
+		"chi"		"7-运河航道"
+	}
+	"d1_canals_01a_d"
+	{
+		"chi"		"8-运河航道"
+	}
+	"d1_canals_02_d"
+	{
+		"chi"		"9-运河航道"
+	}
+	"d1_canals_03_d"
+	{
+		"chi"		"10-运河航道"
+	}
+	"d1_canals_05_d"
+	{
+		"chi"		"11-运河航道"
+	}
+	"d1_canals_06_d"
+	{
+		"chi"		"12-水障碍区"
+	}
+	"d1_canals_07_d"
+	{
+		"chi"		"13-水障碍区"
+	}
+	"d1_canals_08_d"
+	{
+		"chi"		"14-水障碍区"
+	}
+	"d1_canals_09_d"
+	{
+		"chi"		"15-水障碍区"
+	}
+	"d1_canals_10_d"
+	{
+		"chi"		"16-水障碍区"
+	}
+	"d1_canals_11_d"
+	{
+		"chi"		"17-水障碍区"
+	}
+	"d1_canals_12_d"
+	{
+		"chi"		"18-水障碍区"
+	}
+	"d1_canals_13_d"
+	{
+		"chi"		"19-水障碍区"
+	}
+	"d1_eli_01_d"
+	{
+		"chi"		"20-黑山基地东区"
+	}
+	"d1_eli_02_d"
+	{
+		"chi"		"21-黑山基地东区"
+	}
+	"d1_town_01_d"
+	{
+		"chi"		"22-我们不去莱温霍姆"
+	}
+	"d1_town_01a_d"
+	{
+		"chi"		"23-我们不去莱温霍姆"
+	}
+	"d1_town_02_d"
+	{
+		"chi"		"24-我们不去莱温霍姆"
+	}
+	"d1_town_02a_d"
+	{
+		"chi"		"25-我们不去莱温霍姆"
+	}
+	"d1_town_04_d"
+	{
+		"chi"		"26-我们不去莱温霍姆"
+	}
+	"d1_town_05_d"
+	{
+		"chi"		"27-我们不去莱温霍姆"
+	}
+	"d2_coast_01_d"
+	{
+		"chi"		"28-17号高速公路"
+	}
+	"d2_coast_03_d"
+	{
+		"chi"		"29-17号高速公路"
+	}
+	"d2_coast_04_d"
+	{
+		"chi"		"30-17号高速公路"
+	}
+	"d2_coast_05_d"
+	{
+		"chi"		"31-17号高速公路"
+	}
+	"d2_coast_07_d"
+	{
+		"chi"		"32-17号高速公路"
+	}
+	"d2_coast_09_d"
+	{
+		"chi"		"33-沙地陷阱"
+	}
+	"d2_coast_10_d"
+	{
+		"chi"		"34-沙地陷阱"
+	}
+	"d2_coast_11_d"
+	{
+		"chi"		"35-沙地陷阱"
+	}
+	"d2_coast_12_d"
+	{
+		"chi"		"36-沙地陷阱"
+	}
+	"d2_prison_01_d"
+	{
+		"chi"		"37-沙地陷阱"
+	}
+	"d2_prison_02_d"
+	{
+		"chi"		"38-诺瓦矿场"
+	}
+	"d2_prison_03_d"
+	{
+		"chi"		"39-诺瓦矿场"
+	}
+	"d2_prison_04_d"
+	{
+		"chi"		"40-诺瓦矿场"
+	}
+	"d2_prison_05_d"
+	{
+		"chi"		"41-诺瓦矿场"
+	}
+	"d2_prison_06_d"
+	{
+		"chi"		"42-牵连设备"
+	}
+	"d2_prison_07_d"
+	{
+		"chi"		"43-牵连设备"
+	}
+	"d2_prison_08_d"
+	{
+		"chi"		"44-牵连设备"
+	}
+	"d3_c17_01_d"
+	{
+		"chi"		"45-牵连设备"
+	}
+	"d3_c17_02_d"
+	{
+		"chi"		"46-反叛者1号"
+	}
+	"d3_c17_03_d"
+	{
+		"chi"		"47-反叛者1号"
+	}
+	"d3_c17_04_d"
+	{
+		"chi"		"48-反叛者1号"
+	}
+	"d3_c17_05_d"
+	{
+		"chi"		"49-反叛者1号"
+	}
+	"d3_c17_06a_d"
+	{
+		"chi"		"50-反叛者1号"
+	}
+	"d3_c17_06b_d"
+	{
+		"chi"		"51-反叛者1号"
+	}
+	"d3_c17_07_d"
+	{
+		"chi"		"52-反叛者1号"
+	}
+	"d3_c17_08_d"
+	{
+		"chi"		"53-反叛者1号"
+	}
+	"d3_c17_09_d"
+	{
+		"chi"		"54-跟随弗里曼"
+	}
+	"d3_c17_10a_d"
+	{
+		"chi"		"55-跟随弗里曼"
+	}
+	"d3_c17_10b_d"
+	{
+		"chi"		"56-跟随弗里曼"
+	}
+	"d3_c17_11_d"
+	{
+		"chi"		"57-跟随弗里曼"
+	}
+	"d3_c17_12_d"
+	{
+		"chi"		"58-跟随弗里曼"
+	}
+	"d3_c17_12b_d"
+	{
+		"chi"		"59-跟随弗里曼"
+	}
+	"d3_c17_13_d"
+	{
+		"chi"		"60-跟随弗里曼"
+	}
+	"d3_citadel_01_d"
+	{
+		"chi"		"61-我们的恩主"
+	}
+	"d3_citadel_02_d"
+	{
+		"chi"		"62-我们的恩主"
+	}
+	"d3_citadel_03_d"
+	{
+		"chi"		"63-我们的恩主"
+	}
+	"d3_citadel_04_d"
+	{
+		"chi"		"64-我们的恩主"
+	}
+	"d3_citadel_05_d"
+	{
+		"chi"		"65-我们的恩主"
+	}
+	"d3_breen_01_d"
+	{
+		"chi"		"66-暗能"
+	}
+	"st2_1"
+	{
+		"chi"		"焦土地狱"
+	}
+	"st2_2"
+	{
+		"chi"		"供电塔"
+	}
+	"st2_3"
+	{
+		"chi"		"机构搜集"
+	}
+	"st2_4"
+	{
+		"chi"		"逃离机构"
+	}
+	"st2_5"
+	{
+		"chi"		"山顶大瀑布"
+	}
+	"st2_6"
+	{
+		"chi"		"下水道"
+	}
+	"st2_7"
+	{
+		"chi"		"移动迷宫"
+	}
+	"st2_8"
+	{
+		"chi"		"悬崖"
+	}
+	"st2_9"
+	{
+		"chi"		"城墙内部"
+	}
+	"st2_10"
+	{
+		"chi"		"重返迷宫"
+	}
+	"st2_11"
+	{
+		"chi"		"逃离迷宫"
+	}
+	"de01_sewers"
+	{
+		"chi"		"下水道"
+	}
+	"de02_hotel"
+	{
+		"chi"		"酒店"
+	}
+	"de03_store"
+	{
+		"chi"		"超市"
+	}
+	"de04_woods"
+	{
+		"chi"		"森林"
+	}
+	"de05_echo_finale"
+	{
+		"chi"		"回声基地"
+	}
+	"Backriders"
+	{
+		"chi"		"背行者"
+	}
+	"Helis_and_Humpers"
+	{
+		"chi"		"直升机"
+	}
+	"Dosey_Doe"
+	{
+		"chi"		"剂量"
+	}
+	"No_More_Humpers"
+	{
+		"chi"		"不再有驼峰"
+	}
+	"wow_map1"
+	{
+		"chi"		"购物中心"
+	}
+	"wow_map2"
+	{
+		"chi"		"前哨站"
+	}
+	"wow_map3"
+	{
+		"chi"		"火车站"
+	}
+	"wow_map4"
+	{
+		"chi"		"港口"
+	}
+	"wow_map5"
+	{
+		"chi"		"灯塔"
+	}
+	"l4d2_ff01_woods"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_ff02_factory"
+	{
+		"chi"		"工厂"
+	}
+	"l4d2_ff03_highway"
+	{
+		"chi"		"公路"
+	}
+	"l4d2_ff04_plant"
+	{
+		"chi"		"工厂2"
+	}
+	"l4d2_ff05_station"
+	{
+		"chi"		"火车站救援"
+	}
+	"l4d2_darkblood01_tanker"
+	{
+		"chi"		"油轮"
+	}
+	"l4d2_darkblood02_engine"
+	{
+		"chi"		"油轮发动机"
+	}
+	"l4d2_darkblood03_platform"
+	{
+		"chi"		"站台"
+	}
+	"l4d2_darkblood04_extraction"
+	{
+		"chi"		"提取"
+	}
+	"2ee_01"
+	{
+		"chi"		"致命的开始"
+	}
+	"2ee_02"
+	{
+		"chi"		"死水"
+	}
+	"2ee_03"
+	{
+		"chi"		"完全停止"
+	}
+	"2ee_04"
+	{
+		"chi"		"无动力列车"
+	}
+	"2ee_05"
+	{
+		"chi"		"死亡风暴"
+	}
+	"2ee_06"
+	{
+		"chi"		"死胡同"
+	}
+	"beginning"
+	{
+		"chi"		"开始"
+	}
+	"trapsmap2"
+	{
+		"chi"		"外部"
+	}
+	"finale"
+	{
+		"chi"		"结局"
+	}
+	"trapsmapsurvival"
+	{
+		"chi"		"幸存"
+	}
+	"con2"
+	{
+		"chi"		"困惑1"
+	}
+	"con2m2"
+	{
+		"chi"		"困惑2"
+	}
+	"con2m3"
+	{
+		"chi"		"困惑3"
+	}
+	"con2m4"
+	{
+		"chi"		"困惑4"
+	}
+	"l4d_powerstation_utg_01"
+	{
+		"chi"		"发电站 01"
+	}
+	"l4d_powerstation_utg_02"
+	{
+		"chi"		"发电站 02"
+	}
+	"l4d_powerstation_utg_03"
+	{
+		"chi"		"发电站 03"
+	}
+	"l4d_powerstation_utg_04"
+	{
+		"chi"		"发电站 04"
+	}
+	"l4d_powerstation_utg_05"
+	{
+		"chi"		"发电站 05"
+	}
+	"l4d_thewoods2_01"
+	{
+		"chi"		"宗博里的海岸"
+	}
+	"l4d_thewoods2_02"
+	{
+		"chi"		"铁路追踪"
+	}
+	"l4d_thewoods2_03"
+	{
+		"chi"		"墓地"
+	}
+	"l4d_thewoods2_04"
+	{
+		"chi"		"我们去树林里"
+	}
+	"l4d_thewoods_01"
+	{
+		"chi"		"伍兹·雷德克斯"
+	}
+	"l4d_thewoods_02"
+	{
+		"chi"		"坏透了的木头"
+	}
+	"l4d_thewoods_03b"
+	{
+		"chi"		"更多该死的树林"
+	}
+	"map_part1"
+	{
+		"chi"		"插曲:1"
+	}
+	"map_part2"
+	{
+		"chi"		"插曲:2"
+	}
+	"map_part3"
+	{
+		"chi"		"插曲:3"
+	}
+	"map_part4"
+	{
+		"chi"		"插曲:4"
+	}
+	"map_part5"
+	{
+		"chi"		"插曲:5"
+	}
+	"map_part6"
+	{
+		"chi"		"插曲:6"
+	}
+	"map_part7"
+	{
+		"chi"		"插曲:7"
+	}
+	"map_part8"
+	{
+		"chi"		"插曲:8"
+	}
+	"map_part9"
+	{
+		"chi"		"插曲:9"
+	}
+	"map_part10"
+	{
+		"chi"		"插曲:10(最后的)"
+	}
+	"sector-74-chapter-1"
+	{
+		"chi"		"1-离开家"
+	}
+	"sector-74-chapter-2"
+	{
+		"chi"		"2-一列火车"
+	}
+	"sector-74-chapter-3"
+	{
+		"chi"		"3-古老的森林"
+	}
+	"sector-74-chapter-4"
+	{
+		"chi"		"4-地下通道"
+	}
+	"sector-74-chapter-5"
+	{
+		"chi"		"5-沙漠军事基地"
+	}
+	"sector-74-chapter-6"
+	{
+		"chi"		"6-直升机来了"
+	}
+	"sector-74-chapter-7"
+	{
+		"chi"		"7-抵达74区"
+	}
+	"sector-74-chapter-8"
+	{
+		"chi"		"8-巨大的危险"
+	}
+	"sector-74-chapter-9"
+	{
+		"chi"		"9-绿色代码"
+	}
+	"sector-74-chapter-10"
+	{
+		"chi"		"10-废弃的总部"
+	}
+	"sector-74-chapter-11"
+	{
+		"chi"		"11-逃离地狱"
+	}
+	"sector-74-chapter-12"
+	{
+		"chi"		"12-不错的邻居"
+	}
+	"sector-74-chapter-13"
+	{
+		"chi"		"13-在建(越野车)1"
+	}
+	"sector-74-chapter-14"
+	{
+		"chi"		"14-在建(越野车)2"
+	}
+	"sector-74-chapter-15"
+	{
+		"chi"		"15-在建(越野车)3"
+	}
+	"srocchurch"
+	{
+		"chi"		"附近"
+	}
+	"plaza_espana"
+	{
+		"chi"		"市场"
+	}
+	"maria_cristina"
+	{
+		"chi"		"大街"
+	}
+	"mnac"
+	{
+		"chi"		"公园"
+	}
+	"ud_map01"
+	{
+		"chi"		"开始"
+	}
+	"ud_map02"
+	{
+		"chi"		"工厂"
+	}
+	"ud_map03"
+	{
+		"chi"		"航空区"
+	}
+	"ud_map04"
+	{
+		"chi"		"鬼城"
+	}
+	"ud_map05"
+	{
+		"chi"		"要么跑,要么死"
+	}
+	"l4d_sv_deathaboard_ship"
+	{
+		"chi"		"船舶生存"
+	}
+	"versus_1"
+	{
+		"chi"		"旧设施"
+	}
+	"versus_2"
+	{
+		"chi"		"造船厂"
+	}
+	"versus_3"
+	{
+		"chi"		"办公室死亡"
+	}
+	"versus_4"
+	{
+		"chi"		"消防塔"
+	}
+	"versus_5"
+	{
+		"chi"		"消防塔救援"
+	}
+	"pt_home1"
+	{
+		"chi"		"主页"
+	}
+	"pt_village2"
+	{
+		"chi"		"村庄"
+	}
+	"pt_retribution3"
+	{
+		"chi"		"报应"
+	}
+	"pt_conclusion4"
+	{
+		"chi"		"结论"
+	}
+	"td_suicide_forest"
+	{
+		"chi"		"自杀森林"
+	}
+	"td_akihabara"
+	{
+		"chi"		"秋叶原"
+	}
+	"td_shinjuku"
+	{
+		"chi"		"新宿"
+	}
+	"DE_1_street"
+	{
+		"chi"		"街道"
+	}
+	"DE_2_laboratory"
+	{
+		"chi"		"实验室"
+	}
+	"DE_3_end"
+	{
+		"chi"		"结束"
+	}
+	"bloodtracks_01"
+	{
+		"chi"		"港口"
+	}
+	"bloodtracks_02"
+	{
+		"chi"		"树林"
+	}
+	"bloodtracks_03"
+	{
+		"chi"		"铁轨"
+	}
+	"bloodtracks_04"
+	{
+		"chi"		"车站"
+	}
+	"A_New_Day"
+	{
+		"chi"		"新的一天"
+	}
+	"Again"
+	{
+		"chi"		"再一次"
+	}
+	"Errors"
+	{
+		"chi"		"错误"
+	}
+	"Stranger"
+	{
+		"chi"		"陌生人"
+	}
+	"Solution"
+	{
+		"chi"		"解决办法"
+	}
+	"claustrophobia1"
+	{
+		"chi"		"下水道"
+	}
+	"claustrophobia2"
+	{
+		"chi"		"威克兰精神病院"
+	}
+	"claustrophobia3"
+	{
+		"chi"		"核反应堆"
+	}
+	"claustrophobia4"
+	{
+		"chi"		"地铁"
+	}
+	"claustrophobia5"
+	{
+		"chi"		"地铁隧道"
+	}
+	"claustrophobia6"
+	{
+		"chi"		"运河"
+	}
+	"claustrophobia7"
+	{
+		"chi"		"峡谷"
+	}
+	"indiana_adventure"
+	{
+		"chi"		"生产线"
+	}
+	"indiana_adventure2"
+	{
+		"chi"		"游乐设施"
+	}
+	"indiana_adventure3"
+	{
+		"chi"		"逃亡者"
+	}
+	"indiana_adventure_whole"
+	{
+		"chi"		"自由滑行"
+	}
+	"Venissia"
+	{
+		"chi"		"威尼斯"
+	}
+	"subway"
+	{
+		"chi"		"地铁"
+	}
+	"parkissou"
+	{
+		"chi"		"公园"
+	}
+	"xaviere"
+	{
+		"chi"		"泽维尔"
+	}
+	"l4d_dust01_road"
+	{
+		"chi"		"到达"
+	}
+	"l4d_dust02_street"
+	{
+		"chi"		"街道"
+	}
+	"l4d_dust03_knell"
+	{
+		"chi"		"丧钟"
+	}
+	"l4d_dust04_garage"
+	{
+		"chi"		"车库"
+	}
+	"dead_space_maps1_l4d2_pw"
+	{
+		"chi"		"第一章"
+	}
+	"dead_space_maps2_l4d2_pw"
+	{
+		"chi"		"第二章"
+	}
+	"dead_space_maps3_l4d2_pw"
+	{
+		"chi"		"第三章"
+	}
+	"dead_space_maps4_l4d2_pw"
+	{
+		"chi"		"第四章"
+	}
+	"dead_space_maps5_l4d2_pw"
+	{
+		"chi"		"救援"
+	}
+	"l4d_draxmap0"
+	{
+		"chi"		"你的船沉了"
+	}
+	"l4d_draxmap2"
+	{
+		"chi"		"轮到你了"
+	}
+	"l4d_draxmap3"
+	{
+		"chi"		"那是什么味道"
+	}
+	"l4d_draxmap4"
+	{
+		"chi"		"最后一站"
+	}
+	"part1_facility"
+	{
+		"chi"		"化学设施"
+	}
+	"part2_archives"
+	{
+		"chi"		"档案馆/仓库"
+	}
+	"part3_control"
+	{
+		"chi"		"控制/洞穴"
+	}
+	"part4_cradle"
+	{
+		"chi"		"天线支架"
+	}
+	"l4d2_deadflagblues01_city"
+	{
+		"chi"		"城市"
+	}
+	"l4d2_deadflagblues02_library"
+	{
+		"chi"		"图书馆"
+	}
+	"l4d2_deadflagblues03_arena"
+	{
+		"chi"		"竞技场"
+	}
+	"l4d2_deadflagblues04_woods"
+	{
+		"chi"		"树林"
+	}
+	"l4d2_deadflagblues05_station"
+	{
+		"chi"		"火车站"
+	}
+	"slik_desert"
+	{
+		"chi"		"大漠"
+	}
+	"slik_senlin"
+	{
+		"chi"		"森林"
+	}
+	"slik_senlin2"
+	{
+		"chi"		"农场"
+	}
+	"slik_xiagu"
+	{
+		"chi"		"峡谷"
+	}
+	"slik_baise"
+	{
+		"chi"		"河流"
+	}
+	"slik_end"
+	{
+		"chi"		"遗址"
+	}
+	"rw_beach1"
+	{
+		"chi"		"漫长的道路"
+	}
+	"rw_bridge2"
+	{
+		"chi"		"大桥"
+	}
+	"rw_city3"
+	{
+		"chi"		"城市"
+	}
+	"rw_artdeco4"
+	{
+		"chi"		"主干道"
+	}
+	"rw_mansion5"
+	{
+		"chi"		"大厦"
+	}
+	"rotenacht"
+	{
+		"chi"		"红色之夜"
+	}
+	"descent"
+	{
+		"chi"		"下降"
+	}
+	"intothenothing"
+	{
+		"chi"		"进入虚无"
+	}
+	"templeofmalevolence"
+	{
+		"chi"		"邪恶神殿"
+	}
+	"tombofmalphas"
+	{
+		"chi"		"马尔法斯墓"
+	}
+	"uf1_boulevard"
+	{
+		"chi"		"林荫大道"
+	}
+	"uf2_rooftops"
+	{
+		"chi"		"屋顶"
+	}
+	"uf3_harbor"
+	{
+		"chi"		"海港"
+	}
+	"uf4_airfield"
+	{
+		"chi"		"机场"
+	}
+	"cnm1_city1"
+	{
+		"chi"		"0号城市"
+	}
+	"cnm2_gay1"
+	{
+		"chi"		"尻山基地"
+	}
+	"cnm3_boy1"
+	{
+		"chi"		"尻神试炼"
+	}
+	"cnm4_kaoming"
+	{
+		"chi"		"羊村"
+	}
+	"riptide_map1_final"
+	{
+		"chi"		"城市"
+	}
+	"riptide_map2_final"
+	{
+		"chi"		"水族馆"
+	}
+	"riptide_map3_final"
+	{
+		"chi"		"码头"
+	}
+	"riptide_map4_final"
+	{
+		"chi"		"救援"
+	}
+	"outbackrail"
+	{
+		"chi"		"内陆铁路"
+	}
+	"pr3"
+	{
+		"chi"		"皮普跑步"
+	}
+	"pr4"
+	{
+		"chi"		"运行2"
+	}
+	"Logger_Station10"
+	{
+		"chi"		"记录站10"
+	}
+	"dockss2"
+	{
+		"chi"		"码头"
+	}
+	"l4d2_cc_street_d"
+	{
+		"chi"		"火灾街道"
+	}
+	"l4d2_cc_basement_c"
+	{
+		"chi"		"地下室恐怖"
+	}
+	"l4d2_cc_ascent_a"
+	{
+		"chi"		"上升"
+	}
+	"l4d2_cc_hotel"
+	{
+		"chi"		"酒店"
+	}
+	"l4d2_cc_station-a"
+	{
+		"chi"		"丧尸火车站"
+	}
+	"l4d2_cc_finale"
+	{
+		"chi"		"屋顶逃生"
+	}
+	"SpaceJockeysbackup"
+	{
+		"chi"		"太空骑师"
+	}
+	"mobstadium2012L4D2V2"
+	{
+		"chi"		"民众体育场2012"
+	}
+	"TheReturnOfTheJockeys"
+	{
+		"chi"		"骑师回归"
+	}
+	"tripday_m1"
+	{
+		"chi"		"废区"
+	}
+	"tripday_m2"
+	{
+		"chi"		"郊野"
+	}
+	"tripday_m3"
+	{
+		"chi"		"野外"
+	}
+	"tripday_m4"
+	{
+		"chi"		"加油站"
+	}
+	"deadbeat01_forest"
+	{
+		"chi"		"森林"
+	}
+	"deadbeat02_alley"
+	{
+		"chi"		"小巷"
+	}
+	"deadbeat03_street"
+	{
+		"chi"		"街道"
+	}
+	"deadbeat04_park"
+	{
+		"chi"		"公园救援"
+	}
+	"ddntr1_01urban"
+	{
+		"chi"		"秋天"
+	}
+	"ddntr1_02normal"
+	{
+		"chi"		"放弃前进"
+	}
+	"ddntr1_02reverse"
+	{
+		"chi"		"放弃反转"
+	}
+	"ddntr1_03day"
+	{
+		"chi"		"腐蚀日"
+	}
+	"ddntr1_03night"
+	{
+		"chi"		"腐蚀之夜"
+	}
+	"ddntr1_04finale"
+	{
+		"chi"		"塔楼"
+	}
+	"beta_thecity1"
+	{
+		"chi"		"隔离区"
+	}
+	"azcity_senter"
+	{
+		"chi"		"街道"
+	}
+	"azcity_new_street"
+	{
+		"chi"		"公园"
+	}
+	"azcity_end"
+	{
+		"chi"		"解放碑"
+	}
+	"WormwoodVnew"
+	{
+		"chi"		"苦恼"
+	}
+	"pier__part1_l4d2"
+	{
+		"chi"		"第一部分"
+	}
+	"pier__part2_l4d2_001"
+	{
+		"chi"		"第二部分"
+	}
+	"pier__part3"
+	{
+		"chi"		"第三部分"
+	}
+	"Tod1_Farm"
+	{
+		"chi"		"新闻"
+	}
+	"tod2_night"
+	{
+		"chi"		"夜晚"
+	}
+	"tod3_gas"
+	{
+		"chi"		"加油站"
+	}
+	"tod4_fema"
+	{
+		"chi"		"地堡"
+	}
+	"l4d2_morgan_road"
+	{
+		"chi"		"摩根路"
+	}
+	"l4d2_apartments"
+	{
+		"chi"		"公寓"
+	}
+	"l4d2_police_station"
+	{
+		"chi"		"警察局"
+	}
+	"l4d2_river"
+	{
+		"chi"		"河"
+	}
+	"l4d2_7hours_later_01"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_7hours_later_02"
+	{
+		"chi"		"桥梁"
+	}
+	"l4d2_7hours_later_03"
+	{
+		"chi"		"森林公路"
+	}
+	"l4d2_7hours_later_04"
+	{
+		"chi"		"工厂"
+	}
+	"l4d2_7hours_later_05"
+	{
+		"chi"		"森林机场"
+	}
+	"nt01_mansion"
+	{
+		"chi"		"28天大厦"
+	}
+	"nt02_haunts"
+	{
+		"chi"		"鬼屋"
+	}
+	"nt03_moria"
+	{
+		"chi"		"莫莉亚矿山"
+	}
+	"nt04_jungleruins"
+	{
+		"chi"		"欢迎来到丛林"
+	}
+	"nt05_wake"
+	{
+		"chi"		"锁定屏幕"
+	}
+	"sd01_airfield"
+	{
+		"chi"		"地下通道"
+	}
+	"sd02_thedusk"
+	{
+		"chi"		"老城区"
+	}
+	"sd03_themines"
+	{
+		"chi"		"矿山"
+	}
+	"sd04_apcescape"
+	{
+		"chi"		"海港"
+	}
+	"l4d2_lotrm1_moria"
+	{
+		"chi"		"莫莉亚矿山"
+	}
+	"l4d2_lotrm2_mordor"
+	{
+		"chi"		"末日火山"
+	}
+	"l4d2_lotrm3_helms_deep_redux"
+	{
+		"chi"		"圣盔谷之战"
+	}
+	"l4d_zero01_south"
+	{
+		"chi"		"南天堂"
+	}
+	"l4d_zero02_complex"
+	{
+		"chi"		"被遗弃的"
+	}
+	"l4d_zero03_chasm"
+	{
+		"chi"		"裂缝冰废墟"
+	}
+	"l4d_zero04_steppes"
+	{
+		"chi"		"圣殿草原"
+	}
+	"l4d_zero05_aerith"
+	{
+		"chi"		"休息"
+	}
+	"splash6"
+	{
+		"chi"		"飞溅山之旅"
+	}
+	"l4d_grave_city"
+	{
+		"chi"		"美国丧尸城"
+	}
+	"l4d_grave_mall_beta"
+	{
+		"chi"		"宗博购物中心"
+	}
+	"l4d_grave_sewers_beta"
+	{
+		"chi"		"下水道"
+	}
+	"l4d_grave_factory_beta"
+	{
+		"chi"		"工业事故"
+	}
+	"l4d_grave_outside_beta"
+	{
+		"chi"		"致命的源头"
+	}
+	"l4d_grave_rural"
+	{
+		"chi"		"哈克贝利时间"
+	}
+	"l4d_grave_prison"
+	{
+		"chi"		"越狱"
+	}
+	"l4d_grave_station"
+	{
+		"chi"		"骑着贝西"
+	}
+	"titty1"
+	{
+		"chi"		"本尼"
+	}
+	"titty"
+	{
+		"chi"		"乳摇酒吧"
+	}
+	"deathttoiletmaze1"
+	{
+		"chi"		"冲洗"
+	}
+	"deathttoiletmaze2"
+	{
+		"chi"		"电源"
+	}
+	"deathttoiletmaze3"
+	{
+		"chi"		"希望"
+	}
+	"deathttoiletmaze4"
+	{
+		"chi"		"陷阱"
+	}
+	"deathttoiletmaze5"
+	{
+		"chi"		"未记录"
+	}
+	"deathttoiletmazeturret"
+	{
+		"chi"		"炮塔防御"
+	}
+	"l4d2_lab024_01"
+	{
+		"chi"		"伍兹"
+	}
+	"l4d2_lab024_02"
+	{
+		"chi"		"煤仓"
+	}
+	"l4d2_lab024_03"
+	{
+		"chi"		"无法使用"
+	}
+	"gasfever_1"
+	{
+		"chi"		"死区"
+	}
+	"gasfever_2"
+	{
+		"chi"		"河边"
+	}
+	"gasfever_3"
+	{
+		"chi"		"建筑工地大结局"
+	}
+	"building"
+	{
+		"chi"		"酒店"
+	}
+	"streets"
+	{
+		"chi"		"街道"
+	}
+	"factory"
+	{
+		"chi"		"仓库"
+	}
+	"trainyard"
+	{
+		"chi"		"火车站"
+	}
+	"m1_beach"
+	{
+		"chi"		"海滩"
+	}
+	"m2_burbs"
+	{
+		"chi"		"郊区"
+	}
+	"m3_crowd_control"
+	{
+		"chi"		"群体控制"
+	}
+	"m4_launchpad"
+	{
+		"chi"		"发射台"
+	}
+	"m5_station_finale"
+	{
+		"chi"		"车站救援"
+	}
+	"l4d_bs_mansion"
+	{
+		"chi"		"继续运输"
+	}
+	"l4d_bs_riverside"
+	{
+		"chi"		"血色河滨蓝"
+	}
+	"l4d_bs_valley_of_death"
+	{
+		"chi"		"死亡血腥谷"
+	}
+	"l4d_bs_barrage"
+	{
+		"chi"		"血腥拦河坝"
+	}
+	"l4d_bs_bloodyfinale"
+	{
+		"chi"		"血腥星期日"
+	}
+	"awaystadium_c1"
+	{
+		"chi"		"码头仓库"
+	}
+	"awaystadium_c2"
+	{
+		"chi"		"地下下水道"
+	}
+	"awaystadium_c3"
+	{
+		"chi"		"地下迷宫"
+	}
+	"hotarubi_map1"
+	{
+		"chi"		"迷宫"
+	}
+	"hotarubi_map2"
+	{
+		"chi"		"潜伏"
+	}
+	"hotarubi_map3"
+	{
+		"chi"		"废墟"
+	}
+	"yanzhounight_tiwei"
+	{
+		"chi"		"机围"
+	}
+	"yanzhounight_duhe"
+	{
+		"chi"		"二厂"
+	}
+	"yanzhounight_baogonci"
+	{
+		"chi"		"包公祠"
+	}
+	"yanzhounight_underground"
+	{
+		"chi"		"古墓"
+	}
+	"route_to_city"
+	{
+		"chi"		"城市之旅"
+	}
+	"the_city"
+	{
+		"chi"		"在城市中狩猎"
+	}
+	"Prison"
+	{
+		"chi"		"入狱时间"
+	}
+	"trainstation"
+	{
+		"chi"		"2栋房子,1列火车"
+	}
+	"fox_river"
+	{
+		"chi"		"福克斯河"
+	}
+	"Prison_Yard"
+	{
+		"chi"		"监狱看守所"
+	}
+	"medical_room"
+	{
+		"chi"		"今晚"
+	}
+	"Tonight"
+	{
+		"chi"		"逃走"
+	}
+	"BlackMesa_Undertow_01"
+	{
+		"chi"		"通电"
+	}
+	"BlackMesa_Undertow_02"
+	{
+		"chi"		"暗潮"
+	}
+	"BlackMesa_Undertow_03"
+	{
+		"chi"		"伦理问题"
+	}
+	"BlackMesa_Undertow_04"
+	{
+		"chi"		"超速任务"
+	}
+	"g1m1"
+	{
+		"chi"		"堕落避难所"
+	}
+	"g1m2"
+	{
+		"chi"		"蛆虫坑"
+	}
+	"g1m3_old"
+	{
+		"chi"		"噩梦王国"
+	}
+	"g1m5"
+	{
+		"chi"		"天堂之南"
+	}
+	"g1m6"
+	{
+		"chi"		"瘟疫屠夫的领地"
+	}
+	"g1m7"
+	{
+		"chi"		"噩梦结束"
+	}
+	"c1m1_ufchapter1"
+	{
+		"chi"		"农场"
+	}
+	"c1m2_ufchapter2a"
+	{
+		"chi"		"城镇"
+	}
+	"l4d_noway_streets01"
+	{
+		"chi"		"街道"
+	}
+	"l4d_noway_backalleys02"
+	{
+		"chi"		"小巷"
+	}
+	"l4d_noway_market03"
+	{
+		"chi"		"市场"
+	}
+	"port_01"
+	{
+		"chi"		"港口"
+	}
+	"city_02"
+	{
+		"chi"		"城市"
+	}
+	"outpost_3"
+	{
+		"chi"		"前哨"
+	}
+	"c4m1_milltown_a_d1a"
+	{
+		"chi"		"米尔敦"
+	}
+	"c4m2_sugarmill_a_d1a"
+	{
+		"chi"		"糖厂"
+	}
+	"c4m3_sugarmill_b_d1a"
+	{
+		"chi"		"糖厂2"
+	}
+	"c4m4_milltown_b_d1a"
+	{
+		"chi"		"米尔敦2"
+	}
+	"c4m5_milltown_escape_d1a"
+	{
+		"chi"		"逃脱"
+	}
+	"l4d_linz_kbh"
+	{
+		"chi"		"动漫大会"
+	}
+	"busbahnhof1"
+	{
+		"chi"		"汽车站"
+	}
+	"l4d_linz_ok"
+	{
+		"chi"		"林茨4020号Rt31"
+	}
+	"l4d_linz_zurueck"
+	{
+		"chi"		"人民花园"
+	}
+	"l4d_linz_bahnhof"
+	{
+		"chi"		"林茨火车站"
+	}
+	"theravine"
+	{
+		"chi"		"峡谷"
+	}
+	"theunderground"
+	{
+		"chi"		"神圣的地下"
+	}
+	"malphas"
+	{
+		"chi"		"马尔法斯"
+	}
+	"evildominion"
+	{
+		"chi"		"邪恶统治"
+	}
+	"ForsakenChapel"
+	{
+		"chi"		"被遗忘的教堂"
+	}
+	"tacobucket01"
+	{
+		"chi"		"公寓"
+	}
+	"tacobucket02"
+	{
+		"chi"		"街道"
+	}
+	"tacobucket03"
+	{
+		"chi"		"玉米卷桶"
+	}
+	"tacobucket01vs"
+	{
+		"chi"		"公寓"
+	}
+	"tacobucket02vs"
+	{
+		"chi"		"街道"
+	}
+	"tacobucket03vs"
+	{
+		"chi"		"玉米卷桶"
+	}
+	"Signal_Broken"
+	{
+		"chi"		"信号中断"
+	}
+	"Frozen_Mines"
+	{
+		"chi"		"冻结矿山"
+	}
+	"Rescue"
+	{
+		"chi"		"救援"
+	}
+	"ch_map1_city"
+	{
+		"chi"		"城市"
+	}
+	"ch_map2_temple"
+	{
+		"chi"		"寺庙"
+	}
+	"ch_map3_greatwall"
+	{
+		"chi"		"长城"
+	}
+	"l4d2_frontier"
+	{
+		"chi"		"高中地狱"
+	}
+	"l4d2_thewalkhome"
+	{
+		"chi"		"丧尸街道"
+	}
+	"l4d2_thesewers"
+	{
+		"chi"		"下水道"
+	}
+	"l4d2_downtowndine01"
+	{
+		"chi"		"法院大楼"
+	}
+	"l4d2_downtowndine02"
+	{
+		"chi"		"餐馆"
+	}
+	"l4d2_downtowndine04"
+	{
+		"chi"		"半岛俱乐部和公寓"
+	}
+	"l4d2_downtowndine05"
+	{
+		"chi"		"逃脱"
+	}
+	"l4d_tbm_1"
+	{
+		"chi"		"小屋"
+	}
+	"l4d_tbm_2"
+	{
+		"chi"		"酸屋派对"
+	}
+	"l4d_tbm_3"
+	{
+		"chi"		"远离荒野"
+	}
+	"l4d_tbm_4"
+	{
+		"chi"		"老雄鹿"
+	}
+	"l4d_tbm_5"
+	{
+		"chi"		"亚瑟的供应品"
+	}
+	"prooemium2"
+	{
+		"chi"		"我的计划"
+	}
+	"313again"
+	{
+		"chi"		"主要行为"
+	}
+	"warp"
+	{
+		"chi"		"结局"
+	}
+	"campanar_coop_vs"
+	{
+		"chi"		"运动"
+	}
+	"alboraya_coop_vs"
+	{
+		"chi"		"你好吗"
+	}
+	"cullera_coop_vs"
+	{
+		"chi"		"库莱拉"
+	}
+	"pool_survival"
+	{
+		"chi"		"游泳池"
+	}
+	"squash_surv"
+	{
+		"chi"		"南瓜"
+	}
+	"rooftop_surv"
+	{
+		"chi"		"屋顶"
+	}
+	"hellishjourney01"
+	{
+		"chi"		"旅程开始"
+	}
+	"hellishjourney02"
+	{
+		"chi"		"市区"
+	}
+	"hellishjourney03"
+	{
+		"chi"		"城市逃生"
+	}
+	"hellishjourney01_l4d2"
+	{
+		"chi"		"旅程开始"
+	}
+	"hellishjourney02_l4d2"
+	{
+		"chi"		"市区"
+	}
+	"hellishjourney03_l4d2"
+	{
+		"chi"		"城市逃生"
+	}
+	"grave_yard"
+	{
+		"chi"		"墓地"
+	}
+	"grave_discovery"
+	{
+		"chi"		"墓地发现"
+	}
+	"grave_finale"
+	{
+		"chi"		"严重后果"
+	}
+	"survival_catacombs0_6dev"
+	{
+		"chi"		"严重后果-陵墓"
+	}
+	"l4d2_freezing_01"
+	{
+		"chi"		"零下"
+	}
+	"l4d2_freezing_02"
+	{
+		"chi"		"老宅邸"
+	}
+	"l4d2_freezing_03"
+	{
+		"chi"		"秘密实验室"
+	}
+	"l4d2_freezing_04"
+	{
+		"chi"		"挑战大结局"
+	}
+	"city"
+	{
+		"chi"		"城市"
+	}
+	"fly"
+	{
+		"chi"		"飞"
+	}
+	"rush"
+	{
+		"chi"		"长城"
+	}
+	"end"
+	{
+		"chi"		"花村"
+	}
+	"l4d_arrival"
+	{
+		"chi"		"抵达火星"
+	}
+	"l4d_mba_campaign_map_2"
+	{
+		"chi"		"火星地铁系统"
+	}
+	"l4d_darkness"
+	{
+		"chi"		"蓄水池"
+	}
+	"l4d_labyrinth"
+	{
+		"chi"		"外星迷宫"
+	}
+	"l4d_warehouses"
+	{
+		"chi"		"西多尼亚仓库区"
+	}
+	"l4d_machine"
+	{
+		"chi"		"外星机器"
+	}
+	"l4d_blackops1"
+	{
+		"chi"		"秘密行动"
+	}
+	"l4d_marsbase"
+	{
+		"chi"		"火星基地"
+	}
+	"l4d2_diescraper1_apartment_35"
+	{
+		"chi"		"公寓大楼"
+	}
+	"l4d2_diescraper2_streets_35"
+	{
+		"chi"		"市中心军事前哨"
+	}
+	"l4d2_diescraper3_mid_35"
+	{
+		"chi"		"购物中心"
+	}
+	"l4d2_diescraper4_top_35"
+	{
+		"chi"		"顶级套房"
+	}
+	"potc1"
+	{
+		"chi"		"夏延山"
+	}
+	"potc2"
+	{
+		"chi"		"星际之门指挥中心"
+	}
+	"potc3b"
+	{
+		"chi"		"返回"
+	}
+	"potc3"
+	{
+		"chi"		"寻找艺术品"
+	}
+	"potc4"
+	{
+		"chi"		"感染源"
+	}
+	"c5a1"
+	{
+		"chi"		"危险区域"
+	}
+	"c5a2"
+	{
+		"chi"		"弱光"
+	}
+	"c5a3"
+	{
+		"chi"		"爆炸坑"
+	}
+	"c5a4"
+	{
+		"chi"		"表面紧张"
+	}
+	"c5a5"
+	{
+		"chi"		"辐射"
+	}
+	"2019ii_fourth_plaza"
+	{
+		"chi"		"港口"
+	}
+	"2019ii_fourth_streets"
+	{
+		"chi"		"街道"
+	}
+	"2019ii_blart_battle"
+	{
+		"chi"		"商场警察3"
+	}
+	"2019ii_fourth_outside"
+	{
+		"chi"		"到达"
+	}
+	"2019ii_fourth_getup"
+	{
+		"chi"		"幻觉"
+	}
+	"2019ii_fourth_bunker"
+	{
+		"chi"		"煤仓"
+	}
+	"2019ii_fourth_end"
+	{
+		"chi"		"救赎"
+	}
+	"l4d2_fallindeath01"
+	{
+		"chi"		"小镇"
+	}
+	"l4d2_fallindeath02"
+	{
+		"chi"		"森林"
+	}
+	"l4d2_fallindeath03"
+	{
+		"chi"		"山"
+	}
+	"l4d2_fallindeath04"
+	{
+		"chi"		"缆车"
+	}
+	"Dead_Series1"
+	{
+		"chi"		"绝望的房子"
+	}
+	"Dead_Series2"
+	{
+		"chi"		"冷空气箱"
+	}
+	"Dead_Series3"
+	{
+		"chi"		"小恶魔"
+	}
+	"Dead_Series4"
+	{
+		"chi"		"突击队"
+	}
+	"eu01_residential_b16"
+	{
+		"chi"		"居住的"
+	}
+	"eu02_castle_b16"
+	{
+		"chi"		"城堡"
+	}
+	"eu03_oldtown_b16"
+	{
+		"chi"		"旧镇"
+	}
+	"eu04_freeway_b16"
+	{
+		"chi"		"高速公路"
+	}
+	"eu05_train_b16"
+	{
+		"chi"		"火车站"
+	}
+	"sv_eu_park_b02"
+	{
+		"chi"		"公园"
+	}
+	"sv_eu_castle_b01"
+	{
+		"chi"		"城堡"
+	}
+	"sv_eu_courtyard_b03"
+	{
+		"chi"		"庭院"
+	}
+	"sv_eu_freeway_b01"
+	{
+		"chi"		"高速公路"
+	}
+	"metro_vlc_surv"
+	{
+		"chi"		"地铁"
+	}
+	"l4d_viennacalling_city"
+	{
+		"chi"		"内城"
+	}
+	"l4d_viennacalling_kaiserfranz"
+	{
+		"chi"		"车站"
+	}
+	"l4d_viennacalling_gloomy"
+	{
+		"chi"		"努斯多夫"
+	}
+	"l4d_viennacalling_donauinsel"
+	{
+		"chi"		"多瑙河岛"
+	}
+	"l4d_viennacalling_donauturm"
+	{
+		"chi"		"多瑙河塔"
+	}
+	"l4d_viennacalling2_1"
+	{
+		"chi"		"一个城市"
+	}
+	"l4d_viennacalling2_2"
+	{
+		"chi"		"普拉特"
+	}
+	"l4d_viennacalling2_3"
+	{
+		"chi"		"议会"
+	}
+	"l4d_viennacalling2_4"
+	{
+		"chi"		"马萨克尔"
+	}
+	"l4d_viennacalling2_5"
+	{
+		"chi"		"动物园"
+	}
+	"l4d_viennacalling2_finale"
+	{
+		"chi"		"小亭子"
+	}
+	"Labirinferno_parte1"
+	{
+		"chi"		"迷宫1"
+	}
+	"Labirinferno_parte2"
+	{
+		"chi"		"迷宫2"
+	}
+	"lbas"
+	{
+		"chi"		"瑟奇莱特"
+	}
+	"rmstitanic_s1"
+	{
+		"chi"		"甲板生存"
+	}
+	"cave0_m1"
+	{
+		"chi"		"洞穴_m1"
+	}
+	"cave0_m2"
+	{
+		"chi"		"洞穴_m2"
+	}
+	"cave0_m3"
+	{
+		"chi"		"洞穴_m3"
+	}
+	"cave_m1"
+	{
+		"chi"		"洞穴1_m1"
+	}
+	"cave_m2"
+	{
+		"chi"		"洞穴1_m2"
+	}
+	"cave_m3"
+	{
+		"chi"		"洞穴1_m3"
+	}
+	"cave_m4"
+	{
+		"chi"		"洞穴1_m4"
+	}
+	"cave_m5"
+	{
+		"chi"		"洞穴1_m5"
+	}
+	"cave_m6"
+	{
+		"chi"		"洞穴1_m6"
+	}
+	"cave2_m1"
+	{
+		"chi"		"洞穴2_m1"
+	}
+	"cave2_m2"
+	{
+		"chi"		"洞穴2_m2"
+	}
+	"cave2_m3"
+	{
+		"chi"		"洞穴2_m3"
+	}
+	"cave2_m4"
+	{
+		"chi"		"洞穴2_m4"
+	}
+	"cave2_m5"
+	{
+		"chi"		"洞穴2_m5"
+	}
+	"cave2_m6"
+	{
+		"chi"		"洞穴2_m6"
+	}
+	"cave3m1"
+	{
+		"chi"		"洞穴3_m1"
+	}
+	"cave3m2"
+	{
+		"chi"		"洞穴3_m2"
+	}
+	"cave3m3"
+	{
+		"chi"		"洞穴3_m3"
+	}
+	"cave3m4"
+	{
+		"chi"		"洞穴3_m4"
+	}
+	"cave3m5"
+	{
+		"chi"		"洞穴3_m5"
+	}
+	"cave4m1"
+	{
+		"chi"		"洞穴4_m1"
+	}
+	"cave4m2"
+	{
+		"chi"		"洞穴4_m2"
+	}
+	"cave4m3"
+	{
+		"chi"		"洞穴4_m3"
+	}
+	"cave4m4"
+	{
+		"chi"		"洞穴4_m4"
+	}
+	"cave4m5"
+	{
+		"chi"		"洞穴4_m5"
+	}
+}
