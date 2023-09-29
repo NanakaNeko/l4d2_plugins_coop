@@ -187,7 +187,7 @@ void IsClientPrint(DataPack hPack)
 	if(IsValidTank(client) && g_iTankPrompt != 0 && !TankSpawnFinaleVehicleLeaving)
 	{
 		if(g_iTankPrompt == 1 || g_iTankPrompt == 2)
-			CPrintToChatAll("{default}[{green}!{default}] {blue}Tank {default}({olive}控制者：%s{default}) 已经生成！\n{default}[{green}!{default}] {blue}难度:{green}%s {blue}存活生还:{green}%d {blue}血量:{green}%d", GetSurvivorName(client), sName, IsCountPlayersTeam(), GetClientHealth(client));//聊天窗提示.
+			CPrintToChatAll("{default}[{green}!{default}] {blue}Tank {default}({olive}控制者: %s{default}) 已经生成！\n{default}[{green}!{default}] {blue}难度:{green}%s {blue}存活生还:{green}%d {blue}血量:{green}%d", GetSurvivorName(client), sName, IsCountPlayersTeam(), GetClientHealth(client));//聊天窗提示.
 		if(g_iTankPrompt == 2 || g_iTankPrompt == 3)
 			PrintHintTextToAll("坦克 %s 出现! 难度:%s 存活生还:%d 血量:%d", GetSurvivorName(client), sName, IsCountPlayersTeam(), GetClientHealth(client));//屏幕中下提示.
 	}
@@ -200,11 +200,11 @@ char[] GetSurvivorName(int tank)
 	// 是否玩家Tank
 	if (!IsFakeClient(tank) && IsClientInGame(tank) && GetClientTeam(tank) == 3 && GetEntProp(tank, Prop_Send, "m_zombieClass") == 8)
 	{
-		FormatEx(sTankName, sizeof(sTankName), "(玩家) %N", tank);
+		FormatEx(sTankName, sizeof(sTankName), "(玩家)%N", tank);
 	}
 	else if (tank != 0 && GetClientTeam(tank) == 3 && GetEntProp(tank, Prop_Send, "m_zombieClass") == 8)
 	{
-		FormatEx(sTankName, sizeof(sTankName), "(AI) %N", tank);
+		FormatEx(sTankName, sizeof(sTankName), "(AI)%N", tank);
 	}
 	return sTankName;
 }

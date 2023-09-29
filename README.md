@@ -23,7 +23,7 @@
 |  [**l4d_blackandwhite**](./scripting/l4d_blackandwhite.sp)   | 汉化并增加聊天框提示颜色，增加黑白移除提示                   |
 | [**l4d_explosion_announcer**](./scripting/l4d_explosion_announcer.sp) | 爆炸提示，修改提示颜色                                       |
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
-| [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | 战役用仿zonemod的坦克数据提示，最大支持8人，超过会不显示，仅汉化 |
+| [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | [tank_damage2.0.sp](https://github.com/GlowingTree880/L4D2_LittlePlugins/blob/main/TankDamageAnnounce/tank_damage2.0.sp) 基于该插件修改，删除treeutil和logger依赖，删除坦克出现提示，交给其他插件处理 |
 | [**l4d_throwable_announcer**](./scripting/l4d_throwable_announcer.sp) | 投掷物提示，修改提示颜色                                     |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
 |             [**server**](./scripting/server.sp)              | 服务器部分功能的实现  <br/>重启地图  <br/>安全屋无敌  <br/>关闭闲置提示  <br/>ConVar提示仅管理员可见  <br/>1.1.1 频繁改名踢出  <br/>1.1.2 全球排名和人数  <br/>1.1.3 新增debug模式，来自sorallll的rygive插件  <br/>1.1.4 增加服务器匹配禁用<br/>1.1.7 增加sm提示仅管理员可见开关<br/>1.1.8 增加ping过高踢出，仅在进入一分钟后检测一次<br/>1.2.0 移除自杀指令，放在其他插件 |
