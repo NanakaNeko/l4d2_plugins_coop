@@ -87,21 +87,21 @@ public void EventReviveSuccess(Event event, const char[] name, bool dontBroadcas
 			{
 				if(bandw_type == 1 || bandw_type == 2) 
 					if(!idleplayer)
-						PrintHintTextToAll("%N黑白了,即将死亡.", target);
+						PrintHintTextToAll("%N黑白了,即将死亡", target);
 					else
-						PrintHintTextToAll("闲置:%N(%N)黑白了,即将死亡.", idleplayer, target);
+						PrintHintTextToAll("闲置:%N(%N)黑白了,即将死亡", idleplayer, target);
 				if(bandw_type == 0 || bandw_type == 2)
 					if(!idleplayer)
-						CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡.", target);
+						CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡", target);
 					else
-						CPrintToChatAll("{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡.", idleplayer, target);
+						CPrintToChatAll("{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡", idleplayer, target);
 			}
 			else
 			{
 				if(bandw_type == 1 || bandw_type == 2) 
-					PrintHintTextToAll("%N(%s)黑白了,即将死亡.", target, GetBotName(target));
+					PrintHintTextToAll("%N(%s)黑白了,即将死亡", target, GetBotName(target));
 				if(bandw_type == 0 || bandw_type == 2)
-					CPrintToChatAll("{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡.", target, GetBotName(target));
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡", target, GetBotName(target));
 			}
 		}
 		//print to infected
@@ -116,21 +116,21 @@ public void EventReviveSuccess(Event event, const char[] name, bool dontBroadcas
 				{	
 					if(bandw_type == 1 || bandw_type == 2) 
 						if(!idleplayer)
-							PrintHintText(x, "%N黑白了,即将死亡.", target);
+							PrintHintText(x, "%N黑白了,即将死亡", target);
 						else
-							PrintHintText(x, "闲置:%N(%N)黑白了,即将死亡.", idleplayer, target);
+							PrintHintText(x, "闲置:%N(%N)黑白了,即将死亡", idleplayer, target);
 					if(bandw_type == 0 || bandw_type == 2)
 						if(!idleplayer)
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡.", target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡", target);
 						else
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡.", idleplayer, target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡", idleplayer, target);
 				}
 				else
 				{
 					if(bandw_type == 1 || bandw_type == 2)
-						PrintHintText(x, "%N(%s)黑白了,即将死亡.", target, GetBotName(target));
+						PrintHintText(x, "%N(%s)黑白了,即将死亡", target, GetBotName(target));
 					if(bandw_type == 0 || bandw_type == 2)
-						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡.", target, GetBotName(target));	
+						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡", target, GetBotName(target));	
 				}
 			}
 		}
@@ -145,21 +145,21 @@ public void EventReviveSuccess(Event event, const char[] name, bool dontBroadcas
 				{		
 					if(bandw_type == 1 || bandw_type == 2) 
 						if(!idleplayer)
-							PrintHintText(x, "%N黑白了,即将死亡.", target);
+							PrintHintText(x, "%N黑白了,即将死亡", target);
 						else
-							PrintHintText(x, "闲置:%N(%N)黑白了,即将死亡.", idleplayer, target);
+							PrintHintText(x, "闲置:%N(%N)黑白了,即将死亡", idleplayer, target);
 					if(bandw_type == 0 || bandw_type == 2)
 						if(!idleplayer)
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡.", target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}黑白了,即将死亡", target);
 						else
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡.", idleplayer, target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}黑白了,即将死亡", idleplayer, target);
 				}
 				else
 				{
 					if(bandw_type == 1 || bandw_type == 2) 
-						PrintHintText(x, "%N(%s)黑白了,即将死亡.", target, GetBotName(target));
+						PrintHintText(x, "%N(%s)黑白了,即将死亡", target, GetBotName(target));
 					if(bandw_type == 0 || bandw_type == 2)
-						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡.", target, GetBotName(target));					
+						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}黑白了,即将死亡", target, GetBotName(target));					
 				}
 			}
 		}	
@@ -206,21 +206,21 @@ public void EventHealSuccess(Event event, const char[] name, bool dontBroadcast)
 			{
 				if(bandw_type == 1 || bandw_type == 2) 
 					if(!idleplayer)
-						PrintHintTextToAll("%N治疗完成,不再黑白.", target);
+						PrintHintTextToAll("%N治疗完成,不再黑白", target);
 					else
-						PrintHintTextToAll("闲置:%N(%N)治疗完成,不再黑白.", idleplayer, target);
+						PrintHintTextToAll("闲置:%N(%N)治疗完成,不再黑白", idleplayer, target);
 				if(bandw_type == 0 || bandw_type == 2)
 					if(!idleplayer)
-						CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白.", target);
+						CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白", target);
 					else
-						CPrintToChatAll("{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白.", idleplayer, target);
+						CPrintToChatAll("{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白", idleplayer, target);
 			}
 			else
 			{
 				if(bandw_type == 1 || bandw_type == 2) 
-					PrintHintTextToAll("%N(%s)治疗完成,不再黑白.", target, GetBotName(target));
+					PrintHintTextToAll("%N(%s)治疗完成,不再黑白", target, GetBotName(target));
 				if(bandw_type == 0 || bandw_type == 2)
-					CPrintToChatAll("{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白.", target, GetBotName(target));
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白", target, GetBotName(target));
 			}
 		}
 		//print to infected
@@ -235,21 +235,21 @@ public void EventHealSuccess(Event event, const char[] name, bool dontBroadcast)
 				{	
 					if(bandw_type == 1 || bandw_type == 2) 
 						if(!idleplayer)
-							PrintHintText(x, "%N治疗完成,不再黑白.", target);
+							PrintHintText(x, "%N治疗完成,不再黑白", target);
 						else
-							PrintHintText(x, "闲置:%N(%N)治疗完成,不再黑白.", idleplayer, target);
+							PrintHintText(x, "闲置:%N(%N)治疗完成,不再黑白", idleplayer, target);
 					if(bandw_type == 0 || bandw_type == 2)
 						if(!idleplayer)
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白.", target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白", target);
 						else
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白.", idleplayer, target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白", idleplayer, target);
 				}
 				else
 				{
 					if(bandw_type == 1 || bandw_type == 2) 
-						PrintHintText(x, "%N(%s)治疗完成,不再黑白.", target, GetBotName(target));
+						PrintHintText(x, "%N(%s)治疗完成,不再黑白", target, GetBotName(target));
 					if(bandw_type == 0 || bandw_type == 2)
-						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白.", target, GetBotName(target));	
+						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白", target, GetBotName(target));	
 				}
 			}
 		}
@@ -264,21 +264,21 @@ public void EventHealSuccess(Event event, const char[] name, bool dontBroadcast)
 				{		
 					if(bandw_type == 1 || bandw_type == 2) 
 						if(!idleplayer)
-							PrintHintText(x, "%N治疗完成,不再黑白.", target);
+							PrintHintText(x, "%N治疗完成,不再黑白", target);
 						else
-							PrintHintText(x, "闲置:%N(%N)治疗完成,不再黑白.", idleplayer, target);
+							PrintHintText(x, "闲置:%N(%N)治疗完成,不再黑白", idleplayer, target);
 					if(bandw_type == 0 || bandw_type == 2)
 						if(!idleplayer)
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白.", target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}%N {olive}治疗完成,不再黑白", target);
 						else
-							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白.", idleplayer, target);
+							CPrintToChat(x, "{default}[{green}!{default}] {blue}闲置:%N{green}(%N) {olive}治疗完成,不再黑白", idleplayer, target);
 				}
 				else
 				{
 					if(bandw_type == 1 || bandw_type == 2) 
-						PrintHintText(x, "%N(%s)治疗完成,不再黑白.", target, GetBotName(target));
+						PrintHintText(x, "%N(%s)治疗完成,不再黑白", target, GetBotName(target));
 					if(bandw_type == 0 || bandw_type == 2)
-						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白.", target, GetBotName(target));					
+						CPrintToChat(x, "{default}[{green}!{default}] {blue}%N{green}(%s) {olive}治疗完成,不再黑白", target, GetBotName(target));					
 				}
 			}
 		}

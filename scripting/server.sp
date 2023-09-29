@@ -1,7 +1,7 @@
-#include <sdktools>
-#include <sourcemod>
 #pragma newdecls required
 #pragma semicolon 1
+#include <sourcemod>
+#include <sdktools>
 
 //清除部分功能，让插件通用在服务器
 ConVar
@@ -28,7 +28,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.1.9",
+	version = "1.2.0",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -46,8 +46,6 @@ public void OnPluginStart()
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
 	RegAdminCmd("sm_restartmap5", RestartMap5, ADMFLAG_ROOT, "延迟5秒重启当前地图");
 	RegAdminCmd("sm_debug", DebugMode, ADMFLAG_ROOT, "开关调试模式");
-	RegConsoleCmd("sm_zs", Kill_Survivor, "幸存者自杀指令");
-	RegConsoleCmd("sm_kill", Kill_Survivor, "幸存者自杀指令");
 	HookUserMessage(GetUserMessageId("TextMsg"), umTextMsg, true);
 	HookEvent("server_cvar", Event_ServerCvar, EventHookMode_Pre);
 	HookEvent("round_start", Event_RoundStart, EventHookMode_Post);
@@ -236,11 +234,6 @@ Action Event_ServerCvar(Event event, const char[] name, bool dontBroadcast) {
 	return Plugin_Handled;
 }
 
-stock bool IsAliveSurvivor(int i)
-{
-    return i > 0 && i <= MaxClients && !IsFakeClient(i) && IsClientInGame(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2;
-}
-
 void SetGodMode(bool canset)
 {
 	int flags = GetCommandFlags("god");
@@ -270,16 +263,6 @@ public Action Timer_Restartmap(Handle timer)
 	char mapname[64];
 	GetCurrentMap(mapname, sizeof(mapname));
 	ServerCommand("changelevel %s", mapname);
-	return Plugin_Handled;
-}
-
-public Action Kill_Survivor(int client, int args)
-{
-	if(IsAliveSurvivor(client))
-	{
-		ForcePlayerSuicide(client);
-		PrintToChatAll("\x04[提示]\x03%N\x05失去梦想,升天了.", client);
-	}
 	return Plugin_Handled;
 }
 

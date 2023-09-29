@@ -4,9 +4,10 @@
 #pragma newdecls required
 #include <sourcemod>
 #include <sdkhooks>
+#include <sdktools>
 #include <colors>
 
-#define PLUGIN_VERSION	"1.3.9"
+#define PLUGIN_VERSION	"1.4.0"
 
 char g_sZombieName[][] = 
 {
@@ -44,6 +45,9 @@ public void OnPluginStart()
 	g_hFallSpeedFatal = FindConVar("fall_speed_fatal");
 	g_hFallSpeedSafe.AddChangeHook(IsConVarChanged);
 	g_hFallSpeedFatal.AddChangeHook(IsConVarChanged);
+
+	RegConsoleCmd("sm_zs", Kill_Survivor, "幸存者自杀指令");
+	RegConsoleCmd("sm_kill", Kill_Survivor, "幸存者自杀指令");
 }
 
 //地图开始.
@@ -85,7 +89,7 @@ public void Event_PlayerLedgeGrab(Event event, const char[] name, bool dontBroad
 		return;
 	
 	if(IsValidClient(client) && GetClientTeam(client) == 2)
-		CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}挂边了.", GetTrueName(client));//聊天窗提示.
+		CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}挂边了", GetTrueName(client));//聊天窗提示.
 }
 
 public void OnClientPutInServer(int client) 
@@ -130,19 +134,19 @@ void OnTakeDamageAlivePost(int victim, int attacker, int inflictor, float damage
 			GetEntityClassname(attacker, classname, sizeof classname);
 
 			if (damagetype & DMG_DROWN && GetEntProp(victim, Prop_Data, "m_nWaterLevel") > 1)
-				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}淹死了.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}淹死了", GetTrueName(victim));//聊天窗提示.
 			else if (damagetype & DMG_FALL && RoundToFloor(Pow(GetEntPropFloat(victim, Prop_Send, "m_flFallVelocity") / (g_fFallSpeedFatal - g_fFallSpeedSafe), 2.0) * 100.0) == damage)
-				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔死了,亲亲也起不来了.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔死了,亲亲也起不来了", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "worldspawn") == 0 && damagetype == 131072)
-				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}流血而死.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}流血而死", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "infected") == 0)
 				CPrintToChatAll("{default}[{green}!{default}] {olive}小僵尸 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
 			else if (StrEqual(classname, "witch", false))
 				CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
 			else if (strcmp(classname, "insect_swarm") == 0)
-				CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}已死亡.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}已死亡", GetTrueName(victim));//聊天窗提示.
 			else
-				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}已死亡.", GetTrueName(victim));//聊天窗提示.
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}已死亡", GetTrueName(victim));//聊天窗提示.
 		}
 	}
 }
@@ -187,20 +191,35 @@ public void Event_Incapacitate(Event event, const char[] name, bool dontBroadcas
 				GetEntityClassname(entity, classname, sizeof(classname));
 
 				if (damagetype & DMG_DROWN && GetEntProp(client, Prop_Data, "m_nWaterLevel") > 1)
-					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}晕倒了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}晕倒了", GetTrueName(client));//聊天窗提示.
 				else if (damagetype & DMG_FALL)
-					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔倒了,需要亲亲才能起来.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}摔倒了,需要亲亲才能起来", GetTrueName(client));//聊天窗提示.
 				else if (strcmp(classname, "infected") == 0)
 					CPrintToChatAll("{default}[{green}!{default}] {olive}小僵尸 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
 				else if (StrEqual(classname, "witch", false))
 					CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
 				else if (strcmp(classname, "insect_swarm") == 0)
-					CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}倒下了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {olive}踩痰达人 {blue}%s {default}倒下了", GetTrueName(client));//聊天窗提示.
 				else
-					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}倒下了.", GetTrueName(client));//聊天窗提示.
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%s {olive}倒下了", GetTrueName(client));//聊天窗提示.
 			}
 		}
 	}
+}
+
+public Action Kill_Survivor(int client, int args)
+{
+	if(IsAliveSurvivor(client))
+	{
+		ForcePlayerSuicide(client);
+		PrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}失去梦想,升天了.", client);
+	}
+	return Plugin_Handled;
+}
+
+stock bool IsAliveSurvivor(int i)
+{
+    return i > 0 && i <= MaxClients && !IsFakeClient(i) && IsClientInGame(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2;
 }
 
 bool IsValidClient(int client)
