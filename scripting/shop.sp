@@ -48,7 +48,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.6", 
+	version = "1.3.7", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -1322,7 +1322,7 @@ public void GiveAmmo(int client)
 	}
 	if(f_AmmoTime < 0.0)
 	{
-		PrintToChat(client, "\x04[商店]\x05补充子弹已关闭.");
+		PrintToChat(client, "\x04[商店]\x05补充弹药已关闭.");
 		return;
 	}
 	if (GetClientTeam(client) == 2 && !NoValidPlayer(client))
@@ -1334,7 +1334,7 @@ public void GiveAmmo(int client)
 			return;
 		}
 		GiveCommand(client, "ammo");
-		PrintToChat(client, "\x04[提示]\x05后备弹药已补充.");
+		PrintToChatAll("\x04[提示]\x03%N\x05补充了后备弹药.", client);
 		player[client].ClientAmmoTime = GetEngineTime();
 	}
 }
@@ -1483,6 +1483,11 @@ public Action BuyPill(int client,int args)
 	if(b_Disable)
 	{
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
+		return Plugin_Handled;
+	}
+	if(cv_Medical.BoolValue)
+	{
+		PrintToChat(client, "\x04[商店]\x05医疗物品购买未开启.");
 		return Plugin_Handled;
 	}
 	if(judge(client))
