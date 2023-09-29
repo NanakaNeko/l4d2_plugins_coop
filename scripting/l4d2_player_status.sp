@@ -212,7 +212,7 @@ public Action Kill_Survivor(int client, int args)
 	if(IsAliveSurvivor(client))
 	{
 		ForcePlayerSuicide(client);
-		PrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}失去梦想,升天了.", client);
+		CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}失去梦想,升天了", client);
 	}
 	return Plugin_Handled;
 }
