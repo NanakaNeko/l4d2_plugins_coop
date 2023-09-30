@@ -90,7 +90,7 @@ public void OnPluginStart()
 	g_hAllowAnnounce = CreateConVar("tank_damage_enable", "1", "是否允许在 Tank 死亡后输出生还者对 Tank 的伤害统计", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowForceKillAnnounce = CreateConVar("tank_damage_force_kill_announce", "0", "Tank 被强制处死或自杀时是否输出生还者对 Tank 的伤害统计", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowPrintLiveTime = CreateConVar("tank_damage_print_livetime", "1", "是否显示 Tank 存活时间", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hMissionFailedAnnounce = CreateConVar("tank_damage_failed_announce", "1", "生还者团灭时在场还有 Tank 是否显示生还者对 Tank 的伤害统计", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hMissionFailedAnnounce = CreateConVar("tank_damage_failed_announce", "1", "生还者团灭时在场还有 Tank 是否显示 Tank 的剩余血量", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowPrintZeroDamage = CreateConVar("tank_damage_print_zero", "1", "是否允许显示对 Tank 零伤的玩家", CVAR_FLAG, true, 0.0, true, 1.0);
 
 	// HookEvents
@@ -267,14 +267,15 @@ public void roundEndHandler(Event event, const char[] name, bool dontBroadcast) 
 				break;
 			int percent = RoundToNearest(float(GetClientHealth(i)) / float(tankHealth[i]) * 100.0);
 
-			CPrintToChatAll("[{green}!{default}] {green}%N {default}剩余 {green}%d{default}({green}%d%%{default}) {blue}血量", i, health, percent);
+			CPrintToChatAll("[{green}!{default}] {blue}%N {default}剩余 {olive}%d{default}({olive}%d%%{default}) 血量", i, health, percent);
 
 			// 如果已经显示过了 Tank 伤害，则不再显示
 			if (hasPrintDamage[i])
 				return;
 			
 			// 否则创建时钟延迟显示 Tank 伤害
-			CreateTimer(DAMAGE_DISPLAY_DELAY, printTankDamageHandler, i);
+			//回合结束不再展示具体伤害，只展示坦克剩余血量
+			//CreateTimer(DAMAGE_DISPLAY_DELAY, printTankDamageHandler, i);
 			hasPrintDamage[i] = true;
 		}
 	}
@@ -407,10 +408,10 @@ void doPrintTankDamage(int client) {
 				FormatEx(playerName, sizeof(playerName), "%s(无效)", playerName);
 
 			CPrintToChatAll("{blue}[{default}%d{blue}({default}%d%%{blue})]\
-			 [{olive}拳:{default}%d]\
-			  [{olive}石:{default}%d]\
-			   [{olive}铁:{default}%d]\
-			    [{olive}承伤:{default}%d{blue}({default}%d%%{blue})] {blue}%s",
+			 [{green}拳:{default}%d]\
+			  [{green}石:{default}%d]\
+			   [{green}铁:{default}%d]\
+			    [{green}承伤:{default}%d{blue}({default}%d%%{blue})] {olive}%s",
 			damage, damagePercent,
 			playerHurts[client][survivor].punch,
 			playerHurts[client][survivor].rock,

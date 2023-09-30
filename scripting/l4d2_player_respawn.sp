@@ -30,7 +30,7 @@ public void OnPluginStart()
 
 	HookEvent("round_start", Event_Reset, EventHookMode_PostNoCopy);
 	HookEvent("player_death", Event_player_death, EventHookMode_PostNoCopy);
-	RegAdminCmd("sm_hp", RespawnAll, ADMFLAG_ROOT, "复活所有生还");
+	//RegAdminCmd("sm_hp", RespawnAll, ADMFLAG_ROOT, "复活所有生还");
 	//AutoExecConfig(true, "l4d2_player_respawn");
 }
 
