@@ -2,11 +2,12 @@
 #pragma newdecls required
 #include <sourcemod>
 #include <left4dhooks>
+#include <colors>
 
 #define PLUGIN_NAME				"Give Item Menu"
 #define PLUGIN_AUTHOR			"sorallll"
 #define PLUGIN_DESCRIPTION		"多功能插件"
-#define PLUGIN_VERSION			"1.2.3"
+#define PLUGIN_VERSION			"1.2.3-3"
 #define PLUGIN_URL				""
 
 #define GAMEDATA				"rygive"
@@ -42,6 +43,14 @@ int
 	g_iSelection[MAXPLAYERS + 1],
 	g_iOff_m_nFallenSurvivors,
 	g_iOff_m_FallenSurvivorTimer;
+
+static const int
+	g_iTargetTeam[] = {
+		0,
+		1,
+		2,
+		3
+	};
 
 char
 	g_sNamedItem[MAXPLAYERS + 1][64];
@@ -280,15 +289,29 @@ bool bCheckClientAccess(int client)
 
 void Rygive(int client) {
 	Menu menu = new Menu(Rygive_MenuHandler);
-	menu.SetTitle("Cheat命令:");
-	menu.AddItem("w", "武器");
-	menu.AddItem("i", "物品");
-	menu.AddItem("z", "感染");
+	menu.SetTitle("Cheat命令");
+	menu.AddItem("w", "生成武器");
+	menu.AddItem("i", "生成物品");
+	menu.AddItem("z", "生成感染");
+	//root权限玩家可用
 	if(bCheckClientAccess(client))
-		menu.AddItem("m", "杂项");
+		menu.AddItem("m", "杂项功能");
+	//免疫达到99同时root权限玩家可用
+	if (bCheckClientAccess(client) && GetClientImmunityLevel(client) > 98)
+		menu.AddItem("t", "团队控制");
 
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+int GetClientImmunityLevel(int client) {
+	char sSteamID[32];
+	GetClientAuthId(client, AuthId_Steam2, sSteamID, sizeof sSteamID);
+	AdminId admin = FindAdminByIdentity(AUTHMETHOD_STEAM, sSteamID);
+	if (admin == INVALID_ADMIN_ID)
+		return -999;
+
+	return admin.ImmunityLevel;
 }
 
 int Rygive_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
@@ -308,6 +331,9 @@ int Rygive_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
 
 				case 'm':
 					Miscell(client, 0);
+
+				case 't':
+					SwitchTeam(client, 0);
 			}
 				
 		}
@@ -321,9 +347,9 @@ int Rygive_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
 
 void Weapon(int client) {
 	Menu menu = new Menu(Weapons_MenuHandler);
-	menu.SetTitle("武器");
-	menu.AddItem("", "枪械");
-	menu.AddItem("", "近战");
+	menu.SetTitle("生成武器");
+	menu.AddItem("", "生成枪械");
+	menu.AddItem("", "生成近战");
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
@@ -530,7 +556,7 @@ int Infected_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
 			menu.GetItem(param2, item, sizeof item);
 			int kicked;
 			if (GetClientCount(false) >= MaxClients - 1) {
-				PrintToChat(client, "尝试踢出死亡的感染机器人...");
+				CPrintToChat(client, "{default}[{green}!{default}] {olive}尝试踢出死亡的感染机器人...");
 				kicked = KickDeadInfectedBots(client);
 			}
 
@@ -569,7 +595,7 @@ int KickDeadInfectedBots(int client) {
 	}
 
 	if (kickedBots > 0)
-		PrintToChat(client, "Kicked %i bots.", kickedBots);
+		CPrintToChat(client, "{default}[{green}!{default}] {olive}踢出 {green}%i {olive}人机.", kickedBots);
 
 	return kickedBots;
 }
@@ -590,7 +616,7 @@ int CreateInfected(int client, const char[] zombie) {
 	if (!GetTeleportEndPoint(client, vEnd))
 		return -1;
 
-	PrintToChatAll("\x04[提示] \x03%N \x05使用指令生成一个 \x03感染者\x04%s", client, zombie);
+	CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令生成一个 {olive}感染者{green}%s", client, zombie);
 	return _CreateInfected(zombie, vEnd, NULL_VECTOR);
 }
 
@@ -709,11 +735,11 @@ void InitializeSpecial(int ent, const float vPos[3], const float vAng[3]) {
 
 void Miscell(int client, int item) {
 	Menu menu = new Menu(Miscell_MenuHandler);
-	menu.SetTitle("杂项");
-	menu.AddItem("a", "倒地");
-	menu.AddItem("b", "剥夺");
-	menu.AddItem("c", "复活");
-	menu.AddItem("d", "传送");
+	menu.SetTitle("杂项功能");
+	menu.AddItem("a", "倒地玩家");
+	menu.AddItem("c", "复活玩家");
+	menu.AddItem("d", "传送玩家");
+	menu.AddItem("b", "剥夺装备");
 	menu.AddItem("i", "处死所有特感");
 	menu.AddItem("k", "处死所有生还");
 	menu.ExitBackButton = true;
@@ -782,7 +808,7 @@ int IncapSur_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
 				for (int i = 1; i <= MaxClients; i++)
 					Incap(i);
 
-				PrintToChatAll("\x04[提示] \x03%N \x05使用指令让 \x04全员 \x05倒地", client);		
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令让 {green}全员 {olive}倒地", client);		
 				Miscell(client, 0);
 			}
 			else {
@@ -790,7 +816,7 @@ int IncapSur_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
 				if (target && IsClientInGame(target))
 					Incap(target);
 
-				PrintToChatAll("\x04[提示] \x03%N \x05使用指令让 \x04%N \x05倒地", client, target);
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令让 {green}%N {olive}倒地", client, target);
 				IncapSur(client, menu.Selection);
 			}
 		}
@@ -868,7 +894,7 @@ int StripSlot_MenuHandler(Menu menu, MenuAction action, int client, int param2) 
 					if (IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i))
 						L4D_RemoveAllWeapons(i);
 				}
-				PrintToChatAll("\x04[提示] \x03%N \x05使用指令剥夺 \x04全员 \x05装备", client);
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令剥夺 {green}全员 {olive}全部装备", client);
 				Miscell(client, 0);
 			}
 			else {
@@ -940,12 +966,12 @@ int SlotSelect_MenuHandler(Menu menu, MenuAction action, int client, int param2)
 			if (target && IsClientInGame(target)) {
 				if (info[1][0] == 'a') {
 					L4D_RemoveAllWeapons(target);
-					PrintToChatAll("\x04[提示] \x03%N \x05使用指令剥夺 \x04%N \x05全部装备", client, target);
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令剥夺 {green}%N {olive}全部装备", client, target);
 					StripSlot(client, g_iSelection[client]);
 				}
 				else {
 					L4D_RemoveWeaponSlot(target, view_as<L4DWeaponSlot>(StringToInt(info[1])));
-					PrintToChatAll("\x04[提示] \x03%N \x05使用指令剥夺 \x04%N \x05装备", client, target);
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令剥夺 {green}%N {olive}装备", client, target);
 					SlotSelect(client, target);
 				}
 			}
@@ -1000,7 +1026,7 @@ int RespawnPlayer_MenuHandler(Menu menu, MenuAction action, int client, int para
 							L4D_RespawnPlayer(target);
 							StatsConditionPatch(false);
 							TeleportToSurvivor(target);
-							PrintToChatAll("\x04[提示] \x03%N \x05使用指令复活 \x04%N", client, target);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}复活 {green}%N", client, target);
 							RespawnPlayer(client, menu.Selection);
 						}
 
@@ -1035,7 +1061,7 @@ void RespawnAll(int client)
 		StatsConditionPatch(false);
 		TeleportToSurvivor(i);
 	}
-	PrintToChatAll("\x04[提示] \x03%N \x05使用指令复活 \x04全员", client);
+	CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}复活 {green}全员", client);
 }
 
 void SelectClassMenu(int client, int target, int item) {
@@ -1066,7 +1092,7 @@ int SelectClass_MenuHandler(Menu menu, MenuAction action, int client, int param2
 				if (GetClientTeam(target) == 3 && !IsPlayerAlive(target))
 					RespawnPZ(target, StringToInt(info[1]));
 
-				PrintToChatAll("\x04[提示] \x03%N \x05使用指令复活 \x04%N \x03为特感", client, target);
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}复活 {green}%N {default}为特感", client, target);
 				SelectClassMenu(client, target, menu.Selection);
 			}
 		}
@@ -1212,7 +1238,7 @@ int iTeleportTarget_MenuHandler(Menu menu, MenuAction action, int client, int pa
 					ForceCrouch(victim);
 					TeleportFix(victim);
 					TeleportEntity(victim, vOrigin, NULL_VECTOR, NULL_VECTOR);
-					PrintToChatAll("\x04[提示] \x03%N \x05使用指令传送 \x04%N \x05到 \x04%s", client, victim, sName);
+					CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}传送 {green}%N {default}到 {green}%s", client, victim, sName);
 				}
 				else {
 					switch (targetTeam) {
@@ -1224,7 +1250,7 @@ int iTeleportTarget_MenuHandler(Menu menu, MenuAction action, int client, int pa
 									TeleportEntity(i, vOrigin, NULL_VECTOR, NULL_VECTOR);
 								}
 							}
-							PrintToChatAll("\x04[提示] \x03%N \x05使用指令传送 \x04所有生还 \x05到 \x04%s", client, sName);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}传送 {green}所有生还 {default}到 {green}%s", client, sName);
 						}
 							
 						case 3: {
@@ -1234,13 +1260,13 @@ int iTeleportTarget_MenuHandler(Menu menu, MenuAction action, int client, int pa
 									TeleportEntity(i, vOrigin, NULL_VECTOR, NULL_VECTOR);
 								}
 							}
-							PrintToChatAll("\x04[提示] \x03%N \x05使用指令传送 \x04所有特感 \x05到 \x04%s", client, sName);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}传送 {green}所有特感 {default}到 {green}%s", client, sName);
 						}
 					}
 				}
 			}
 			else if (info[1][0] == 'c')
-				PrintToChat(client, "获取准心处位置失败! 请重新尝试.");
+				CPrintToChat(client, "{default}[{green}!{default}] {olive}获取准心处位置失败! 请重新尝试.");
 	
 			TeleportPlayer(client, g_iSelection[client]);
 		}
@@ -1356,7 +1382,7 @@ void SlayAllSI(int client) {
 		if (IsClientInGame(i) && GetClientTeam(i) == 3 && IsPlayerAlive(i))
 			ForcePlayerSuicide(i);
 	}
-	PrintToChatAll("\x04[提示] \x03%N \x05使用指令处死 \x04所有特感", client);
+	CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}处死 {green}所有特感", client);
 	Miscell(client, g_iSelection[client]);
 }
 
@@ -1365,7 +1391,7 @@ void SlayAllSur(int client) {
 		if (IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i))
 			ForcePlayerSuicide(i);
 	}
-	PrintToChatAll("\x04[提示] \x03%N \x05使用指令处死 \x04所有生还", client);
+	CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}使用指令{olive}处死 {green}所有生还", client);
 	Miscell(client, g_iSelection[client]);
 }
 
@@ -1396,11 +1422,11 @@ int ShowAliveSur_MenuHandler(Menu menu, MenuAction action, int client, int param
 					if (IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i))
 						CheatCommand(i, g_sNamedItem[client]);
 				}
-				PrintToChatAll("\x04[提示] \x03%N \x05给 \x03全员 \x05使用 \x04%s \x05指令", client, g_sNamedItem[client]);
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}给 {olive}全员 {default}使用 {green}%s {default}指令", client, g_sNamedItem[client]);
 			}
 			else {
 				CheatCommand(GetClientOfUserId(StringToInt(item)), g_sNamedItem[client]);
-				PrintToChatAll("\x04[提示] \x03%N \x05给 \x03%N \x05使用 \x04%s \x05指令", client, GetClientOfUserId(StringToInt(item)), g_sNamedItem[client]);
+				CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}给 {olive}%N {default}使用 {green}%s {default}指令", client, GetClientOfUserId(StringToInt(item)), g_sNamedItem[client]);
 			}
 
 			PageExitBack(client, g_iFunction[client], g_iSelection[client]);
@@ -1417,6 +1443,199 @@ int ShowAliveSur_MenuHandler(Menu menu, MenuAction action, int client, int param
 
 	return 0;
 }
+
+void SwitchTeam(int client, int item) {
+	char info[12];
+	char disp[PLATFORM_MAX_PATH];
+	Menu menu = new Menu(SwitchTeam_MenuHandler);
+	menu.SetTitle("目标玩家");
+
+	for (int i = 1; i <= MaxClients; i++) {
+		if (!IsClientInGame(i) || IsFakeClient(i))
+			continue;
+	
+		FormatEx(info, sizeof info, "%d", GetClientUserId(i));
+		FormatEx(disp, sizeof disp, "%N", i);
+		switch (GetClientTeam(i)) {
+			case 1:
+				Format(disp, sizeof disp, "%s - %s", GetBotOfIdlePlayer(i) ? "闲置" : "观众", disp);
+
+			case 2:
+				Format(disp, sizeof disp, "生还 - %s", disp);
+					
+			case 3:
+				Format(disp, sizeof disp, "感染 - %s", disp);
+		}
+
+		menu.AddItem(info, disp);
+	}
+	menu.ExitBackButton = true;
+	menu.DisplayAt(client, item, MENU_TIME_FOREVER);
+}
+
+int SwitchTeam_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
+	switch (action) {
+		case MenuAction_Select: {
+			char item[12];
+			menu.GetItem(param2, item, sizeof item);
+			g_iSelection[client] = menu.Selection;
+
+			int target = GetClientOfUserId(StringToInt(item));
+			if (target && IsClientInGame(target))
+				SwitchPlayerTeam(client, target);
+			else
+				CPrintToChat(client, "{default}[{green}!{default}] {olive}目标玩家已失效");
+		}
+
+		case MenuAction_Cancel: {
+			if (param2 == MenuCancel_ExitBack)
+				Rygive(client);
+		}
+
+		case MenuAction_End:
+			delete menu;
+	}
+
+	return 0;
+}
+
+void SwitchPlayerTeam(int client, int target) {
+	char info[32];
+	char str[2][16];
+	Menu menu = new Menu(SwitchPlayerTeam_MenuHandler);
+	menu.SetTitle("目标队伍");
+	FormatEx(str[0], sizeof str[], "%d", GetClientUserId(target));
+
+	int team;
+	if (!GetBotOfIdlePlayer(target))
+		team = GetClientTeam(target);
+
+	for (int i; i < sizeof g_iTargetTeam; i++) {
+		if (team == i || (team != 2 && i == 0))
+			continue;
+
+		IntToString(g_iTargetTeam[i], str[1], sizeof str[]);
+		ImplodeStrings(str, sizeof str, "|", info, sizeof info);
+		menu.AddItem(info, g_sTargetTeam[i]);
+	}
+
+	menu.ExitBackButton = true;
+	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+int SwitchPlayerTeam_MenuHandler(Menu menu, MenuAction action, int client, int param2) {
+	switch (action) {
+		case MenuAction_Select: {
+			char item[12];
+			menu.GetItem(param2, item, sizeof item);
+			char info[2][16];
+			ExplodeString(item, "|", info, sizeof info, sizeof info[]);
+			int target = GetClientOfUserId(StringToInt(info[0]));
+			if (target && IsClientInGame(target)) {
+				int team;
+				if (!GetBotOfIdlePlayer(target))
+					team = GetClientTeam(target);
+
+				int targetTeam = StringToInt(info[1]);
+				if (team != targetTeam) {
+					switch (targetTeam) {
+						case 0: {
+							if (team == 2) {
+								GoAFKTimer(target, 0.0);
+								CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}更改 {green}%N {default}到 {olive}闲置", client, target);
+							}
+							else
+								CPrintToChat(client, "{default}[{green}!{default}] {olive}只有生还者才能进行闲置");
+						}
+
+						case 1: {
+							if (team == 0)
+								L4D_TakeOverBot(target);
+
+							ChangeClientTeam(target, targetTeam);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}更改 {green}%N {default}到 {olive}旁观", client, target);
+						}
+
+						case 2: {
+							ChangeTeamToSurvivor(target, team);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}更改 {green}%N {default}到 {olive}生还", client, target);
+						}
+
+						case 3: {
+							ChangeClientTeam(target, targetTeam);
+							CPrintToChatAll("{default}[{green}!{default}] {blue}%N {default}更改 {green}%N {default}到 {olive}感染", client, target);
+						}
+					}
+				}
+				else
+					CPrintToChat(client, "{default}[{green}!{default}] {olive}玩家已在目标队伍中");
+						
+				SwitchTeam(client, g_iSelection[client]);
+			}
+			else
+				CPrintToChat(client, "{default}[{green}!{default}] {olive}目标玩家已失效");
+		}
+	
+		case MenuAction_Cancel: {
+			if (param2 == MenuCancel_ExitBack)
+				SwitchTeam(client, g_iSelection[client]);
+		}
+	
+		case MenuAction_End:
+			delete menu;
+	}
+
+	return 0;
+}
+
+void ChangeTeamToSurvivor(int client, int team) {
+	if (GetEntProp(client, Prop_Send, "m_isGhost"))
+		SetEntProp(client, Prop_Send, "m_isGhost", 0);
+
+	if (team != 1)
+		ChangeClientTeam(client, 1);
+
+	if (GetBotOfIdlePlayer(client)) {
+		L4D_TakeOverBot(client);
+		return;
+	}
+
+	int bot = FindAliveSurBot();
+	if (bot) {
+		L4D_SetHumanSpec(bot, client);
+		L4D_TakeOverBot(client);
+	}
+	else
+		ChangeClientTeam(client, 2);
+}
+
+int FindAliveSurBot() {
+	for (int i = 1; i <= MaxClients; i++) {
+		if (IsAliveSurBot(i)) 
+			return i;
+	}
+	return 0;
+}
+
+bool IsAliveSurBot(int client) {
+	return IsClientInGame(client) && !IsClientInKickQueue(client) && IsFakeClient(client) && GetClientTeam(client) == 2 && IsPlayerAlive(client) && !GetIdlePlayerOfBot(client);
+}
+
+int GetBotOfIdlePlayer(int client) {
+	for (int i = 1; i <= MaxClients; i++) {
+		if (IsClientInGame(i) && IsFakeClient(i) && GetClientTeam(i) == 2 && GetIdlePlayerOfBot(i) == client)
+			return i;
+	}
+	return 0;
+}
+
+int GetIdlePlayerOfBot(int client) {
+	if (!HasEntProp(client, Prop_Send, "m_humanSpectatorUserID"))
+		return 0;
+
+	return GetClientOfUserId(GetEntProp(client, Prop_Send, "m_humanSpectatorUserID"));
+}
+
 
 void PageExitBack(int client, int func, int item) {
 	switch (func) {
@@ -1488,6 +1707,15 @@ void CheatCommand(int client, const char[] command) {
 		else if (strcmp(command[5], "ammo") == 0)
 			ReloadAmmo(client); //榴弹发射器加子弹
 	}
+}
+
+void GoAFKTimer(int client, float flDuration) {
+	static int m_GoAFKTimer = -1;
+	if (m_GoAFKTimer == -1)
+		m_GoAFKTimer = FindSendPropInfo("CTerrorPlayer", "m_lookatPlayer") - 12;
+
+	SetEntDataFloat(client, m_GoAFKTimer + 4, flDuration);
+	SetEntDataFloat(client, m_GoAFKTimer + 8, GetGameTime() + flDuration);
 }
 
 void InitData() {
