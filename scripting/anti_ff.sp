@@ -13,7 +13,7 @@ public Plugin myinfo =
 	name = "[L4D2]友伤惩罚",
 	author = "奈",
 	description = "友伤到达一定值惩罚攻击者",
-	version = "1.1",
+	version = "1.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -30,7 +30,7 @@ public void OnPluginStart()
 public void Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast)
 {
 	int victim = GetClientOfUserId(event.GetInt("userid")), attacker = GetClientOfUserId(event.GetInt("attacker")), damage = event.GetInt("dmg_health");
-	if (IsValidPlayer(attacker) && IsValidPlayer(victim) && GetClientTeam(attacker) == 2 && GetClientTeam(victim) == 2)
+	if (IsValidPlayer(attacker) && IsValidPlayer(victim) && GetClientTeam(attacker) == 2 && GetClientTeam(victim) == 2 && attacker != victim)
 	{
 		FriendlyFire[attacker] += damage;
 		FriendlyFireCheck(attacker);
@@ -62,7 +62,7 @@ void FriendlyFireCheck(int client)
 		{
 			ForcePlayerSuicide(client);
 			IsSuicide[client] = true;
-			ResetFriendlyFireCount(client);
+			CreateTimer(0.1, ResetFriendlyFireCount, client);
 			PrintToChatAll("\x04[提示] \x03%N \x05队友伤害达到 \x04%d \x05进行 \x03处死 \x05惩罚", client, FFSuicide);
 		}
 	}
@@ -74,7 +74,7 @@ public void OnMapStart()
 	for (int i = 1; i <= MaxClients + 1; i++)
 	{
 		if (IsValidPlayer(i) && !IsFakeClient(i) && GetClientTeam(i) == 2)
-			ResetFriendlyFireCount(i);
+			CreateTimer(5.0, ResetFriendlyFireCount, i);
 	}
 }
 
@@ -84,12 +84,12 @@ public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 	for (int i = 1; i <= MaxClients + 1; i++)
 	{
 		if (IsValidPlayer(i) && !IsFakeClient(i) && GetClientTeam(i) == 2)
-			ResetFriendlyFireCount(i);
+			CreateTimer(5.0, ResetFriendlyFireCount, i);
 	}
 }
 
 //重置友伤计算
-void ResetFriendlyFireCount(int client)
+Action ResetFriendlyFireCount(Handle timer, int client)
 {
 	if (IsValidPlayer(client) && FriendlyFire[client] != 0)
 	{
@@ -98,6 +98,7 @@ void ResetFriendlyFireCount(int client)
 		IsSuicide[client] = false;
 		//PrintToChatAll("\x04[提示] \x03队友伤害计算次数已重置");
 	}
+	return Plugin_Stop;
 }
 
 stock bool IsValidPlayer(int client)
