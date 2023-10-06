@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "[L4D2]提示信息音效",
 	description = "notify",
 	author = "奈",
-	version = "1.8.1",
+	version = "1.8.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -84,7 +84,6 @@ public void OnClientConnected(int client)
 {   
 	if(!IsFakeClient(client) && cv_Isconnecting.BoolValue){
         CPrintToChatAll("{green}[服务器] {olive}玩家{blue}%N{olive}申请进入牢房...", client);
-        //PrintToChatAll("\x03[服务器] \x05玩家\x03%N\x05连接中...", client);
         PlaySound(IsConnecting);
     }
 }
@@ -104,11 +103,16 @@ public void OnClientPutInServer(int client)
             Format(steamid, sizeof(steamid), "");
         CPrintToChatAll("{green}[服务器] %s玩家{blue}%N%s{olive}入狱", buffer, client, steamid);
         if(b_shop)
-            CPrintToChatAll("{green}[服务器] {blue}%N{olive}本服务器游玩时长 {green}%.2f {olive}小时", client, Shop_Get_GetPlayerTime(client));
-        //PrintToChatAll("\x03[服务器] \x05玩家\x04%N(\x01%s\x05)加入", client, GetSteamId(client));
+            CreateTimer(0.1, showTime, client);
         PlaySound(IsConnected);
         showNotify[client] = true;
     }
+}
+
+Action showTime(Handle timer, int client)
+{
+    CPrintToChatAll("{green}[服务器] {blue}%N{olive}本服务器游玩时长 {green}%.2f {olive}小时", client, Shop_Get_GetPlayerTime(client));
+    return Plugin_Handled;
 }
 
 //玩家离开游戏
@@ -184,7 +188,6 @@ public Action Event_PlayerDisconnect(Event event, const char[] name, bool dontBr
     }
 
     CPrintToChatAll("{green}[服务器] {olive}玩家{blue}%N{olive}越狱 - 理由: [{green}%s{olive}]", client, message);
-    //PrintToChatAll("\x03[服务器] \x05玩家\x04%N\x05退出 - 理由: [\x04%s\x05]", client, message);
     PlaySound(IsDisconnect);
     showNotify[client] = false;
     return Plugin_Handled;
