@@ -4,6 +4,7 @@
 #include <sdktools>
 #include <colors>
 #include <geoip>
+#include <shop>
 
 //玩家连接时播放的声音
 #define IsConnecting        "ambient/alarms/klaxon1.wav"
@@ -15,23 +16,43 @@
 #define IsLeftSafeArea      "level/countdown.wav"
 #define IsStart             "level/loud/bell_break.wav"
 
-ConVar cv_SafeArea, cv_Isconnecting;
+ConVar cv_SafeArea, cv_Isconnecting, cv_Country, cv_SteamId;
+bool b_shop;
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.7",
+	version = "1.8",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
-    cv_Isconnecting = CreateConVar("l4d2_connecting_sound", "1", "连接中提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+    cv_Isconnecting = CreateConVar("l4d2_connecting_notify", "1", "连接中提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+    cv_Country = CreateConVar("l4d2_country_notify", "1", "加入服务器后国家提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+    cv_SteamId = CreateConVar("l4d2_steamid_notify", "1", "加入服务器后SteamId提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     cv_SafeArea = CreateConVar("l4d2_leftsafe_sound", "1", "离开安全屋提示音", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
     //RegAdminCmd("sm_test", test, ADMFLAG_ROOT);
+}
+
+public void OnAllPluginsLoaded()
+{
+    b_shop = LibraryExists("shop");
+}
+
+public void OnLibraryAdded(const char[] name)
+{
+    if(StrEqual(name, "shop"))
+		b_shop = true;
+}
+
+public void OnLibraryRemoved(const char[] name)
+{
+    if(StrEqual(name, "shop"))
+        b_shop = false;
 }
 
 public void OnMapStart()
@@ -73,7 +94,18 @@ public void OnClientConnected(int client)
 public void OnClientPutInServer(int client)
 {
     if(!IsFakeClient(client)){
-        CPrintToChatAll("{green}[服务器] {olive}来自{blue}%s{olive}的玩家{blue}%N{green}(%s){olive}入狱", GetCountry(client), client, GetSteamId(client));
+        char buffer[128], steamid[64];
+        if(cv_Country.BoolValue)
+            Format(buffer, sizeof(buffer), "{olive}来自{blue}%s{olive}的", GetCountry(client));
+        else
+            Format(buffer, sizeof(buffer), "{olive}");
+        if(cv_SteamId.BoolValue)
+            Format(steamid, sizeof(steamid), "{green}(%s)", GetSteamId(client));
+        else
+            Format(steamid, sizeof(steamid), "");
+        CPrintToChatAll("{green}[服务器] %s玩家{blue}%N%s{olive}入狱", buffer, client, steamid);
+        if(b_shop)
+            CPrintToChatAll("{green}[服务器] {blue}%N{olive}本服务器游玩时长 {green}%.2f {olive}小时", client, Shop_Get_GetPlayerTime(client));
         //PrintToChatAll("\x03[服务器] \x05玩家\x04%N(\x01%s\x05)加入", client, GetSteamId(client));
         PlaySound(IsConnected);
     }
@@ -198,6 +230,8 @@ char[] GetCountry(int client)
         Format(Country,sizeof(Country),"印度尼西亚");
     else if(StrContains(Country, "Vietnam", false) != -1)
         Format(Country,sizeof(Country),"越南");
+    else if(StrContains(Country, "Russia", false) != -1)
+        Format(Country,sizeof(Country),"俄罗斯");
     return Country;
 }
 
