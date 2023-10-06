@@ -9,8 +9,10 @@ ConVar
 	cv_ServerRank,
 	cv_ServerNumber,
 	cv_LobbyDisable,
+	cv_CvarChange,
 	cv_smPrompt,
 	cv_pingCheck;
+
 enum struct pingStruct{
 	int pingTooHigh;
 	int pingCheckCount;
@@ -28,10 +30,9 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.0",
+	version = "1.2.1",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
-
 
 public void OnPluginStart()
 {
@@ -40,7 +41,8 @@ public void OnPluginStart()
 	cv_ServerRank = CreateConVar("l4d_server_rank", "233", "全球排名数", _, true, 0.0);
 	cv_ServerNumber = CreateConVar("l4d_server_players_number", "6666", "加入服务器人数", _, true, 0.0);
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	cv_smPrompt = CreateConVar("l4d2_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_CvarChange = CreateConVar("server_cvar_change_notify", "1", "屏蔽游戏自带的ConVar更改提示 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_smPrompt = CreateConVar("server_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_pingCheck = CreateConVar("l4d2_ping_check", "1", "进入服务器ping值检测,高于250ms踢出,仅在第一次进入检测,中途升高不检测 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/server_kick.log");
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
@@ -118,7 +120,7 @@ public Action ping_Check(Handle timer, int client)
 	if(!client || pingCheck[client].playerDisconnect || pingCheck[client].CheckFinish)
 		return Plugin_Stop;
 
-	if (GetClientTime(client) < 60.0)
+	if (GetClientTime(client) < 90.0)
 		return Plugin_Continue;
 
 	float ping = GetClientAvgLatency(client, NetFlow_Outgoing) * 1000.0;
@@ -134,7 +136,7 @@ public Action ping_Check(Handle timer, int client)
 		LogToFileEx(g_sLogPath, "[ping] %N 因为ping太高被踢出", client);
 		return Plugin_Stop;
 	}
-	if(pingCheck[client].pingCheckCount > 15){
+	if(pingCheck[client].pingCheckCount > 30){
 		pingCheck[client].CheckFinish = true;
 		return Plugin_Stop;
 	}
@@ -231,7 +233,10 @@ void NextFrame_SMMessage(DataPack dPack) {
 // ConVar更改提示
 // ------------------------------------------------------------------------
 Action Event_ServerCvar(Event event, const char[] name, bool dontBroadcast) {
-	return Plugin_Handled;
+	if (cv_CvarChange.BoolValue)
+		return Plugin_Handled;
+
+	return Plugin_Continue;
 }
 
 void SetGodMode(bool canset)
