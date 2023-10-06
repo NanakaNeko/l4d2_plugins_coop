@@ -20,6 +20,8 @@ enum struct PlayerStruct{
 	int ClientFFCount;
 	int ClientGotFFCount;
 	float ClientAmmoTime;
+	float ClientJoinTime;
+	float ClientTime;
 	bool CanBuyMedical;
 	int ClientTransmit;
 }
@@ -48,7 +50,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.7", 
+	version = "1.3.8", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -65,6 +67,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("Shop_Get_HeadShotCount", Native_GetHeadShotCount);
 	CreateNative("Shop_Get_FFCount", Native_GetFFCount);
 	CreateNative("Shop_Get_GotFFCount", Native_GetGotFFCount);
+	CreateNative("Shop_Get_GetPlayerTime", Native_GetPlayerTime);
 	return APLRes_Success;
 }
 
@@ -180,6 +183,20 @@ int Native_GetGotFFCount(Handle plugin, int numParams)
 	return player[client].ClientGotFFCount;
 }
 
+any Native_GetPlayerTime(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].ClientTime;
+}
+
 public void OnPluginStart() 
 { 
 	RegConsoleCmd("sm_gw", ShopMenu, "商店菜单"); 
@@ -251,7 +268,7 @@ void InitSQLite()
 	if (!(sqlite = SQLite_UseDatabase("ShopSystem", sError, sizeof sError)))
 		SetFailState("Could not connect to the database \"ShopSystem\" at the following error:\n%s", sError);
 
-	SQL_FastQuery(sqlite, "CREATE TABLE IF NOT EXISTS Shop(SteamID NVARCHAR(32) NOT NULL DEFAULT '', Select_Melee INT NOT NULL DEFAULT 0, Point INT NOT NULL DEFAULT 0, TotalPoint INT NOT NULL DEFAULT 0, KillCI INT NOT NULL DEFAULT 0, KillSI INT NOT NULL DEFAULT 0, KillTank INT NOT NULL DEFAULT 0, KillWitch INT NOT NULL DEFAULT 0 ,HeadShotCount INT NOT NULL DEFAULT 0, FFCount INT NOT NULL DEFAULT 0, GotFFCount INT NOT NULL DEFAULT 0);");
+	SQL_FastQuery(sqlite, "CREATE TABLE IF NOT EXISTS Shop(SteamID NVARCHAR(32) NOT NULL DEFAULT '', Select_Melee INT NOT NULL DEFAULT 0, Point INT NOT NULL DEFAULT 0, TotalPoint INT NOT NULL DEFAULT 0, KillCI INT NOT NULL DEFAULT 0, KillSI INT NOT NULL DEFAULT 0, KillTank INT NOT NULL DEFAULT 0, KillWitch INT NOT NULL DEFAULT 0 ,HeadShotCount INT NOT NULL DEFAULT 0, FFCount INT NOT NULL DEFAULT 0, GotFFCount INT NOT NULL DEFAULT 0, Time FLOAT NOT NULL DEFAULT 0.00);");
 }
 
 void SQL_LoadAll() 
@@ -272,6 +289,10 @@ void SQL_SaveAll()
 			SQL_SaveKillCI(i);
 			SQL_SaveKillSI(i);
 			SQL_SaveKillTankWitch(i);
+			SQL_SaveHeadShotCount(i);
+			SQL_SaveFFCount(i);
+			SQL_SaveGotFFCount(i);
+			SQL_SaveTime(i);
 		}		
 	}
 }
@@ -282,7 +303,7 @@ void SQL_Load(int client)
 		return;
 
 	char query[1024];
-	FormatEx(query, sizeof query, "SELECT Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch, HeadShotCount, FFCount, GotFFCount FROM Shop WHERE SteamID = '%s';", GetSteamId(client));
+	FormatEx(query, sizeof query, "SELECT Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch, HeadShotCount, FFCount, GotFFCount, Time FROM Shop WHERE SteamID = '%s';", GetSteamId(client));
 	sqlite.Query(SQL_CallbackLoad, query, GetClientUserId(client));
 }
 
@@ -366,6 +387,16 @@ void SQL_SaveGotFFCount(int client)
 	SQL_FastQuery(sqlite, query);
 }
 
+void SQL_SaveTime(int client)
+{
+	if (!sqlite)
+		return;
+
+	char query[1024];
+	FormatEx(query, sizeof query, "UPDATE Shop SET Time = %.2f WHERE SteamID = '%s';", player[client].ClientTime, GetSteamId(client));
+	SQL_FastQuery(sqlite, query);
+}
+
 void SQL_CallbackLoad(Database db, DBResultSet results, const char[] error, any data) 
 {
 	if (!db || !results) {
@@ -388,10 +419,11 @@ void SQL_CallbackLoad(Database db, DBResultSet results, const char[] error, any 
 		player[client].ClientHeadShotCount = results.FetchInt(7);
 		player[client].ClientFFCount = results.FetchInt(8);
 		player[client].ClientGotFFCount = results.FetchInt(9);
+		player[client].ClientTime = results.FetchFloat(10);
 	}
 	else {
 		char query[1024];
-		FormatEx(query, sizeof query, "INSERT INTO Shop(SteamID, Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch, HeadShotCount, FFCount, GotFFCount) VALUES ('%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);", GetSteamId(client), player[client].ClientMelee, player[client].ClientPoint, player[client].ClientTotalPoint, player[client].ClientKillCI, player[client].ClientKillSI, player[client].ClientKillTank, player[client].ClientKillWitch, player[client].ClientHeadShotCount, player[client].ClientFFCount, player[client].ClientGotFFCount);
+		FormatEx(query, sizeof query, "INSERT INTO Shop(SteamID, Select_Melee, Point, TotalPoint, KillCI, KillSI, KillTank, KillWitch, HeadShotCount, FFCount, GotFFCount, Time) VALUES ('%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %.2f);", GetSteamId(client), player[client].ClientMelee, player[client].ClientPoint, player[client].ClientTotalPoint, player[client].ClientKillCI, player[client].ClientKillSI, player[client].ClientKillTank, player[client].ClientKillWitch, player[client].ClientHeadShotCount, player[client].ClientFFCount, player[client].ClientGotFFCount, player[client].ClientTime);
 		SQL_FastQuery(sqlite, query);
 	}
 
@@ -411,15 +443,18 @@ char[] GetSteamId(int client)
 
 public void OnClientPostAdminCheck(int client)
 {
-	if(!IsFakeClient(client))
+	if(!IsFakeClient(client)){
 		SQL_Load(client);
-
-	player[client].ClientAmmoTime = 0.0;
+		player[client].ClientJoinTime = GetClientTime(client);
+		player[client].ClientAmmoTime = 0.0;
+	}
 }
 
 public void OnClientDisconnect(int client)
 {
 	if(!IsFakeClient(client)){
+		if(player[client].ClientJoinTime)
+			player[client].ClientTime += (GetClientTime(client) - player[client].ClientJoinTime)/3600.0;
 		SQL_SaveMelee(client);
 		SQL_SavePoint(client);
 		SQL_SaveKillCI(client);
@@ -428,6 +463,7 @@ public void OnClientDisconnect(int client)
 		SQL_SaveHeadShotCount(client);
 		SQL_SaveFFCount(client);
 		SQL_SaveGotFFCount(client);
+		SQL_SaveTime(client);
 	}
 }
 
@@ -727,6 +763,8 @@ public void PlayerInfoMenu(int client)
 	Panel panel = new Panel();
 	Format(buffer, sizeof(buffer), "%N的个人数据\n——————————", client);
 	panel.SetTitle(buffer);
+	Format(buffer, sizeof(buffer), "☆ 游玩时间: %.2fh", player[client].ClientTime);
+	DrawPanelText(panel, buffer);
 	Format(buffer, sizeof(buffer), "☆ 总爆头率: %.0f%%", GetHeadShot(client));
 	DrawPanelText(panel, buffer);
 	Format(buffer, sizeof(buffer), "☆ 累计点数: %d", player[client].ClientTotalPoint);

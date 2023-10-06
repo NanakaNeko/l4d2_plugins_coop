@@ -25,6 +25,7 @@ public void __pl_shop_SetNTVOptional()
 	MarkNativeAsOptional("Shop_Get_HeadShotCount");
 	MarkNativeAsOptional("Shop_Get_FFCount");
 	MarkNativeAsOptional("Shop_Get_GotFFCount");
+	MarkNativeAsOptional("Shop_Get_GetPlayerTime");
 }
 #endif
 
@@ -107,3 +108,13 @@ native int Shop_Get_FFCount(int client);
 *
 */
 native int Shop_Get_GotFFCount(int client);
+
+/**
+* @根据id返回爆头率
+*
+* @client	需要获取数据的玩家id
+*
+* @return	float服务器游玩时间
+*
+*/
+native any Shop_Get_GetPlayerTime(int client);
