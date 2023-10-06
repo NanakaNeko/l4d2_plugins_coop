@@ -16,7 +16,6 @@ ConVar
 enum struct pingStruct{
 	int pingTooHigh;
 	int pingCheckCount;
-	bool playerDisconnect;
 	bool CheckFinish;
 }
 pingStruct pingCheck[MAXPLAYERS + 1];
@@ -30,7 +29,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.1",
+	version = "1.2.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -110,14 +109,13 @@ public void OnClientPutInServer(int client)
 	if(IsFakeClient(client))
 		return;
 	ChangeName[client] = 0;
-	pingCheck[client].playerDisconnect = false;
 	if(cv_pingCheck.BoolValue)
 		CreateTimer(2.0, ping_Check, client, TIMER_REPEAT);
 }
 
 public Action ping_Check(Handle timer, int client)
 {
-	if(!client || pingCheck[client].playerDisconnect || pingCheck[client].CheckFinish)
+	if(!client || pingCheck[client].CheckFinish)
 		return Plugin_Stop;
 
 	if (GetClientTime(client) < 90.0)
@@ -163,7 +161,6 @@ public void OnClientDisconnect(int client)
 	if(IsFakeClient(client))
 		return;
 	ServerRank();
-	pingCheck[client].playerDisconnect = true;
 }
 
 void IsRemoveLobby(bool dis)
@@ -288,11 +285,17 @@ public void OnClientPostAdminCheck(int client)
 
 void Event_PlayerDisconnect(Event event, const char[] name, bool dontBroadcast)
 {
-	if (!g_bDebugMode)
+	int client = GetClientOfUserId(GetEventInt(event,"userid"));
+
+	if (!(1 <= client <= MaxClients))
 		return;
 
-	int client = GetClientOfUserId(event.GetInt("userid"));
-	if (client && IsFakeClient(client))
+	if (IsFakeClient(client))
+		return;
+
+	pingCheck[client].CheckFinish = false;
+
+	if (!g_bDebugMode)
 		return;
 
 	if (RealPlayerExist(client))

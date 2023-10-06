@@ -17,14 +17,14 @@
 #define IsStart             "level/loud/bell_break.wav"
 
 ConVar cv_SafeArea, cv_Isconnecting, cv_Country, cv_SteamId;
-bool b_shop;
+bool b_shop, showNotify[MAXPLAYERS + 1];
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]加入退出提示",
 	description = "connected and disconnected message",
 	author = "奈",
-	version = "1.8",
+	version = "1.8.1",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -35,7 +35,6 @@ public void OnPluginStart()
     cv_SteamId = CreateConVar("l4d2_steamid_notify", "1", "加入服务器后SteamId提示", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     cv_SafeArea = CreateConVar("l4d2_leftsafe_sound", "1", "离开安全屋提示音", FCVAR_NOTIFY, true, 0.0, true, 1.0);
     HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
-    //RegAdminCmd("sm_test", test, ADMFLAG_ROOT);
 }
 
 public void OnAllPluginsLoaded()
@@ -93,7 +92,7 @@ public void OnClientConnected(int client)
 //玩家进入游戏
 public void OnClientPutInServer(int client)
 {
-    if(!IsFakeClient(client)){
+    if(!IsFakeClient(client) && !showNotify[client]){
         char buffer[128], steamid[64];
         if(cv_Country.BoolValue)
             Format(buffer, sizeof(buffer), "{olive}来自{blue}%s{olive}的", GetCountry(client));
@@ -108,6 +107,7 @@ public void OnClientPutInServer(int client)
             CPrintToChatAll("{green}[服务器] {blue}%N{olive}本服务器游玩时长 {green}%.2f {olive}小时", client, Shop_Get_GetPlayerTime(client));
         //PrintToChatAll("\x03[服务器] \x05玩家\x04%N(\x01%s\x05)加入", client, GetSteamId(client));
         PlaySound(IsConnected);
+        showNotify[client] = true;
     }
 }
 
@@ -186,6 +186,7 @@ public Action Event_PlayerDisconnect(Event event, const char[] name, bool dontBr
     CPrintToChatAll("{green}[服务器] {olive}玩家{blue}%N{olive}越狱 - 理由: [{green}%s{olive}]", client, message);
     //PrintToChatAll("\x03[服务器] \x05玩家\x04%N\x05退出 - 理由: [\x04%s\x05]", client, message);
     PlaySound(IsDisconnect);
+    showNotify[client] = false;
     return Plugin_Handled;
 }
 
