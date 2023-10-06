@@ -8,7 +8,7 @@
 |            [**anti_ff**](./scripting/anti_ff.sp)             | 友伤达到一定值惩罚攻击者                                     |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
 |           [**hostname**](./scripting/hostname.sp)            | 根据端口号改服名，显示部分突变模式(不常用的模式没写，仅写了部分战役和生还者)和难度 |
-|       [**join_out_msg**](./scripting/join_out_msg.sp)        | 加入退出服务器提示信息，离开安全屋提示音                     |
+|       [**join_out_msg**](./scripting/join_out_msg.sp)        | 加入退出服务器提示信息                                       |
 |           [**kicktank**](./scripting/kicktank.sp)            | 使用指令后单次关卡只会出现一个克                             |
 |  [**l4d2_auto_medical**](./scripting/l4d2_auto_medical.sp)   | 根据人数自动倍数医疗物品                                     |
 | [**l4d2_friendly_fire**](./scripting/l4d2_friendly_fire.sp)  | 开关队友伤害，!setff on打开友伤，!setff off关闭友伤，!setff normal设置普通友伤，!setff top设置最高友伤（1.0） |
@@ -26,6 +26,7 @@
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
 | [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | [tank_damage2.0.sp](https://github.com/GlowingTree880/L4D2_LittlePlugins/blob/main/TankDamageAnnounce/tank_damage2.0.sp) 基于该插件修改，删除treeutil和logger依赖，删除坦克出现提示，交给其他插件处理 |
 | [**l4d_throwable_announcer**](./scripting/l4d_throwable_announcer.sp) | 投掷物提示，修改提示颜色                                     |
+|             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示               |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
 |             [**rygive**](./scripting/rygive.sp)              | 基于原插件删除部分功能，增加使用指令会有聊天框提示           |
 |             [**server**](./scripting/server.sp)              | 服务器部分功能的实现  <br/>重启地图  <br/>安全屋无敌  <br/>关闭闲置提示  <br/>ConVar提示仅管理员可见  <br/>1.1.1 频繁改名踢出  <br/>1.1.2 全球排名和人数  <br/>1.1.3 新增debug模式，来自sorallll的rygive插件  <br/>1.1.4 增加服务器匹配禁用<br/>1.1.7 增加sm提示仅管理员可见开关<br/>1.1.8 增加ping过高踢出，仅在进入一分钟后检测一次<br/>1.2.0 移除自杀指令，放在其他插件 |
