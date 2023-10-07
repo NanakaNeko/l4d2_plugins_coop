@@ -29,7 +29,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.2",
+	version = "1.2.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -115,7 +115,7 @@ public void OnClientPutInServer(int client)
 
 public Action ping_Check(Handle timer, int client)
 {
-	if(!client || pingCheck[client].CheckFinish)
+	if(!client || IsFakeClient(client) || !IsClientConnected(client) || pingCheck[client].CheckFinish)
 		return Plugin_Stop;
 
 	if (GetClientTime(client) < 90.0)
