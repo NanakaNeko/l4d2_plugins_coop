@@ -23,7 +23,7 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
-	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "50", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
+	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "70", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
 	cv_TimeUnlockDoor = CreateConVar("unlock_door_time", "5", "需要几秒解锁安全门", FCVAR_NOTIFY, true, 0.0);
 	HookConVarChange(cv_MinSurvivorPercent, CvarChanged);
 	HookConVarChange(cv_TimeUnlockDoor, CvarChanged);
@@ -103,7 +103,7 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 				iParam = RoundToCeil(i_MinSurvivorPercent / 100.0 * iParam);
 				if(iReached < iParam)
 				{
-					PrintHintTextToAll("%d 人达到安全屋附近(需 %d 人解锁)", iReached, iParam);
+					PrintHintTextToAll("当前%d人达到安全屋附近(需%d人解锁)", iReached, iParam);
 					return Plugin_Handled;
 				}
 
