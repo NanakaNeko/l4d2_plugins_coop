@@ -26,6 +26,7 @@
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
 | [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | [tank_damage2.0.sp](https://github.com/GlowingTree880/L4D2_LittlePlugins/blob/main/TankDamageAnnounce/tank_damage2.0.sp) 基于该插件修改，删除treeutil和logger依赖，删除坦克出现提示，交给其他插件处理 |
 | [**l4d_throwable_announcer**](./scripting/l4d_throwable_announcer.sp) | 投掷物提示，修改提示颜色                                     |
+|           [**lockdoor**](./scripting/lockdoor.sp)            | 锁定终点安全门，需要足够人数在范围内才能打开                 |
 |             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示               |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
 |             [**rygive**](./scripting/rygive.sp)              | 基于原插件删除部分功能，增加使用指令会有聊天框提示           |
