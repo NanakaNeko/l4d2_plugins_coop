@@ -13,7 +13,7 @@ public Plugin myinfo =
 	name = "[L4D2]友伤惩罚",
 	author = "奈",
 	description = "友伤到达一定值惩罚攻击者",
-	version = "1.2",
+	version = "1.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -30,7 +30,7 @@ public void OnPluginStart()
 public void Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast)
 {
 	int victim = GetClientOfUserId(event.GetInt("userid")), attacker = GetClientOfUserId(event.GetInt("attacker")), damage = event.GetInt("dmg_health");
-	if (IsValidPlayer(attacker) && IsValidPlayer(victim) && GetClientTeam(attacker) == 2 && GetClientTeam(victim) == 2 && attacker != victim)
+	if (IsValidPlayer(attacker) && IsValidPlayer(victim) && GetClientTeam(attacker) == 2 && GetClientTeam(victim) == 2 && !IsFakeClient(victim) && attacker != victim)
 	{
 		FriendlyFire[attacker] += damage;
 		FriendlyFireCheck(attacker);
