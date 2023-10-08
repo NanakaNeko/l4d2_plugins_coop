@@ -17,7 +17,7 @@ public Plugin myinfo =
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0",
+	version = "1.0.1",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -35,13 +35,13 @@ public void OnPluginStart()
 
 public void OnMapStart()
 {
-	b_FinalMap = true;
+	b_FinalMap = false;
 }
 
 public void OnConfigsExecuted()
 {
 	if(L4D_IsMissionFinalMap(true))
-		b_FinalMap = false;
+		b_FinalMap = true;
 }
 
 void CvarChanged(ConVar cvar, const char[] sOldValue, const char[] sNewValue)
@@ -58,7 +58,7 @@ void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 
 Action tmrStart(Handle timer)
 {
-	if (b_FinalMap == false)
+	if (b_FinalMap)
 		return Plugin_Continue;
 
 	b_UnlockDoor = false;
@@ -69,7 +69,7 @@ Action tmrStart(Handle timer)
 
 Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, float value)
 {
-	if (b_FinalMap == false)
+	if (b_FinalMap)
 		return Plugin_Continue;
 	
 	if (IsSurvivor(client))
@@ -121,7 +121,7 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 Action tmrUnlockDoor(Handle timer)
 {
 	if(tmrNum < i_TimeUnlockDoor){
-		PrintHintTextToAll("还有 %d 秒解锁安全门", i_TimeUnlockDoor - tmrNum);
+		PrintHintTextToAll("安全门还有 %d 秒解锁", i_TimeUnlockDoor - tmrNum);
 		PlaySound("ambient/alarms/klaxon1.wav");
 		tmrNum++;
 		return Plugin_Continue;
