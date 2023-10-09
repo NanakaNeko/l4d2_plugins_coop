@@ -8,16 +8,16 @@
 #define UNLOCK 0
 #define LOCK 1
 
-ConVar sb_unstick, cv_MinSurvivorPercent, cv_TimeUnlockDoor;
+ConVar sb_unstick, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
 int g_iEndCheckpointDoor, i_MinSurvivorPercent, i_TimeUnlockDoor, tmrNum;
-bool b_FinalMap, b_UnlockDoor;
+bool b_FinalMap, b_UnlockDoor, b_TankAliveLock;
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0.1",
+	version = "1.0.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -25,10 +25,13 @@ public void OnPluginStart()
 {
 	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "70", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
 	cv_TimeUnlockDoor = CreateConVar("unlock_door_time", "5", "需要几秒解锁安全门", FCVAR_NOTIFY, true, 0.0);
+	cv_TankAliveLock = CreateConVar("lock_door_tank_alive", "1", "当前场上有存活坦克是否锁定安全门 1:锁定 0:不锁定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	HookConVarChange(cv_MinSurvivorPercent, CvarChanged);
 	HookConVarChange(cv_TimeUnlockDoor, CvarChanged);
+	HookConVarChange(cv_TankAliveLock, CvarChanged);
 	i_MinSurvivorPercent = GetConVarInt(cv_MinSurvivorPercent);
 	i_TimeUnlockDoor = GetConVarInt(cv_TimeUnlockDoor);
+	b_TankAliveLock = GetConVarBool(cv_TankAliveLock);
 	sb_unstick = FindConVar("sb_unstick");
 	HookEvent("round_start", Event_RoundStart);
 }
@@ -48,6 +51,7 @@ void CvarChanged(ConVar cvar, const char[] sOldValue, const char[] sNewValue)
 {
 	i_MinSurvivorPercent = GetConVarInt(cv_MinSurvivorPercent);
 	i_TimeUnlockDoor = GetConVarInt(cv_TimeUnlockDoor);
+	b_TankAliveLock = GetConVarBool(cv_TankAliveLock);
 }
 
 void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
@@ -85,13 +89,28 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 		{
 			if(i_MinSurvivorPercent > 0 && !b_UnlockDoor)
 			{
+				if(b_TankAliveLock)
+				{
+					int tanknum = 0;
+					for(int j = 1;j <= MaxClients; j++)
+					{
+						if(IsAliveTank(j))
+							tanknum++;
+					}
+					if(tanknum > 0)
+					{
+						PrintHintTextToAll("当前还有%d个坦克存活,安全门锁定", tanknum);
+						return Plugin_Handled;
+					}
+				}
+
 				float clientOrigin[3];
 				float doorOrigin[3];
 				int iParam = 0, iReached = 0;
 				GetEntPropVector(door, Prop_Send, "m_vecOrigin", doorOrigin);
 				for (int i = 1; i <= MaxClients; i++)
 				{
-					if(IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i))
+					if(IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) && !IsPlayerIncap(i))
 					{
 						iParam ++;
 						GetClientAbsOrigin(i, clientOrigin);
@@ -103,7 +122,7 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 				iParam = RoundToCeil(i_MinSurvivorPercent / 100.0 * iParam);
 				if(iReached < iParam)
 				{
-					PrintHintTextToAll("当前%d人达到安全屋附近(需%d人解锁)", iReached, iParam);
+					PrintHintTextToAll("当前有%d人到达安全屋附近(需%d人解锁)", iReached, iParam);
 					return Plugin_Handled;
 				}
 
@@ -211,7 +230,23 @@ void PlaySound(const char[] sample) {
 	EmitSoundToAll(sample, SOUND_FROM_PLAYER, SNDCHAN_STATIC, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL, -1, NULL_VECTOR, NULL_VECTOR, true, 0.0);
 }
 
+stock bool IsValidPlayer(int client)
+{
+	return client > 0 && client <= MaxClients && IsClientInGame(client);
+}
+
 stock bool IsSurvivor(int client)
 {
-	return (client > 0 && client <= MaxClients && IsClientInGame(client) && GetClientTeam(client) == 2);
+	return IsValidPlayer(client) && GetClientTeam(client) == 2;
+}
+
+stock bool IsPlayerIncap(int client)
+{
+	return view_as<bool>(GetEntProp(client, Prop_Send, "m_isIncapacitated"));
+}
+
+// 是否是存活坦克
+bool IsAliveTank(int client)
+{
+	return IsValidPlayer(client) && GetClientTeam(client) == 3 && GetEntProp(client, Prop_Send, "m_zombieClass") == 8 && IsPlayerAlive(client);
 }

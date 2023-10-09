@@ -37,7 +37,7 @@ public void OnClientPutInServer(int client)
 
 public Action ping_Check(Handle timer, int client)
 {
-	if(!(0 < client < MaxClients))
+	if(!(0 < client <= MaxClients))
 		return Plugin_Stop;
 
 	if(pingCheck[client].CheckDisconnect)
