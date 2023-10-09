@@ -10,14 +10,14 @@
 
 ConVar sb_unstick, cv_LockDoorEnable, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
 int g_iEndCheckpointDoor, i_MinSurvivorPercent, i_TimeUnlockDoor, tmrNum;
-bool b_FinalMap, b_UnlockDoor, b_TankAliveLock;
+bool b_FinalMap, b_UnlockDoor, b_TankAliveLock, b_CTimer;
 
 public Plugin myinfo = 
 {
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0.3",
+	version = "1.0.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -71,6 +71,7 @@ Action tmrStart(Handle timer)
 		return Plugin_Continue;
 
 	b_UnlockDoor = false;
+	b_CTimer = false;
 	InitDoor();
 	sb_unstick.SetBool(false);
 	return Plugin_Continue;
@@ -139,9 +140,13 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 					}
 				}
 
-				//解锁安全门
-				tmrNum = 0;
-				CreateTimer(1.0, tmrUnlockDoor, _, TIMER_REPEAT);
+				if(!b_CTimer)
+				{
+					//解锁安全门
+					tmrNum = 0;
+					CreateTimer(1.0, tmrUnlockDoor, _, TIMER_REPEAT);
+					b_CTimer = true;
+				}
 			}
 		}
 	}
