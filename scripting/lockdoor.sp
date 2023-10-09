@@ -8,7 +8,7 @@
 #define UNLOCK 0
 #define LOCK 1
 
-ConVar sb_unstick, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
+ConVar sb_unstick, cv_LockDoorEnable, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
 int g_iEndCheckpointDoor, i_MinSurvivorPercent, i_TimeUnlockDoor, tmrNum;
 bool b_FinalMap, b_UnlockDoor, b_TankAliveLock;
 
@@ -17,15 +17,17 @@ public Plugin myinfo =
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0.2",
+	version = "1.0.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
+	cv_LockDoorEnable = CreateConVar("lock_door_enable", "1", "开关插件 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "70", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
 	cv_TimeUnlockDoor = CreateConVar("unlock_door_time", "5", "需要几秒解锁安全门", FCVAR_NOTIFY, true, 0.0);
 	cv_TankAliveLock = CreateConVar("lock_door_tank_alive", "1", "当前场上有存活坦克是否锁定安全门 1:锁定 0:不锁定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	HookConVarChange(cv_LockDoorEnable, CvarChanged);
 	HookConVarChange(cv_MinSurvivorPercent, CvarChanged);
 	HookConVarChange(cv_TimeUnlockDoor, CvarChanged);
 	HookConVarChange(cv_TankAliveLock, CvarChanged);
@@ -62,6 +64,9 @@ void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 
 Action tmrStart(Handle timer)
 {
+	if(!cv_LockDoorEnable.BoolValue)
+		return Plugin_Continue;
+
 	if (b_FinalMap)
 		return Plugin_Continue;
 
@@ -73,6 +78,9 @@ Action tmrStart(Handle timer)
 
 Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, float value)
 {
+	if(!cv_LockDoorEnable.BoolValue)
+		return Plugin_Continue;
+
 	if (b_FinalMap)
 		return Plugin_Continue;
 	
@@ -87,8 +95,9 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 		int state = GetEntProp(door, Prop_Data, "m_eDoorState");
 		if (state==DOOR_STATE_CLOSED)
 		{
-			if(i_MinSurvivorPercent > 0 && !b_UnlockDoor)
+			if(!b_UnlockDoor)
 			{
+				//坦克存活锁定安全门
 				if(b_TankAliveLock)
 				{
 					int tanknum = 0;
@@ -103,34 +112,37 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 						return Plugin_Handled;
 					}
 				}
-
-				float clientOrigin[3];
-				float doorOrigin[3];
-				int iParam = 0, iReached = 0;
-				GetEntPropVector(door, Prop_Send, "m_vecOrigin", doorOrigin);
-				for (int i = 1; i <= MaxClients; i++)
+				
+				//根据玩家数量锁定安全门
+				if(i_MinSurvivorPercent > 0)
 				{
-					if(IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) && !IsPlayerIncap(i))
+					float clientOrigin[3];
+					float doorOrigin[3];
+					int iParam = 0, iReached = 0;
+					GetEntPropVector(door, Prop_Send, "m_vecOrigin", doorOrigin);
+					for (int i = 1; i <= MaxClients; i++)
 					{
-						iParam ++;
-						GetClientAbsOrigin(i, clientOrigin);
-						if (GetVectorDistance(clientOrigin, doorOrigin, true) <= 1000 * 1000)
-							iReached++;
+						if(IsClientInGame(i) && GetClientTeam(i) == 2 && IsPlayerAlive(i) && !IsPlayerIncap(i))
+						{
+							iParam ++;
+							GetClientAbsOrigin(i, clientOrigin);
+							if (GetVectorDistance(clientOrigin, doorOrigin, true) <= 1000 * 1000)
+								iReached++;
+						}
+					}
+
+					iParam = RoundToCeil(i_MinSurvivorPercent / 100.0 * iParam);
+					if(iReached < iParam)
+					{
+						PrintHintTextToAll("当前有%d人到达安全屋附近(需%d人解锁)", iReached, iParam);
+						return Plugin_Handled;
 					}
 				}
 
-				iParam = RoundToCeil(i_MinSurvivorPercent / 100.0 * iParam);
-				if(iReached < iParam)
-				{
-					PrintHintTextToAll("当前有%d人到达安全屋附近(需%d人解锁)", iReached, iParam);
-					return Plugin_Handled;
-				}
-
+				//解锁安全门
 				tmrNum = 0;
 				CreateTimer(1.0, tmrUnlockDoor, _, TIMER_REPEAT);
 			}
-			
-			sb_unstick.SetBool(false);
 		}
 	}
 
@@ -139,7 +151,8 @@ Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, f
 
 Action tmrUnlockDoor(Handle timer)
 {
-	if(tmrNum < i_TimeUnlockDoor){
+	if(tmrNum < i_TimeUnlockDoor)
+	{
 		PrintHintTextToAll("安全门还有 %d 秒解锁", i_TimeUnlockDoor - tmrNum);
 		PlaySound("ambient/alarms/klaxon1.wav");
 		tmrNum++;
@@ -151,10 +164,11 @@ Action tmrUnlockDoor(Handle timer)
 	return Plugin_Stop;
 }
 
+//初始化
 void InitDoor()
 {
 	g_iEndCheckpointDoor = L4D_GetCheckpointLast();
-	if( g_iEndCheckpointDoor == -1 )
+	if(g_iEndCheckpointDoor == -1)
 	{
 		g_iEndCheckpointDoor = FindEndSafeRoomDoor();
 		return;
@@ -184,6 +198,7 @@ void InitDoor()
 	g_iEndCheckpointDoor = EntIndexToEntRef(g_iEndCheckpointDoor);
 }
 
+//找终点安全屋
 int FindEndSafeRoomDoor()
 {
 	int ent = MaxClients+1;
@@ -204,6 +219,7 @@ int FindEndSafeRoomDoor()
 	return -1;
 }
 
+//控制安全门
 void ControlDoor(int entity, int iOperation)
 {
 	switch (iOperation)
@@ -226,7 +242,8 @@ void ControlDoor(int entity, int iOperation)
 }
 
 //播放声音.
-void PlaySound(const char[] sample) {
+void PlaySound(const char[] sample)
+{
 	EmitSoundToAll(sample, SOUND_FROM_PLAYER, SNDCHAN_STATIC, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL, -1, NULL_VECTOR, NULL_VECTOR, true, 0.0);
 }
 
@@ -235,18 +252,20 @@ stock bool IsValidPlayer(int client)
 	return client > 0 && client <= MaxClients && IsClientInGame(client);
 }
 
+//是否是生还者
 stock bool IsSurvivor(int client)
 {
 	return IsValidPlayer(client) && GetClientTeam(client) == 2;
 }
 
+// 玩家是否倒地
 stock bool IsPlayerIncap(int client)
 {
 	return view_as<bool>(GetEntProp(client, Prop_Send, "m_isIncapacitated"));
 }
 
 // 是否是存活坦克
-bool IsAliveTank(int client)
+stock bool IsAliveTank(int client)
 {
 	return IsValidPlayer(client) && GetClientTeam(client) == 3 && GetEntProp(client, Prop_Send, "m_zombieClass") == 8 && IsPlayerAlive(client);
 }
