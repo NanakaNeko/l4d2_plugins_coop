@@ -1,2 +1,3 @@
 #忽略编译smx
 scripting/compiled/*
+other_version/compiled/*
