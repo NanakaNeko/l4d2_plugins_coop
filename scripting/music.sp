@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[L4D2]点歌",
 	author = "奈",
 	description = "在安全区域可以点歌给所有人",
-	version = "1.0.2",
+	version = "1.0.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -20,6 +20,12 @@ public void OnPluginStart()
 {
     init();
     RegConsoleCmd("sm_music", Cmd_MusicMenu);
+    HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
+}
+
+public void Event_RoundStart(Event event, const char []name, bool dontBroadcast)
+{
+    b_leftarea = false;
 }
 
 void init()
