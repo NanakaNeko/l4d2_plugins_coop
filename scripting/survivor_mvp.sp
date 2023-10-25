@@ -451,6 +451,8 @@ void printParticularMvp(int client) {
 			FormatEx(buffer, sizeof(buffer), "{blue}[{default}你的排名{blue}] {olive}特感: {green}#%d {blue}({default}%d {olive}伤害 {blue}[{default}%d%%{blue}]{default}, %d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].totalDamage, dmgPercent, playerInfos[client].siCount, killPercent);
 			CPrintToChat(client, "%s", buffer);
 		}
+		else
+			CPrintToChat(client, "{blue}[{default}你的排名{blue}] {olive}特感: {green}暂无排名");
 
 		rank = GetRank(client, sortByCiCountFunction);
 		if(rank > 0 && playerInfos[client].ciCount > 0) {
@@ -458,6 +460,8 @@ void printParticularMvp(int client) {
 			FormatEx(buffer, sizeof(buffer), "{blue}[{default}你的排名{blue}] {olive}丧尸: {green}#%d {blue}({default}%d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].ciCount, killPercent);
 			CPrintToChat(client, "%s", buffer);
 		}
+		else
+			CPrintToChat(client, "{blue}[{default}你的排名{blue}] {olive}丧尸: {green}暂无排名");
 	}
 }
 
