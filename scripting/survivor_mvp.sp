@@ -378,7 +378,7 @@ void printParticularMvp(int client) {
 	char clientName[MAX_NAME_LENGTH], buffer[512], temp[256];
 	// 允许显示 SI MVP
 	if (g_hAllowShowSi.BoolValue) {
-		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] SI: ");
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] 特感排名: ");
 		if (!IsValidClient(siMvpClient) || siTotal <= 0) {
 			StrCat(buffer, sizeof(buffer), "{olive}本局还没有击杀任何特感");
 		} else {
@@ -394,7 +394,7 @@ void printParticularMvp(int client) {
 	}
 	// 允许显示 CI MVP
 	if (g_hAllowShowCi.BoolValue) {
-		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] CI: ");
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] 丧尸排名: ");
 		if (!IsValidClient(ciMvpClient) || ciTotal <= 0) {
 			StrCat(buffer, sizeof(buffer), "{olive}本局还没有击杀任何丧尸");
 		} else {
@@ -409,7 +409,7 @@ void printParticularMvp(int client) {
 	}
 	// 允许显示 FF MVP
 	if (g_hAllowShowFF.BoolValue) {
-		FormatEx(buffer, sizeof(buffer), "{blue}[{default}LVP{blue}] FF: ");
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}LVP{blue}] 黑枪排名: ");
 		if (!IsValidClient(ffMvpClient) || ffTotal <= 0) {
 			StrCat(buffer, sizeof(buffer), "{olive}大家都没有黑枪");
 		} else {
@@ -423,7 +423,7 @@ void printParticularMvp(int client) {
 		CPrintToChat(client, "%s", buffer);
 
 		// 被黑 MVP
-		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] FF Receive: ");
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}MVP{blue}] 被黑排名: ");
 		if (!IsValidClient(gotFFMvpClient) || gotFFTotal <= 0) {
 			StrCat(buffer, sizeof(buffer), "{olive}暂时没有倒霉蛋被黑得最惨");
 		} else {
@@ -439,64 +439,50 @@ void printParticularMvp(int client) {
 	// 允许显示你的排名
 	if (g_hAllowShowRank.BoolValue) {
 		// 不是生还者, 不显示排名
-		if (!IsValidClient(client) || GetClientTeam(client) != TEAM_SURVIVOR) {
-			return;
-		}
-		// 你是 SI MVP, 则显示你的 CI 排名, 你是 SI, CI MVP 霸榜了, 除非你想显示你的 FF 排名, 则不显示你的排名
-		if (client == siMvpClient && client == ciMvpClient) {
+		if (!IsValidSurvivor(client)) {
 			return;
 		}
 
-		// 开始排名
-		int index = 0, rank;
-		int[] players = new int[MaxClients + 1];
-		for (i = 1; i <= MaxClients; i++) {
-			if (!IsValidClient(i)) {
-				continue;
-			}
-			players[index++] = i;
-		}
-
-		// 是杀特高手 或 不是杀特高手也不是清僵尸高手, 显示他的杀丧尸排名
-		if (client == siMvpClient || client != ciMvpClient) {
-			// 没有丧尸击杀, 不显示丧尸排名
-			if (ciTotal <= 0) {
-				return;
-			}
-
-			SortCustom1D(players, index, sortByCiCountFunction);
-
-			for (i = 0; i < index; i++) {
-				if (players[i] == client) {
-					rank = i + 1;
-					break;
-				}
-			}
-
-			killPercent = RoundToNearest(float(playerInfos[client].ciCount) / float(ciTotal) * 100.0);
-			FormatEx(buffer, sizeof(buffer), "{blue}你的排名 {olive}CI: {green}#%d {blue}({default}%d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].ciCount, killPercent);
-		} else {
-			// 没有特感击杀, 不显示特感排名
-			if (siTotal <= 0) {
-				return;
-			}
-
-			SortCustom1D(players, index, sortBySiCountFunction);
-
-			for (i = 0; i < index; i++) {
-				if (players[i] == client) {
-					rank = i + 1;
-					break;
-				}
-			}
-
+		int rank;
+		rank = GetRank(client, sortBySiCountFunction);
+		if(rank > 0 && playerInfos[client].siCount > 0 && playerInfos[client].totalDamage > 0) {
 			dmgPercent = RoundToNearest(float(playerInfos[client].totalDamage) / float(dmgTotal) * 100.0);
 			killPercent = RoundToNearest(float(playerInfos[client].siCount) / float(siTotal) * 100.0);
-			FormatEx(buffer, sizeof(buffer), "{blue}你的排名 {olive}SI: {green}#%d {blue}({default}%d {olive}伤害 {blue}[{default}%d%%{blue}]{default}, %d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].totalDamage, dmgPercent, playerInfos[client].siCount, killPercent);
+			FormatEx(buffer, sizeof(buffer), "{blue}[{default}你的排名{blue}] {olive}特感: {green}#%d {blue}({default}%d {olive}伤害 {blue}[{default}%d%%{blue}]{default}, %d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].totalDamage, dmgPercent, playerInfos[client].siCount, killPercent);
+			CPrintToChat(client, "%s", buffer);
 		}
-		CPrintToChat(client, "%s", buffer);
+
+		rank = GetRank(client, sortByCiCountFunction);
+		if(rank > 0 && playerInfos[client].ciCount > 0) {
+			killPercent = RoundToNearest(float(playerInfos[client].ciCount) / float(ciTotal) * 100.0);
+			FormatEx(buffer, sizeof(buffer), "{blue}[{default}你的排名{blue}] {olive}丧尸: {green}#%d {blue}({default}%d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].ciCount, killPercent);
+			CPrintToChat(client, "%s", buffer);
+		}
 	}
 }
+
+int GetRank(int client, SortFunc1D SortRank)
+{
+	int index = 0, rank;
+	int[] players = new int[MaxClients + 1];
+	for (int i = 1; i <= MaxClients; i++) {
+		if (!IsValidSurvivor(i)) {
+			continue;
+		}
+		players[index++] = i;
+	}
+
+	SortCustom1D(players, index, SortRank);
+
+	for (int i = 0; i < index; i++) {
+		if (players[i] == client) {
+			rank = i + 1;
+			break;
+		}
+	}
+	return rank;
+}
+
 
 /**
 * 根据客户端是否为 BOT 在其名字后面添加 [BOT] 字样
