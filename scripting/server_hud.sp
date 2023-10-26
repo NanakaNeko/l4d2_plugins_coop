@@ -38,8 +38,9 @@ char g_sModeSingle[][] =
 	"mutation17" //孤胆枪手
 };
 static char mapName[64];
+static char TankAndWitch[128];
 static int g_iFailCount;
-ConVar hud_style;
+ConVar hud_style, versus_boss_buffer;
 KillData g_eData;
 Handle g_hTimer;
 bool g_bflow;
@@ -50,7 +51,7 @@ public Plugin myinfo =
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.1.8",
+	version = "1.2.0",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -67,7 +68,8 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart() 
 {
-	hud_style = CreateConVar("l4d2_hud_style", "1", "hud样式切换", _, true, 0.0, true, 5.0);
+	hud_style = CreateConVar("l4d2_hud_style", "1", "hud样式切换", _, true, 0.0, true, 3.0);
+	versus_boss_buffer = FindConVar("versus_boss_buffer");
 	HookEvent("round_end", Event_RoundEnd, EventHookMode_PostNoCopy);
 	HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
@@ -82,7 +84,7 @@ public void OnPluginStart()
 public void CvarChanged(ConVar convar, const char[] oldValue, const char[] newValue)
 {
 	g_ihud = GetConVarInt(hud_style);
-	hud_start(true);
+	hud_start();
 }
 
 public void OnConfigsExecuted() 
@@ -149,193 +151,111 @@ void Event_MissionLost(Event event, const char[] name, bool dontBroadcast)
 	g_iFailCount++;
 }
 
-void hud_start(bool restart=false)
+void hud_start()
 {
 	if(g_ihud == 0){
 		delete g_hTimer;
-		if(restart)
-			RestartMap();
+		RequestFrame(RemoveAllSlots);
 	}
 	else if(g_ihud == 1){
 		delete g_hTimer;
+		RequestFrame(RemoveAllSlots);
 		g_hTimer = CreateTimer(1.0, tmrUpdate1, _, TIMER_REPEAT);
-		if(restart)
-			RestartMap();
 	}
 	else if(g_ihud == 2){
 		delete g_hTimer;
+		RequestFrame(RemoveAllSlots);
 		g_hTimer = CreateTimer(1.0, tmrUpdate2, _, TIMER_REPEAT);
-		if(restart)
-			RestartMap();
 	}
 	else if(g_ihud == 3){
 		delete g_hTimer;
+		RequestFrame(RemoveAllSlots);
 		g_hTimer = CreateTimer(1.0, tmrUpdate3, _, TIMER_REPEAT);
-		if(restart)
-			RestartMap();
-	}
-	else if(g_ihud == 4){
-		delete g_hTimer;
-		g_hTimer = CreateTimer(1.0, tmrUpdate4, _, TIMER_REPEAT);
-		if(restart)
-			RestartMap();
-	}
-	else if(g_ihud == 5){
-		delete g_hTimer;
-		g_hTimer = CreateTimer(1.0, tmrUpdate5, _, TIMER_REPEAT);
-		if(restart)
-			RestartMap();
 	}
 }
 
-void RestartMap()
+void RemoveAllSlots()
 {
-	char mapbuffer[64];
-	GetCurrentMap(mapbuffer, sizeof(mapbuffer));
-	ServerCommand("changelevel %s", mapbuffer);
+	if(HUDSlotIsUsed(HUD_SCORE_1))
+		RemoveHUD(HUD_SCORE_1);
+	if(HUDSlotIsUsed(HUD_SCORE_2))
+		RemoveHUD(HUD_SCORE_2);
+	if(HUDSlotIsUsed(HUD_SCORE_3))
+		RemoveHUD(HUD_SCORE_3);
+	if(HUDSlotIsUsed(HUD_SCORE_4))
+		RemoveHUD(HUD_SCORE_4);
 }
 
-Action tmrUpdate1(Handle timer) 
+//出安全区域停止刷新坦克女巫百分比
+public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
 {
-	static char buffer[128];
-	static int roundNumber;
+	g_bflow = false;
+	return Plugin_Stop;
+}
+
+//坦克女巫路程
+void TankAndWitchFlow()
+{
 	if(g_bflow)
-	{
-		g_bflow = false;
-		char tank[16];
-		char witch[16];
-		roundNumber = GameRules_GetProp("m_bInSecondHalfOfRound");
-		IntToString(RoundToCeil(L4D2Direct_GetVSTankFlowPercent(roundNumber) * 100.0), tank, sizeof(tank));
-		StrCat(tank, sizeof(tank), "%");
-		Format(buffer, sizeof(buffer), "坦克: [%s]", L4D2Direct_GetVSTankToSpawnThisRound(roundNumber) ? tank : "固定");
+		Format(TankAndWitch, sizeof(TankAndWitch), "坦克: [%s]%s女巫: [%s]", GetTankPercent(), GetAddSpacesMax(5, " "), GetWitchPercent());
 
-		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
-		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-	}
-
-	static int client;
-	static float maxFlow;
-	static float highestFlow;
-	maxFlow = L4D2Direct_GetMapMaxFlowDistance();
-	highestFlow = (client = L4D_GetHighestFlowSurvivor()) != -1 ? L4D2Direct_GetFlowDistance(client) : L4D2_GetFurthestSurvivorFlow();
-	if (highestFlow)
-		highestFlow = highestFlow / maxFlow * 100;
-
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", RoundToCeil(highestFlow), GetAddSpacesMax(5, " "), buffer);
+	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", GetCurDistance(), GetAddSpacesMax(5, " "), TankAndWitch);
 	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
+}
 
+//北京时间
+void ShowTime()
+{
 	char Time[128];
 	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
 	HUDPlace(HUD_SCORE_2, -0.02, 0.00, 1.0, 0.03);
+}
 
+//团灭关卡人数
+void FailedAndLevelAndPeople()
+{
 	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "团灭: %d次 关卡: [%d/%d] 人数: [%d/%d]", g_iFailCount, g_iCurrentChapter, g_iMaxChapters, g_iPlayerNum, GetMaxPlayers());
 	HUDPlace(HUD_SCORE_3, -0.02, 0.03, 1.0, 0.03);
+}
 
+//击杀统计
+void TotalKill()
+{
 	HUDSetLayout(HUD_SCORE_4, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
 	HUDPlace(HUD_SCORE_4, -0.02, 0.06, 1.0, 0.03);
+}
 
+//坦克女巫路程，北京时间，团灭关卡人数
+Action tmrUpdate1(Handle timer) 
+{
+	TankAndWitchFlow();
+	ShowTime();
+	FailedAndLevelAndPeople();
 	return Plugin_Continue;
 }
 
+//坦克女巫路程，服名人数
 Action tmrUpdate2(Handle timer) 
 {
-	static char buffer[192];
-	static int roundNumber;
-	if(g_bflow)
-	{
-		g_bflow = false;
-		char tank[16];
-		char witch[16];
-		roundNumber = GameRules_GetProp("m_bInSecondHalfOfRound");
-		IntToString(RoundToCeil(L4D2Direct_GetVSTankFlowPercent(roundNumber) * 100.0), tank, sizeof(tank));
-		StrCat(tank, sizeof(tank), "%");
-		Format(buffer, sizeof(buffer), "坦克: [%s]", L4D2Direct_GetVSTankToSpawnThisRound(roundNumber) ? tank : "固定");
-
-		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
-		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-	}
-
-	static int client;
-	static float maxFlow;
-	static float highestFlow;
-	maxFlow = L4D2Direct_GetMapMaxFlowDistance();
-	highestFlow = (client = L4D_GetHighestFlowSurvivor()) != -1 ? L4D2Direct_GetFlowDistance(client) : L4D2_GetFurthestSurvivorFlow();
-	if (highestFlow)
-		highestFlow = highestFlow / maxFlow * 100;
-
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", RoundToCeil(highestFlow), GetAddSpacesMax(5, " "), buffer);
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
+	TankAndWitchFlow();
 
 	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "%s[%d/%d]", GetHostName(), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.03);
+	HUDPlace(HUD_SCORE_2, -0.02, 0.00, 1.0, 0.03);
 
 	return Plugin_Continue;
 }
 
+//坦克女巫路程，团灭关卡人数，击杀统计
 Action tmrUpdate3(Handle timer) 
 {
-	static char buffer[128];
-	static int roundNumber;
-	if(g_bflow)
-	{
-		g_bflow = false;
-		char tank[16];
-		char witch[16];
-		roundNumber = GameRules_GetProp("m_bInSecondHalfOfRound");
-		IntToString(RoundToCeil(L4D2Direct_GetVSTankFlowPercent(roundNumber) * 100.0), tank, sizeof(tank));
-		StrCat(tank, sizeof(tank), "%");
-		Format(buffer, sizeof(buffer), "坦克: [%s]", L4D2Direct_GetVSTankToSpawnThisRound(roundNumber) ? tank : "固定");
-
-		IntToString(RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0), witch, sizeof(witch));
-		StrCat(witch, sizeof(witch), "%");
-		Format(buffer, sizeof(buffer), "%s%s女巫: [%s]", buffer, GetAddSpacesMax(5, " "), L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber) ? witch : "固定");
-	}
-
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "%s", buffer);
-	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
-
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
-	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
-
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "人数: [%d/%d]%s关卡: [%d/%d]", g_iPlayerNum, GetMaxPlayers(), GetAddSpacesMax(5, " "), g_iCurrentChapter, g_iMaxChapters);
-	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
-
+	ShowTime();
+	FailedAndLevelAndPeople();
+	TotalKill();
 	return Plugin_Continue;
 }
 
-Action tmrUpdate4(Handle timer) 
-{
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "关卡: [%d/%d]%s人数: [%d/%d]", g_iCurrentChapter, g_iMaxChapters, GetAddSpacesMax(5, " "), g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
-
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_CENTER, "%s", GetHostName());
-	HUDPlace(HUD_SCORE_2, 0.00, 0.00, 1.0, 0.03);
-
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_3, -0.02, 0.00, 1.0, 0.03);
-
-	return Plugin_Continue;
-}
-
-Action tmrUpdate5(Handle timer) 
-{
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "统计: 特感:%d 僵尸:%d", g_eData.TotalSI, g_eData.TotalCI);
-	HUDPlace(HUD_SCORE_1, 0.05, 0.00, 1.0, 0.03);
-
-	char Time[128];
-	FormatEx(Time, sizeof(Time), "%s %s %s%s", GetDate(), GetWeek(), GetAPM(), Get12Time());
-	HUDSetLayout(HUD_SCORE_2, HUD_FLAG_ALIGN_RIGHT|HUD_FLAG_NOBG|HUD_FLAG_TEXT, Time);
-	HUDPlace(HUD_SCORE_2, -0.05, 0.00, 1.0, 0.03);
-
-	HUDSetLayout(HUD_SCORE_3, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_RIGHT, "团灭: %d次 关卡: [%d/%d] 人数: [%d/%d]",g_iFailCount, g_iCurrentChapter, g_iMaxChapters, g_iPlayerNum, GetMaxPlayers());
-	HUDPlace(HUD_SCORE_3, -0.05, 0.03, 1.0, 0.03);
-
-	return Plugin_Continue;
-}
-
+//特感击杀数量
 void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast) 
 {
 	int victim = GetClientOfUserId(event.GetInt("userid"));
@@ -349,6 +269,7 @@ void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast)
 	g_eData.TotalSI++;
 }
 
+//小僵尸击杀数量
 void Event_InfectedDeath(Event event, const char[] name, bool dontBroadcast) 
 {
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
@@ -358,7 +279,7 @@ void Event_InfectedDeath(Event event, const char[] name, bool dontBroadcast)
 	g_eData.TotalCI++;
 }
 
-//返回服务器名字.
+//返回服务器名字
 char[] GetHostName()
 {
 	char g_sHostName[256];
@@ -405,7 +326,7 @@ char[] Get12Time()
 	return g_sTime;
 }
 
-//填入对应数量的内容.
+//填入对应数量的内容
 char[] GetAddSpacesMax(int Value, char[] sContent)
 {
 	char g_sBlank[64];
@@ -422,7 +343,7 @@ char[] GetAddSpacesMax(int Value, char[] sContent)
 	return g_sBlank;
 }
 
-//返回最大人数.
+//返回最大人数
 int GetMaxPlayers()
 {
 	static Handle g_hMaxPlayers;
@@ -448,9 +369,70 @@ int GetDefaultNumber()
 	return 4;
 }
 
+//获取游戏模式
 char[] GetGameMode()
 {
 	char g_sMode[32];
 	GetConVarString(FindConVar("mp_gamemode"), g_sMode, sizeof(g_sMode));
 	return g_sMode;
+}
+
+//获取当前进度
+int GetCurDistance()
+{
+	static int client;
+	static float highestFlow;
+	highestFlow = (client = L4D_GetHighestFlowSurvivor()) != -1 ? L4D2Direct_GetFlowDistance(client) : L4D2_GetFurthestSurvivorFlow();
+	if (highestFlow)
+		highestFlow = highestFlow / L4D2Direct_GetMapMaxFlowDistance() * 100;
+	return RoundToCeil(highestFlow);
+}
+
+//获取坦克距离
+int GetTankDistance(int roundNumber)
+{
+	int flow;
+	if(L4D2Direct_GetVSTankToSpawnThisRound(roundNumber)) 
+	{
+		flow = RoundToCeil(L4D2Direct_GetVSTankFlowPercent(roundNumber) * 100.0);
+		if (flow > 0) 
+			flow -= RoundToFloor(GetConVarFloat(versus_boss_buffer) / L4D2Direct_GetMapMaxFlowDistance() * 100);
+	}
+	return flow < 0 ? 0 : flow;
+}
+//获取女巫距离
+int GetWitchDistance(int roundNumber)
+{
+	int flow;
+	if(L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber)) 
+	{
+		flow = RoundToCeil(L4D2Direct_GetVSWitchFlowPercent(roundNumber) * 100.0);
+		if (flow > 0) 
+			flow -= RoundToFloor(GetConVarFloat(versus_boss_buffer) / L4D2Direct_GetMapMaxFlowDistance() * 100);
+	}
+	return flow < 0 ? 0 : flow;
+}
+
+//获取坦克路程
+char[] GetTankPercent()
+{
+	char tank[16];
+	int roundNumber = GameRules_GetProp("m_bInSecondHalfOfRound");
+	if(L4D2Direct_GetVSTankToSpawnThisRound(roundNumber))
+		Format(tank, sizeof(tank), "%d%%", GetTankDistance(roundNumber));
+	else
+		Format(tank, sizeof(tank), "%s", "固定");
+	return tank;
+}
+
+//获取女巫路程
+char[] GetWitchPercent()
+{
+	char witch[16];
+	int roundNumber = GameRules_GetProp("m_bInSecondHalfOfRound");
+	if(L4D2Direct_GetVSWitchToSpawnThisRound(roundNumber))
+		Format(witch, sizeof(witch), "%d%%", GetWitchDistance(roundNumber));
+	else
+		Format(witch, sizeof(witch), "%s", "固定");
+	return witch;
 }
