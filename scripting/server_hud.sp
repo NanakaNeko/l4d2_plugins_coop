@@ -43,7 +43,7 @@ static int g_iFailCount;
 ConVar hud_style, versus_boss_buffer;
 KillData g_eData;
 Handle g_hTimer;
-bool g_bflow;
+bool g_bflow, tankInPlay, b_RedHud;
 int g_ihud, g_iPlayerNum, g_iMaxChapters, g_iCurrentChapter;
 
 public Plugin myinfo = 
@@ -51,7 +51,7 @@ public Plugin myinfo =
 	name = "Server Info Hud",
 	author = "sorallll,豆瓣酱な,奈",
 	description = "结合sorallll和豆瓣酱な制作的hud",
-	version = "1.2.0",
+	version = "1.2.1",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -75,6 +75,7 @@ public void OnPluginStart()
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	HookEvent("infected_death", Event_InfectedDeath);
 	HookEvent("mission_lost", Event_MissionLost);
+	HookEvent("tank_spawn", TankSpawn, EventHookMode_PostNoCopy);
 	g_ihud = GetConVarInt(hud_style);
 	HookConVarChange(hud_style, CvarChanged);
 
@@ -143,6 +144,8 @@ void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 	}
 
 	g_bflow = true;
+	tankInPlay = false;
+	b_RedHud = false;
 	hud_start();
 }
 
@@ -199,7 +202,10 @@ void TankAndWitchFlow()
 	if(g_bflow)
 		Format(TankAndWitch, sizeof(TankAndWitch), "坦克: [%s]%s女巫: [%s]", GetTankPercent(), GetAddSpacesMax(5, " "), GetWitchPercent());
 
-	HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", GetCurDistance(), GetAddSpacesMax(5, " "), TankAndWitch);
+	if(b_RedHud)
+		HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT|HUD_FLAG_BLINK, "路程: [%d%%]%s%s", GetCurDistance(), GetAddSpacesMax(5, " "), TankAndWitch);
+	else
+		HUDSetLayout(HUD_SCORE_1, HUD_FLAG_TEXT|HUD_FLAG_NOBG|HUD_FLAG_ALIGN_LEFT, "路程: [%d%%]%s%s", GetCurDistance(), GetAddSpacesMax(5, " "), TankAndWitch);
 	HUDPlace(HUD_SCORE_1, 0.02, 0.00, 1.0, 0.03);
 }
 
@@ -259,6 +265,10 @@ Action tmrUpdate3(Handle timer)
 void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast) 
 {
 	int victim = GetClientOfUserId(event.GetInt("userid"));
+
+	if (IsTank(victim))
+		CreateTimer(0.1, Timer_CheckTank);
+
 	if (!victim || !IsClientInGame(victim) || GetClientTeam(victim) != 3)
 		return;
 
@@ -267,6 +277,29 @@ void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast)
 		return;
 
 	g_eData.TotalSI++;
+}
+
+public void TankSpawn(Event event, const char[] name, bool dontBroadcast) 
+{
+	if (!tankInPlay)
+	{
+		int client = GetClientOfUserId(GetEventInt(event, "userid"));
+		tankInPlay = true;
+		if (IsTank(client) && IsPlayerAlive(client))
+			b_RedHud = true;
+	}
+}
+
+public Action Timer_CheckTank(Handle timer)
+{
+	int tankclient = FindTankClient();
+	if (!tankclient || !IsPlayerAlive(tankclient))
+	{
+		tankInPlay = false;
+		b_RedHud = false;
+	}
+
+	return Plugin_Stop;
 }
 
 //小僵尸击杀数量
@@ -435,4 +468,31 @@ char[] GetWitchPercent()
 	else
 		Format(witch, sizeof(witch), "%s", "固定");
 	return witch;
+}
+
+int FindTankClient()
+{
+	for (int i = 1; i <= MaxClients; i++)
+	{
+		if (!IsTank(i) || !IsPlayerAlive(i))
+			continue;
+		
+		return i;
+	}
+	return 0;
+}
+
+stock bool IsValidClient(int client)
+{
+	return client > 0 && client <= MaxClients && IsClientInGame(client);
+}
+
+stock bool IsInfected(int client)
+{
+	return IsValidClient(client) && GetClientTeam(client) == 3;
+}
+
+stock bool IsTank(int client)
+{
+	return IsInfected(client) && GetEntProp(client, Prop_Send, "m_zombieClass") == 8;
 }
