@@ -22,7 +22,7 @@ public Plugin myinfo =
 	name = "[L4D2]时长检测",
 	author = "奈",
 	description = "display time",
-	version = "1.2",
+	version = "1.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -59,7 +59,7 @@ public Action Display_AllTime(int client, int args)
 		if(IsValidClient(i) && !IsFakeClient(i))
 		{
 			GetPlayerTime(i);
-			DisplayTime(i);
+			DisplayTime2(client, i);
 		}
 	}
 	
@@ -82,6 +82,14 @@ void DisplayTime(int client)
 		CPrintToChatAll("{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}总游玩时间:{green}%.1f小时{olive}(实际:{green}%.1f小时{olive}),最近两周时间:{green}%.1f小时",client, player[client].totalplaytime/60.0, player[client].realplaytime/60.0, player[client].last2weektime/60.0);
 	else
 		CPrintToChatAll("{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}游玩时间:{green}未知",client);
+}
+
+void DisplayTime2(int show, int client)
+{
+	if(player[client].totalplaytime || player[client].realplaytime || player[client].last2weektime)
+		CPrintToChat(show, "{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}总游玩时间:{green}%.1f小时{olive}(实际:{green}%.1f小时{olive}),最近两周时间:{green}%.1f小时",client, player[client].totalplaytime/60.0, player[client].realplaytime/60.0, player[client].last2weektime/60.0);
+	else
+		CPrintToChat(show, "{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}游玩时间:{green}未知",client);
 }
 
 void GetPlayerTime(int client)
