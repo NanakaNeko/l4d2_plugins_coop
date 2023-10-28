@@ -22,19 +22,20 @@ public Plugin myinfo =
 	name = "[L4D2]时长检测",
 	author = "奈",
 	description = "display time",
-	version = "1.1",
+	version = "1.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
-	RegConsoleCmd("sm_time", Display_Time);
+	RegConsoleCmd("sm_time", Display_Time, "查询自己游戏时间");
+	RegConsoleCmd("sm_alltime", Display_AllTime, "查询所有人游戏时间");
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
 
 public void OnClientPostAdminCheck(int client)
 {
-	if(IsClientConnected(client) && !IsFakeClient(client) && !player[client].Displayed)
+	if(IsValidClient(client) && !IsFakeClient(client) && !player[client].Displayed)
 	{
 		GetPlayerTime(client);
 		CreateTimer(3.0, announcetime, client);
@@ -43,7 +44,7 @@ public void OnClientPostAdminCheck(int client)
 
 public Action Display_Time(int client, int args)
 {
-	if(IsClientConnected(client) && !IsFakeClient(client))
+	if(IsValidClient(client) && !IsFakeClient(client))
 	{
 		GetPlayerTime(client);
 		DisplayTime(client);
@@ -51,9 +52,23 @@ public Action Display_Time(int client, int args)
 	return Plugin_Handled;
 }
 
+public Action Display_AllTime(int client, int args)
+{
+	for(int i = 1; i <= MaxClients; i++)
+	{
+		if(IsValidClient(i) && !IsFakeClient(i))
+		{
+			GetPlayerTime(i);
+			DisplayTime(i);
+		}
+	}
+	
+	return Plugin_Handled;
+}
+
 public Action announcetime(Handle timer, int client)
 {
-	if(IsClientConnected(client) && !IsFakeClient(client))
+	if(IsValidClient(client) && !IsFakeClient(client))
 	{
 		DisplayTime(client);
 		player[client].Displayed = true;
@@ -208,4 +223,9 @@ public void Event_PlayerDisconnect(Event event, const char[] name, bool dontBroa
 	player[client].realplaytime = 0;
 	player[client].last2weektime = 0;
 	player[client].Displayed = false;
+}
+
+stock bool IsValidClient(int client)
+{
+	return client > 0 && client <= MaxClients && IsClientInGame(client);
 }
