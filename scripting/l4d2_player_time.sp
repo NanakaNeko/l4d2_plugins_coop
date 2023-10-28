@@ -4,26 +4,25 @@
 #include <ripext>
 #include <colors>
 
-#define HOST_PATH "http://api.steampowered.com"
-#define TOTAL_PLAYTIME_URL "IPlayerService/GetOwnedGames/v1/?format=json&appids_filter[0]=550"
-#define REAL_PLAYTIME_URL "ISteamUserStats/GetUserStatsForGame/v2/?appid=550"
-#define VALVEKEY "C7B3FC46E6E6D5C87700963F0688FCB4"
+#define HOST_PATH					"http://api.steampowered.com"
+#define TOTAL_PLAYTIME_URL			"IPlayerService/GetOwnedGames/v1/?format=json&appids_filter[0]=550"
+#define REAL_PLAYTIME_URL			"ISteamUserStats/GetUserStatsForGame/v2/?appid=550"
+#define VALVEKEY					"C7B3FC46E6E6D5C87700963F0688FCB4"
 
-enum struct PlayerStruct
-{
+enum struct PlayerStruct {
 	int totalplaytime;
 	int realplaytime;
 	int last2weektime;
 	bool Displayed;
 }
-PlayerStruct player[32];
+PlayerStruct player[MAXPLAYERS + 1];
 
 public Plugin myinfo =
 {
-	name = "[L4D2]时长提示",
+	name = "[L4D2]时长检测",
 	author = "奈",
 	description = "display time",
-	version = "1.0",
+	version = "1.1",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -44,12 +43,12 @@ public void OnClientPostAdminCheck(int client)
 
 public Action Display_Time(int client, int args)
 {
-    if(IsClientConnected(client) && !IsFakeClient(client))
+	if(IsClientConnected(client) && !IsFakeClient(client))
 	{
 		GetPlayerTime(client);
 		DisplayTime(client);
 	}
-    return Plugin_Handled;
+	return Plugin_Handled;
 }
 
 public Action announcetime(Handle timer, int client)
@@ -65,9 +64,9 @@ public Action announcetime(Handle timer, int client)
 void DisplayTime(int client)
 {
 	if(player[client].totalplaytime || player[client].realplaytime || player[client].last2weektime)
-		CPrintToChatAll("{default}[{olive}时长检测{default}] 玩家 {blue}%N {default}总游玩时间: {green}%.1f小时{default}(实际:{green}%.1f小时{default}), 最近两周时间:{green}%.1f小时{default}",client, player[client].totalplaytime/60.0, player[client].realplaytime/60.0, player[client].last2weektime/60.0);
+		CPrintToChatAll("{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}总游玩时间:{green}%.1f小时{olive}(实际:{green}%.1f小时{olive}),最近两周时间:{green}%.1f小时",client, player[client].totalplaytime/60.0, player[client].realplaytime/60.0, player[client].last2weektime/60.0);
 	else
-		CPrintToChatAll("{default}[{olive}时长检测{default}] 玩家 {blue}%N {default}游玩时间: {green}未知",client);
+		CPrintToChatAll("{default}[{green}时长检测{default}] {olive}玩家{blue}%N{olive}游玩时间:{green}未知",client);
 }
 
 void GetPlayerTime(int client)
@@ -93,10 +92,9 @@ public Action GetRealTime(Handle hTimer, int client)
 	return Plugin_Continue;
 }
 
+//获取总游戏时长
 public void HTTPResponse_GetOwnedGames(HTTPResponse response, int client)
 {
-	//LogError("获取总游戏时长");
-	
 	if (response.Status != HTTPStatus_OK || response.Data == null)
 	{
 		LogError("Failed to retrieve response (GetOwnedGames) - HTTPStatus: %i", view_as<int>(response.Status));
@@ -131,11 +129,11 @@ public void HTTPResponse_GetOwnedGames(HTTPResponse response, int client)
 	// playtime is formatted in minutes
 	player[client].totalplaytime = dataObj.GetInt("playtime_forever");
 	player[client].last2weektime = dataObj.GetInt("playtime_2weeks");
-	//LogError("%i %i", player[client].totalplaytime, player[client].last2weektime);
 	delete jsonArray;
 	delete dataObj;
 }
 
+//获取真实时间
 public void HTTPResponse_GetUserStatsForGame(HTTPResponse response, int client)
 {	
 	if (response.Status != HTTPStatus_OK || response.Data == null)
