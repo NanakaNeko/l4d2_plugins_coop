@@ -41,7 +41,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本) 无个人信息统计", 
-	version = "1.3.3-b", 
+	version = "1.3.3-b1", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -601,13 +601,14 @@ public int MedicalMenu_back(Menu menu, MenuAction action, int client, int param)
 {
 	if(judge(client))
 		return 0;
-	if(player[client].ClientPoint == 0){
-		CPrintToChat(client, "{default}[{green}!{default}] {blue}点数不足!");
-		return 0;
-	}
 
 	if (action == MenuAction_Select)
 	{
+		if(player[client].ClientPoint == 0) {
+		CPrintToChat(client, "{default}[{green}!{default}] {blue}点数不足!");
+		return 0;
+		}
+
 		switch (param) 
 		{ 
 			case 0: //止痛药
@@ -712,13 +713,14 @@ public int SundryMenu_back(Menu menu, MenuAction action, int client, int param)
 {
 	if(judge(client))
 		return 0;
-	if(player[client].ClientPoint == 0){
-		CPrintToChat(client, "{default}[{green}!{default}] {blue}点数不足!");
-		return 0;
-	}
 
 	if (action == MenuAction_Select)
 	{
+		if(player[client].ClientPoint == 0) {
+		CPrintToChat(client, "{default}[{green}!{default}] {blue}点数不足!");
+		return 0;
+		}
+
 		switch (param) 
 		{ 
 			case 0: //子弹
