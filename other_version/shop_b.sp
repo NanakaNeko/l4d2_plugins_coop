@@ -41,7 +41,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本) 无个人信息统计", 
-	version = "1.3.3-b1", 
+	version = "1.3.3-b2", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -1152,7 +1152,7 @@ public Action BuyPill(int client,int args)
 		CPrintToChat(client, "{default}[{green}!{default}] {olive}商店未开启");
 		return Plugin_Handled;
 	}
-	if(cv_Medical.BoolValue)
+	if(!cv_Medical.BoolValue)
 	{
 		CPrintToChat(client, "{default}[{green}!{default}] {olive}医疗物品购买未开启");
 		return Plugin_Handled;
