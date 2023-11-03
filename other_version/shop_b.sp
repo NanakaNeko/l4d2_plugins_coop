@@ -41,7 +41,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本) 无个人信息统计", 
-	version = "1.3.3-b2", 
+	version = "1.3.3-b3", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -230,7 +230,7 @@ public void Event_player_death(Event event, const char []name, bool dontBroadcas
 }
 
 //回合开始或失败重开重置次数
-public Action Event_Reset(Event event, const char []name, bool dontBroadcast)
+void Event_Reset(Event event, const char []name, bool dontBroadcast)
 {
 	for(int client = 1; client <= MaxClients; client++){
 		player[client].ClientWeapon = 0;
@@ -238,12 +238,13 @@ public Action Event_Reset(Event event, const char []name, bool dontBroadcast)
 		player[client].CanBuyMedical = true;
 		player[client].ClientTransmit = 0;
 	}
-	return Plugin_Continue;
 }
 
 //玩家通关救援奖励1点数
-public Action Event_RewardPoint(Event event, const char []name, bool dontBroadcast)
+void Event_RewardPoint(Event event, const char []name, bool dontBroadcast)
 {
+	if(b_Disable)
+		return;
 	for(int client = 1; client <= MaxClients; client++){
 		if(IsClientConnected(client) && IsClientInGame(client) && !IsFakeClient(client) && GetClientTeam(client) == 2)
 		{
@@ -264,12 +265,13 @@ public Action Event_RewardPoint(Event event, const char []name, bool dontBroadca
 			}
 		}
 	}
-	return Plugin_Continue;
 }
 
 // 秒妹加点
-public Action Event_WitchKilled(Event event, const char[] name, bool dontBroadcast)
+void Event_WitchKilled(Event event, const char[] name, bool dontBroadcast)
 {
+	if(b_Disable)
+		return;
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if (!NoValidPlayer(client) && GetClientTeam(client) == 2){
 		if(player[client].ClientPoint < i_MaxPoint){
@@ -281,12 +283,13 @@ public Action Event_WitchKilled(Event event, const char[] name, bool dontBroadca
 		else
 			CPrintToChat(client, "{default}[{green}!{default}] {olive}点数到达上限{blue} %d {olive}点", i_MaxPoint);
 	}
-	return Plugin_Continue;
 }
 
 // 击杀坦克加点
-public Action Event_TankKilled(Event event, const char[] name, bool dontBroadcast)
+void Event_TankKilled(Event event, const char[] name, bool dontBroadcast)
 {
+	if(b_Disable)
+		return;
 	int client = GetClientOfUserId(event.GetInt("attacker"));
 	if (!NoValidPlayer(client) && GetClientTeam(client) == 2){
 		if(player[client].ClientPoint < i_MaxPoint){
@@ -298,7 +301,6 @@ public Action Event_TankKilled(Event event, const char[] name, bool dontBroadcas
 		else
 			CPrintToChat(client, "{default}[{green}!{default}] {olive}点数到达上限{blue} %d {olive}点", i_MaxPoint);
 	}
-	return Plugin_Continue;
 }
 
 void CheckMaxPoint(int client)
