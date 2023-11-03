@@ -8,7 +8,7 @@
 #define UNLOCK 0
 #define LOCK 1
 
-ConVar sb_unstick, cv_LockDoorEnable, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
+ConVar sb_unstick, cv_LockDoorEnable, cv_ForceLockDoor, cv_MinSurvivorPercent, cv_TimeUnlockDoor, cv_TankAliveLock;
 int g_iEndCheckpointDoor, i_MinSurvivorPercent, i_TimeUnlockDoor, tmrNum;
 bool b_FinalMap, b_UnlockDoor, b_TankAliveLock, b_CTimer;
 
@@ -17,13 +17,14 @@ public Plugin myinfo =
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0.4",
+	version = "1.0.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
 	cv_LockDoorEnable = CreateConVar("lock_door_enable", "1", "开关插件 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_ForceLockDoor = CreateConVar("lock_door_force", "0", "锁死安全门 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "70", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
 	cv_TimeUnlockDoor = CreateConVar("unlock_door_time", "5", "需要几秒解锁安全门", FCVAR_NOTIFY, true, 0.0);
 	cv_TankAliveLock = CreateConVar("lock_door_tank_alive", "1", "当前场上有存活坦克是否锁定安全门 1:锁定 0:不锁定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -79,7 +80,13 @@ Action tmrStart(Handle timer)
 
 Action OnUse_EndCheckpointDoor(int door, int client, int caller, UseType type, float value)
 {
-	if(!cv_LockDoorEnable.BoolValue)
+	if (cv_ForceLockDoor.BoolValue)
+	{
+		PrintHintTextToAll("安全门已锁死, 无法打开!");
+		return Plugin_Handled;
+	}
+
+	if (!cv_LockDoorEnable.BoolValue)
 		return Plugin_Continue;
 
 	if (b_FinalMap)
