@@ -46,8 +46,8 @@ public void OnPluginStart()
 	g_hFallSpeedSafe.AddChangeHook(IsConVarChanged);
 	g_hFallSpeedFatal.AddChangeHook(IsConVarChanged);
 
-	RegConsoleCmd("sm_zs", Kill_Survivor, "幸存者自杀指令");
-	RegConsoleCmd("sm_kill", Kill_Survivor, "幸存者自杀指令");
+	RegConsoleCmd("sm_zs", Kill_Player, "自杀指令");
+	RegConsoleCmd("sm_kill", Kill_Player, "自杀指令");
 }
 
 //地图开始.
@@ -207,19 +207,32 @@ public void Event_Incapacitate(Event event, const char[] name, bool dontBroadcas
 	}
 }
 
-public Action Kill_Survivor(int client, int args)
+public Action Kill_Player(int client, int args)
 {
 	if(IsAliveSurvivor(client))
 	{
 		ForcePlayerSuicide(client);
-		CPrintToChatAll("{default}[{green}!{default}] {blue}%N {olive}失去梦想,升天了", client);
+		CPrintToChatAll("{default}[{green}!{default}] {olive}生还者 {blue}%N {olive}失去梦想,寄了", client);
 	}
+	else if(IsAliveInfected(client))
+	{
+		ForcePlayerSuicide(client);
+		CPrintToChatAll("{default}[{green}!{default}] {olive}感染者 {red}%N {olive}失去梦想,凉了", client);
+	}
+	else
+		CPrintToChat(client, "{default}[{green}!{default}] {olive}当前状态无法自杀");
+
 	return Plugin_Handled;
 }
 
-stock bool IsAliveSurvivor(int i)
+stock bool IsAliveSurvivor(int client)
 {
-    return i > 0 && i <= MaxClients && !IsFakeClient(i) && IsClientInGame(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2;
+    return IsValidClient(client) && !IsFakeClient(client) && IsPlayerAlive(client) && GetClientTeam(client) == 2;
+}
+
+stock bool IsAliveInfected(int client)
+{
+    return IsValidClient(client) && !IsFakeClient(client) && IsPlayerAlive(client) && GetClientTeam(client) == 3;
 }
 
 bool IsValidClient(int client)
