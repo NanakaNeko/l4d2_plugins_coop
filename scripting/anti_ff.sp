@@ -13,7 +13,7 @@ public Plugin myinfo =
 	name = "[L4D2]友伤惩罚",
 	author = "奈",
 	description = "友伤到达一定值惩罚攻击者",
-	version = "1.4",
+	version = "1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -82,26 +82,6 @@ void FriendlyFireCheck(int client)
 	}
 }
 
-//换图重置
-public void OnMapStart()
-{
-	for (int i = 1; i <= MaxClients + 1; i++)
-	{
-		if (IsValidPlayer(i) && !IsFakeClient(i) && GetClientTeam(i) == 2)
-			CreateTimer(5.0, ResetFriendlyFireCount, i);
-	}
-}
-
-//回合开始重置
-public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
-{
-	for (int i = 1; i <= MaxClients + 1; i++)
-	{
-		if (IsValidPlayer(i) && !IsFakeClient(i) && GetClientTeam(i) == 2)
-			CreateTimer(5.0, ResetFriendlyFireCount, i);
-	}
-}
-
 //重置友伤计算
 Action ResetFriendlyFireCount(Handle timer, int client)
 {
@@ -113,6 +93,28 @@ Action ResetFriendlyFireCount(Handle timer, int client)
 		//PrintToChatAll("\x04[提示] \x03队友伤害计算次数已重置");
 	}
 	return Plugin_Stop;
+}
+
+//换图重置
+public void OnMapStart()
+{
+	ResetFF();
+}
+
+//回合开始重置
+public void Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
+{
+	ResetFF();
+}
+
+void ResetFF()
+{
+	for(int i = 1; i <= MaxClients + 1; i++)
+	{
+		FriendlyFire[i] = 0;
+		IsIncap[i] = false;
+		IsSuicide[i] = false;
+	}
 }
 
 stock bool IsValidPlayer(int client)
