@@ -24,7 +24,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	cv_LockDoorEnable = CreateConVar("lock_door_enable", "1", "开关插件 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	cv_ForceLockDoor = CreateConVar("lock_door_force", "0", "锁死安全门 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_ForceLockDoor = CreateConVar("lock_door_force", "0", "锁死终点安全门无法打开 0:关闭 1:开启", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_MinSurvivorPercent = CreateConVar("lock_door_persent", "70", "百分之多少人可以打开安全门 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 100.0);
 	cv_TimeUnlockDoor = CreateConVar("unlock_door_time", "5", "需要几秒解锁安全门", FCVAR_NOTIFY, true, 0.0);
 	cv_TankAliveLock = CreateConVar("lock_door_tank_alive", "1", "当前场上有存活坦克是否锁定安全门 1:锁定 0:不锁定", FCVAR_NOTIFY, true, 0.0, true, 1.0);

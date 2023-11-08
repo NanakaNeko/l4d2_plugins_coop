@@ -4,8 +4,6 @@
 #include <sourcemod>
 #include <builtinvotes>
 #include <colors>
-#undef REQUIRE_PLUGIN
-
 
 public Plugin myinfo =
 {

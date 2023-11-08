@@ -118,11 +118,13 @@ public void evt_TankSpawn(Event event, const char[] name, bool dontBroadcast)
 	static int i;
 	for (i = 1; i <= MaxClients; i++)
 	{
-		if (IsClientInGame(i) && !IsFakeClient(i) && GetClientTeam(i) != TEAM_SURVIVOR && hiddenPanel[i])
-			PrintToChat(i, "\x04[TankHUD] \x05输入\x04!tankhud\x03打开\x05坦克状态面板");
-		
-		if (IsClientInGame(i) && !IsFakeClient(i) && GetClientTeam(i) != TEAM_SURVIVOR && !hiddenPanel[i])
-			PrintToChat(i, "\x04[TankHUD] \x05输入\x04!tankhud\x03关闭\x05坦克状态面板");
+		if (IsClientInGame(i) && !IsFakeClient(i) && GetClientTeam(i) != TEAM_SURVIVOR)
+		{
+			if(hiddenPanel[i])
+				PrintToChat(i, "\x04[TankHUD] \x05输入\x04!tankhud\x03打开\x05坦克状态面板");
+			else
+				PrintToChat(i, "\x04[TankHUD] \x05输入\x04!tankhud\x03关闭\x05坦克状态面板");
+		}
 	}
 }
 

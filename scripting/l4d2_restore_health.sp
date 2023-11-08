@@ -12,15 +12,15 @@ public Plugin myinfo =
 	name = "[L4D2]通关回血",
 	author = "奈",
 	description = "过关所有人回满血",
-	version = "1.1",
+	version = "1.2",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 
 public void OnPluginStart()
 {
-	cv_restore_health = CreateConVar("l4d2_restore_health_flag", "0", "开关回血判定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	HookEvent("map_transition", ResetSurvivors, EventHookMode_Post);
+	cv_restore_health = CreateConVar("l4d2_restore_health_flag", "1", "开关回血判定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	HookEvent("map_transition", ResetSurvivors, EventHookMode_Pre);
 	HookConVarChange(cv_restore_health, CvarChange);
 }
 
