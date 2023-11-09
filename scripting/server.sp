@@ -14,15 +14,42 @@ ConVar
 
 int ChangeName[MAXPLAYERS + 1];
 StringMap g_smSteamIDs;
-bool g_bDebugMode;
+bool g_bDebugMode, g_bChangeLevel;
 char g_sLogPath[PLATFORM_MAX_PATH];
+
+native void L4D2_ChangeLevel(const char[] map);
+public void OnLibraryAdded(const char[] name)
+{
+	if (strcmp(name, "l4d2_changelevel") == 0)
+		g_bChangeLevel = true;
+}
+
+public void OnLibraryRemoved(const char[] name)
+{
+	if (strcmp(name, "l4d2_changelevel") == 0)
+		g_bChangeLevel = false;
+}
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	MarkNativeAsOptional("L4D2_ChangeLevel");
+
+	EngineVersion game = GetEngineVersion();
+	if (game!=Engine_Left4Dead2)
+	{
+		strcopy(error, err_max, "本插件只支持 Left 4 Dead 2");
+		return APLRes_SilentFailure;
+	}
+
+	return APLRes_Success;
+}
 
 public Plugin myinfo =
 {
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.5",
+	version = "1.2.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -213,7 +240,7 @@ public Action RestartMap(int client,int args)
 {
 	char mapname[64];
 	GetCurrentMap(mapname, sizeof(mapname));
-	ServerCommand("changelevel %s", mapname);
+	ChangeLevel(mapname);
 	return Plugin_Handled;
 }
 
@@ -228,8 +255,16 @@ public Action Timer_Restartmap(Handle timer)
 {
 	char mapname[64];
 	GetCurrentMap(mapname, sizeof(mapname));
-	ServerCommand("changelevel %s", mapname);
+	ChangeLevel(mapname);
 	return Plugin_Handled;
+}
+
+void ChangeLevel(const char[] map)
+{
+	if (g_bChangeLevel)
+		L4D2_ChangeLevel(map);
+	else
+		ServerCommand("changelevel %s", map);
 }
 
 //调试模式，感谢sorallll
