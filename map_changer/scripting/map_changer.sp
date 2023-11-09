@@ -122,7 +122,7 @@ public void OnPluginStart() {
 	CreateConVar("map_changer_version", PLUGIN_VERSION, "Map Changer plugin version.", FCVAR_NOTIFY|FCVAR_DONTRECORD);
 
 	g_cvFinaleChangeType = 		CreateConVar("mapchanger_finale_change_type",		"12",	"0 - 终局不换地图(返回大厅); 1 - 救援载具离开时; 2 - 终局获胜时; 4 - 统计屏幕出现时; 8 - 统计屏幕结束时", CVAR_FLAGS);
-	g_cvFinaleFailureCount =	CreateConVar("mapchanger_finale_failure_count",		"999",	"终局团灭几次自动换到下一张图", CVAR_FLAGS);
+	g_cvFinaleFailureCount =	CreateConVar("mapchanger_finale_failure_count",		"0",	"终局团灭几次自动换到下一张图", CVAR_FLAGS);
 	g_cvFinaleRandomNextMap =	CreateConVar("mapchanger_finale_random_nextmap",	"0",	"终局是否启用随机下一关地图", CVAR_FLAGS);
 	g_cvFinaleChangeType.AddChangeHook(CvarChanged);
 	g_cvFinaleFailureCount.AddChangeHook(CvarChanged);
