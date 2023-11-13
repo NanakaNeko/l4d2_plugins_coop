@@ -60,13 +60,14 @@ public Plugin myinfo =
 	name 			= "Survivor Mvp & Round Status",
 	author 			= "夜羽真白, 奈",
 	description 	= "生还者 MVP 统计",
-	version 		= "2023-07-26(2)",
+	version 		= "2023-07-26(3)",
 	url 			= "https://steamcommunity.com/id/saku_ra/"
 }
 
 ConVar
 	g_hAllowShowMvp,
 	g_hWhichTeamToShow,
+	g_hAllowShowInfo,
 	g_hAllowShowSi,
 	g_hAllowShowCi,
 	g_hAllowShowFF,
@@ -94,6 +95,7 @@ public void OnPluginStart()
 	g_hAllowShowMvp = CreateConVar("mvp_allow_show", "1", "是否启用插件", CVAR_FLAG, true, 0.0, true, 1.0);
 
 	g_hWhichTeamToShow = CreateConVar("mvp_witch_team_show", "0", "允许给哪个团队显示 MVP 信息 (0: 所有团队, 1: 仅旁观者团队, 2: 仅生还者团队, 3: 仅特感团队)", CVAR_FLAG, true, 0.0, true, 3.0);
+	g_hAllowShowInfo = CreateConVar("mvp_allow_show_info", "1", "是否允许显示所有人详细数据", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowSi = CreateConVar("mvp_allow_show_si", "1", "是否允许显示特感击杀信息", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowCi = CreateConVar("mvp_allow_show_ci", "1", "是否允许显示丧尸击杀信息", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowFF = CreateConVar("mvp_allow_show_ff", "1", "是否允许显示黑枪与被黑信息", CVAR_FLAG, true, 0.0, true, 1.0);
@@ -158,7 +160,9 @@ public Action showMvpHandler(int client, int args)
 		CPrintToChat(client, "{blue}[{default}MVP{blue}]: {default}当前生还者 MVP 统计数据不允许向感染者显示");
 		return Plugin_Handled;
 	}
-	printMvpStatus(client);
+	if (g_hAllowShowInfo.BoolValue) {
+		printMvpStatus(client);
+	}
 	if (g_hAllowShowDetails.BoolValue) {
 		printParticularMvp(client);
 	}
@@ -288,10 +292,12 @@ void roundEndPrint() {
 			}
 		}
 
-		if (g_bHasPrint) {
-			break;
+		if (g_hAllowShowInfo.BoolValue) {
+			if (g_bHasPrint) {
+				break;
+			}
+			printMvpStatus(i);
 		}
-		printMvpStatus(i);
 		
 		if (g_hAllowShowDetails.BoolValue) {
 			if (g_bHasPrintDetails) {
@@ -300,8 +306,9 @@ void roundEndPrint() {
 			printParticularMvp(i);
 		}
 	}
-
-	g_bHasPrint = true;
+	if (g_hAllowShowInfo.BoolValue) {
+		g_bHasPrint = true;
+	}
 	if (g_hAllowShowDetails.BoolValue) {
 		g_bHasPrintDetails = true;
 	}
