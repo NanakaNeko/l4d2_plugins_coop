@@ -41,7 +41,7 @@
 |               [**shop**](./scripting/shop.sp)                | 采用sqlite数据库保存数据，功能和shop一样  <br/>1.1.1 重构代码，数据库增加点数，救援关通关加1点，增加医疗物品和投掷物品的购买  <br/>1.1.3 增加死亡重置次数开关，增加医疗物品购买上限，提供设置获取点数cvar  <br/>1.2.0 增加击杀坦克和女巫获取点数  <br/>1.2.2 增加传送菜单  <br/>1.2.7 投掷修改为杂项，增加激光瞄准<br/>1.3.1 杂项增加子弹补充<br/>1.3.2 增加快捷买药，随机单喷<br/>1.3.4 增加inc文件提供其他插件支持，个人信息面板，显示累计得分，击杀僵尸、特感、坦克、女巫数量<br/>1.3.6 增加爆头率、累计黑枪<br/>1.3.8 新增服务器游玩时长统计<br/>安装过插件的，建议删除data/sqlite文件夹下的数据库文件，再更新插件重建数据库表 |
 |          [**shop_lite**](./scripting/shop_lite.sp)           | 商店插件说明:  <br/>每关提供几次机会白嫖部分武器，cvar可自行设定每关几次  <br/>!buy !gw打开商店面板  <br/>!chr快速选铁喷，!pum快速选木喷，!uzi快速选uzi，!smg快速选smg  <br/>!ammo补充后备弹夹，cvar设置多长时间补充一次  <br/>增加出门近战发放，读取steamid写入data/melee.txt文件，再次进服自动加载之前选择  <br/>增加一个cvar控制开关商店  <br/>2.0新增管理员指令开关商店，!shop off关闭商店，!shop on打开商店，!shop查看当前商店开关情况  <br/>2.1新增白嫖近战菜单 |
 |         [**slots_vote**](./scripting/slots_vote.sp)          | 投票增加最大人数，管理直接修改，玩家投票修改                 |
-|       [**survivor_mvp**](./scripting/survivor_mvp.sp)        | 基于 [survivor_mvp](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/SurvivorMVP) 修改，删除部分依赖，修改配色 |
+|       [**survivor_mvp**](./scripting/survivor_mvp.sp)        | 基于 [survivor_mvp](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/SurvivorMVP) 修改，删除部分依赖，修改配色，细化rank排名，增加cvar控制 |
 |           [**taketank**](./scripting/taketank.sp)            | 战役模式输入!pb加入接管坦克候选池，随机抽取一个玩家接管坦克，管理员输入!tt接管AI坦克 |
 |            [**tankhud**](./scripting/tankhud.sp)             | 不限制模式显示坦克状态，仅限旁观和特感，删除部分依赖，使插件通用在服务器 |
 |               [**vote**](./scripting/vote.sp)                | Anne的投票加载cfg和指令，删除数据库相关功能，仅保留投票和踢人 |

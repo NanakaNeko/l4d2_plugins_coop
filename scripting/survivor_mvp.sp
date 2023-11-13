@@ -58,9 +58,9 @@ static char
 public Plugin myinfo = 
 {
 	name 			= "Survivor Mvp & Round Status",
-	author 			= "夜羽真白",
+	author 			= "夜羽真白, 奈",
 	description 	= "生还者 MVP 统计",
-	version 		= "2023-07-26",
+	version 		= "2023-07-26(2)",
 	url 			= "https://steamcommunity.com/id/saku_ra/"
 }
 
@@ -74,7 +74,11 @@ ConVar
 	g_hAllowShowAccuracy,
 	g_hAllowShowFailCount,
 	g_hAllowShowDetails,
-	g_hAllowShowRank;
+	g_hAllowShowRank,
+	g_hAllowShowRankMvp,
+	g_hAllowShowRankSI,
+	g_hAllowShowRankCI,
+	g_hAllowShowRankFF;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) {
 	EngineVersion test = GetEngineVersion();
@@ -94,11 +98,16 @@ public void OnPluginStart()
 	g_hAllowShowCi = CreateConVar("mvp_allow_show_ci", "1", "是否允许显示丧尸击杀信息", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowFF = CreateConVar("mvp_allow_show_ff", "1", "是否允许显示黑枪与被黑信息", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowTotalDmg = CreateConVar("mvp_allow_show_damage", "1", "是否允许显示总伤害信息", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hAllowShowAccuracy = CreateConVar("mvp_allow_show_acc", "1", "是否允许显示准确度信息", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hAllowShowAccuracy = CreateConVar("mvp_allow_show_acc", "1", "是否允许显示爆头信息", CVAR_FLAG, true, 0.0, true, 1.0);
 
 	g_hAllowShowFailCount = CreateConVar("mvp_show_fail_count", "1", "是否在团灭时显示团灭次数", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hAllowShowDetails = CreateConVar("mvp_show_details", "1", "是否在过关或团灭时显示各项 MVP 数据 (每项 MVP 数据显示与否与 mvp_allow_show_xx Cvar 挂钩, 本 Cvar 关闭所有单项数据均不会显示)", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hAllowShowRank = CreateConVar("mvp_show_your_rank", "1", "显示各项 MVP 数据时是否允许显示你的排名", CVAR_FLAG, true, 0.0, true, 1.0);
+	
+	g_hAllowShowRank = CreateConVar("mvp_show_your_rank", "1", "是否允许显示你的排名 (每项 Rank 数据显示与否与 mvp_allow_show_xx Cvar 挂钩, 本 Cvar 关闭所有单项数据均不会显示)", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hAllowShowRankMvp = CreateConVar("mvp_show_your_rank_mvp", "1", "是否允许在显示各项 MVP 时显示你的排名", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hAllowShowRankSI = CreateConVar("mvp_show_your_rank_si", "1", "是否允许显示你的特感排名", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hAllowShowRankCI = CreateConVar("mvp_show_your_rank_ci", "1", "是否允许显示你的丧尸排名", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hAllowShowRankFF = CreateConVar("mvp_show_your_rank_ff", "1", "是否允许显示你的友伤排名", CVAR_FLAG, true, 0.0, true, 1.0);
 
 	// HookEvents
 	HookEvent("player_death", siDeathHandler);
@@ -111,6 +120,7 @@ public void OnPluginStart()
 	HookEvent("finale_vehicle_leaving", roundEndHandler);
 	// RegConsoleCmd
 	RegConsoleCmd("sm_mvp", showMvpHandler);
+	RegConsoleCmd("sm_rank", showRankHandler);
 }
 
 public void OnMapStart()
@@ -153,6 +163,16 @@ public Action showMvpHandler(int client, int args)
 		printParticularMvp(client);
 	}
 
+	return Plugin_Handled;
+}
+
+public Action showRankHandler(int client, int args)
+{
+	if (!g_hAllowShowRank.BoolValue) {
+		ReplyToCommand(client, "[MVP]：当前生还者 Rank 排名已禁用");
+		return Plugin_Handled;
+	}
+	showRank(client);
 	return Plugin_Handled;
 }
 
@@ -330,7 +350,7 @@ void printMvpStatus(int client)
 			FormatEx(buffer, sizeof(buffer), "{lightgreen}爆头率{green}%.0f%% ", accuracy * 100.0);
 			StrCat(toPrint, sizeof(toPrint), buffer);
 		}
-		FormatEx(buffer, sizeof(buffer), "{olive} - %N", players[i]);
+		FormatEx(buffer, sizeof(buffer), "{olive}%N", players[i]);
 		StrCat(toPrint, sizeof(toPrint), buffer);
 
 		// 打印一个玩家的 MVP 信息
@@ -409,7 +429,7 @@ void printParticularMvp(int client) {
 	}
 	// 允许显示 FF MVP
 	if (g_hAllowShowFF.BoolValue) {
-		FormatEx(buffer, sizeof(buffer), "{blue}[{default}LVP{blue}] 黑枪: ");
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}LVP{blue}] 友伤: ");
 		if (!IsValidClient(ffMvpClient) || ffTotal <= 0) {
 			StrCat(buffer, sizeof(buffer), "{olive}大家都没有黑枪");
 		} else {
@@ -437,31 +457,75 @@ void printParticularMvp(int client) {
 		CPrintToChat(client, "%s", buffer);
 	}
 	// 允许显示你的排名
-	if (g_hAllowShowRank.BoolValue) {
-		// 不是生还者, 不显示排名
-		if (!IsValidSurvivor(client)) {
-			return;
-		}
+	if (g_hAllowShowRank.BoolValue && g_hAllowShowRankMvp.BoolValue) {
+		showRank(client);
+	}
+}
 
-		int rank;
+void showRank(int client)
+{
+	// 不是生还者, 不显示排名
+	if (!IsValidSurvivor(client)) {
+		return;
+	}
+	int dmgTotal, siTotal, ciTotal, ffTotal;
+	for (int i = 1; i <= MaxClients; i++) {
+		// 跳过不是生还者的
+		if (!IsValidClient(i) || GetClientTeam(i) != TEAM_SURVIVOR) {
+			continue;
+		}
+		dmgTotal += playerInfos[i].totalDamage;
+		siTotal += playerInfos[i].siCount;
+		ciTotal += playerInfos[i].ciCount;
+		ffTotal += playerInfos[i].ffCount;
+	}
+	char buffer[128];
+	int rank, dmgPercent, killPercent;
+	if (g_hAllowShowSi.BoolValue && g_hAllowShowRankSI.BoolValue) {
 		rank = GetRank(client, sortBySiCountFunction);
-		if(rank > 0 && playerInfos[client].siCount > 0 && playerInfos[client].totalDamage > 0) {
-			dmgPercent = RoundToNearest(float(playerInfos[client].totalDamage) / float(dmgTotal) * 100.0);
-			killPercent = RoundToNearest(float(playerInfos[client].siCount) / float(siTotal) * 100.0);
-			FormatEx(buffer, sizeof(buffer), "{blue}[{default}Rank{blue}] {olive}特感: {green}#%d {blue}({default}%d {olive}伤害 {blue}[{default}%d%%{blue}]{default}, %d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].totalDamage, dmgPercent, playerInfos[client].siCount, killPercent);
-			CPrintToChat(client, "%s", buffer);
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}Rank{blue}] {olive}特感:");
+		if(rank > 0 && siTotal > 0) {
+			if(rank == 1)
+				CPrintToChat(client, "%s {default}你是本回合 {green}MVP", buffer);
+			else
+			{
+				dmgPercent = RoundToNearest(float(playerInfos[client].totalDamage) / float(dmgTotal) * 100.0);
+				killPercent = RoundToNearest(float(playerInfos[client].siCount) / float(siTotal) * 100.0);
+				CPrintToChat(client, "%s {green}#%d {blue}({default}%d {olive}伤害 {blue}[{default}%d%%{blue}]{default}, %d {olive}击杀 {blue}[{default}%d%%{blue}])", buffer, rank, playerInfos[client].totalDamage, dmgPercent, playerInfos[client].siCount, killPercent);
+			}
 		}
 		else
-			CPrintToChat(client, "{blue}[{default}Rank{blue}] {olive}特感: {green}暂无排名");
-
+			CPrintToChat(client, "%s {green}暂无排名", buffer);
+	}
+	if (g_hAllowShowCi.BoolValue && g_hAllowShowRankCI.BoolValue) {
 		rank = GetRank(client, sortByCiCountFunction);
-		if(rank > 0 && playerInfos[client].ciCount > 0) {
-			killPercent = RoundToNearest(float(playerInfos[client].ciCount) / float(ciTotal) * 100.0);
-			FormatEx(buffer, sizeof(buffer), "{blue}[{default}Rank{blue}] {olive}丧尸: {green}#%d {blue}({default}%d {olive}击杀 {blue}[{default}%d%%{blue}])", rank, playerInfos[client].ciCount, killPercent);
-			CPrintToChat(client, "%s", buffer);
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}Rank{blue}] {olive}丧尸:");
+		if(rank > 0 && ciTotal > 0) {
+			if(rank == 1)
+				CPrintToChat(client, "%s {default}你是本回合 {green}MVP", buffer);
+			else
+			{
+				killPercent = RoundToNearest(float(playerInfos[client].ciCount) / float(ciTotal) * 100.0);
+				CPrintToChat(client, "%s {green}#%d {blue}({default}%d {olive}击杀 {blue}[{default}%d%%{blue}])", buffer, rank, playerInfos[client].ciCount, killPercent);
+			}
 		}
 		else
-			CPrintToChat(client, "{blue}[{default}Rank{blue}] {olive}丧尸: {green}暂无排名");
+			CPrintToChat(client, "%s {green}暂无排名", buffer);
+	}
+	if (g_hAllowShowFF.BoolValue && g_hAllowShowRankFF.BoolValue) {
+		rank = GetRank(client, sortByFriendlyFireFunction);
+		FormatEx(buffer, sizeof(buffer), "{blue}[{default}Rank{blue}] {olive}友伤:");
+		if(rank > 0 && ffTotal > 0) {
+			if(rank == 1)
+				CPrintToChat(client, "%s {default}你是本回合 {green}LVP", buffer);
+			else
+			{
+				killPercent = RoundToNearest(float(playerInfos[client].ffCount) / float(ffTotal) * 100.0);
+				CPrintToChat(client, "%s {green}#%d {blue}({default}%d {olive}友伤 {blue}[{default}%d%%{blue}])", buffer, rank, playerInfos[client].ffCount, killPercent);
+			}
+		}
+		else
+			CPrintToChat(client, "%s {green}暂无排名", buffer);
 	}
 }
 
