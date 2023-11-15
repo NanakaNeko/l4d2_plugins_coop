@@ -17,7 +17,7 @@ public Plugin myinfo =
 	name = "[L4D2]终点安全门锁定",
 	author = "奈",
 	description = "Locks Saferoom Door Until Enough People Open It.",
-	version = "1.0.5",
+	version = "1.0.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -183,7 +183,6 @@ void InitDoor()
 	if(g_iEndCheckpointDoor == -1)
 	{
 		g_iEndCheckpointDoor = FindEndSafeRoomDoor();
-		return;
 	}
 	else
 	{
