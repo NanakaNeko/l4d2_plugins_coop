@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[L4D2]通关回血",
 	author = "奈",
 	description = "过关所有人回满血",
-	version = "1.2",
+	version = "1.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -29,10 +29,11 @@ public void CvarChange( ConVar convar, const char[] oldValue, const char[] newVa
 	flag = GetConVarBool(cv_restore_health);
 }
 
-public void ResetSurvivors(Event event, const char[] name, bool dontBroadcast)
+public Action ResetSurvivors(Event event, const char[] name, bool dontBroadcast)
 {
 	if(flag)
 		RestoreHealth();
+	return Plugin_Continue;
 }
 
 void RestoreHealth()
@@ -47,12 +48,9 @@ void RestoreHealth()
 				L4D_RespawnPlayer(client);
 				TeleportClient(client);
 			}
-				
-				
 			//回血
 			GiveCommand(client, "health");
 			SetEntProp(client, Prop_Send, "m_isGoingToDie", 0);
-			SetEntPropFloat(client, Prop_Send, "m_healthBuffer", 0.0);
 			SetEntProp(client, Prop_Send, "m_currentReviveCount", 0);
 			SetEntProp(client, Prop_Send, "m_bIsOnThirdStrike", 0);
 			StopSound(client, SNDCHAN_STATIC, "player/heartbeatloop.wav");
