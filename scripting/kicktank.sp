@@ -54,7 +54,7 @@ void KickMoreTank(int client)
     if(IsFinal && IsKickTank)
     {
         IsKickTank = false;
-        PrintToChatAll("\x04[提示]\x05救援关恢复正常刷克.");
+        PrintToChatAll("\x01[\x04!\x01] \x05救援关恢复正常刷克.");
     }
     if(tanknum > 1 && IsKickTank)
         KickClient(client);
@@ -63,21 +63,21 @@ void KickMoreTank(int client)
 Action KickMoreTanks(int client, int args)
 {
     if(args == 0)
-        PrintToChat(client, "\x04[提示]\x05请输入正确命令!");
+        PrintToChat(client, "\x01[\x04!\x01] \x05请输入正确命令!");
     else if(args == 1)
     {
         char tmp[4];
         GetCmdArg(1, tmp, sizeof(tmp));
         if (strcmp(tmp, "on", false) == 0) {
             IsKickTank = true;
-            PrintToChatAll("\x04[提示]\x05开启单个坦克,本次关卡只会刷出一个坦克.");
+            PrintToChatAll("\x01[\x04!\x01] \x05开启单个坦克,本次关卡只会刷出一个坦克.");
         }
         else if (strcmp(tmp, "off", false) == 0) {
             IsKickTank = false;
-            PrintToChatAll("\x04[提示]\x05关闭单个坦克,本次关卡正常生成坦克.");
+            PrintToChatAll("\x01[\x04!\x01] \x05关闭单个坦克,本次关卡正常生成坦克.");
         }
         else
-            PrintToChat(client, "\x04[提示]\x05请输入正确的命令!");
+            PrintToChat(client, "\x01[\x04!\x01] \x05请输入正确的命令!");
     }
     return Plugin_Handled;
 }

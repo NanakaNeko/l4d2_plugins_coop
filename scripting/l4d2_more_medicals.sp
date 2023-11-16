@@ -48,11 +48,11 @@ public void CvarKitChanged(ConVar convar, const char[] oldValue, const char[] ne
 	SetMultMed(i_MultiMedicalKits);
 	if(i_MultiMedicalKits == 1)
 	{
-		PrintToChatAll("\x04[提示]\x05多倍医疗包\x03关闭.");
+		PrintToChatAll("\x01[\x04!\x01] \x05多倍医疗包\x03关闭.");
 	}
 	else
 	{
-		PrintToChatAll("\x04[提示]\x05多倍医疗包\x03开启\x05,更改为\x04%d\x05倍.", i_MultiMedicalKits);
+		PrintToChatAll("\x01[\x04!\x01] \x05多倍医疗包\x03开启\x05,更改为\x04%d\x05倍.", i_MultiMedicalKits);
 	}
 }
 
@@ -62,11 +62,11 @@ public void CvarPillChanged(ConVar convar, const char[] oldValue, const char[] n
 	SetMultMed(i_MultiMedicalPills, false);
 	if(i_MultiMedicalPills == 1)
 	{
-		PrintToChatAll("\x04[提示]\x05多倍止痛药和肾上腺素\x03关闭.");
+		PrintToChatAll("\x01[\x04!\x01] \x05多倍止痛药和肾上腺素\x03关闭.");
 	}
 	else
 	{
-		PrintToChatAll("\x04[提示]\x05多倍止痛药和肾上腺素\x03开启\x05,更改为\x04%d\x05倍.", i_MultiMedicalKits);
+		PrintToChatAll("\x01[\x04!\x01] \x05多倍止痛药和肾上腺素\x03开启\x05,更改为\x04%d\x05倍.", i_MultiMedicalKits);
 	}
 }
 
@@ -74,7 +74,7 @@ public Action Cmd_SetMultKits(int client, int args)
 {
 	if(args == 0)
 	{
-		PrintToChat(client, "\x04[提示]\x05请输入\x03!mmk <数字> \x05例: \x03!mmk 2");
+		PrintToChat(client, "\x01[\x04!\x01] \x05请输入\x04!mmk <数字> \x05例: \x04!mmk 2");
 	}
 	else if(args == 1)
 	{
@@ -90,7 +90,7 @@ public Action Cmd_SetMultPills(int client, int args)
 {
 	if(args == 0)
 	{
-		PrintToChat(client, "\x04[提示]\x05请输入\x03!mmp <数字> \x05例: \x03!mmp 2");
+		PrintToChat(client, "\x01[\x04!\x01] \x05请输入\x04!mmp <数字> \x05例: \x04!mmp 2");
 	}
 	else if(args == 1)
 	{

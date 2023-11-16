@@ -90,7 +90,7 @@ public void OnClientDisconnect(int client)
 
 Action KickLoaders(int client, int args)
 {
-	PrintToChatAll("\x04[提示]\x05管理员%N踢出所有正在连接玩家.", client);
+	PrintToChatAll("\x01[\x04!\x01] \x05管理员\x03%N\x05踢出所有正在连接玩家.", client);
 	
 	for (int i = 1; i <= MaxClients; i++)
 	{
@@ -129,7 +129,7 @@ Action CheckClientIngame(Handle timer, any client)
 		
 		KickClient(client, "卡在连接状态太久了!");
 	
-		PrintToChatAll("\x04[提示]\x03%N\x05卡在连接状态\x04%.0f\x05秒被踢出服务器.", client, g_fCvarDuration);
+		PrintToChatAll("\x01[\x04!\x01] \x03%N\x05卡在连接状态\x04%.0f\x05秒被踢出服务器.", client, g_fCvarDuration);
 		
 		LogToFileEx(file, "[%s] %N (%s) - 卡在连接状态太久了被踢出服务器.", time, client, steamid); // this logs their steamids and names. to be banned.
 	}

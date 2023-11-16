@@ -153,9 +153,9 @@ public Action SwitchShop(int client, int args)
 	if(args == 0)
 	{
 		if(b_Disable)
-			PrintToChat(client, "\x04[武器]\x03商店已关闭,打开请输入\x04!shop on");
+			PrintToChat(client, "\x01[\x04!\x01] \x03商店已关闭,打开请输入\x04!shop on");
 		else
-			PrintToChat(client, "\x04[武器]\x03商店已开启,关闭请输入\x04!shop off");
+			PrintToChat(client, "\x01[\x04!\x01] \x03商店已开启,关闭请输入\x04!shop off");
 	}
 	else if(args == 1)
 	{
@@ -163,15 +163,15 @@ public Action SwitchShop(int client, int args)
 		if (strcmp(info, "on", false) == 0)
 		{
 			b_Disable = false;
-			PrintToChatAll("\x04[武器]\x03管理员打开商店");
+			PrintToChatAll("\x01[\x04!\x01] \x03管理员打开商店");
 		}
 		else if (strcmp(info, "off", false) == 0)
 		{
 			b_Disable = true;
-			PrintToChatAll("\x04[武器]\x03管理员关闭商店");
+			PrintToChatAll("\x01[\x04!\x01] \x03管理员关闭商店");
 		}
 		else
-			PrintToChat(client, "\x04[武器]\x03请输入正确的命令!");
+			PrintToChat(client, "\x01[\x04!\x01] \x03请输入正确的命令!");
 	}
 	return Plugin_Handled;
 }
@@ -181,7 +181,7 @@ public Action ShowMenu(int client, int args)
 {
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if( !NoValidPlayer(client) && GetClientTeam(client) == 2 )
@@ -370,7 +370,7 @@ public int MeleeMenu_back(Menu menu, MenuAction action, int client, int num)
 void PrintWeaponName(int client, int i, bool isWeapon = true)
 {
 	ClientWeapon[client]++;
-	PrintToChat(client, "\x04[武器]\x05白嫖\x03%s\x05成功,还剩\x04%d\x05次", isWeapon?WeaponName[i]:MeleeName[i], SURPLUS(client));
+	PrintToChat(client, "\x01[\x04!\x01] \x05白嫖\x03%s\x05成功,还剩\x04%d\x05次", isWeapon?WeaponName[i]:MeleeName[i], SURPLUS(client));
 }
 
 //出门近战选择菜单
@@ -407,7 +407,7 @@ public int MeleeSelect_back(Menu menu, MenuAction action, int client, int num)
 			case 0://清除武器
 			{
 				ClientMelee[client]=0;
-				PrintToChat(client,"\x04[武器]\x03出门近战武器设置已清除");
+				PrintToChat(client,"\x01[\x04!\x01] \x03出门近战武器设置已清除");
 			}
 			case 1://砍刀
 			{
@@ -479,7 +479,7 @@ public int MeleeSelect_back(Menu menu, MenuAction action, int client, int num)
 //出门近战选择后聊天框展示
 void PrintMeleeSelect(int client)
 {
-	PrintToChat(client,"\x04[武器]\x05出门近战武器设为\x03%s", MeleeName[ClientMelee[client]]);
+	PrintToChat(client,"\x01[\x04!\x01] \x05出门近战武器设为\x03%s", MeleeName[ClientMelee[client]]);
 }
 
 //出门发放近战
@@ -563,12 +563,12 @@ public Action GiveAmmo(int client, int args)
 {
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if(f_AmmoTime < 0.0)
 	{
-		PrintToChat(client, "\x04[武器]\x03补充子弹已关闭");
+		PrintToChat(client, "\x01[\x04!\x01] \x03补充子弹已关闭");
 		return Plugin_Handled;
 	}
 	if (GetClientTeam(client) == 2 && !NoValidPlayer(client))
@@ -576,7 +576,7 @@ public Action GiveAmmo(int client, int args)
 		float fTime = GetEngineTime() - ClientAmmoTime[client] - f_AmmoTime;
 		if (fTime < 0.0)
 		{
-			PrintToChat(client, "\x04[武器]\x05请等待\x04%.1f\x05秒后补充子弹", FloatAbs(fTime));
+			PrintToChat(client, "\x01[\x04!\x01] \x05请等待\x04%.1f\x05秒后补充子弹", FloatAbs(fTime));
 			return Plugin_Handled;
 		}
 		GiveCommand(client, "ammo");
@@ -617,13 +617,13 @@ bool judge(int client)
 		
 	if(GetClientTeam(client) != 2) 
 	{ 
-		PrintToChat(client, "\x04[武器]\x03武器菜单仅对生还生效"); 
+		PrintToChat(client, "\x01[\x04!\x01] \x03武器菜单仅对生还生效"); 
 		return true; 
 	} 
 
 	if(ClientWeapon[client] >= i_MaxWeapon)  
 	{ 
-		PrintToChat(client, "\x04[武器]\x03已达到每关白嫖上限"); 
+		PrintToChat(client, "\x01[\x04!\x01] \x03已达到每关白嫖上限"); 
 		return true; 
 	}
 	return false;
@@ -634,7 +634,7 @@ public Action GiveChr(int client,int args)
 { 
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if(judge(client))
@@ -649,7 +649,7 @@ public Action GivePum(int client,int args)
 { 
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if(judge(client))
@@ -664,7 +664,7 @@ public Action GiveSmg(int client,int args)
 { 
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if(judge(client))
@@ -679,7 +679,7 @@ public Action GiveUzi(int client,int args)
 { 
 	if(b_Disable)
 	{
-		PrintToChat(client, "\x04[武器]\x03商店未开启");
+		PrintToChat(client, "\x01[\x04!\x01] \x03商店未开启");
 		return Plugin_Handled;
 	}
 	if(judge(client))

@@ -67,7 +67,7 @@ void FriendlyFireCheck(int client)
 			IsIncap[client] = true;
 			if(!IsPlayerIncap(client))
 				Incap(client);
-			PrintToChatAll("\x04[提示] \x03%N \x05队友伤害达到 \x04%d \x05进行 \x03倒地 \x05惩罚", client, FFIncap);
+			PrintToChatAll("\x01[\x04!\x01] \x03%N\x01队友伤害达到\x04%d\x01进行\x05倒地\x01惩罚", client, FFIncap);
 		}
 	}
 	if (FriendlyFire[client] >= FFSuicide)
@@ -77,7 +77,7 @@ void FriendlyFireCheck(int client)
 			ForcePlayerSuicide(client);
 			IsSuicide[client] = true;
 			CreateTimer(0.1, ResetFriendlyFireCount, client);
-			PrintToChatAll("\x04[提示] \x03%N \x05队友伤害达到 \x04%d \x05进行 \x03处死 \x05惩罚", client, FFSuicide);
+			PrintToChatAll("\x01[\x04!\x01] \x03%N\x01队友伤害达到\x04%d\x01进行\x05处死\x01惩罚", client, FFSuicide);
 		}
 	}
 }

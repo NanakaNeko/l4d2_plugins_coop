@@ -111,7 +111,7 @@ public Action RespawnAll(int client, int args)
 			StopSound(i, SNDCHAN_STATIC, "player/heartbeatloop.wav");
 		}
 	}
-	PrintToChatAll("\x04[提示]\x03%N\x05使用指令,全体玩家复活并回满血量!", client);
+	PrintToChatAll("\x01[\x04!\x01] \x03%N \x05使用指令,全体玩家复活并回满血量!", client);
 	return Plugin_Handled;
 }
 

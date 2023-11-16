@@ -82,11 +82,11 @@ void SetAuto(int players)
 		g_iMultiple = multiple;
 		if(b_PillandAdrenaline){
 			SetMultMed(g_iMultiple, false);
-			PrintToChatAll("\x04[提示]\x03医疗包,止痛药,肾上腺素\x05更改为\x04%d\x05倍.", multiple);
+			PrintToChatAll("\x01[\x04!\x01] \x03医疗包,止痛药,肾上腺素\x05更改为\x04%d\x05倍.", multiple);
 		}
 		else{
 			SetMultMed(g_iMultiple);
-			PrintToChatAll("\x04[提示]\x03医疗包\x05更改为\x04%d\x05倍.", multiple);
+			PrintToChatAll("\x01[\x04!\x01] \x03医疗包\x05更改为\x04%d\x05倍.", multiple);
 		}
 	}
 }
