@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[L4D2]通关回血",
 	author = "奈",
 	description = "过关所有人回满血",
-	version = "1.4",
+	version = "1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -43,6 +43,9 @@ void RestoreHealth()
 			}
 			//回血
 			GiveCommand(client, "health");
+			SetEntPropFloat(client, Prop_Send, "m_healthBuffer", 0.0);
+			SetEntityHealth(client, GetEntProp(client, Prop_Data, "m_iMaxHealth"));
+			SetEntPropFloat(client, Prop_Send, "m_healthBufferTime", GetGameTime());
 			SetEntProp(client, Prop_Send, "m_isGoingToDie", 0);
 			SetEntProp(client, Prop_Send, "m_currentReviveCount", 0);
 			SetEntProp(client, Prop_Send, "m_bIsOnThirdStrike", 0);
