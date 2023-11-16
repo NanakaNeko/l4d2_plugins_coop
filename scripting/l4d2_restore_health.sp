@@ -6,13 +6,13 @@
 #pragma semicolon 1
 
 ConVar cv_restore_health;
-bool flag;
+
 public Plugin myinfo =
 {
 	name = "[L4D2]通关回血",
 	author = "奈",
 	description = "过关所有人回满血",
-	version = "1.3",
+	version = "1.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -20,20 +20,13 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	cv_restore_health = CreateConVar("l4d2_restore_health_flag", "1", "开关回血判定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	HookEvent("map_transition", ResetSurvivors, EventHookMode_Pre);
-	HookConVarChange(cv_restore_health, CvarChange);
+	HookEvent("map_transition", ResetSurvivors, EventHookMode_Post);
 }
 
-public void CvarChange( ConVar convar, const char[] oldValue, const char[] newValue )
+public void ResetSurvivors(Event event, const char[] name, bool dontBroadcast)
 {
-	flag = GetConVarBool(cv_restore_health);
-}
-
-public Action ResetSurvivors(Event event, const char[] name, bool dontBroadcast)
-{
-	if(flag)
+	if(GetConVarBool(cv_restore_health))
 		RestoreHealth();
-	return Plugin_Continue;
 }
 
 void RestoreHealth()
