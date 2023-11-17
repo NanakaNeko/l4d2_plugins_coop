@@ -12,15 +12,29 @@ public Plugin myinfo =
 	name = "[L4D2]通关回血",
 	author = "奈",
 	description = "过关所有人回满血",
-	version = "1.5",
+	version = "1.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 
 public void OnPluginStart()
 {
-	cv_restore_health = CreateConVar("l4d2_restore_health_flag", "1", "开关回血判定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_restore_health = CreateConVar("l4d2_restore_health_flag", "0", "开关回血判定", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	HookEvent("map_transition", ResetSurvivors, EventHookMode_Post);
+}
+
+//出门再次回血，防止过关出现各种奇奇怪怪问题没回满血
+public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
+{
+	if(GetConVarBool(cv_restore_health))
+	{
+		for (int i = 1; i <= MaxClients; i++)
+		{
+			if (IsValidSurvivor(i))
+				GiveCommand(i, "health");
+		}
+	}
+	return Plugin_Stop;
 }
 
 public void ResetSurvivors(Event event, const char[] name, bool dontBroadcast)
