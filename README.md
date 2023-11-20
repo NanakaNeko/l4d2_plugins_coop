@@ -45,5 +45,6 @@
 |       [**survivor_mvp**](./scripting/survivor_mvp.sp)        | 基于 [survivor_mvp](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/SurvivorMVP) 修改，删除部分依赖，修改配色，细化rank排名，增加cvar控制 |
 |           [**taketank**](./scripting/taketank.sp)            | 战役模式输入!pb加入接管坦克候选池，随机抽取一个玩家接管坦克，管理员输入!tt接管AI坦克 |
 |            [**tankhud**](./scripting/tankhud.sp)             | 不限制模式显示坦克状态，仅限旁观和特感，删除部分依赖，使插件通用在服务器 |
+|            [**tankrun**](./scripting/tankrun.sp)             | 修改坦克同屏数量和产生时间，增加狙击类武器救倒地玩家，可开启玩家游玩坦克<br/>请修改突变模式为tank run再加载插件，否则出现bug并不在修复内容 |
 |               [**vote**](./scripting/vote.sp)                | Anne的投票加载cfg和指令，删除数据库相关功能，仅保留投票和踢人 |
 | [**witch_damage_announce**](./scripting/witch_damage_announce.sp) | zonemod的witch伤害提示，和上面tank提示一起使用，配色统一     |
