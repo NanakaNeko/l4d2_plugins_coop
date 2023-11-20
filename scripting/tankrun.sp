@@ -13,7 +13,7 @@ public Plugin myinfo =
 	name = "[L4D2]坦克润",
 	author = "奈",
 	description = "tank run",
-	version = "1.5",
+	version = "1.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -24,10 +24,13 @@ public void OnPluginStart()
 	cv_SniperHealth = CreateConVar("l4d2_sniper_restore_health", "60", "狙击类武器救起倒地玩家恢复多少虚血量", FCVAR_NOTIFY, true, 1.0, true, 100.0);
 	cv_LimitPlayer = CreateConVar("l4d2_player_tank_number", "2", "玩家克上限", FCVAR_NOTIFY, true, 0.0);
 	cv_CanPlayTank = CreateConVar("l4d2_can_play_tank", "1", "是否可以玩克", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	HookConVarChange(cv_CanPlayTank, CvarChanged);
 
 	HookEvent("player_spawn", Event_TankSpawn);
-	HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
-	HookEvent("mission_lost", Event_MissionLost, EventHookMode_PostNoCopy);
+	HookEvent("round_start", Event_RoundStart);
+	HookEvent("round_end", Event_RoundEnd);
+	HookEvent("map_transition", Event_RoundEnd);
+	HookEvent("mission_lost", Event_RoundEnd);
 	HookEvent("player_hurt", Event_PlayerHurt);
 
 	RegConsoleCmd("sm_team2", cmd_Team2, "生还");
@@ -35,6 +38,12 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_playtank", cmd_PlayTank, "玩克");
 
 	SetCvar();
+}
+
+void CvarChanged(ConVar convar, const char[] oldValue, const char[] newValue)
+{
+	if(!GetConVarBool(cv_CanPlayTank))
+		ChangeTeamToSurvivor();
 }
 
 public void OnPluginEnd()
@@ -53,6 +62,7 @@ public void OnConfigsExecuted()
 
 public void OnMapStart()
 {
+	delete g_hTimer;
 	CreateTimer(40.0, timer_notify, _, TIMER_FLAG_NO_MAPCHANGE);
 	SetCvar();
 	for(int i = 1;i <= MaxClients; i++)
@@ -160,13 +170,6 @@ void Event_RoundStart(Event event, const char []name, bool dontBroadcast)
 {
 	delete g_hTimer;
 	ReplaceWeapon();
-	CreateTimer(5.0, timer_team, _, TIMER_FLAG_NO_MAPCHANGE);
-}
-
-Action timer_team(Handle timer)
-{
-	ChangeTeamToSurvivor();
-	return Plugin_Continue;
 }
 
 //更改狙击武器只能拿一次
@@ -199,7 +202,7 @@ Action ReplaceWeapon()
 	return Plugin_Continue;
 }
 
-void Event_MissionLost(Event event, const char []name, bool dontBroadcast)
+void Event_RoundEnd(Event event, const char []name, bool dontBroadcast)
 {
 	delete g_hTimer;
 	ChangeTeamToSurvivor();
