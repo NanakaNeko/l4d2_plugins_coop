@@ -14,6 +14,7 @@
 |           [**kicktank**](./scripting/kicktank.sp)            | 使用指令后单次关卡只会出现一个克                             |
 |         [**killregain**](./scripting/killregain.sp)          | 击杀特感小僵尸回血回子弹，修复倒地bug，增加击杀女巫回血      |
 |  [**l4d2_auto_medical**](./scripting/l4d2_auto_medical.sp)   | 根据人数自动倍数医疗物品                                     |
+|      [**l4d2_doorlock**](./scripting/l4d2_doorlock.sp)       | 所有人加载完毕才能打开安全门，基于 [**l4d2_doorlock**](https://github.com/umlka/l4d2/tree/main/l4d2_doorlock) 修改，删除翻译文件，增加开关门提示 |
 | [**l4d2_friendly_fire**](./scripting/l4d2_friendly_fire.sp)  | 开关队友伤害，!setff on打开友伤，!setff off关闭友伤，!setff normal设置普通友伤，!setff top设置最高友伤（1.0） |
 |     [**l4d2_item_hint**](./scripting/l4d2_item_hint.sp)      | 标记物品，仅汉化                                             |
 | [**l4d2_more_medicals**](./scripting/l4d2_more_medicals.sp)  | 手动加载多倍医疗，不随人数动态变化，配合投票插件使用（!mmk 2就是2倍医疗包，!mmp 2就是2倍针药） |
