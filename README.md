@@ -7,6 +7,7 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------- |
 |              [**alone**](./scripting/alone.sp)               | 被特感控制后，扣除血量解控                                   |
 |            [**anti_ff**](./scripting/anti_ff.sp)             | 友伤达到一定值惩罚攻击者                                     |
+|    [**eq_finale_tanks**](./scripting/eq_finale_tanks.sp)     | 救援减少一次事件，不再需要文件，自动写入最后一关             |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
 |           [**hostname**](./scripting/hostname.sp)            | 根据端口号改服名，显示部分突变模式(不常用的模式没写，仅写了部分战役和生还者)和难度 |
 |  [**infected_teleport**](./scripting/infected_teleport.sp)   | 基于 [infected_teleport](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/InfectedTeleport) 删除logger依赖 |
