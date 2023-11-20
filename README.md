@@ -31,6 +31,7 @@
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
 | [**l4d_tank_damage_announce**](./scripting/l4d_tank_damage_announce.sp) | [tank_damage2.0.sp](https://github.com/GlowingTree880/L4D2_LittlePlugins/blob/main/TankDamageAnnounce/tank_damage2.0.sp) 基于该插件修改，删除treeutil和logger依赖，删除坦克出现提示，交给其他插件处理 |
 | [**l4d_throwable_announcer**](./scripting/l4d_throwable_announcer.sp) | 投掷物提示，修改提示颜色                                     |
+|        [**lerpmonitor**](./scripting/lerpmonitor.sp)         | 玩家lerp显示                                                 |
 |           [**lockdoor**](./scripting/lockdoor.sp)            | 锁定终点安全门，需要足够人数在范围内才能打开                 |
 |              [**music**](./scripting/music.sp)               | 在安全屋可以点歌放给所有人，插件没有实现fastdl，使用vpk扩展 [音乐扩展包](./音乐扩展包.vpk) |
 |             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示               |
