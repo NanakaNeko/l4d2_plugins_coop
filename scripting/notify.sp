@@ -4,7 +4,7 @@
 #include <sdktools>
 #include <colors>
 #include <geoip>
-#include <shop>
+#tryinclude <shop>
 
 //玩家连接时播放的声音
 #define IsConnecting        "ambient/alarms/klaxon1.wav"
@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "[L4D2]提示信息音效",
 	description = "notify",
 	author = "奈",
-	version = "1.8.2",
+	version = "1.8.3",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
