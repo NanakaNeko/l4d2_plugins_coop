@@ -2,6 +2,7 @@
 #pragma semicolon 1
 #include <sourcemod>
 #include <sdktools>
+#include <left4dhooks>
 
 //清除部分功能，让插件通用在服务器
 ConVar
@@ -10,7 +11,8 @@ ConVar
 	cv_ServerNumber,
 	cv_LobbyDisable,
 	cv_CvarChange,
-	cv_smPrompt;
+	cv_smPrompt,
+	cv_AFKtoSpec;
 
 int ChangeName[MAXPLAYERS + 1];
 StringMap g_smSteamIDs;
@@ -49,7 +51,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.6",
+	version = "1.2.7",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -62,6 +64,7 @@ public void OnPluginStart()
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_CvarChange = CreateConVar("server_cvar_change_notify", "1", "屏蔽游戏自带的ConVar更改提示 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_smPrompt = CreateConVar("server_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cv_AFKtoSpec = CreateConVar("server_afk_to_spec", "10", "玩家闲置多少秒移到旁观 禁用:0", FCVAR_NOTIFY, true, 0.0);
 	BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/server_kick.log");
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
 	RegAdminCmd("sm_restartmap5", RestartMap5, ADMFLAG_ROOT, "延迟5秒重启当前地图");
@@ -71,6 +74,7 @@ public void OnPluginStart()
 	HookEvent("round_start", Event_RoundStart, EventHookMode_Post);
 	HookEvent("player_changename", Event_PlayerChangeName);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+	AddCommandListener(Player_AFK, "go_away_from_keyboard");
 	//AutoExecConfig(true, "server_config");
 }
 
@@ -328,4 +332,52 @@ Action DebugMode(int client, int args)
 	}
 	
 	return Plugin_Handled;
+}
+
+Action Player_AFK(int client, const char[] command, int args)
+{
+	if(GetConVarBool(cv_AFKtoSpec))
+		CreateTimer(GetConVarFloat(cv_AFKtoSpec), timer_AFK, client);
+	return Plugin_Continue;
+}
+
+Action timer_AFK(Handle timer, int client)
+{
+	if(IsValidClient(client) && !IsFakeClient(client) && GetClientTeam(client) == 1 && iGetBotOfIdle(client))
+	{
+		L4D_TakeOverBot(client);
+		ChangeClientTeam(client, 1);
+	}
+	return Plugin_Handled;
+}
+
+int iGetBotOfIdle(int client)
+{
+	for(int i = 1; i <= MaxClients; i++)
+	{
+		if(IsClientInGame(i) && IsFakeClient(i) && GetClientTeam(i) == 2 && (iHasIdlePlayer(i) == client))
+			return i;
+	}
+	return 0;
+}
+
+static int iHasIdlePlayer(int client)
+{
+	char sNetClass[64];
+	if(!GetEntityNetClass(client, sNetClass, sizeof(sNetClass)))
+		return 0;
+
+	if(FindSendPropInfo(sNetClass, "m_humanSpectatorUserID") < 1)
+		return 0;
+
+	client = GetClientOfUserId(GetEntProp(client, Prop_Send, "m_humanSpectatorUserID"));			
+	if(client && IsClientInGame(client) && !IsFakeClient(client) && GetClientTeam(client) == 1)
+		return client;
+
+	return 0;
+}
+
+stock bool IsValidClient(int client)
+{
+	return (client > 0 && client <= MaxClients && IsClientInGame(client));
 }
