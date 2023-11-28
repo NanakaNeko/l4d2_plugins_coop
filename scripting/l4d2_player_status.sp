@@ -9,14 +9,18 @@
 
 #define PLUGIN_VERSION	"1.4.0"
 
-char g_sZombieName[][] = 
+char SI_Names[][] =
 {
+	"Unknown",
 	"Smoker",
 	"Boomer",
 	"Hunter",
 	"Spitter",
 	"Jockey",
-	"Charger"
+	"Charger",
+	"Witch",
+	"Tank",
+	"Not SI"
 };
 
 float  g_fFallSpeedSafe, g_fFallSpeedFatal;
@@ -116,12 +120,12 @@ void OnTakeDamageAlivePost(int victim, int attacker, int inflictor, float damage
 				CPrintToChatAll("{default}[{green}!{default}] {olive}%s {default}黑死了 {blue}%s", GetTrueName(attacker), GetTrueName(victim));//聊天窗提示.
 			case 3: 
 			{
-				int zcid = GetEntProp(attacker, Prop_Send, "m_zombieClass");
-				if(zcid >= 1 && zcid <= 6)
-					CPrintToChatAll("{default}[{green}!{default}] {olive}感染者{green}%s{blue}(%s) {default}杀死了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(victim));//聊天窗提示.
-				else if(zcid == 7)
+				int zombie_class = GetEntProp(attacker, Prop_Send, "m_zombieClass");
+				if(zombie_class >= 1 && zombie_class <= 6)
+					CPrintToChatAll("{default}[{green}!{default}] {red}%N{green}(%s) {default}杀死了 {olive}%s", attacker, IsFakeClient(attacker)?"AI":SI_Names[zombie_class], GetTrueName(victim));//聊天窗提示.
+				else if(zombie_class == 7)
 					CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}杀死了 {blue}%s", GetTrueName(victim));//聊天窗提示.
-				else if(zcid == 8)
+				else if(zombie_class == 8)
 					CPrintToChatAll("{default}[{green}!{default}] {olive}坦克{green}%s {default}杀死了 {blue}%s", GetTankName(attacker), GetTrueName(victim));
 			}
 		}
@@ -173,12 +177,12 @@ public void Event_Incapacitate(Event event, const char[] name, bool dontBroadcas
 					CPrintToChatAll("{default}[{green}!{default}] {olive}%s {default}黑倒了 {blue}%s", GetTrueName(attacker), GetTrueName(client));//聊天窗提示.
 				case 3: 
 				{
-					int zcid = GetEntProp(attacker, Prop_Send, "m_zombieClass");
-					if(zcid >= 1 && zcid <= 6)
-						CPrintToChatAll("{default}[{green}!{default}] {olive}感染者{green}%s{blue}(%s) {default}制服了 {blue}%s", g_sZombieName[zcid - 1], GetSIName(attacker), GetTrueName(client));//聊天窗提示.
-					else if(zcid == 7)
+					int zombie_class = GetEntProp(attacker, Prop_Send, "m_zombieClass");
+					if(zombie_class >= 1 && zombie_class <= 6)
+						CPrintToChatAll("{default}[{green}!{default}] {red}%N{green}(%s) {default}制服了 {olive}%s", attacker, IsFakeClient(attacker)?"AI":SI_Names[zombie_class], GetTrueName(client));//聊天窗提示.
+					else if(zombie_class == 7)
 						CPrintToChatAll("{default}[{green}!{default}] {blue}女巫 {default}制服了 {blue}%s", GetTrueName(client));//聊天窗提示.
-					else if(zcid == 8)
+					else if(zombie_class == 8)
 						CPrintToChatAll("{default}[{green}!{default}] {olive}坦克{green}%s {default}制服了 {blue}%s", GetTankName(attacker), GetTrueName(client));
 				}
 			}
@@ -238,16 +242,6 @@ stock bool IsAliveInfected(int client)
 bool IsValidClient(int client)
 {
 	return client > 0 && client <= MaxClients && IsClientInGame(client);
-}
-
-char[] GetSIName(int client)
-{
-	char sName[32];
-	if (!IsFakeClient(client))
-		FormatEx(sName, sizeof(sName), "%N", client);
-	else
-		FormatEx(sName, sizeof(sName), "AI");
-	return sName;
 }
 
 char[] GetTankName(int client)
