@@ -10,27 +10,14 @@ public Plugin myinfo =
 	name = "Vote for run command or cfg file",
 	description = "使用!vote投票执行命令或cfg文件",
 	author = "东",
-	version = "1.3",
+	version = "1.3.1",
 	url = "https://github.com/fantasylidong/"
 };
 
-
-Handle
-	g_hVote,
-	g_hVoteKick,	
-	g_hCfgsKV;
-
-ConVar
-	g_hVoteFilelocation;
-
-char
-	g_sCfg[128],
-	g_sVoteFile[128];
-
-int 
-	kickclient;
-
-
+Handle g_hVote, g_hVoteKick, g_hCfgsKV;
+ConVar g_hVoteFilelocation;
+char g_sCfg[128], g_sVoteFile[128];
+int kickclient;
 
 public void OnPluginStart()
 {
@@ -38,8 +25,8 @@ public void OnPluginStart()
 	g_hVoteFilelocation = CreateConVar("votecfgfile", "data/cfgs.txt", "投票文件的位置(位于sourcemod/文件夹)", FCVAR_NOTIFY);
 
 	GetConVarString(g_hVoteFilelocation, g_sVoteFile, sizeof(g_sVoteFile));
-	RegConsoleCmd("sm_v", VoteRequest);
-	RegConsoleCmd("sm_vk", KickRequest);
+	RegConsoleCmd("sm_v", VoteRequest, "投票加载cfg或cvar");
+	RegConsoleCmd("sm_vk", KickRequest, "投票踢出玩家");
 	RegAdminCmd("sm_cv", VoteCancle, ADMFLAG_GENERIC, "管理员终止此次投票", "", 0);
 	g_hVoteFilelocation.AddChangeHook(FileLocationChanged);
 	g_hCfgsKV = CreateKeyValues("Cfgs", "", "");
@@ -202,7 +189,7 @@ public int ConfigsMenuHandler(Handle menu, MenuAction action, int param1, int pa
 		int style;
 		GetMenuItem(menu, param2, sInfo, sizeof(sInfo), style, sBuffer, sizeof(sBuffer));
 		strcopy(g_sCfg, sizeof(g_sCfg), sInfo);
-		if (!StrEqual(g_sCfg, "sm_votekick", true))
+		if (!StrEqual(g_sCfg, "sm_vk", true))
 		{
 			if (StartVote(param1, sBuffer))
 			{
@@ -215,7 +202,7 @@ public int ConfigsMenuHandler(Handle menu, MenuAction action, int param1, int pa
 		}
 		else
 		{
-			FakeClientCommand(param1, "sm_votekick");
+			FakeClientCommand(param1, "sm_vk");
 		}
 	}
 	if (action == MenuAction_End)
@@ -330,6 +317,8 @@ public int Menu_Voteskick(Handle menu, MenuAction action, int param1, int param2
 		char name[128];
 		GetMenuItem(menu, param2, name, sizeof(name));
 		kickclient = GetClientOfUserId(StringToInt(name));
+		if(bCheckClientAccess(kickclient))
+			kickclient = param1;
 		CPrintToChatAll("[{olive}vote{default}] {blue}%N {default}发起投票踢出 {blue} %N", param1, kickclient);
 		if (DisplayVoteKickMenu(param1))
 		{
@@ -337,6 +326,13 @@ public int Menu_Voteskick(Handle menu, MenuAction action, int param1, int param2
 		}
 	}
 	return 0;
+}
+
+bool bCheckClientAccess(int client)
+{
+	if(GetUserFlagBits(client) & ADMFLAG_ROOT)
+		return true;
+	return false;
 }
 
 public bool DisplayVoteKickMenu(int client)
