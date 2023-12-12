@@ -77,7 +77,7 @@ public void OnPluginStart()
 	HookEvent("player_changename", Event_PlayerChangeName);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 	HookEvent("player_team", Event_playerteam);
-	AddCommandListener(Player_AFK, "go_away_from_keyboard");
+
 	//AutoExecConfig(true, "server_config");
 }
 
@@ -350,13 +350,6 @@ void Event_playerteam(Event event, const char[] name, bool dontBroadcast)
 				CreateTimer(GetConVarFloat(cv_AFKtoSpec), timer_AFK, client);
 		}
 	}
-}
-
-Action Player_AFK(int client, const char[] command, int args)
-{
-	if(GetConVarBool(cv_AFKtoSpec))
-		CreateTimer(GetConVarFloat(cv_AFKtoSpec), timer_AFK, client);
-	return Plugin_Continue;
 }
 
 Action timer_AFK(Handle timer, int client)
