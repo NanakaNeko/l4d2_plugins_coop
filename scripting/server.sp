@@ -51,7 +51,7 @@ public Plugin myinfo =
 	name = "[L4D2]Server Function",
 	author = "奈",
 	description = "服务器一些功能实现",
-	version = "1.2.7",
+	version = "1.2.8",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -66,14 +66,17 @@ public void OnPluginStart()
 	cv_smPrompt = CreateConVar("server_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_AFKtoSpec = CreateConVar("server_afk_to_spec", "10", "玩家闲置多少秒移到旁观 禁用:0", FCVAR_NOTIFY, true, 0.0);
 	BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/server_kick.log");
+
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");
 	RegAdminCmd("sm_restartmap5", RestartMap5, ADMFLAG_ROOT, "延迟5秒重启当前地图");
 	RegAdminCmd("sm_debug", DebugMode, ADMFLAG_ROOT, "开关调试模式");
+
 	HookUserMessage(GetUserMessageId("TextMsg"), umTextMsg, true);
 	HookEvent("server_cvar", Event_ServerCvar, EventHookMode_Pre);
 	HookEvent("round_start", Event_RoundStart, EventHookMode_Post);
 	HookEvent("player_changename", Event_PlayerChangeName);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+	HookEvent("player_team", Event_playerteam);
 	AddCommandListener(Player_AFK, "go_away_from_keyboard");
 	//AutoExecConfig(true, "server_config");
 }
@@ -332,6 +335,21 @@ Action DebugMode(int client, int args)
 	}
 	
 	return Plugin_Handled;
+}
+
+void Event_playerteam(Event event, const char[] name, bool dontBroadcast) 
+{
+	int newteam = GetEventInt(event, "team");
+	int client = GetClientOfUserId(event.GetInt("userid"));
+	
+	if (GetConVarBool(cv_AFKtoSpec))
+	{
+		if (IsValidClient(client) && !IsFakeClient(client))
+		{
+			if (newteam == 1)
+				CreateTimer(GetConVarFloat(cv_AFKtoSpec), timer_AFK, client);
+		}
+	}
 }
 
 Action Player_AFK(int client, const char[] command, int args)
