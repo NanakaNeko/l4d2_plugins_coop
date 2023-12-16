@@ -4,6 +4,36 @@
 #include <sourcemod> 
 #include <sdktools>
 
+/**
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+数据存入sqlite，在某些情况下会丢失数据，例如服务器与steam通信不好，玩家在某些情况下闪退等
+想要良好的游戏数据统计建议使用MySQL数据库
+本插件数据统计仅仅是图一乐，不要细究
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+基于shop_lite更新，不再使用本地cfg文件存写，使用sqlite数据库
+1.1.1 重构代码，数据库增加点数，救援关通关加1点，增加医疗物品和投掷物品的购买
+1.1.3 增加死亡重置次数开关，增加医疗物品购买上限，提供设置获取点数cvar
+1.2.0 增加击杀坦克和女巫获取点数
+1.2.2 增加传送菜单
+1.2.7 投掷修改为杂项，增加激光瞄准
+1.3.1 杂项增加子弹补充
+1.3.2 增加快捷买药，随机单喷
+1.3.4 增加inc文件提供其他插件支持，个人信息面板，显示累计得分，击杀僵尸、特感、坦克、女巫数量
+1.3.6 增加爆头率、累计黑枪
+1.3.8 新增服务器游玩时长统计
+1.3.9 数据存入仅在过关后存入一次，缓解部分服务器卡顿
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+**/
+
+
+
 #define SURPLUS(%1)		i_MaxWeapon - player[%1].ClientWeapon
 #define TPS(%1)			i_MaxTransmit - player[%1].ClientTransmit
 
@@ -50,7 +80,7 @@ public Plugin myinfo =
 	name = "[L4D2]Shop", 
 	author = "奈", 
 	description = "商店(数据库版本)", 
-	version = "1.3.8", 
+	version = "1.3.9", 
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop" 
 }
 
@@ -488,12 +518,12 @@ void Event_player_death(Event event, const char []name, bool dontBroadcast)
 		return;
 
 	player[attacker].ClientKillSI++;
-	SQL_SaveKillSI(attacker);
+	//SQL_SaveKillSI(attacker);
 
 	if (event.GetBool("headshot"))
 	{
 		player[attacker].ClientHeadShotCount++; 
-		SQL_SaveHeadShotCount(attacker);
+		//SQL_SaveHeadShotCount(attacker);
 	}
 }
 
@@ -516,11 +546,11 @@ void Event_InfectedDeath(Event event, const char[] name, bool dontBroadcast)
 		return;
 
 	player[attacker].ClientKillCI++;
-	SQL_SaveKillCI(attacker);
+	//SQL_SaveKillCI(attacker);
 	if (event.GetBool("headshot"))
 	{
 		player[attacker].ClientHeadShotCount++;
-		SQL_SaveHeadShotCount(attacker);
+		//SQL_SaveHeadShotCount(attacker);
 	}
 }
 
@@ -531,10 +561,10 @@ public void Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast)
 	if (!NoValidPlayer(attacker) && GetClientTeam(attacker) == 2 && !NoValidPlayer(victim, false) && GetClientTeam(victim) == 2)
 	{
 		player[attacker].ClientFFCount += damage;
-		SQL_SaveFFCount(attacker);
+		//SQL_SaveFFCount(attacker);
 		if(!IsFakeClient(victim)){
 			player[victim].ClientGotFFCount += damage;
-			SQL_SaveGotFFCount(victim);
+			//SQL_SaveGotFFCount(victim);
 		}
 	}
 }
