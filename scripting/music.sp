@@ -12,7 +12,7 @@ public Plugin myinfo =
 	name = "[L4D2]点歌",
 	author = "奈",
 	description = "在安全区域可以点歌给所有人",
-	version = "1.0.3",
+	version = "1.0.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -20,6 +20,8 @@ public void OnPluginStart()
 {
     init();
     RegConsoleCmd("sm_music", Cmd_MusicMenu);
+    RegConsoleCmd("sm_forcestopmusic", Cmd_StopMusic);
+    RegConsoleCmd("sm_fsm", Cmd_StopMusic);
     HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
 }
 
@@ -70,6 +72,13 @@ Action Cmd_MusicMenu(int client, int args)
         MusicMenu(client);
     else
         PrintToChat(client, "\x03[提示] \x05已离开安全区域,无法点歌");
+    return Plugin_Handled;
+}
+
+Action Cmd_StopMusic(int client, intn args)
+{
+    b_playing = true;
+    StopMusic(client);
     return Plugin_Handled;
 }
 
@@ -191,7 +200,10 @@ void StopMusic(int client)
 	        StopSound(i, SNDCHAN_STATIC, sPath);
     }
     b_playing = false;
-    PrintToChatAll("\x03[音乐] \x05%N \x04关闭了 \x05%s", client, sName);
+    if(client > 0 && client < MaxClients + 1)
+        PrintToChatAll("\x03[音乐] \x05%N \x04关闭了 \x05%s", client, sName);
+    else
+        PrintToChatAll("\x03[音乐] \x05玩家离开安全区域 \x04%s \x05自动关闭", sName);
 }
 
 public void OnClientPutInServer(int client)
@@ -209,7 +221,7 @@ public void OnClientDisconnect(int client)
 public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
 {
     if(b_playing)
-        StopMusic(0);
+        StopMusic(-1);
     b_leftarea = true;
     return Plugin_Stop;
 }
