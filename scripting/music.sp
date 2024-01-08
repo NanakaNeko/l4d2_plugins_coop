@@ -20,8 +20,8 @@ public void OnPluginStart()
 {
     init();
     RegConsoleCmd("sm_music", Cmd_MusicMenu);
-    RegConsoleCmd("sm_forcestopmusic", Cmd_StopMusic);
-    RegConsoleCmd("sm_fsm", Cmd_StopMusic);
+    RegAdminCmd("sm_forcestopmusic", Cmd_StopMusic, ADMFLAG_ROOT);
+    RegAdminCmd("sm_fsm", Cmd_StopMusic, ADMFLAG_ROOT);
     HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
 }
 
