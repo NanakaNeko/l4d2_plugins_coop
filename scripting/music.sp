@@ -13,7 +13,7 @@ public Plugin myinfo =
 	author = "奈",
 	description = "在安全区域可以点歌给所有人",
 	version = "1.0.4",
-	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
+	url = "https://githubfast.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
@@ -144,7 +144,8 @@ public int PlayMusicDetail(Menu menu, MenuAction action, int client, int param)
         return 0;
     if(b_playing)
     {
-        PrintToChat(client, "\x03[音乐] \x05当前有歌曲正在播放");
+        if(client > 0)
+            PrintToChat(client, "\x03[音乐] \x05当前有歌曲正在播放");
         return 0;
     }
     if(action == MenuAction_Select)
