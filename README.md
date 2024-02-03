@@ -9,6 +9,7 @@
 |            [**anti_ff**](./scripting/anti_ff.sp)             | 友伤达到一定值惩罚攻击者                                     |
 |    [**eq_finale_tanks**](./scripting/eq_finale_tanks.sp)     | 救援减少一次事件，不再需要文件，自动写入最后一关             |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
+|  [**hitsound_branches**](./scripting/hitsound_branches.sp)   | 击中反馈三合一版本，vpk扩展音效材质 [击杀及击中反馈](./[材质]击杀及击中反馈.vpk) |
 |           [**hostname**](./scripting/hostname.sp)            | 根据端口号改服名，显示部分突变模式(不常用的模式没写，仅写了部分战役和生还者)和难度 |
 |  [**infected_teleport**](./scripting/infected_teleport.sp)   | 基于 [infected_teleport](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/InfectedTeleport) 删除logger依赖 |
 |       [**join_out_msg**](./scripting/join_out_msg.sp)        | 加入退出服务器提示信息                                       |
@@ -36,7 +37,7 @@
 | [**l4d_throwable_announcer**](./scripting/l4d_throwable_announcer.sp) | 投掷物提示，修改提示颜色                                     |
 |        [**lerpmonitor**](./scripting/lerpmonitor.sp)         | 玩家lerp显示                                                 |
 |           [**lockdoor**](./scripting/lockdoor.sp)            | 锁定终点安全门，需要足够人数在范围内才能打开                 |
-|              [**music**](./scripting/music.sp)               | 在安全屋可以点歌放给所有人，插件没有实现fastdl，使用vpk扩展 [音乐扩展包](./音乐扩展包.vpk) |
+|              [**music**](./scripting/music.sp)               | 在安全屋可以点歌放给所有人，插件没有实现fastdl，使用vpk扩展 [音乐扩展包](./[材质]音乐扩展包.vpk) |
 |             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示               |
 |         [**ping_check**](./scripting/ping_check.sp)          | 进入服务器90秒后检测ping值，超过250ms5次踢出服务器           |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
