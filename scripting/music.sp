@@ -13,7 +13,7 @@ public Plugin myinfo =
 	author = "奈",
 	description = "在安全区域可以点歌给所有人",
 	version = "1.0.4",
-	url = "https://githubfast.com/NanakaNeko/l4d2_plugins_coop"
+	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
