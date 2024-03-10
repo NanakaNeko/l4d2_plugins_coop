@@ -1,0 +1,21 @@
+"MatchModes"
+{
+	"单人模式" //一级名字
+	{
+		"match/alone/alone" //执行cfg文件的路径为: cfg/match/alone/alone.cfg，卸载文件cfg/match/alone/aloneoff.cfg
+		{
+			"name" "单人模式" //二级名字
+		}
+		"match/hunter/hunter"
+		{
+			"name" "Hunter训练"
+		}
+	}
+	"多人模式"
+	{
+		"match/cj/cj"
+		{
+			"name" "纯净模式"
+		}
+	}
+}
