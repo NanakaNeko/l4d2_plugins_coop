@@ -13,7 +13,7 @@ public Plugin myinfo =
 	name = "[L4D2]友伤惩罚",
 	author = "奈",
 	description = "友伤到达一定值惩罚攻击者",
-	version = "1.5",
+	version = "1.6",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -122,6 +122,8 @@ stock bool IsValidPlayer(int client)
 	if (client < 1 || client > MaxClients)
 		return false;
 	if (!IsClientConnected(client) || !IsClientInGame(client))
+		return false;
+	if (!IsPlayerAlive(client))
 		return false;
 	
 	return true;
