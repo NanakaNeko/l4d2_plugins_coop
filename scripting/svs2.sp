@@ -52,7 +52,7 @@ public Plugin myinfo =
 	name = "[L4D2]生还VS生还(随机复活)",
 	author = "奈",
 	description = "survivor vs survivor",
-	version = "1.1.4",
+	version = "1.1.5",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
@@ -83,6 +83,7 @@ public void OnPluginStart()
     HookEvent("mission_lost", Event_RoundEnd);
     HookEvent("round_end", Event_RoundEnd);
     HookEvent("finale_vehicle_leaving", Event_RoundEnd);
+    HookEvent("player_team", Event_playerteam);
 
     RegConsoleCmd("sm_mvp", Mvp_Info);
     RegConsoleCmd("sm_skill", cmd_Skill);
@@ -165,6 +166,18 @@ void ResetData()
         KillNumber[i] = 0;
         RespawnTime[i] = 0;
     }   
+}
+
+void Event_playerteam(Event event, const char[] name, bool dontBroadcast) 
+{
+    int newteam = GetEventInt(event, "team");
+    int client = GetClientOfUserId(event.GetInt("userid"));
+
+    if (IsValidClient(client) && !IsFakeClient(client))
+    {
+        if (newteam == 2)
+            CreateTimer(1.0, Timer_Respawn, client, TIMER_REPEAT);
+    }
 }
 
 //玩家死亡
