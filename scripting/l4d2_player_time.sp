@@ -22,9 +22,20 @@ public Plugin myinfo =
 	name = "[L4D2]时长检测",
 	author = "奈",
 	description = "display time",
-	version = "1.3",
+	version = "1.4",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	//API
+	RegPluginLibrary("l4d2_player_time");
+	//Native
+	CreateNative("Time_Get_TotalTime", Native_GetTotalTime);
+	CreateNative("Time_Get_GetRealTime", Native_GetRealTime);
+	CreateNative("Time_Get_GetWeekTime", Native_GetWeekTime);
+	return APLRes_Success;
+}
 
 public void OnPluginStart()
 {
@@ -237,3 +248,46 @@ stock bool IsValidClient(int client)
 {
 	return client > 0 && client <= MaxClients && IsClientInGame(client);
 }
+
+int Native_GetTotalTime(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].totalplaytime;
+}
+
+int Native_GetRealTime(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].realplaytime;
+}
+
+int Native_GetWeekTime(Handle plugin, int numParams)
+{
+	int client = GetNativeCell(1);
+	if (client < 1 || client > MaxClients)
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index (%d)", client);
+	}
+	if (!IsClientConnected(client))
+	{
+		return ThrowNativeError(SP_ERROR_NATIVE, "Client %d is not connected", client);
+	}
+	return player[client].last2weektime;
+}
+
