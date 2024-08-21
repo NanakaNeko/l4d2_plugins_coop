@@ -23,7 +23,7 @@
 | [**l4d2_more_medicals**](./scripting/l4d2_more_medicals.sp)  | 手动加载多倍医疗，不随人数动态变化，配合投票插件使用（!mmk 2就是2倍医疗包，!mmp 2就是2倍针药） |
 | [**l4d2_player_respawn**](./scripting/l4d2_player_respawn.sp) | 玩家死亡后复活，可以设置复活次数和时间，每次复活后增加时间   |
 | [**l4d2_player_status**](./scripting/l4d2_player_status.sp)  | 基于豆瓣酱提示插件修改，删除witchid，增加colors，调整部分提示，增加自杀指令 |
-|   [**l4d2_player_time**](./scripting/l4d2_player_time.sp)    | 玩家时长检测，展示总时长，真实时长，最近两周。个人资料关闭公开的玩家无法读取(需要依赖[ripext](https://github.com/ErikMinekus/sm-ripext)) |
+|   [**l4d2_player_time**](./scripting/l4d2_player_time.sp)    | 玩家时长检测，展示总时长，真实时长，最近两周。个人资料关闭公开的玩家无法读取(需要依赖[ripext](https://github.com/ErikMinekus/sm-ripext))<br/>[称号插件依赖版本]：[l4d2_player_time](./other_version/l4d2_player_time.sp) |
 | [**l4d2_restore_health**](./scripting/l4d2_restore_health.sp) | 过关回满血，增加一个cvar判定，默认0关闭回血，1为开启回血     |
 |      [**l4d2_rpg_tank**](./scripting/l4d2_rpg_tank.sp)       | 给输入!rpg的生还传送回起点安全屋并生成5个克，更改死门模式，召唤尸潮，并于60秒后处死全员 |
 |     [**l4d2_satellite**](./scripting/l4d2_satellite.sp)      | 使用马格南射出两种模式的卫星炮                               |
@@ -39,14 +39,14 @@
 |           [**lockdoor**](./scripting/lockdoor.sp)            | 锁定终点安全门，需要足够人数在范围内才能打开                 |
 |         [**match_vote**](./scripting/match_vote.sp)          | 基于 [match_vote](https://github.com/fbef0102/L4D1_2-Plugins/tree/master/match_vote) 修改而成 <br/>增加模式锁定，切换模式必须!rmatch卸载当前模式加载的cfg <br/>同级目录下，文件增加off为卸载文件(例：加载模式文件为coop.cfg，卸载文件就叫coopoff.cfg) <br/>**注意：需要data文件** |
 |              [**music**](./scripting/music.sp)               | 在安全屋可以点歌放给所有人，插件没有实现fastdl，使用vpk扩展 [音乐扩展包](./[材质]音乐扩展包.vpk) <br/>**注意：需要data文件** |
-|             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示               |
+|             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示<br/>[无商店依赖版本]：[notify](./other_version/notify.sp) |
 |         [**ping_check**](./scripting/ping_check.sp)          | 进入服务器90秒后检测ping值，超过250ms5次踢出服务器           |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
 |             [**rygive**](./scripting/rygive.sp)              | 基于原插件删除部分功能，增加使用指令会有聊天框提示 <br/>**注意：需要gamedata文件** |
 |             [**server**](./scripting/server.sp)              | 服务器部分功能的实现  <br/>重启地图  <br/>安全屋无敌  <br/>关闭闲置提示  <br/>ConVar提示仅管理员可见  <br/>1.1.1 频繁改名踢出  <br/>1.1.2 全球排名和人数  <br/>1.1.3 新增debug模式，来自sorallll的rygive插件  <br/>1.1.4 增加服务器匹配禁用<br/>1.1.7 增加sm提示仅管理员可见开关<br/>1.1.8 增加ping过高踢出，仅在进入一分钟后检测一次<br/>1.2.0 移除自杀指令，放在其他插件<br/>1.2.5 移除ping检测，更换为[ping_check](./scripting/ping_check.sp)独立插件<br/>1.2.7 增加玩家闲置后一段时间移动到旁观位置 |
 |         [**server_hud**](./scripting/server_hud.sp)          | 融合sorallll和豆瓣酱的hud，提供几种风格<br/>1. 坦克女巫路程居左，北京时间、团灭次数、地图关卡、人数居右<br/>2. 坦克女巫路程居左，服名、人数居右 <br/>3. 北京时间、团灭次数、地图关卡、人数、击杀数量居右 |
 |        [**server_name**](./scripting/server_name.sp)         | 基于Anne的服名插件修改，用于zonemod药抗 <br/>**注意：需要data文件** |
-|               [**shop**](./scripting/shop.sp)                | 采用sqlite数据库保存数据，功能和shop_lite一样<br/>详细更新说明在源码里<br/>安装过插件的，建议删除data/sqlite文件夹下的数据库文件，再更新插件重建数据库表 |
+|               [**shop**](./scripting/shop.sp)                | 采用sqlite数据库保存数据，功能和shop_lite一样<br/>详细更新说明在源码里<br/>安装过插件的，建议删除data/sqlite文件夹下的数据库文件，再更新插件重建数据库表<br/>[无个人信息统计版本]：[shop_b](./other_version/shop_b.sp)<br/>[使用colors依赖版本]：[shop_c](./other_version/shop_c.sp) |
 |          [**shop_lite**](./scripting/shop_lite.sp)           | 商店插件说明:  <br/>每关提供几次机会白嫖部分武器，cvar可自行设定每关几次  <br/>!buy !gw打开商店面板  <br/>!chr快速选铁喷，!pum快速选木喷，!uzi快速选uzi，!smg快速选smg  <br/>!ammo补充后备弹夹，cvar设置多长时间补充一次  <br/>增加出门近战发放，读取steamid写入data/melee.txt文件，再次进服自动加载之前选择  <br/>增加一个cvar控制开关商店  <br/>2.0新增管理员指令开关商店，!shop off关闭商店，!shop on打开商店，!shop查看当前商店开关情况  <br/>2.1新增白嫖近战菜单 |
 |         [**slots_vote**](./scripting/slots_vote.sp)          | 投票增加最大人数，管理直接修改，玩家投票修改                 |
 |       [**survivor_mvp**](./scripting/survivor_mvp.sp)        | 基于 [survivor_mvp](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/SurvivorMVP) 修改，删除部分依赖，修改配色，细化rank排名，增加cvar控制 |
