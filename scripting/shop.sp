@@ -1553,7 +1553,7 @@ public Action BuyPill(int client,int args)
 		PrintToChat(client, "\x04[商店]\x05商店未开启.");
 		return Plugin_Handled;
 	}
-	if(cv_Medical.BoolValue)
+	if(!cv_Medical.BoolValue)
 	{
 		PrintToChat(client, "\x04[商店]\x05医疗物品购买未开启.");
 		return Plugin_Handled;
