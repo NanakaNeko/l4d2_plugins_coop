@@ -1524,7 +1524,7 @@ public Action BuyPill(int client,int args)
 		CPrintToChat(client, "{default}[{green}!{default}] {olive}商店未开启.");
 		return Plugin_Handled;
 	}
-	if(cv_Medical.BoolValue)
+	if(!cv_Medical.BoolValue)
 	{
 		CPrintToChat(client, "{default}[{green}!{default}] {olive}医疗物品购买未开启.");
 		return Plugin_Handled;
