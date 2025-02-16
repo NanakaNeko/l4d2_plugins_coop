@@ -19,9 +19,7 @@ int
 	MapStripper,
 	Rhp,
 	Restore,
-	Siammoregain,
-	SiNum,
-	SiTime;
+	Siammoregain;
 
 public Plugin myinfo = 
 {
@@ -39,13 +37,6 @@ public void OnPluginStart()
 	cv_SiNum = FindConVar("l4d2_si_spawn_control_max_specials");
 	cv_SiTime = FindConVar("l4d2_si_spawn_control_spawn_time");
 	cv_SiMode = FindConVar("l4d2_si_spawn_control_together_spawn");
-	if(cv_SiNum != null && cv_SiTime != null && cv_SiMode != null){
-		cv_SiNum.AddChangeHook(CvarInfected);
-		cv_SiTime.AddChangeHook(CvarInfected);
-		cv_SiMode.AddChangeHook(CvarInfected);
-	}
-	SiNum = GetConVarInt(cv_SiNum);
-	SiTime = GetConVarInt(cv_SiTime);
 	
 	cv_Weapon = CreateConVar("WeaponDamage", "-1", "设置武器伤害", _, true, -1.0, true, 2.0);
 	cv_WeaponReplace = CreateConVar("WeaponReplace", "0", "开启大小枪", _, true, 0.0, true, 1.0);
@@ -94,18 +85,10 @@ public void OnConfigsExecuted()
 		cv_Restore = FindConVar("l4d2_restore_health_flag");
 		cv_Restore.AddChangeHook(CvarRestore);
 	}
-	if(cv_SiNum != null && cv_SiTime != null && cv_SiMode != null){
-		cv_SiNum.AddChangeHook(CvarInfected);
-		cv_SiTime.AddChangeHook(CvarInfected);
-		cv_SiMode.AddChangeHook(CvarInfected);
-	}
-	else if(FindConVar("l4d2_si_spawn_control_max_specials") && FindConVar("l4d2_si_spawn_control_spawn_time") && FindConVar("l4d2_si_spawn_control_together_spawn")){
+	if(FindConVar("l4d2_si_spawn_control_max_specials") && FindConVar("l4d2_si_spawn_control_spawn_time") && FindConVar("l4d2_si_spawn_control_together_spawn")){
 		cv_SiNum = FindConVar("l4d2_si_spawn_control_max_specials");
 		cv_SiTime = FindConVar("l4d2_si_spawn_control_spawn_time");
 		cv_SiMode = FindConVar("l4d2_si_spawn_control_together_spawn");
-		cv_SiNum.AddChangeHook(CvarInfected);
-		cv_SiTime.AddChangeHook(CvarInfected);
-		cv_SiMode.AddChangeHook(CvarInfected);
 	}
 }
 
@@ -155,17 +138,12 @@ public void CvarAmmo( ConVar convar, const char[] oldValue, const char[] newValu
 {
 	Siammoregain = GetConVarInt(cv_Siammoregain);
 }
-public void CvarInfected( ConVar convar, const char[] oldValue, const char[] newValue)
-{
-	SiNum = GetConVarInt(cv_SiNum);
-	SiTime = GetConVarInt(cv_SiTime);
-}
 
 void printinfo(int client = 0, bool All = true){
 	char buffer[256];
 	char buffer2[256];
 	
-	Format(buffer, sizeof(buffer), "\x03特感\x05[\x04%s%d特%d秒\x05]", (cv_SiMode !=null && cv_SiMode.BoolValue)?"固定":"自动", SiNum, SiTime);
+	Format(buffer, sizeof(buffer), "\x03特感\x05[\x04%s%d特%d秒\x05]", (cv_SiMode !=null && cv_SiMode.BoolValue)?"固定":"自动", cv_SiNum.IntValue, cv_SiTime.IntValue);
 	Format(buffer, sizeof(buffer), "%s \x03武器\x05[\x04%s\x05]", buffer, Weapon == 0?"Zone":(Weapon == 1?"Anne":(Weapon == 2?"Anne+":"默认")));
 	Format(buffer, sizeof(buffer), "%s \x03地图\x05[\x04%s\x05]", buffer, MapStripper == 1?"ZoneMod":(MapStripper == 2?"NeoMod":(MapStripper == 3?"DeadMan":"默认")));
 
