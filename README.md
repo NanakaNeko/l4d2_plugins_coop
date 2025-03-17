@@ -9,6 +9,7 @@
 |            [**anti_ff**](./scripting/anti_ff.sp)             | 友伤达到一定值惩罚攻击者                                     |
 |    [**eq_finale_tanks**](./scripting/eq_finale_tanks.sp)     | 救援减少一次事件，不再需要文件，自动写入最后一关             |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
+|            [**hextags**](./scripting/hextags.sp)             | 游戏内聊天框称号插件，联动时长获取插件: [l4d2_player_time](./other_version/l4d2_player_time.sp)<br/>**注意：需要config文件**<br/>**include文件需要：**[[**chat-processor.inc**](./scripting/include/chat-processor.inc)] [[**hexstocks.inc**](./scripting/include/hexstocks.inc)] [[**hextags.inc**](./scripting/include/hextags.inc)] |
 |  [**hitsound_branches**](./scripting/hitsound_branches.sp)   | 击中反馈三合一版本，vpk扩展音效材质 [击杀及击中反馈](./[材质]击杀及击中反馈.vpk) |
 |           [**hostname**](./scripting/hostname.sp)            | 根据端口号改服名，显示部分突变模式(不常用的模式没写，仅写了部分战役和生还者)和难度 <br/>**注意：需要data文件** |
 |  [**infected_teleport**](./scripting/infected_teleport.sp)   | 基于 [infected_teleport](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/InfectedTeleport) 删除logger依赖 |
@@ -57,3 +58,6 @@
 |            [**tankrun**](./scripting/tankrun.sp)             | 修改坦克同屏数量和产生时间，增加狙击类武器救倒地玩家，可开启玩家游玩坦克<br/>请修改突变模式为tank run再加载插件，否则出现bug并不在修复内容 |
 |               [**vote**](./scripting/vote.sp)                | Anne的投票加载cfg和指令，删除数据库相关功能，仅保留投票和踢人，增加root权限管理防踢 |
 | [**witch_damage_announce**](./scripting/witch_damage_announce.sp) | zonemod的witch伤害提示，和上面tank提示一起使用，配色统一 <br/>**注意：需要翻译文件** |
+
+
+

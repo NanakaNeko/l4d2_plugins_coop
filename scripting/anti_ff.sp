@@ -4,7 +4,7 @@
 #include <sourcemod>
 #include <left4dhooks>
 
-ConVar cv_FFIncap, cv_FFSuicide, cv_FFSelf, cv_FFBot;
+ConVar cv_Enable, cv_FFIncap, cv_FFSuicide, cv_FFSelf, cv_FFBot;
 int FriendlyFire[MAXPLAYERS + 1];
 bool IsIncap[MAXPLAYERS + 1], IsSuicide[MAXPLAYERS + 1];
 
@@ -13,12 +13,13 @@ public Plugin myinfo =
 	name = "[L4D2]友伤惩罚",
 	author = "奈",
 	description = "友伤到达一定值惩罚攻击者",
-	version = "1.6",
+	version = "1.7",
 	url = "https://github.com/NanakaNeko/l4d2_plugins_coop"
 };
 
 public void OnPluginStart()
 {
+	cv_Enable = CreateConVar("friendly_fire_enable", "1", "是否开启队友伤害惩罚？ 1:开启 0:关闭", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_FFIncap = CreateConVar("friendly_fire_incap", "150", "友伤达到多少进行第一个惩罚？(倒地)", FCVAR_NOTIFY, true, 50.0, true, 9999.0);
 	cv_FFSuicide = CreateConVar("friendly_fire_suicide", "300", "友伤达到多少进行第二个惩罚？(处死) 设置值不能低于第一个惩罚", FCVAR_NOTIFY, true, GetConVarFloat(cv_FFIncap), true, 9999.0);
 	cv_FFSelf = CreateConVar("friendly_fire_self_damage", "1", "对自己的友伤是否计算在内 1:不计算 0:计算", FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -34,6 +35,9 @@ public void Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast)
 	int victim = GetClientOfUserId(event.GetInt("userid"));
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
 	int damage = event.GetInt("dmg_health");
+
+	if(!cv_Enable.BoolValue)
+		return;
 
 	if(!IsValidPlayer(attacker) || !IsValidPlayer(victim))
 		return;
