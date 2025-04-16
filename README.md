@@ -31,6 +31,7 @@
 |       [**l4d2_tank_hp**](./scripting/l4d2_tank_hp.sp)        | 根据豆瓣酱坦克提示插件修改，配色更符合下面的坦克击杀数据统计，删除随机女巫血量变成固定血量，坦克血量随难度提升降低，平衡各个难度，新增witch惊扰提示 |
 | [**l4d2_tank_random_name**](./scripting/l4d2_tank_random_name.sp) | 修改AI坦克名字为碧蓝档案角色名字                             |
 |     [**l4d2_text_info**](./scripting/l4d2_text_info.sp)      | 信息提示，不适用其他服务器                                   |
+| [**l4d2_votemisschapter**](./scripting/l4d2_votemisschapter.sp) | 投票跳过当前关卡，适用于卡关或难度过大不想继续               |
 |  [**l4d_blackandwhite**](./scripting/l4d_blackandwhite.sp)   | 汉化并增加聊天框提示颜色，增加黑白移除提示                   |
 | [**l4d_explosion_announcer**](./scripting/l4d_explosion_announcer.sp) | 爆炸提示，修改提示颜色                                       |
 | [**l4d_kickloadstuckers**](./scripting/l4d_kickloadstuckers.sp) | 踢出卡在连接状态太久的玩家，仅汉化                           |
@@ -58,6 +59,8 @@
 |            [**tankrun**](./scripting/tankrun.sp)             | 修改坦克同屏数量和产生时间，增加狙击类武器救倒地玩家，可开启玩家游玩坦克<br/>请修改突变模式为tank run再加载插件，否则出现bug并不在修复内容 |
 |               [**vote**](./scripting/vote.sp)                | Anne的投票加载cfg和指令，删除数据库相关功能，仅保留投票和踢人，增加root权限管理防踢 |
 | [**witch_damage_announce**](./scripting/witch_damage_announce.sp) | zonemod的witch伤害提示，和上面tank提示一起使用，配色统一 <br/>**注意：需要翻译文件** |
+
+
 
 
 
