@@ -105,7 +105,7 @@ bool StartVote(int client)
 		{
 			SetBuiltinVoteInitiator(g_Vote, client);
 		}
-		SetBuiltinVoteArgument(g_Vote, "投票跳过当前关卡?");
+		SetBuiltinVoteArgument(g_Vote, "跳过当前关卡?");
 		DisplayBuiltinVoteToAll(g_Vote, 20);
 		return true;
 	}
