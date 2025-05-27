@@ -1,4 +1,11 @@
 # l4d2_plugins_coop
+
+## 访问统计
+
+##  <a href="https://count.getloli.com/"><img src="https://count.getloli.com/@l4d2-plugins-coop?name=l4d2-plugins-coop&theme=moebooru&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=auto"></a>
+
+## 介绍
+
 + **求生之路2的一些小插件**
 + 一部分参考各路大佬写（抄）出来的插件，一部分是直接拿的大佬的插件，仅做整理。
 + 如果有适合你的，可以随意下载使用
