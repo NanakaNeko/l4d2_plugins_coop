@@ -216,12 +216,12 @@ public Action Kill_Player(int client, int args)
 	if(IsAliveSurvivor(client))
 	{
 		ForcePlayerSuicide(client);
-		CPrintToChatAll("{default}[{green}!{default}] {olive}生还者 {blue}%N {olive}失去梦想,殒命了", client);
+		CPrintToChatAll("{default}[{green}!{default}] {olive}生还者 {blue}%N {olive}失去梦想,自杀身亡", client);
 	}
 	else if(IsAliveInfected(client))
 	{
 		ForcePlayerSuicide(client);
-		CPrintToChatAll("{default}[{green}!{default}] {olive}感染者 {red}%N {olive}失去梦想,归天了", client);
+		CPrintToChatAll("{default}[{green}!{default}] {olive}感染者 {red}%N {olive}失去梦想,自杀身亡", client);
 	}
 	else
 		CPrintToChat(client, "{default}[{green}!{default}] {olive}当前状态无法自杀");

@@ -64,7 +64,7 @@ public void OnPluginStart()
 	cv_LobbyDisable = CreateConVar("server_lobby_disable", "1", "禁用服务器匹配 官方默认:0 禁用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_CvarChange = CreateConVar("server_cvar_change_notify", "1", "屏蔽游戏自带的ConVar更改提示 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	cv_smPrompt = CreateConVar("server_sm_prompt", "0", "SM提示仅限管理可见 禁用:0 启用:1", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	cv_AFKtoSpec = CreateConVar("server_afk_to_spec", "45", "玩家闲置多少秒移到旁观 禁用:0", FCVAR_NOTIFY, true, 0.0);
+	cv_AFKtoSpec = CreateConVar("server_afk_to_spec", "180", "玩家闲置多少秒移到旁观 禁用:0", FCVAR_NOTIFY, true, 0.0);
 	BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/server_kick.log");
 
 	RegAdminCmd("sm_restartmap", RestartMap, ADMFLAG_ROOT, "立即重启当前地图");

@@ -35,6 +35,7 @@
 | [**l4d2_restore_health**](./scripting/l4d2_restore_health.sp) | 过关回满血，增加一个cvar判定，默认0关闭回血，1为开启回血     |
 |      [**l4d2_rpg_tank**](./scripting/l4d2_rpg_tank.sp)       | 给输入!rpg的生还传送回起点安全屋并生成5个克，更改死门模式，召唤尸潮，并于60秒后处死全员 |
 |     [**l4d2_satellite**](./scripting/l4d2_satellite.sp)      | 使用马格南射出两种模式的卫星炮                               |
+|         [**l4d2_speed**](./scripting/l4d2_speed.sp)          | 截取自rygive的武器操纵性修改，单独拆分为一个插件，接入admin面板，也可以!speed打开面板，需要WeaponHandling插件 |
 |       [**l4d2_tank_hp**](./scripting/l4d2_tank_hp.sp)        | 根据豆瓣酱坦克提示插件修改，配色更符合下面的坦克击杀数据统计，删除随机女巫血量变成固定血量，坦克血量随难度提升降低，平衡各个难度，新增witch惊扰提示 |
 | [**l4d2_tank_random_name**](./scripting/l4d2_tank_random_name.sp) | 修改AI坦克名字为碧蓝档案角色名字                             |
 |     [**l4d2_text_info**](./scripting/l4d2_text_info.sp)      | 信息提示，不适用其他服务器                                   |
