@@ -49,6 +49,7 @@
 |           [**lockdoor**](./scripting/lockdoor.sp)            | 锁定终点安全门，需要足够人数在范围内才能打开                 |
 |         [**match_vote**](./scripting/match_vote.sp)          | 基于 [match_vote](https://github.com/fbef0102/L4D1_2-Plugins/tree/master/match_vote) 修改而成 <br/>增加模式锁定，切换模式必须!rmatch卸载当前模式加载的cfg <br/>同级目录下，文件增加off为卸载文件(例：加载模式文件为coop.cfg，卸载文件就叫coopoff.cfg) <br/>**注意：需要data文件** |
 |              [**music**](./scripting/music.sp)               | 在安全屋可以点歌放给所有人，插件没有实现fastdl，使用vpk扩展 [音乐扩展包](./[材质]音乐扩展包.vpk) <br/>**注意：需要data文件** |
+|       [**nofalldamage**](./scripting/nofalldamage.sp)        | 空中摔落无伤害                                               |
 |             [**notify**](./scripting/notify.sp)              | 加入退出提示，出安全屋音效，服务器游玩时长提示<br/>[无商店依赖版本]：[notify](./other_version/notify.sp) |
 |         [**ping_check**](./scripting/ping_check.sp)          | 进入服务器90秒后检测ping值，超过250ms5次踢出服务器           |
 |             [**remove**](./scripting/remove.sp)              | 删除地图所有医疗物资，出门发止痛药，增加通关清除武器         |
