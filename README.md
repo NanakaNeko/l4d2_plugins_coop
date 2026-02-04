@@ -14,6 +14,7 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------- |
 |              [**alone**](./scripting/alone.sp)               | 被特感控制后，扣除血量解控                                   |
 |            [**anti_ff**](./scripting/anti_ff.sp)             | 友伤达到一定值惩罚攻击者                                     |
+| [**coop_round_restart_delay**](./scripting/coop_round_restart_delay.sp) | 回合重开延迟时间                                             |
 |    [**eq_finale_tanks**](./scripting/eq_finale_tanks.sp)     | 救援减少一次事件，不再需要文件，自动写入最后一关             |
 |      [**give_pill_kit**](./scripting/give_pill_kit.sp)       | 开局离开安全屋发药包                                         |
 |            [**hextags**](./scripting/hextags.sp)             | 游戏内聊天框称号插件，联动时长获取插件: [l4d2_player_time](./other_version/l4d2_player_time.sp)<br/>**注意：需要config文件**<br/>**include文件需要：**[[**chat-processor.inc**](./scripting/include/chat-processor.inc)] [[**hexstocks.inc**](./scripting/include/hexstocks.inc)] [[**hextags.inc**](./scripting/include/hextags.inc)] |
