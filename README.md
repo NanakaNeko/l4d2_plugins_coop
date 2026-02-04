@@ -59,6 +59,7 @@
 |               [**shop**](./scripting/shop.sp)                | 采用sqlite数据库保存数据，功能和shop_lite一样<br/>详细更新说明在源码里<br/>安装过插件的，建议删除data/sqlite文件夹下的数据库文件，再更新插件重建数据库表<br/>[无个人信息统计版本]：[shop_b](./other_version/shop_b.sp)<br/>[使用colors依赖版本]：[shop_c](./other_version/shop_c.sp) |
 |          [**shop_lite**](./scripting/shop_lite.sp)           | 商店插件说明:  <br/>每关提供几次机会白嫖部分武器，cvar可自行设定每关几次  <br/>!buy !gw打开商店面板  <br/>!chr快速选铁喷，!pum快速选木喷，!uzi快速选uzi，!smg快速选smg  <br/>!ammo补充后备弹夹，cvar设置多长时间补充一次  <br/>增加出门近战发放，读取steamid写入data/melee.txt文件，再次进服自动加载之前选择  <br/>增加一个cvar控制开关商店  <br/>2.0新增管理员指令开关商店，!shop off关闭商店，!shop on打开商店，!shop查看当前商店开关情况  <br/>2.1新增白嫖近战菜单 |
 |         [**slots_vote**](./scripting/slots_vote.sp)          | 投票增加最大人数，管理直接修改，玩家投票修改                 |
+|          [**smokergun**](./scripting/smokergun.sp)           | 用小手枪使用鼠标中键，可以射出舌头，shift拉近距离，ctrl放开。总之，像蜘蛛侠那样 |
 |       [**survivor_mvp**](./scripting/survivor_mvp.sp)        | 基于 [survivor_mvp](https://github.com/GlowingTree880/L4D2_LittlePlugins/tree/main/SurvivorMVP) 修改，删除部分依赖，修改配色，细化rank排名，增加cvar控制 |
 |                [**svs**](./scripting/svs.sp)                 | 固定回合模式的生还者对抗生还者（模式详细介绍请看源码）       |
 |               [**svs2**](./scripting/svs2.sp)                | 随机复活模式的生还者对抗生还者（模式详细内容请看源码）       |
@@ -67,6 +68,8 @@
 |            [**tankrun**](./scripting/tankrun.sp)             | 修改坦克同屏数量和产生时间，增加狙击类武器救倒地玩家，可开启玩家游玩坦克<br/>请修改突变模式为tank run再加载插件，否则出现bug并不在修复内容 |
 |               [**vote**](./scripting/vote.sp)                | Anne的投票加载cfg和指令，删除数据库相关功能，仅保留投票和踢人，增加root权限管理防踢 |
 | [**witch_damage_announce**](./scripting/witch_damage_announce.sp) | zonemod的witch伤害提示，和上面tank提示一起使用，配色统一 <br/>**注意：需要翻译文件** |
+
+
 
 
 
