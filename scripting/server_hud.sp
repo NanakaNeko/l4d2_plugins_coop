@@ -324,30 +324,35 @@ char[] GetHostName()
 char[] GetDate()
 {
 	char g_sDate[64];
-	FormatTime(g_sDate, sizeof(g_sDate), "%Y年%m月%d日");
+	char sYear[8], sMonth[8], sDay[8];
+	// Windows 的 strftime 遇到格式串里的非 ASCII 会失败，中文必须放在 FormatTime 外面拼。
+	FormatTime(sYear, sizeof(sYear), "%Y");
+	FormatTime(sMonth, sizeof(sMonth), "%m");
+	FormatTime(sDay, sizeof(sDay), "%d");
+	FormatEx(g_sDate, sizeof(g_sDate), "%s年%s月%s日", sYear, sMonth, sDay);
 	return g_sDate;
 }
 
 //返回当前周几.
 char[] GetWeek()
 {
-	char g_sWeek[8];
-	char g_sWeekName[][] = {"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
-	FormatTime(g_sWeek, sizeof(g_sWeek), "%u");
-	return g_sWeekName[StringToInt(g_sWeek) - 1];
+	char sWeek[8];
+	// %w 在 Windows/Linux 都是 0=周日 … 6=周六。%u 是 glibc 扩展，Windows 的 strftime 不认，FormatTime 会直接报错。
+	char g_sWeekName[][] = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
+	FormatTime(sWeek, sizeof(sWeek), "%w");
+	int day = StringToInt(sWeek);
+	if (day < 0 || day > 6)
+		day = 0;
+	return g_sWeekName[day];
 }
 
 //返回上午下午
 char[] GetAPM()
 {
-	char g_sAPM[4], g_sMaA[8];
-	FormatTime(g_sAPM, sizeof(g_sAPM), "%p");
-	if(StrContains(g_sAPM, "AM", false) != -1)
-		Format(g_sMaA, sizeof(g_sMaA), "上午");
-	else if(StrContains(g_sAPM, "PM", false) != -1)
-		Format(g_sMaA, sizeof(g_sMaA), "下午");
-	else
-		Format(g_sMaA, sizeof(g_sMaA), "");
+	char sHour[8], g_sMaA[8];
+	// 不用 %p：中文系统区域会写出“上午/下午”，原来的 4 字节缓冲会爆，英文 AM/PM 判断也会失效。
+	FormatTime(sHour, sizeof(sHour), "%H");
+	FormatEx(g_sMaA, sizeof(g_sMaA), "%s", StringToInt(sHour) < 12 ? "上午" : "下午");
 	return g_sMaA;
 }
 
